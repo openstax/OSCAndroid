@@ -87,7 +87,7 @@
             android:fastScrollEnabled="true"
             android:smoothScrollbar="true" 
             android:divider="@drawable/divider"
-            android:dividerHeight="3px"/>
+            android:dividerHeight="dp"/>
     </LinearLayout>
 
 </LinearLayout>

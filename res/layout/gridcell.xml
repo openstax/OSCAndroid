@@ -6,10 +6,12 @@
  
     <ImageView
         android:id="@+id/grid_item_image"
-        android:layout_width="80px"
-        android:layout_height="80px"
-        android:layout_marginRight="10px"
-        android:src="@drawable/biology" >
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_margin="10dp"
+        android:scaleType="center"
+        android:gravity="center"
+        android:src="@drawable/biology_lg" >
     </ImageView>
  
 </LinearLayout>

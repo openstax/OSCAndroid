@@ -146,25 +146,25 @@ public class BookmarkListAdapter extends ArrayAdapter<Content> implements Sectio
 //                	else
 //                	{
 	                    //set correct icon based on URL
-	                    if(c.getIcon().equals(Integer.toString(R.drawable.physics)))
+	                    if(c.getIcon().equals(Integer.toString(R.drawable.physics_lg)))
 	                    {
-	                        holder.imageView.setImageResource(R.drawable.physics);
+	                        holder.imageView.setImageResource(R.drawable.physics_lg);
 	                    }
-	                    else if(c.getIcon().equals(Integer.toString(R.drawable.sociology)))
+	                    else if(c.getIcon().equals(Integer.toString(R.drawable.sociology_lg)))
 	                    {
-	                        holder.imageView.setImageResource(R.drawable.sociology);
+	                        holder.imageView.setImageResource(R.drawable.sociology_lg);
 	                    }
-	                    else if(c.getIcon().equals(Integer.toString(R.drawable.biology)))
+	                    else if(c.getIcon().equals(Integer.toString(R.drawable.biology_lg)))
 	                    {
-	                        holder.imageView.setImageResource(R.drawable.biology);
+	                        holder.imageView.setImageResource(R.drawable.biology_lg);
 	                    }
-	                    else if(c.getIcon().equals(Integer.toString(R.drawable.concepts_biology)) )
+	                    else if(c.getIcon().equals(Integer.toString(R.drawable.concepts_biology_lg)) )
 	                    {
-	                        holder.imageView.setImageResource(R.drawable.concepts_biology);
+	                        holder.imageView.setImageResource(R.drawable.concepts_biology_lg);
 	                    }
-	                    else if(c.getIcon().equals(Integer.toString(R.drawable.anatomy)))
+	                    else if(c.getIcon().equals(Integer.toString(R.drawable.anatomy_lg)))
 	                    {
-	                        holder.imageView.setImageResource(R.drawable.anatomy);
+	                        holder.imageView.setImageResource(R.drawable.anatomy_lg);
 	                    }
                 	}
                 //}
