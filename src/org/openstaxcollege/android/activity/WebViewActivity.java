@@ -501,27 +501,27 @@ public class WebViewActivity extends SherlockActivity
                       }
                   });
                 
-                ImageButton epubButton = (ImageButton)findViewById(R.id.epubButton);
-                epubButton.setOnClickListener(new OnClickListener() 
-                {
-                          
-                      public void onClick(View v) 
-                      {
-                          download(Constants.EPUB_TYPE);
-
-                      }
-                  });
-                
-                ImageButton pdfButton = (ImageButton)findViewById(R.id.pdfButton);
-                pdfButton.setOnClickListener(new OnClickListener() 
-                {
-                          
-                      public void onClick(View v) 
-                      {
-                          download(Constants.PDF_TYPE);
-
-                      }
-                  });
+//                ImageButton epubButton = (ImageButton)findViewById(R.id.epubButton);
+//                epubButton.setOnClickListener(new OnClickListener() 
+//                {
+//                          
+//                      public void onClick(View v) 
+//                      {
+//                          download(Constants.EPUB_TYPE);
+//
+//                      }
+//                  });
+//                
+//                ImageButton pdfButton = (ImageButton)findViewById(R.id.pdfButton);
+//                pdfButton.setOnClickListener(new OnClickListener() 
+//                {
+//                          
+//                      public void onClick(View v) 
+//                      {
+//                          download(Constants.PDF_TYPE);
+//
+//                      }
+//                  });
                 
                 ImageButton copyButton = (ImageButton)findViewById(R.id.copyButton);
                 if(Build.VERSION.SDK_INT < 11) 

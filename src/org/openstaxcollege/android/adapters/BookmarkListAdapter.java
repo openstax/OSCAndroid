@@ -101,7 +101,7 @@ public class BookmarkListAdapter extends ArrayAdapter<Content> implements Sectio
         {
             //Log.d("LensListAdapter.getView()", "view is null ");
             LayoutInflater vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = vi.inflate(R.layout.cnx_list, null);
+            v = vi.inflate(R.layout.cnx_bookmark_list, null);
             holder = new ViewHolder(v);
            
             v.setTag(holder);
@@ -166,6 +166,10 @@ public class BookmarkListAdapter extends ArrayAdapter<Content> implements Sectio
 	                    {
 	                        holder.imageView.setImageResource(R.drawable.anatomy_lg);
 	                    }
+	                    else if(c.getIcon().equals(Integer.toString(R.drawable.statistics_lg)))
+	                    {
+	                        holder.imageView.setImageResource(R.drawable.statistics_lg);
+	                    }
                 	}
                 //}
             }
@@ -198,7 +202,16 @@ public class BookmarkListAdapter extends ArrayAdapter<Content> implements Sectio
      */
     public int getPositionForSection(int section) 
     {
-        String letter = sections[section];
+    	String letter="a";
+        
+    	if(section < sections.length)
+    	{
+    		letter = sections[section];
+    	}
+    	else
+    	{
+    		return 0;
+    	}
         //Log.d("LensListAdapter ", "letter: " + letter);
         return alphaIndexer.get(letter);
     }

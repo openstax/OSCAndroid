@@ -12,6 +12,7 @@ import android.content.Context;
 import android.os.Build;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -88,6 +89,11 @@ public class ImageAdapter extends BaseAdapter
 		// Convert the dps to pixels, based on density scale
 		//final int imgSize  = (int) (size * scale + 0.5f);
 		//final int imgSize  = (int) (scaleImage * scale + 0.5f);
+		//LayoutInflater infla=context.getgetLayoutInflater();
+
+	    //View v=infla.inflate(R.layout.main1,null);
+
+	    //ImageView iv1=(ImageView)v.findViewById(R.id.imageView1);
 		ImageView imageView = new ImageView(context);
         imageView.setImageResource(imageIds[position]);
         //imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
@@ -104,13 +110,14 @@ public class ImageAdapter extends BaseAdapter
 //                         imageView.setLayoutParams(new GridView.LayoutParams(highVal, highVal));
 //                         break;
 //        }
-        if(Build.VERSION.SDK_INT <= 10)
+        if(Build.VERSION.SDK_INT <= 10)//add code to check for screen size of 480 px
         {
         	size = 280;
         }
         else
         {
         	size = (int) context.getResources().getDimension(R.dimen.width);
+        	Log.d("ImageAdator", "Size = " + size);
         }
         imageView.setLayoutParams(new GridView.LayoutParams(size, size));
         return imageView;

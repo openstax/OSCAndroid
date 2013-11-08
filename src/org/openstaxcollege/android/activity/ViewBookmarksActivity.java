@@ -139,32 +139,32 @@ public class ViewBookmarksActivity extends SherlockListActivity
       /* (non-Javadoc)
        * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
        */
-      @Override
-      public boolean onCreateOptionsMenu(Menu menu) 
-      {
-          
-          getSupportMenuInflater().inflate(R.menu.lenses_options_menu, menu);
-          return true;
-          
-      }
+//      @Override
+//      public boolean onCreateOptionsMenu(Menu menu) 
+//      {
+//          
+//          getSupportMenuInflater().inflate(R.menu.lenses_options_menu, menu);
+//          return true;
+//          
+//      }
       
       /* (non-Javadoc)
        * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
        */
-      @Override
-      public boolean onOptionsItemSelected(MenuItem item) 
-      {
-          MenuHandler mh = new MenuHandler();
-          boolean returnVal = mh.handleContextMenu(item, this, null);
-          if(returnVal)
-          {
-              return returnVal;
-          }
-          else
-          {
-              return super.onOptionsItemSelected(item);
-          }
-      }
+//      @Override
+//      public boolean onOptionsItemSelected(MenuItem item) 
+//      {
+//          MenuHandler mh = new MenuHandler();
+//          boolean returnVal = mh.handleContextMenu(item, this, null);
+//          if(returnVal)
+//          {
+//              return returnVal;
+//          }
+//          else
+//          {
+//              return super.onOptionsItemSelected(item);
+//          }
+//      }
       
       /* (non-Javadoc)
      * @see android.app.Activity#onResume()

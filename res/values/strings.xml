@@ -14,7 +14,7 @@
     <string name="menu_go_to_favs">Go to Bookmarks</string>
     <string name="menu_help">Help</string>
     <string name="menu_delete_from_favs">Delete from Bookmarks</string>
-    <string name="menu_search">Search Connexions</string>
+    <string name="menu_search">Search OpenStax College</string>
     <string name="menu_lenses">Content</string>
     <string name="menu_refresh">Refresh</string>
     <string name="menu_pdf">Download PDF</string>
@@ -33,7 +33,7 @@
     <string name="up_one_level">Up One Level</string>
     <string name="webcontent">webcontent</string>
     <string name="content">content</string>
-    <string name="intro">Welcome to Connexions for Android!\n\n  Browse our content using the Content tab and save content you like to your favorites.  Use the menu to find other features like search, taking notes, downloading EPUBs or PDFs, viewing downloaded files and help.</string>
+    <string name="intro">Welcome to OpenStax College for Android!\n\n  Browse our content using the Content tab and save content you like to your favorites.  Use the menu to find other features like search, taking notes, downloading EPUBs or PDFs, viewing downloaded files and help.</string>
     <string name="search_title">Search: </string>
     <string name="file_browser_title">Select File to View</string>
     <string name="file_dialog_title">View</string>
@@ -44,8 +44,9 @@
     <string name="biology_desc">Multi-semester biology book for science majors</string>
     <string name="concepts_biology_desc">Introductory biology book for non-science majors</string>
     <string name="anatomy_desc">Two-semester anatomy and physiology</string>
+    <string name="statistics_desc">One-semester introduction to statistics for students who are not mathematics or engineering majors.</string>
     <string name="nothing_to_save">There is nothing to save.</string>
-    <string name="shared_via"> Shared via Connexions for Android app.</string>
+    <string name="shared_via"> Shared via OpenStax College Android app.</string>
     <string name="tell_friend">Tell a friend about </string>
     <string name="cache_lenstypes">lenstypes</string>
     <string name="cache_sentcontent">sentContent</string>

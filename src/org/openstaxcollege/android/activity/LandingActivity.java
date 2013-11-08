@@ -12,26 +12,29 @@ import java.util.ArrayList;
 
 import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.adapters.BooksAdapter;
-import org.openstaxcollege.android.adapters.ImageAdapter;
 import org.openstaxcollege.android.beans.Content;
 import org.openstaxcollege.android.handlers.MenuHandler;
 import org.openstaxcollege.android.utils.ContentCache;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.app.SherlockListActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 
-//import android.app.ListActivity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.BaseAdapter;
 import android.widget.GridView;
-import android.widget.ListView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 /**
@@ -40,7 +43,6 @@ import android.widget.Toast;
  * @author Ed Woodward
  *
  */
-//public class LandingActivity extends SherlockListActivity 
 public class LandingActivity extends SherlockActivity 
 {
    
@@ -64,16 +66,21 @@ public class LandingActivity extends SherlockActivity
         //registerForContextMenu(getListView());
         createList();
         aBar = this.getSupportActionBar();
-        aBar.setTitle("OpenStax College");
+        aBar.setTitle(getString(R.string.app_name));
         aBar.setDisplayHomeAsUpEnabled(false);
         GridView gridView = (GridView) findViewById(R.id.gridView);
+        int orient = getResources().getConfiguration().orientation;
+        if(orient == Configuration.ORIENTATION_LANDSCAPE)
+        {
+        	gridView.setNumColumns(3);
+        }
         gridView.setAdapter(new ImageAdapter(this));
         gridView.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View v,int position, long id) {
-            	if(position > 4)
+            	if(position > 5)
             	{
-            		Toast.makeText(LandingActivity.this, "Coming Soon!",  Toast.LENGTH_SHORT).show();
+            		Toast.makeText(LandingActivity.this, getString(R.string.coming_soon),  Toast.LENGTH_SHORT).show();
             		return;
             	}
             	Content c = content.get(position);
@@ -82,22 +89,6 @@ public class LandingActivity extends SherlockActivity
                 
             }
         });
-        //get already retrieved feed and reuse if it is there
-//        content = (ArrayList<Content>)getLastNonConfigurationInstance();
-//        if(content==null && savedInstanceState != null)
-//        {
-//            //Log.d("ViewLenses.onCreate()", "getting saved data");
-//            content = (ArrayList<Content>)savedInstanceState.getSerializable(getString(R.string.cache_lenstypes));
-//        }
-//        if(content == null)
-//        {
-//            createList();
-//        }
-//       
-//        fillData(content);
-//        finishedLoadingList();
-//            
-//        setListAdapter(adapter);
     }
     
     /* (non-Javadoc)
@@ -140,42 +131,6 @@ public class LandingActivity extends SherlockActivity
         //Log.d("ViewLenses.onSaveInstanceState()", "saving data");
         outState.putSerializable(getString(R.string.cache_lenstypes), content);
         
-    }
-    
-    /* (non-Javadoc)
-     * Handles selection of an item in the Lenses list
-     * @see android.app.ListActivity#onListItemClick(android.widget.ListView, android.view.View, int, long)
-     */
-    //@Override
-//    protected void onListItemClick(ListView l, View v, int position, long id) 
-//    {
-//    	
-//        Content content = (Content)getListView().getItemAtPosition(position);
-//        if(content.getUrl().toString().equals(getString(R.string.lenses_fake_url)))
-//        {
-//        	return;
-//        }
-//        ContentCache.setObject(getString(R.string.webcontent), content);
-//        startActivity(new Intent(this, WebViewActivity.class));
-//    }
-    
-    /** Actions after list is loaded in View*/
-//    protected void finishedLoadingList() 
-//    {
-//        setListAdapter(adapter);
-//        getListView().setSelection(0);
-//        getListView().setSaveEnabled(true);
-//        getListView().setClickable(true);
-//    }
-    
-    /**
-     * Loads data into list view
-     * @param contentList ArrayList<Content>
-     */
-    private void fillData(ArrayList<Content> contentList) 
-    {
-        //Log.d("LensViewer", "fillData() called");
-        adapter = new BooksAdapter(LandingActivity.this, contentList);
     }
     
     /**
@@ -223,9 +178,10 @@ public class LandingActivity extends SherlockActivity
             
             Content c6 = new Content();
             c6.setTitle(getString(R.string.statistics));
-            c6.setContentString(getString(R.string.coming_soon));
-            c6.setUrl(new URL(fakeURL));
+            c6.setContentString(getString(R.string.statistics_desc));
+            c6.setUrl(new URL("http://m.cnx.org/content/col11562/latest/"));
             c6.setIconDrawable(R.drawable.statistics_lg);
+            c6.setIcon(Integer.toString(R.drawable.statistics_lg));
             
             Content c7 = new Content();
             c7.setTitle(getString(R.string.econ));
@@ -294,6 +250,94 @@ public class LandingActivity extends SherlockActivity
             Log.d("LandingActivity.createList()", "Error: " + e.toString(),e);
         }
         
+    }
+    
+    class ImageAdapter extends BaseAdapter 
+    {
+    	private Context context;
+    	
+    	
+    	public Integer[] imageIds = {
+                R.drawable.physics_lg, R.drawable.sociology_lg,
+                R.drawable.biology_lg, R.drawable.concepts_biology_lg,
+                R.drawable.anatomy_lg, R.drawable.statistics_lg,
+                R.drawable.precalculus_lg, R.drawable.psychology_lg,
+                R.drawable.econ_lg, R.drawable.chemistry_lg,
+                R.drawable.history_lg, R.drawable.macro_econ_lg,
+                R.drawable.micro_econ_lg};
+    	
+    	public ImageAdapter(Context c)
+    	{
+    		context = c;
+    	}
+
+    	/* (non-Javadoc)
+    	 * @see android.widget.Adapter#getCount()
+    	 */
+    	@Override
+    	public int getCount() 
+    	{
+    		return imageIds.length;
+    	}
+
+    	/* (non-Javadoc)
+    	 * @see android.widget.Adapter#getItem(int)
+    	 */
+    	@Override
+    	public Object getItem(int position) 
+    	{
+    		return imageIds[position];
+    	}
+
+    	/* (non-Javadoc)
+    	 * @see android.widget.Adapter#getItemId(int)
+    	 */
+    	@Override
+    	public long getItemId(int position) 
+    	{
+    		return 0;
+    	}
+
+    	/* (non-Javadoc)
+    	 * @see android.widget.Adapter#getView(int, android.view.View, android.view.ViewGroup)
+    	 */
+    	@Override
+    	public View getView(int position, View convertView, ViewGroup parent) 
+    	{
+
+    		// Get the screen's density scale
+    		
+    		int size = 0;
+    		LayoutInflater infla = getLayoutInflater();
+
+    	    View v=infla.inflate(R.layout.gridcell,null);
+
+    	    ImageView imageView=(ImageView)v.findViewById(R.id.grid_item_image);
+    		//ImageView imageView = new ImageView(context);
+            imageView.setImageResource(imageIds[position]);
+            
+            if(Build.VERSION.SDK_INT <= 10)
+            {
+            	//size = context.getResources().getDisplayMetrics().densityDpi;
+            	size = 280;
+            	//Log.d("ImageAdapter", "densityDPI = " + context.getResources().getDisplayMetrics().densityDpi);
+            }
+            else if(Build.VERSION.SDK_INT >10 && Build.VERSION.SDK_INT < 16)
+            {
+            	size = context.getResources().getDisplayMetrics().densityDpi;
+            	imageView.setLayoutParams(new GridView.LayoutParams(size, size+60));
+            	return imageView;
+            }
+            else
+            {
+            	size = (int) context.getResources().getDimension(R.dimen.width);
+            	//size = context.getResources().getDisplayMetrics().densityDpi;
+            	//Log.d("ImageAdator", "Size = " + size);
+            }
+            imageView.setLayoutParams(new GridView.LayoutParams(size, size));
+            return imageView;
+    	}
+
     }
     
 }
