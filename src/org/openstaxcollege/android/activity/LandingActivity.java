@@ -16,6 +16,7 @@ import org.openstaxcollege.android.adapters.BooksAdapter;
 import org.openstaxcollege.android.beans.Content;
 import org.openstaxcollege.android.handlers.MenuHandler;
 import org.openstaxcollege.android.utils.ContentCache;
+import org.openstaxcollege.android.utils.OSCUtil;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
@@ -28,6 +29,7 @@ import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +42,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /**
- * Activity to view list of available Lens types. 
+ * Activity to view list of OSC books available. 
  * 
  * @author Ed Woodward
  *
@@ -72,10 +74,21 @@ public class LandingActivity extends SherlockActivity
         aBar.setDisplayHomeAsUpEnabled(false);
         GridView gridView = (GridView) findViewById(R.id.gridView);
         int orient = getResources().getConfiguration().orientation;
-        if(orient == Configuration.ORIENTATION_LANDSCAPE)
+        Display d = getWindowManager().getDefaultDisplay();
+        boolean isTablet = OSCUtil.isTabletDevice(this);
+        if(orient == Configuration.ORIENTATION_LANDSCAPE && isTablet)
+        {
+        	gridView.setNumColumns(4);
+        }
+        else if(orient == Configuration.ORIENTATION_LANDSCAPE)
         {
         	gridView.setNumColumns(3);
         }
+        else if(orient == Configuration.ORIENTATION_PORTRAIT && isTablet)
+        {
+        	gridView.setNumColumns(3);
+        }
+        
         gridView.setAdapter(new ImageAdapter(this));
         gridView.setOnItemClickListener(new OnItemClickListener() {
             @Override
@@ -259,31 +272,23 @@ public class LandingActivity extends SherlockActivity
     	private Context context;
     	
     	List<Bookcover> bookcovers = new ArrayList<Bookcover>();
-//    	public Bookcover[] imageIds = {
-//                R.drawable.physics_lg, R.drawable.sociology_lg,
-//                R.drawable.biology_lg, R.drawable.concepts_biology_lg,
-//                R.drawable.anatomy_lg, R.drawable.statistics_lg,
-//                R.drawable.precalculus_lg, R.drawable.psychology_lg,
-//                R.drawable.econ_lg, R.drawable.chemistry_lg,
-//                R.drawable.history_lg, R.drawable.macro_econ_lg,
-//                R.drawable.micro_econ_lg};
     	
     	public ImageAdapter(Context c)
     	{
     		context = c;
-    		bookcovers.add(new Bookcover("College Physics",R.drawable.physics_lg));
-    		bookcovers.add(new Bookcover("Sociology",R.drawable.sociology_lg));
-    		bookcovers.add(new Bookcover("Biology", R.drawable.biology_lg));
-    		bookcovers.add(new Bookcover("Concepts of Biology",R.drawable.concepts_biology_lg));
-    		bookcovers.add(new Bookcover("Anatomy",R.drawable.anatomy_lg));
-    		bookcovers.add(new Bookcover("Introductory Statistics",R.drawable.statistics_lg));
-    		bookcovers.add(new Bookcover("Precalculus",R.drawable.precalculus_lg));
-    		bookcovers.add(new Bookcover("Psychology",R.drawable.psychology_lg));
-    		bookcovers.add(new Bookcover("Economics",R.drawable.econ_lg));
-    		bookcovers.add(new Bookcover("Chemistry",R.drawable.chemistry_lg));
-    		bookcovers.add(new Bookcover("US History",R.drawable.history_lg));
-    		bookcovers.add(new Bookcover("MacroEconomics",R.drawable.macro_econ_lg));
-    		bookcovers.add(new Bookcover("MicroEconomics",R.drawable.micro_econ_lg));
+    		bookcovers.add(new Bookcover(getString(R.string.physics),R.drawable.physics_lg));
+    		bookcovers.add(new Bookcover(getString(R.string.landing_title_sociology),R.drawable.sociology_lg));
+    		bookcovers.add(new Bookcover(getString(R.string.biology), R.drawable.biology_lg));
+    		bookcovers.add(new Bookcover(getString(R.string.concepts_biology),R.drawable.concepts_biology_lg));
+    		bookcovers.add(new Bookcover(getString(R.string.landing_title_anatomy),R.drawable.anatomy_lg));
+    		bookcovers.add(new Bookcover(getString(R.string.statistics),R.drawable.statistics_lg));
+    		bookcovers.add(new Bookcover(getString(R.string.precalculus),R.drawable.precalculus_lg));
+    		bookcovers.add(new Bookcover(getString(R.string.psychology),R.drawable.psychology_lg));
+    		bookcovers.add(new Bookcover(getString(R.string.landing_title_economics),R.drawable.econ_lg));
+    		bookcovers.add(new Bookcover(getString(R.string.chemistry),R.drawable.chemistry_lg));
+    		bookcovers.add(new Bookcover(getString(R.string.history),R.drawable.history_lg));
+    		bookcovers.add(new Bookcover(getString(R.string.macro_econ),R.drawable.macro_econ_lg));
+    		bookcovers.add(new Bookcover(getString(R.string.micro_econ),R.drawable.micro_econ_lg));
     		
     	}
 
@@ -321,37 +326,6 @@ public class LandingActivity extends SherlockActivity
     	public View getView(int position, View convertView, ViewGroup parent) 
     	{
 
-    		// Get the screen's density scale
-    		
-//    		int size = 0;
-//    		LayoutInflater infla = getLayoutInflater();
-//
-//    	    View v=infla.inflate(R.layout.gridcell,null);
-//
-//    	    ImageView imageView=(ImageView)v.findViewById(R.id.grid_item_image);
-//    		//ImageView imageView = new ImageView(context);
-//            imageView.setImageResource(imageIds[position]);
-//            
-//            if(Build.VERSION.SDK_INT <= 10)
-//            {
-//            	//size = context.getResources().getDisplayMetrics().densityDpi;
-//            	size = 280;
-//            	//Log.d("ImageAdapter", "densityDPI = " + context.getResources().getDisplayMetrics().densityDpi);
-//            }
-//            else if(Build.VERSION.SDK_INT >10 && Build.VERSION.SDK_INT < 16)
-//            {
-//            	size = context.getResources().getDisplayMetrics().densityDpi;
-//            	imageView.setLayoutParams(new GridView.LayoutParams(size, size+60));
-//            	return imageView;
-//            }
-//            else
-//            {
-//            	size = (int) context.getResources().getDimension(R.dimen.width);
-//            	//size = context.getResources().getDisplayMetrics().densityDpi;
-//            	//Log.d("ImageAdator", "Size = " + size);
-//            }
-//            imageView.setLayoutParams(new GridView.LayoutParams(size, size));
-//            return imageView;
     		View v = convertView;
             ImageView picture;
             TextView name;

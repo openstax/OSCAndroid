@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">OpenStax College</string>
     <string name="no_content">Loading Book List...</string>
+    <string name="no_bookmarks">No Bookmarks found</string>
     <string name="loading_title">Book Lists</string>
     <string name="loading_lenses_description">Loading Book Lists&#8230;</string>
     <string name="loading_favs_title">Bookmarks</string>
@@ -83,5 +84,8 @@
     <string name="micro_econ">Micro-Economics</string>
     <string name="macro_econ">Macro-Economics</string>
     <string name="coming_soon">Coming Soon!</string>
+    <string name="landing_title_sociology">Sociology</string>
+    <string name="landing_title_economics">Economics</string>
+    <string name="landing_title_anatomy">Anatomy</string>
 </resources>
  
