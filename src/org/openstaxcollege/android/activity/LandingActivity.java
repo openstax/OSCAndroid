@@ -11,6 +11,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.ActionBar;
+import android.app.Activity;
+import android.view.*;
+import android.widget.*;
 import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.adapters.BooksAdapter;
 import org.openstaxcollege.android.beans.Content;
@@ -18,28 +22,12 @@ import org.openstaxcollege.android.handlers.MenuHandler;
 import org.openstaxcollege.android.utils.ContentCache;
 import org.openstaxcollege.android.utils.OSCUtil;
 
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Display;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.BaseAdapter;
-import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * Activity to view list of OSC books available. 
@@ -47,7 +35,7 @@ import android.widget.Toast;
  * @author Ed Woodward
  *
  */
-public class LandingActivity extends SherlockActivity 
+public class LandingActivity extends Activity
 {
    
    /** Adaptor for Lens list display */ 
@@ -56,7 +44,7 @@ public class LandingActivity extends SherlockActivity
     ArrayList<Content> content;
     
     private ActionBar aBar;
-    
+
     /* (non-Javadoc)
      * @see android.app.Activity#onCreate(android.os.Bundle)
      * Called when the activity is first created.
@@ -65,11 +53,9 @@ public class LandingActivity extends SherlockActivity
     public void onCreate(Bundle savedInstanceState) 
     {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.list_view);
         setContentView(R.layout.gridview);
-        //registerForContextMenu(getListView());
         createList();
-        aBar = this.getSupportActionBar();
+        aBar = getActionBar();
         aBar.setTitle(getString(R.string.app_name));
         aBar.setDisplayHomeAsUpEnabled(false);
         GridView gridView = (GridView) findViewById(R.id.gridView);
@@ -110,10 +96,10 @@ public class LandingActivity extends SherlockActivity
      * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
      */
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) 
+    public boolean onCreateOptionsMenu(Menu menu)
     {
         super.onCreateOptionsMenu(menu);
-        getSupportMenuInflater().inflate(R.menu.lenses_options_menu, menu);
+        getMenuInflater().inflate(R.menu.lenses_options_menu, menu);
         return true;
         
     }
@@ -194,6 +180,7 @@ public class LandingActivity extends SherlockActivity
             Content c6 = new Content();
             c6.setTitle(getString(R.string.statistics));
             c6.setContentString(getString(R.string.statistics_desc));
+            //c6.setUrl(new URL("http://cnx.org/contents/30189442-6998-4686-ac05-ed152b91b9de@16.5"));
             c6.setUrl(new URL("http://m.cnx.org/content/col11562/latest/"));
             c6.setIconDrawable(R.drawable.statistics_lg);
             c6.setIcon(Integer.toString(R.drawable.statistics_lg));

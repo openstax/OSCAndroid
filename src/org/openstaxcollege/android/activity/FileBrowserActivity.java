@@ -11,13 +11,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import android.app.ActionBar;
+import android.app.ListActivity;
 import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.adapters.FileListAdapter;
 import org.openstaxcollege.android.beans.DownloadedFile;
 import org.openstaxcollege.android.utils.Constants;
-
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockListActivity;
 
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
@@ -43,7 +42,7 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
  * @author Ed Woodward
  *
  */
-public class FileBrowserActivity extends SherlockListActivity
+public class FileBrowserActivity extends ListActivity
 {
     /**
      * List of DownloadedFile objects that represent files in /Connexions directory
@@ -68,7 +67,7 @@ public class FileBrowserActivity extends SherlockListActivity
         setContentView(R.layout.list_view);
         registerForContextMenu(getListView());
         
-        ActionBar aBar = getSupportActionBar();
+        ActionBar aBar = getActionBar();
         aBar.setTitle(getString(R.string.file_browser_title));
         readFileList();
     }
@@ -113,7 +112,7 @@ public class FileBrowserActivity extends SherlockListActivity
     
     /**
      * if directory is passed, then read files in directory.  If a file is selected, then display alert to user
-     * @param File dirOrFile - the directory or file to handle
+     * @param dirOrFile - the directory or file to handle
      */
     private void handleFile(final File dirOrFile)
     {
@@ -202,7 +201,7 @@ public class FileBrowserActivity extends SherlockListActivity
     /**
      * Opens the selected file in a different app if there is an app for the file type
      * If no app for the file type, displays toast message
-     * @param File - The File to open
+     * @param file - The File to open
      */
     private void openFile(File file)
     {

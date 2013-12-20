@@ -10,14 +10,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.beans.Content;
 import org.openstaxcollege.android.providers.Notes;
 import org.openstaxcollege.android.utils.ContentCache;
 import org.openstaxcollege.android.utils.MenuUtil;
-
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockActivity;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -43,7 +42,7 @@ import android.widget.Toast;
  * @author Ed Woodward
  *
  */
-public class NoteEditorActivity extends SherlockActivity
+public class NoteEditorActivity extends Activity
 {
     // This is our state data that is stored when freezing.
     private static final String ORIGINAL_CONTENT = "origContent";
@@ -118,7 +117,7 @@ public class NoteEditorActivity extends SherlockActivity
 
         setContentView(R.layout.note_editor);
         
-        ActionBar aBar = getSupportActionBar();
+        ActionBar aBar = getActionBar();
         
         if(content == null)
         {
@@ -267,7 +266,6 @@ public class NoteEditorActivity extends SherlockActivity
             {
                 cursor.moveToNext();
                 //Log.d("NoteEditorActivity.checkDBForNote()", "cursor.count(): " + cursor.getCount());
-                //int urlColumn = cursor.getColumnIndex(Notes.URL);
                 int notesColumn = cursor.getColumnIndex(Notes.NOTE);
                 //Log.d("NoteEditorActivity.checkDBForNote()", "urlColumn: " + urlColumn);
                 //Log.d("NoteEditorActivity.checkDBForNote()", "notesColumn: " + notesColumn);

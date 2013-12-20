@@ -9,29 +9,23 @@ package org.openstaxcollege.android.activity;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import android.app.ActionBar;
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.view.*;
 import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.beans.Content;
 import org.openstaxcollege.android.handlers.MenuHandler;
 import org.openstaxcollege.android.utils.OSCUtil;
-import org.openstaxcollege.android.utils.Constants;
 import org.openstaxcollege.android.utils.ContentCache;
 import org.openstaxcollege.android.views.ObservableWebView;
 import org.openstaxcollege.android.views.ObservableWebView.OnScrollChangedCallback;
-
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
 
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle; 
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
@@ -47,7 +41,7 @@ import android.widget.Toast;
  * @author Ed Woodward
  *
  */
-public class WebViewActivity extends SherlockActivity
+public class WebViewActivity extends Activity
 {
     /** Web browser view for Activity */
     private ObservableWebView webView;
@@ -61,6 +55,13 @@ public class WebViewActivity extends SherlockActivity
     
     private float yPosition = 0f;
     
+    private boolean progressBarRunning;
+    
+    /**
+     * Progress bar when page is loading
+     */
+    private ProgressDialog progressBar;
+    
     /**
      * keeps track of the previous menu for when the back button is used.
      */
@@ -72,14 +73,19 @@ public class WebViewActivity extends SherlockActivity
         public void onLoadResource(WebView view, String url) 
         {
             super.onLoadResource(view, url);
-            setSupportProgressBarIndeterminateVisibility(true);
-            //Log.d("WebViewClient.onLoadResource()", "Called");
+            
+            Log.d("WebViewClient.onLoadResource()", "Called");
         }
         
         /** loads URL into view */
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) 
         {
+        	Log.d("WebViewClient.shouldOverrideUrlLo()", "Called");
+        	if(!progressBarRunning)
+            {
+            	setProgressBarIndeterminateVisibility(true);
+            }
             view.loadUrl(fixURL(url));
             try
             {
@@ -115,7 +121,9 @@ public class WebViewActivity extends SherlockActivity
             }
             
             setLayout(url);
-            setSupportProgressBarIndeterminateVisibility(false);
+            setProgressBarIndeterminateVisibility(false);
+            progressBarRunning = false;
+            Log.d("WebViewClient.onPageFinished", "setSupportProgressBarIndeterminateVisibility(false) Called");
             yPosition = 0f;
 
         }
@@ -134,8 +142,8 @@ public class WebViewActivity extends SherlockActivity
         //Log.d("LensWebView.onCreate()", "Called");
         
         setContentView(R.layout.new_web_view);
-        aBar = this.getSupportActionBar();
-        setSupportProgressBarIndeterminateVisibility(true);
+        aBar = this.getActionBar();
+        setProgressBarIndeterminateVisibility(true);
         aBar.setDisplayHomeAsUpEnabled(true);
         content = (Content)ContentCache.getObject(getString(R.string.webcontent));
         aBar.setTitle(getString(R.string.app_name));
@@ -166,40 +174,40 @@ public class WebViewActivity extends SherlockActivity
      * Creates option menu
      */
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) 
+    public boolean onCreateOptionsMenu(Menu menu)
     {
-        MenuInflater inflater = getSupportMenuInflater();
+        MenuInflater inflater = getMenuInflater();
         if(content == null)
         {
             return false;
         }
-        if(content.getUrl().toString().indexOf(getString(R.string.help_page)) == -1 && content.getUrl().toString().indexOf(getString(R.string.search)) == -1 && content.getUrl().toString().indexOf(getString(R.string.google)) == -1)
-        {
-            //if the web menu is already being used, don't recreate it
-            if(!previousMenu.equals(WEB_MENU))
-            {
+//        if(content.getUrl().toString().indexOf(getString(R.string.help_page)) == -1 && content.getUrl().toString().indexOf(getString(R.string.search)) == -1 && content.getUrl().toString().indexOf(getString(R.string.google)) == -1)
+//        {
+//            //if the web menu is already being used, don't recreate it
+//            if(!previousMenu.equals(WEB_MENU))
+//            {
                 menu.clear();
                 inflater.inflate(R.menu.web_options_menu, menu);
                 previousMenu = WEB_MENU;
-            }
-        }
-        else 
-        {
-            //no need to check for help menu since there is only one path to it.
-            menu.clear();
-            inflater.inflate(R.menu.help_options_menu, menu);
-            MenuItem menuItem = menu.findItem(R.id.add_to_favs);
-            if(content.getUrl().toString().indexOf(getString(R.string.help_page)) != -1)
-            {
-                
-                menuItem.setVisible(false);
-            }
-            else
-            {
-                menuItem.setVisible(true);
-            }
-            previousMenu = HELP_MENU;
-        }
+            //}
+//        }
+//        else
+//        {
+//            //no need to check for help menu since there is only one path to it.
+//            menu.clear();
+//            inflater.inflate(R.menu.help_options_menu, menu);
+//            MenuItem menuItem = menu.findItem(R.id.add_to_favs);
+//            if(content.getUrl().toString().indexOf(getString(R.string.help_page)) != -1)
+//            {
+//
+//                menuItem.setVisible(false);
+//            }
+//            else
+//            {
+//                menuItem.setVisible(true);
+//            }
+//            previousMenu = HELP_MENU;
+//        }
         return true;
     }
     
@@ -376,31 +384,32 @@ public class WebViewActivity extends SherlockActivity
      */
     protected String fixURL(String url)
     {
-        //Log.d("WebView.fixURL()", "url: " + url);
-        StringBuilder newURL = new StringBuilder();
-        int googIndex = url.indexOf(getString(R.string.google));
-        int helpIndex = url.indexOf(getString(R.string.help_page));
-        if(googIndex > -1 || helpIndex > -1)
-        {
-            return url;
-        }
-        int index = url.indexOf(getString(R.string.lenses_fake_url));
-        int startIndex = 14;
-        if(index == -1)
-        {
-            index = url.indexOf(getString(R.string.mobile_url));
-            startIndex = 16;
-        }
-        if(index > -1)
-        {
-            newURL.append(Constants.MOBILE_CNX_URL);
-            newURL.append(url.substring(startIndex));
-            return newURL.toString();
-        }
-        else
-        {
-            return url;
-        }
+        return url;
+//        //Log.d("WebView.fixURL()", "url: " + url);
+//        StringBuilder newURL = new StringBuilder();
+//        int googIndex = url.indexOf(getString(R.string.google));
+//        int helpIndex = url.indexOf(getString(R.string.help_page));
+//        if(googIndex > -1 || helpIndex > -1)
+//        {
+//            return url;
+//        }
+//        int index = url.indexOf(getString(R.string.lenses_fake_url));
+//        int startIndex = 14;
+//        if(index == -1)
+//        {
+//            index = url.indexOf(getString(R.string.mobile_url));
+//            startIndex = 16;
+//        }
+//        if(index > -1)
+//        {
+//            newURL.append(Constants.MOBILE_CNX_URL);
+//            newURL.append(url.substring(startIndex));
+//            return newURL.toString();
+//        }
+//        else
+//        {
+//            return url;
+//        }
     }
     
     /**
@@ -500,28 +509,6 @@ public class WebViewActivity extends SherlockActivity
 
                       }
                   });
-                
-//                ImageButton epubButton = (ImageButton)findViewById(R.id.epubButton);
-//                epubButton.setOnClickListener(new OnClickListener() 
-//                {
-//                          
-//                      public void onClick(View v) 
-//                      {
-//                          download(Constants.EPUB_TYPE);
-//
-//                      }
-//                  });
-//                
-//                ImageButton pdfButton = (ImageButton)findViewById(R.id.pdfButton);
-//                pdfButton.setOnClickListener(new OnClickListener() 
-//                {
-//                          
-//                      public void onClick(View v) 
-//                      {
-//                          download(Constants.PDF_TYPE);
-//
-//                      }
-//                  });
                 
                 ImageButton copyButton = (ImageButton)findViewById(R.id.copyButton);
                 if(Build.VERSION.SDK_INT < 11) 

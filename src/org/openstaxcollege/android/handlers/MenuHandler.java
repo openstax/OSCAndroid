@@ -10,6 +10,7 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import android.view.MenuItem;
 import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.activity.FileBrowserActivity;
 import org.openstaxcollege.android.activity.LandingActivity;
@@ -21,8 +22,6 @@ import org.openstaxcollege.android.providers.Bookmarks;
 import org.openstaxcollege.android.utils.Constants;
 import org.openstaxcollege.android.utils.ContentCache;
 import org.openstaxcollege.android.utils.MenuUtil;
-
-import com.actionbarsherlock.view.MenuItem;
 
 import android.app.AlertDialog;
 import android.app.DownloadManager;
@@ -43,11 +42,7 @@ import android.util.Log;
  */
 public class MenuHandler
 {
-    public boolean handleContextMenu(android.view.MenuItem item, Context context, Content currentContent)
-    {
-        return handleContextMenu(item.getItemId(), context, currentContent);
-    }
-    
+
     public boolean handleContextMenu(MenuItem item, Context context, Content currentContent)
     {
         return handleContextMenu(item.getItemId(), context, currentContent);

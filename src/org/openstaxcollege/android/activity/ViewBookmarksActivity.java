@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import android.app.ActionBar;
+import android.app.ListActivity;
+import android.view.Window;
 import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.adapters.BookmarkListAdapter;
 import org.openstaxcollege.android.beans.Content;
@@ -17,12 +20,6 @@ import org.openstaxcollege.android.handlers.MenuHandler;
 import org.openstaxcollege.android.providers.Bookmarks;
 import org.openstaxcollege.android.providers.utils.DBUtils;
 import org.openstaxcollege.android.utils.ContentCache;
-
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockListActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.Window;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -41,7 +38,7 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
  * @author Ed Woodward
  *
  */
-public class ViewBookmarksActivity extends SherlockListActivity
+public class ViewBookmarksActivity extends ListActivity
 {
     /** Adaptor for Lens list display */ 
     BookmarkListAdapter adapter;
@@ -74,9 +71,9 @@ public class ViewBookmarksActivity extends SherlockListActivity
           setContentView(R.layout.list_view);
           registerForContextMenu(getListView());
           
-          ActionBar aBar = getSupportActionBar();
+          ActionBar aBar = getActionBar();
           aBar.setTitle(getString(R.string.title_favs));
-          setSupportProgressBarIndeterminateVisibility(true);
+          setProgressBarIndeterminateVisibility(true);
           //get already retrieved feed and reuse if it is there
           content = (ArrayList<Content>)getLastNonConfigurationInstance();
           if(content == null)
@@ -89,7 +86,7 @@ public class ViewBookmarksActivity extends SherlockListActivity
                   //reuse existing feed data
                   adapter = new BookmarkListAdapter(ViewBookmarksActivity.this, content);
                   setListAdapter(adapter);
-                  setSupportProgressBarIndeterminateVisibility(false);
+                  setProgressBarIndeterminateVisibility(false);
              
           }
       }
@@ -136,37 +133,7 @@ public class ViewBookmarksActivity extends SherlockListActivity
           }
       }
       
-      /* (non-Javadoc)
-       * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
-       */
-//      @Override
-//      public boolean onCreateOptionsMenu(Menu menu) 
-//      {
-//          
-//          getSupportMenuInflater().inflate(R.menu.lenses_options_menu, menu);
-//          return true;
-//          
-//      }
-      
-      /* (non-Javadoc)
-       * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
-       */
-//      @Override
-//      public boolean onOptionsItemSelected(MenuItem item) 
-//      {
-//          MenuHandler mh = new MenuHandler();
-//          boolean returnVal = mh.handleContextMenu(item, this, null);
-//          if(returnVal)
-//          {
-//              return returnVal;
-//          }
-//          else
-//          {
-//              return super.onOptionsItemSelected(item);
-//          }
-//      }
-      
-      /* (non-Javadoc)
+     /* (non-Javadoc)
      * @see android.app.Activity#onResume()
      */
     @Override
@@ -205,7 +172,7 @@ public class ViewBookmarksActivity extends SherlockListActivity
           setListAdapter(adapter);
           getListView().setSelection(0);
           //progressDialog.dismiss();
-          setSupportProgressBarIndeterminateVisibility(false);
+          setProgressBarIndeterminateVisibility(false);
       }
       
       /** reads feed in a separate thread.  Starts progress dialog*/
