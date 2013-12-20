@@ -12,7 +12,6 @@ import java.net.URL;
 
 import android.view.MenuItem;
 import org.openstaxcollege.android.R;
-import org.openstaxcollege.android.activity.FileBrowserActivity;
 import org.openstaxcollege.android.activity.LandingActivity;
 import org.openstaxcollege.android.activity.NoteEditorActivity;
 import org.openstaxcollege.android.activity.ViewBookmarksActivity;
@@ -94,16 +93,6 @@ public class MenuHandler
                 return true;
             case R.id.delete_from__favs:
                 context.getContentResolver().delete(Bookmarks.CONTENT_URI, "_id="+ currentContent.getId(), null);
-                return true;
-            case R.id.search:
-                SearchHandler sh = new SearchHandler();
-                sh.displayPopup(context);
-                return true;
-            case R.id.refresh:
-                return true;
-            case R.id.viewFile:
-                Intent viewIntent = new Intent(context, FileBrowserActivity.class);
-                context.startActivity(viewIntent);
                 return true;
             case R.id.home:
                 Intent homeIntent = new Intent(context, LandingActivity.class);
