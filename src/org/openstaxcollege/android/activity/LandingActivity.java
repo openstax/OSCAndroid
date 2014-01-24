@@ -263,19 +263,33 @@ public class LandingActivity extends Activity
     	public ImageAdapter(Context c)
     	{
     		context = c;
-    		bookcovers.add(new Bookcover(getString(R.string.physics),R.drawable.physics_lg));
-    		bookcovers.add(new Bookcover(getString(R.string.landing_title_sociology),R.drawable.sociology_lg));
-    		bookcovers.add(new Bookcover(getString(R.string.biology), R.drawable.biology_lg));
-    		bookcovers.add(new Bookcover(getString(R.string.concepts_biology),R.drawable.concepts_biology_lg));
-    		bookcovers.add(new Bookcover(getString(R.string.landing_title_anatomy),R.drawable.anatomy_lg));
-    		bookcovers.add(new Bookcover(getString(R.string.statistics),R.drawable.statistics_lg));
-    		bookcovers.add(new Bookcover(getString(R.string.precalculus),R.drawable.precalculus_lg));
-    		bookcovers.add(new Bookcover(getString(R.string.psychology),R.drawable.psychology_lg));
-    		bookcovers.add(new Bookcover(getString(R.string.landing_title_economics),R.drawable.econ_lg));
-    		bookcovers.add(new Bookcover(getString(R.string.chemistry),R.drawable.chemistry_lg));
-    		bookcovers.add(new Bookcover(getString(R.string.history),R.drawable.history_lg));
-    		bookcovers.add(new Bookcover(getString(R.string.macro_econ),R.drawable.macro_econ_lg));
-    		bookcovers.add(new Bookcover(getString(R.string.micro_econ),R.drawable.micro_econ_lg));
+//    		bookcovers.add(new Bookcover(getString(R.string.physics),R.drawable.physics_lg));
+//    		bookcovers.add(new Bookcover(getString(R.string.landing_title_sociology),R.drawable.sociology_lg));
+//    		bookcovers.add(new Bookcover(getString(R.string.biology), R.drawable.biology_lg));
+//    		bookcovers.add(new Bookcover(getString(R.string.concepts_biology),R.drawable.concepts_biology_lg));
+//    		bookcovers.add(new Bookcover(getString(R.string.landing_title_anatomy),R.drawable.anatomy_lg));
+//    		bookcovers.add(new Bookcover(getString(R.string.statistics),R.drawable.statistics_lg));
+//    		bookcovers.add(new Bookcover(getString(R.string.precalculus),R.drawable.precalculus_lg));
+//    		bookcovers.add(new Bookcover(getString(R.string.psychology),R.drawable.psychology_lg));
+//    		bookcovers.add(new Bookcover(getString(R.string.landing_title_economics),R.drawable.econ_lg));
+//    		bookcovers.add(new Bookcover(getString(R.string.chemistry),R.drawable.chemistry_lg));
+//    		bookcovers.add(new Bookcover(getString(R.string.history),R.drawable.history_lg));
+//    		bookcovers.add(new Bookcover(getString(R.string.macro_econ),R.drawable.macro_econ_lg));
+//    		bookcovers.add(new Bookcover(getString(R.string.micro_econ),R.drawable.micro_econ_lg));
+
+            bookcovers.add(new Bookcover("",R.drawable.physics_lg));
+            bookcovers.add(new Bookcover("",R.drawable.sociology_lg));
+            bookcovers.add(new Bookcover("", R.drawable.biology_lg));
+            bookcovers.add(new Bookcover("",R.drawable.concepts_biology_lg));
+            bookcovers.add(new Bookcover("",R.drawable.anatomy_lg));
+            bookcovers.add(new Bookcover("",R.drawable.statistics_lg));
+            bookcovers.add(new Bookcover("",R.drawable.precalculus_lg));
+            bookcovers.add(new Bookcover("",R.drawable.psychology_lg));
+            bookcovers.add(new Bookcover("",R.drawable.econ_lg));
+            bookcovers.add(new Bookcover("",R.drawable.chemistry_lg));
+            bookcovers.add(new Bookcover("",R.drawable.history_lg));
+            bookcovers.add(new Bookcover("",R.drawable.macro_econ_lg));
+            bookcovers.add(new Bookcover("",R.drawable.micro_econ_lg));
     		
     	}
 
@@ -321,16 +335,16 @@ public class LandingActivity extends Activity
             	
                 v = LayoutInflater.from(context).inflate(R.layout.gridcell, parent, false);
                 v.setTag(R.id.grid_item_image, v.findViewById(R.id.grid_item_image));
-                v.setTag(R.id.text, v.findViewById(R.id.text));
+                //v.setTag(R.id.text, v.findViewById(R.id.text));
             }
 
             picture = (ImageView)v.getTag(R.id.grid_item_image);
-            name = (TextView)v.getTag(R.id.text);
+            //name = (TextView)v.getTag(R.id.text);
 
             Bookcover item = (Bookcover)getItem(position);
 
             picture.setImageResource(item.drawableId);
-            name.setText(item.name);
+            //name.setText(item.name);
 
             return v;
     	}
