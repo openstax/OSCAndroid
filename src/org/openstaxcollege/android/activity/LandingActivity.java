@@ -329,7 +329,7 @@ public class LandingActivity extends Activity
 
     		View v = convertView;
             ImageView picture;
-            TextView name;
+            //TextView name;
 
             if(v == null) {
             	

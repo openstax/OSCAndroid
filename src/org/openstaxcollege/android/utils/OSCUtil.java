@@ -48,10 +48,20 @@ public class OSCUtil
     
     public static boolean isTabletDevice(Context activityContext) 
     {
-        
-        boolean xlarge = ((activityContext.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE);
 
-        if (xlarge) 
+        boolean xlarge = false;
+
+        if((activityContext.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE || (activityContext.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == 3)
+        {
+            xlarge = true;
+        }
+        //boolean xlarge = ((activityContext.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE);
+        int test = activityContext.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK;
+
+        Log.d("OSCUtil.isTabletDevice()","screenLayout = " + test);
+        Log.d("OSCUtil.isTabletDevice()","screenlayout size mask = " + Configuration.SCREENLAYOUT_SIZE_MASK);
+
+        if (xlarge)
         {
             DisplayMetrics metrics = new DisplayMetrics();
             Activity activity = (Activity) activityContext;
