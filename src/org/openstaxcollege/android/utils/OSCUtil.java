@@ -45,6 +45,12 @@ public class OSCUtil
         
         return isConnected;
     }
+
+    public static boolean isXLarge(Context activityContext)
+    {
+        return ((activityContext.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE);
+
+    }
     
     public static boolean isTabletDevice(Context activityContext) 
     {

@@ -2,10 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/add_to_favs"
           android:icon="@drawable/favoritesadd"
-          android:title="@string/menu_add_to_favs" />
+          android:title="@string/menu_add_to_favs"
+          android:showAsAction="ifRoom"/>
     <item android:id="@+id/go_to_favs"
           android:icon="@drawable/favorites"
-          android:title="@string/menu_go_to_favs" />
+          android:title="@string/menu_go_to_favs"
+          android:showAsAction="ifRoom"/>
     <!--  <item android:id="@+id/viewFile"
           android:title="@string/menu_view_file"
           android:icon="@drawable/ic_menu_upload" />-->

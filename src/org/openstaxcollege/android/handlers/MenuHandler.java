@@ -11,6 +11,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import android.view.MenuItem;
+import android.widget.Toast;
 import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.activity.LandingActivity;
 import org.openstaxcollege.android.activity.NoteEditorActivity;
@@ -72,6 +73,7 @@ public class MenuHandler
                 cv.put(Bookmarks.ICON, currentContent.getIcon());
                 //cv.put(Favs.OTHER, currentContent.getContentString());
                 context.getContentResolver().insert(Bookmarks.CONTENT_URI, cv);
+                Toast.makeText(context, "Bookmark added", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.go_to_favs:
                 Intent intent = new Intent(context, ViewBookmarksActivity.class);

@@ -64,7 +64,14 @@ public class LandingActivity extends Activity
         boolean isTablet = OSCUtil.isTabletDevice(this);
         if(orient == Configuration.ORIENTATION_LANDSCAPE && isTablet)
         {
-        	gridView.setNumColumns(4);
+            if(OSCUtil.isXLarge(this))
+            {
+                gridView.setNumColumns(5);
+            }
+            else
+            {
+        	    gridView.setNumColumns(4);
+            }
         }
         else if(orient == Configuration.ORIENTATION_LANDSCAPE)
         {
@@ -72,7 +79,16 @@ public class LandingActivity extends Activity
         }
         else if(orient == Configuration.ORIENTATION_PORTRAIT && isTablet)
         {
-        	gridView.setNumColumns(3);
+        	//gridView.setNumColumns(3);
+
+            if(OSCUtil.isXLarge(this))
+            {
+                gridView.setNumColumns(4);
+            }
+            else
+            {
+                gridView.setNumColumns(3);
+            }
         }
         
         gridView.setAdapter(new ImageAdapter(this));
@@ -145,6 +161,7 @@ public class LandingActivity extends Activity
             Content c = new Content();
             c.setTitle(getString(R.string.physics));
             c.setContentString(getString(R.string.physics_desc));
+            //c.setUrl(new URL("http://archive.alpha.cnx.org:6543/contents/031da8d3-b525-429c-80cf-6c8ed997733a@7.31.html"));
             c.setUrl(new URL("http://m.cnx.org/content/col11406/latest"));
             c.setIconDrawable(R.drawable.physics_lg);
             c.setIcon(Integer.toString(R.drawable.physics_lg));
