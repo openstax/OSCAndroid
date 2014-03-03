@@ -9,6 +9,9 @@ package org.openstaxcollege.android.handlers;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -67,6 +70,9 @@ public class MenuHandler
                 }
                 else
                 {
+//                    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+//                    Date date = new Date();
+//                    cv.put(Bookmarks.TITLE, dateFormat.format(date)+ " - " + currentContent.getTitle());
                     cv.put(Bookmarks.TITLE, currentContent.getTitle());
                 }
                 cv.put(Bookmarks.URL, currentContent.getUrl().toString());
@@ -107,9 +113,9 @@ public class MenuHandler
                 return true;
             case R.id.menu_save:
                 return true;
-            case R.id.rate:
-            	context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=org.cnx.android")));
-                return true;
+            //case R.id.rate:
+            //	context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=org.cnx.android")));
+              //  return true;
             default:
                 return false;
         }

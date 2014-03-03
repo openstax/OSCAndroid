@@ -146,27 +146,27 @@ public class BookmarkListAdapter extends ArrayAdapter<Content> implements Sectio
 //                	else
 //                	{
 	                    //set correct icon based on URL
-	                    if(c.getIcon().equals(Integer.toString(R.drawable.physics_lg)))
+	                    if(c.getIcon().equals("physics"))
 	                    {
 	                        holder.imageView.setImageResource(R.drawable.physics_lg);
 	                    }
-	                    else if(c.getIcon().equals(Integer.toString(R.drawable.sociology_lg)))
+	                    else if(c.getIcon().equals("sociology"))
 	                    {
 	                        holder.imageView.setImageResource(R.drawable.sociology_lg);
 	                    }
-	                    else if(c.getIcon().equals(Integer.toString(R.drawable.biology_lg)))
+	                    else if(c.getIcon().equals("biology"))
 	                    {
 	                        holder.imageView.setImageResource(R.drawable.biology_lg);
 	                    }
-	                    else if(c.getIcon().equals(Integer.toString(R.drawable.concepts_biology_lg)) )
+	                    else if(c.getIcon().equals("concepts") )
 	                    {
 	                        holder.imageView.setImageResource(R.drawable.concepts_biology_lg);
 	                    }
-	                    else if(c.getIcon().equals(Integer.toString(R.drawable.anatomy_lg)))
+	                    else if(c.getIcon().equals("anatomy"))
 	                    {
 	                        holder.imageView.setImageResource(R.drawable.anatomy_lg);
 	                    }
-	                    else if(c.getIcon().equals(Integer.toString(R.drawable.statistics_lg)))
+	                    else if(c.getIcon().equals("statistics"))
 	                    {
 	                        holder.imageView.setImageResource(R.drawable.statistics_lg);
 	                    }

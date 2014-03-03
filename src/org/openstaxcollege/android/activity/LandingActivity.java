@@ -164,35 +164,35 @@ public class LandingActivity extends Activity
             //c.setUrl(new URL("http://archive.alpha.cnx.org:6543/contents/031da8d3-b525-429c-80cf-6c8ed997733a@7.31.html"));
             c.setUrl(new URL("http://m.cnx.org/content/col11406/latest"));
             c.setIconDrawable(R.drawable.physics_lg);
-            c.setIcon(Integer.toString(R.drawable.physics_lg));
+            c.setIcon("physics");
             
             Content c2 = new Content();
             c2.setTitle(getString(R.string.sociology));
             c2.setContentString(getString(R.string.sociology_desc));
             c2.setUrl(new URL("http://m.cnx.org/content/col11407/latest/"));
             c2.setIconDrawable(R.drawable.sociology_lg);
-            c2.setIcon(Integer.toString(R.drawable.sociology_lg));
+            c2.setIcon("sociology");
             
             Content c3 = new Content();
             c3.setTitle(getString(R.string.biology));
             c3.setContentString(getString(R.string.biology_desc));
             c3.setUrl(new URL("http://m.cnx.org/content/col11448/latest/"));
             c3.setIconDrawable(R.drawable.biology_lg);
-            c3.setIcon(Integer.toString(R.drawable.biology_lg));
+            c3.setIcon("biology");
             
             Content c4 = new Content();
             c4.setTitle(getString(R.string.concepts_biology));
             c4.setContentString(getString(R.string.concepts_biology_desc));
             c4.setUrl(new URL("http://m.cnx.org/content/col11487/latest/"));
             c4.setIconDrawable(R.drawable.concepts_biology_lg);
-            c4.setIcon(Integer.toString(R.drawable.concepts_biology_lg));
+            c4.setIcon("concepts");
             
             Content c5 = new Content();
             c5.setTitle(getString(R.string.anatomy));
             c5.setContentString(getString(R.string.anatomy_desc));
             c5.setUrl(new URL("http://m.cnx.org/content/col11496/latest/"));
             c5.setIconDrawable(R.drawable.anatomy_lg);
-            c5.setIcon(Integer.toString(R.drawable.anatomy_lg));
+            c5.setIcon("anatomy");
             
             Content c6 = new Content();
             c6.setTitle(getString(R.string.statistics));
@@ -200,7 +200,7 @@ public class LandingActivity extends Activity
             //c6.setUrl(new URL("http://cnx.org/contents/30189442-6998-4686-ac05-ed152b91b9de@16.5"));
             c6.setUrl(new URL("http://m.cnx.org/content/col11562/latest/"));
             c6.setIconDrawable(R.drawable.statistics_lg);
-            c6.setIcon(Integer.toString(R.drawable.statistics_lg));
+            c6.setIcon("statistics");
             
             Content c7 = new Content();
             c7.setTitle(getString(R.string.econ));
