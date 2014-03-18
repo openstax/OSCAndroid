@@ -111,8 +111,8 @@ public class MenuHandler
                 Intent noteIntent = new Intent(context, NoteEditorActivity.class);
                 context.startActivity(noteIntent);
                 return true;
-            case R.id.menu_save:
-                return true;
+//            case R.id.menu_save:
+//                return true;
             //case R.id.rate:
             //	context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=org.cnx.android")));
               //  return true;
