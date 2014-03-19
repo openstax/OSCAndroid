@@ -92,10 +92,6 @@ public class OSCUtil
         Toast.makeText(context, "No data connection",  Toast.LENGTH_LONG).show();
     }
     
-    public static void setIcon(Content orig, Content next)
-    {
-    	next.setIconDrawable(orig.getIconDrawable());
-    	
-    }
+
 
 }
