@@ -86,7 +86,7 @@ public class WebViewActivity extends Activity
             {
             	setProgressBarIndeterminateVisibility(true);
             }
-            view.loadUrl(fixURL(url));
+            view.loadUrl(url);
             try
             {
                 content.setUrl(new URL(url));
@@ -96,7 +96,6 @@ public class WebViewActivity extends Activity
             {
                 Log.d("WebViewActivity.shouldOverrideUrlLoading()", "Error: " + e.toString(),e);
             }
-            //setSupportProgressBarIndeterminateVisibility(true);
             return true;
         }
         
@@ -147,7 +146,6 @@ public class WebViewActivity extends Activity
         aBar.setDisplayHomeAsUpEnabled(true);
         content = (Content)ContentCache.getObject(getString(R.string.webcontent));
         aBar.setTitle(getString(R.string.app_name));
-        //webView = (WebView)findViewById(R.id.web_view);
         if(content != null && content.getUrl() != null)
         {
             setLayout(content.getUrl().toString());
@@ -181,33 +179,11 @@ public class WebViewActivity extends Activity
         {
             return false;
         }
-//        if(content.getUrl().toString().indexOf(getString(R.string.help_page)) == -1 && content.getUrl().toString().indexOf(getString(R.string.search)) == -1 && content.getUrl().toString().indexOf(getString(R.string.google)) == -1)
-//        {
-//            //if the web menu is already being used, don't recreate it
-//            if(!previousMenu.equals(WEB_MENU))
-//            {
-                menu.clear();
-                inflater.inflate(R.menu.web_options_menu, menu);
-                previousMenu = WEB_MENU;
-            //}
-//        }
-//        else
-//        {
-//            //no need to check for help menu since there is only one path to it.
-//            menu.clear();
-//            inflater.inflate(R.menu.help_options_menu, menu);
-//            MenuItem menuItem = menu.findItem(R.id.add_to_favs);
-//            if(content.getUrl().toString().indexOf(getString(R.string.help_page)) != -1)
-//            {
-//
-//                menuItem.setVisible(false);
-//            }
-//            else
-//            {
-//                menuItem.setVisible(true);
-//            }
-//            previousMenu = HELP_MENU;
-//        }
+
+        menu.clear();
+        inflater.inflate(R.menu.web_options_menu, menu);
+        previousMenu = WEB_MENU;
+
         return true;
     }
     
@@ -241,14 +217,14 @@ public class WebViewActivity extends Activity
     	{
 	        MenuHandler mh = new MenuHandler();
 	        boolean returnVal = mh.handleContextMenu(item, this, content);
-	        if(returnVal)
-	        {
+//	        if(returnVal)
+//	        {
 	            return returnVal;
-	        }
-	        else
-	        {
-	            return super.onOptionsItemSelected(item);
-	        }
+//	        }
+//	        else
+//	        {
+//	            return super.onOptionsItemSelected(item);
+//	        }
     	}
         
     }
@@ -310,8 +286,6 @@ public class WebViewActivity extends Activity
         //Log.d("WebViewView.setupViews()", "Called");
         webView = (ObservableWebView)findViewById(R.id.web_view);
         webView.getSettings().setJavaScriptEnabled(true);
-        //webView.getSettings().setUseWideViewPort(true);
-        //webView.getSettings().setLoadWithOverviewMode(true);
         webView.getSettings().setDefaultFontSize(17);
         webView.getSettings().setSupportZoom(true);
         webView.getSettings().setBuiltInZoomControls(true);
@@ -349,7 +323,7 @@ public class WebViewActivity extends Activity
         });
         
         webView.setWebViewClient(webViewClient);
-        webView.loadUrl(fixURL(content.url.toString()));
+        webView.loadUrl(content.url.toString());
     }        
     
     private void emulateShiftHeld(WebView view)
@@ -373,60 +347,6 @@ public class WebViewActivity extends Activity
             Log.e("dd", "Exception in emulateShiftHeld()", e);
         }
 
-    }
-    
-    
-    
-    /**
-     * Replace cnx.org with mobile.cnx.org
-     * @param url String - the URL to fix
-     * @return String - either the original URL or the modified URL 
-     */
-    protected String fixURL(String url)
-    {
-        return url;
-//        //Log.d("WebView.fixURL()", "url: " + url);
-//        StringBuilder newURL = new StringBuilder();
-//        int googIndex = url.indexOf(getString(R.string.google));
-//        int helpIndex = url.indexOf(getString(R.string.help_page));
-//        if(googIndex > -1 || helpIndex > -1)
-//        {
-//            return url;
-//        }
-//        int index = url.indexOf(getString(R.string.lenses_fake_url));
-//        int startIndex = 14;
-//        if(index == -1)
-//        {
-//            index = url.indexOf(getString(R.string.mobile_url));
-//            startIndex = 16;
-//        }
-//        if(index > -1)
-//        {
-//            newURL.append(Constants.MOBILE_CNX_URL);
-//            newURL.append(url.substring(startIndex));
-//            return newURL.toString();
-//        }
-//        else
-//        {
-//            return url;
-//        }
-    }
-    
-    /**
-     * Displays dialog to start file download
-     * @param type one of 2 types PDF or EPUB
-     */
-    private void download(String type)
-    {
-        if(OSCUtil.isConnected(this))
-        { 
-            MenuHandler mh = new MenuHandler();
-            mh.displayAlert(this, content, type);
-        }
-        else
-        {
-            OSCUtil.makeNoDataToast(this);
-        }
     }
     
     private void hideToolbar()

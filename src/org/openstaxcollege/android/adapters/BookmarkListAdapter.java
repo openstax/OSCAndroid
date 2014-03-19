@@ -128,50 +128,32 @@ public class BookmarkListAdapter extends ArrayAdapter<Content> implements Sectio
             {
                 if(c.icon != null)
                {
-//                    Builder uriBuilder = new Builder();
-//                    uriBuilder.scheme("http");
-//                    uriBuilder.path(c.icon.substring(5));
-//                    Uri uri = uriBuilder.build();
-//                    //Log.d("LensListAdapter" ,"uri:" + uri.toString());
-//
-//                    new FetchImageTask(holder.imageView).execute(uri.toString());
-//                    
-//                }
-//                else
-//                {
-//                	if(c.getIconDrawable() != 0)
-//                	{
-//                		holder.imageView.setImageResource(c.getIconDrawable());
-//                	}
-//                	else
-//                	{
-	                    //set correct icon based on URL
-	                    if(c.getIcon().equals("physics"))
-	                    {
-	                        holder.imageView.setImageResource(R.drawable.physics_lg);
-	                    }
-	                    else if(c.getIcon().equals("sociology"))
-	                    {
-	                        holder.imageView.setImageResource(R.drawable.sociology_lg);
-	                    }
-	                    else if(c.getIcon().equals("biology"))
-	                    {
-	                        holder.imageView.setImageResource(R.drawable.biology_lg);
-	                    }
-	                    else if(c.getIcon().equals("concepts") )
-	                    {
-	                        holder.imageView.setImageResource(R.drawable.concepts_biology_lg);
-	                    }
-	                    else if(c.getIcon().equals("anatomy"))
-	                    {
-	                        holder.imageView.setImageResource(R.drawable.anatomy_lg);
-	                    }
-	                    else if(c.getIcon().equals("statistics"))
-	                    {
-	                        holder.imageView.setImageResource(R.drawable.statistics_lg);
-	                    }
-                	}
-                //}
+                    //set correct icon based on URL
+                    if(c.getIcon().equals("physics"))
+                    {
+                        holder.imageView.setImageResource(R.drawable.physics_lg);
+                    }
+                    else if(c.getIcon().equals("sociology"))
+                    {
+                        holder.imageView.setImageResource(R.drawable.sociology_lg);
+                    }
+                    else if(c.getIcon().equals("biology"))
+                    {
+                        holder.imageView.setImageResource(R.drawable.biology_lg);
+                    }
+                    else if(c.getIcon().equals("concepts") )
+                    {
+                        holder.imageView.setImageResource(R.drawable.concepts_biology_lg);
+                    }
+                    else if(c.getIcon().equals("anatomy"))
+                    {
+                        holder.imageView.setImageResource(R.drawable.anatomy_lg);
+                    }
+                    else if(c.getIcon().equals("statistics"))
+                    {
+                        holder.imageView.setImageResource(R.drawable.statistics_lg);
+                    }
+                }
             }
             if(text != null){
                 holder.textView.setText(c.title);

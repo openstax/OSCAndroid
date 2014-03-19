@@ -45,8 +45,6 @@ public class ViewBookmarksActivity extends ListActivity
     /** list of lenses as Content objects */ 
     ArrayList<Content> content;
     
-    /** progress window displayed while feed is loading*/
-    protected ProgressDialog progressDialog;
     /**handler */
     final private Handler handler = new Handler();
     
@@ -160,8 +158,7 @@ public class ViewBookmarksActivity extends ListActivity
       protected void onListItemClick(ListView l, View v, int position, long id) 
       {
           Content content = (Content)getListView().getItemAtPosition(position);
-          //ContentCache.setObject("content", content);
-          
+
           ContentCache.setObject(getString(R.string.webcontent), content);
           startActivity(new Intent(this, WebViewActivity.class));
       }
@@ -171,7 +168,6 @@ public class ViewBookmarksActivity extends ListActivity
       {
           setListAdapter(adapter);
           getListView().setSelection(0);
-          //progressDialog.dismiss();
           setProgressBarIndeterminateVisibility(false);
       }
       

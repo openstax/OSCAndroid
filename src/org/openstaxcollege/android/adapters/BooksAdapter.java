@@ -157,18 +157,6 @@ public class BooksAdapter extends ArrayAdapter<Content>implements SectionIndexer
         return contentList;
     }
     
-    /** Fetches contents of URL 
-     * 
-     * @returns Object
-     *  @throws MalformedURLException,IOException 
-     */
-//    private Object fetch(String address) throws MalformedURLException,IOException 
-//    {
-//        URL url = new URL(address);
-//        Object content = url.getContent();
-//        return content;
-//    }
-    
     /* (non-Javadoc)
      * @see android.widget.SectionIndexer#getPositionForSection(int)
      */

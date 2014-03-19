@@ -128,14 +128,14 @@ public class LandingActivity extends Activity
     {
         MenuHandler mh = new MenuHandler();
         boolean returnVal = mh.handleContextMenu(item, this, null);
-        if(returnVal)
-        {
+//        if(returnVal)
+//        {
             return returnVal;
-        }
-        else
-        {
-            return super.onOptionsItemSelected(item);
-        }
+//        }
+//        else
+//        {
+//            return super.onOptionsItemSelected(item);
+//        }
     }
     
     /* (non-Javadoc)
@@ -280,19 +280,6 @@ public class LandingActivity extends Activity
     	public ImageAdapter(Context c)
     	{
     		context = c;
-//    		bookcovers.add(new Bookcover(getString(R.string.physics),R.drawable.physics_lg));
-//    		bookcovers.add(new Bookcover(getString(R.string.landing_title_sociology),R.drawable.sociology_lg));
-//    		bookcovers.add(new Bookcover(getString(R.string.biology), R.drawable.biology_lg));
-//    		bookcovers.add(new Bookcover(getString(R.string.concepts_biology),R.drawable.concepts_biology_lg));
-//    		bookcovers.add(new Bookcover(getString(R.string.landing_title_anatomy),R.drawable.anatomy_lg));
-//    		bookcovers.add(new Bookcover(getString(R.string.statistics),R.drawable.statistics_lg));
-//    		bookcovers.add(new Bookcover(getString(R.string.precalculus),R.drawable.precalculus_lg));
-//    		bookcovers.add(new Bookcover(getString(R.string.psychology),R.drawable.psychology_lg));
-//    		bookcovers.add(new Bookcover(getString(R.string.landing_title_economics),R.drawable.econ_lg));
-//    		bookcovers.add(new Bookcover(getString(R.string.chemistry),R.drawable.chemistry_lg));
-//    		bookcovers.add(new Bookcover(getString(R.string.history),R.drawable.history_lg));
-//    		bookcovers.add(new Bookcover(getString(R.string.macro_econ),R.drawable.macro_econ_lg));
-//    		bookcovers.add(new Bookcover(getString(R.string.micro_econ),R.drawable.micro_econ_lg));
 
             bookcovers.add(new Bookcover("",R.drawable.physics_lg));
             bookcovers.add(new Bookcover("",R.drawable.sociology_lg));
