@@ -153,6 +153,18 @@ public class BookmarkListAdapter extends ArrayAdapter<Content> implements Sectio
                     {
                         holder.imageView.setImageResource(R.drawable.statistics_lg);
                     }
+                    else if(c.getIcon().equals("econ"))
+                    {
+                        holder.imageView.setImageResource(R.drawable.econ_lg);
+                    }
+                    else if(c.getIcon().equals("macro"))
+                    {
+                        holder.imageView.setImageResource(R.drawable.macro_econ_lg);
+                    }
+                    else if(c.getIcon().equals("micro"))
+                    {
+                        holder.imageView.setImageResource(R.drawable.micro_econ_lg);
+                    }
                 }
             }
             if(text != null){

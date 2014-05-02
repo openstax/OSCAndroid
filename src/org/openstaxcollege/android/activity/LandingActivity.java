@@ -207,18 +207,21 @@ public class LandingActivity extends Activity
             c7.setContentString(getString(R.string.coming_soon));
             c7.setUrl(new URL("http://m.cnx.org/content/col11613/latest/"));
             c7.setIconDrawable(R.drawable.econ_lg);
+            c7.setIcon("econ");
 
             Content c11 = new Content();
             c11.setTitle(getString(R.string.macro_econ));
             c11.setContentString(getString(R.string.coming_soon));
             c11.setUrl(new URL("http://m.cnx.org/content/col11626/latest/"));
             c11.setIconDrawable(R.drawable.macro_econ_lg);
+            c11.setIcon("macro");
 
             Content c12 = new Content();
             c12.setTitle(getString(R.string.micro_econ));
             c12.setContentString(getString(R.string.coming_soon));
             c12.setUrl(new URL("http://m.cnx.org/content/col11627/latest/"));
             c12.setIconDrawable(R.drawable.micro_econ_lg);
+            c12.setIcon("micro");
             
             Content c8 = new Content();
             c8.setTitle(getString(R.string.precalculus));
