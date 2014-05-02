@@ -13,17 +13,5 @@
         android:scaleType="fitCenter"
         android:src="@drawable/biology_lg" >
     </org.openstaxcollege.android.views.OSCImageView>
-    <!--<TextView
-        android:id="@+id/text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        android:layout_gravity="bottom"
-        android:textColor="@android:color/white"
-        android:background="#55000000"
-        /> -->
  
 </FrameLayout>

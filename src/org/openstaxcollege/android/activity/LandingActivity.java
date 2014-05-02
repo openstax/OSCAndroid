@@ -95,7 +95,7 @@ public class LandingActivity extends Activity
         gridView.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View v,int position, long id) {
-            	if(position > 5)
+            	if(position > 8)
             	{
             		Toast.makeText(LandingActivity.this, getString(R.string.coming_soon),  Toast.LENGTH_SHORT).show();
             		return;
@@ -205,8 +205,20 @@ public class LandingActivity extends Activity
             Content c7 = new Content();
             c7.setTitle(getString(R.string.econ));
             c7.setContentString(getString(R.string.coming_soon));
-            c7.setUrl(new URL(fakeURL));
+            c7.setUrl(new URL("http://m.cnx.org/content/col11613/latest/"));
             c7.setIconDrawable(R.drawable.econ_lg);
+
+            Content c11 = new Content();
+            c11.setTitle(getString(R.string.macro_econ));
+            c11.setContentString(getString(R.string.coming_soon));
+            c11.setUrl(new URL("http://m.cnx.org/content/col11626/latest/"));
+            c11.setIconDrawable(R.drawable.macro_econ_lg);
+
+            Content c12 = new Content();
+            c12.setTitle(getString(R.string.micro_econ));
+            c12.setContentString(getString(R.string.coming_soon));
+            c12.setUrl(new URL("http://m.cnx.org/content/col11627/latest/"));
+            c12.setIconDrawable(R.drawable.micro_econ_lg);
             
             Content c8 = new Content();
             c8.setTitle(getString(R.string.precalculus));
@@ -226,18 +238,6 @@ public class LandingActivity extends Activity
             c10.setUrl(new URL(fakeURL));
             c10.setIconDrawable(R.drawable.history_lg);
             
-            Content c11 = new Content();
-            c11.setTitle(getString(R.string.macro_econ));
-            c11.setContentString(getString(R.string.coming_soon));
-            c11.setUrl(new URL(fakeURL));
-            c11.setIconDrawable(R.drawable.macro_econ_lg);
-            
-            Content c12 = new Content();
-            c12.setTitle(getString(R.string.micro_econ));
-            c12.setContentString(getString(R.string.coming_soon));
-            c12.setUrl(new URL(fakeURL));
-            c12.setIconDrawable(R.drawable.micro_econ_lg);
-            
             Content c13 = new Content();
             c13.setTitle(getString(R.string.psychology));
             c13.setContentString(getString(R.string.coming_soon));
@@ -256,11 +256,11 @@ public class LandingActivity extends Activity
             content.add(c5);
             content.add(c6);
             content.add(c7);
+            content.add(c11);
+            content.add(c12);
             content.add(c8);
             content.add(c9);
             content.add(c10);
-            content.add(c11);
-            content.add(c12);
             content.add(c13);
             
         }
@@ -287,14 +287,14 @@ public class LandingActivity extends Activity
             bookcovers.add(new Bookcover("",R.drawable.concepts_biology_lg));
             bookcovers.add(new Bookcover("",R.drawable.anatomy_lg));
             bookcovers.add(new Bookcover("",R.drawable.statistics_lg));
-            bookcovers.add(new Bookcover("",R.drawable.precalculus_lg));
-            bookcovers.add(new Bookcover("",R.drawable.psychology_lg));
             bookcovers.add(new Bookcover("",R.drawable.econ_lg));
-            bookcovers.add(new Bookcover("",R.drawable.chemistry_lg));
-            bookcovers.add(new Bookcover("",R.drawable.history_lg));
             bookcovers.add(new Bookcover("",R.drawable.macro_econ_lg));
             bookcovers.add(new Bookcover("",R.drawable.micro_econ_lg));
-    		
+            bookcovers.add(new Bookcover("",R.drawable.precalculus_lg));
+            bookcovers.add(new Bookcover("",R.drawable.psychology_lg));
+            bookcovers.add(new Bookcover("",R.drawable.chemistry_lg));
+            bookcovers.add(new Bookcover("",R.drawable.history_lg));
+
     	}
 
     	/* (non-Javadoc)
