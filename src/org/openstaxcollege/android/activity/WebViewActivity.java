@@ -12,6 +12,7 @@ import java.net.URL;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.view.*;
 import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.beans.Content;
@@ -145,6 +146,18 @@ public class WebViewActivity extends Activity
         setProgressBarIndeterminateVisibility(true);
         aBar.setDisplayHomeAsUpEnabled(true);
         content = (Content)ContentCache.getObject(getString(R.string.webcontent));
+        SharedPreferences sharedPref = getSharedPreferences("org.openstaxcollege.android",MODE_PRIVATE);
+        String url = sharedPref.getString(content.getIcon(),"");
+        if(!url.equals(""))
+        {
+            try {
+                content.setUrl(new URL(url));
+            }
+            catch(MalformedURLException mue)
+            {
+                Log.e("WebViewActivity.onResume","Error: " + mue.toString());
+            }
+        }
         aBar.setTitle(getString(R.string.app_name));
         if(content != null && content.getUrl() != null)
         {
@@ -263,8 +276,31 @@ public class WebViewActivity extends Activity
     protected void onResume() 
     {
         super.onResume();
+        SharedPreferences sharedPref = getSharedPreferences("org.openstaxcollege.android",MODE_PRIVATE);
+        String url = sharedPref.getString(content.getIcon(),"");
+        if(!url.equals(""))
+        {
+            try {
+                content.setUrl(new URL(url));
+            }
+            catch(MalformedURLException mue)
+            {
+                Log.e("WebViewActivity.onResume","Error: " + mue.toString());
+            }
+        }
 
     }
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        SharedPreferences sharedPref = getSharedPreferences("org.openstaxcollege.android",MODE_PRIVATE);
+        SharedPreferences.Editor ed = sharedPref.edit();
+        ed.putString(content.getIcon(), content.getUrl().toString());
+        ed.commit();
+    }
+
     
     @Override
     protected void onSaveInstanceState(Bundle outState)
@@ -272,6 +308,10 @@ public class WebViewActivity extends Activity
         super.onSaveInstanceState(outState);
         //Log.d("ViewLenses.onSaveInstanceState()", "saving data");
         ContentCache.setObject(getString(R.string.webcontent), content);
+        SharedPreferences sharedPref = getSharedPreferences("org.openstaxcollege.android",MODE_PRIVATE);
+        SharedPreferences.Editor ed = sharedPref.edit();
+        ed.putString(content.getIcon(), content.getUrl().toString());
+        ed.commit();
         
     }
     
