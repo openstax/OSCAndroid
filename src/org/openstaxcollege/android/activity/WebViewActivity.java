@@ -18,7 +18,7 @@ import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.beans.Content;
 import org.openstaxcollege.android.handlers.MenuHandler;
 import org.openstaxcollege.android.utils.OSCUtil;
-import org.openstaxcollege.android.utils.ContentCache;
+//import org.openstaxcollege.android.utils.ContentCache;
 import org.openstaxcollege.android.views.ObservableWebView;
 import org.openstaxcollege.android.views.ObservableWebView.OnScrollChangedCallback;
 
@@ -145,7 +145,10 @@ public class WebViewActivity extends Activity
         aBar = this.getActionBar();
         setProgressBarIndeterminateVisibility(true);
         aBar.setDisplayHomeAsUpEnabled(true);
-        content = (Content)ContentCache.getObject(getString(R.string.webcontent));
+        //content = (Content)ContentCache.getObject(getString(R.string.webcontent));
+        Intent intent = getIntent();
+        content = (Content)intent.getSerializableExtra(getString(R.string.webcontent));
+
         SharedPreferences sharedPref = getSharedPreferences("org.openstaxcollege.android",MODE_PRIVATE);
         String url = sharedPref.getString(content.getIcon(),"");
         if(!url.equals(""))
@@ -249,11 +252,13 @@ public class WebViewActivity extends Activity
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) 
     {
-        if ((keyCode == KeyEvent.KEYCODE_BACK) && webView.canGoBack()) 
+        if(webView != null)
         {
-            webView.goBack();
-            return true;
-            
+            if ((keyCode == KeyEvent.KEYCODE_BACK) && webView.canGoBack()) {
+                webView.goBack();
+                return true;
+
+            }
         }
         return super.onKeyDown(keyCode, event);
     }
@@ -307,7 +312,8 @@ public class WebViewActivity extends Activity
     {
         super.onSaveInstanceState(outState);
         //Log.d("ViewLenses.onSaveInstanceState()", "saving data");
-        ContentCache.setObject(getString(R.string.webcontent), content);
+        //ContentCache.setObject(getString(R.string.webcontent), content);
+        outState.putSerializable(getString(R.string.webcontent),content);
         SharedPreferences sharedPref = getSharedPreferences("org.openstaxcollege.android",MODE_PRIVATE);
         SharedPreferences.Editor ed = sharedPref.edit();
         ed.putString(content.getIcon(), content.getUrl().toString());
@@ -440,7 +446,8 @@ public class WebViewActivity extends Activity
                       public void onClick(View v) 
                       {
                           Intent noteintent = new Intent(getApplicationContext(), NoteEditorActivity.class);
-                          ContentCache.setObject(getString(R.string.content), content);
+                          //ContentCache.setObject(getString(R.string.content), content);
+                          noteintent.putExtra(getString(R.string.webcontent),content);
                           startActivity(noteintent);
                       }
                   });
