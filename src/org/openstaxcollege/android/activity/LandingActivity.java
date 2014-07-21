@@ -101,8 +101,10 @@ public class LandingActivity extends Activity
             		return;
             	}
             	Content c = content.get(position);
-            	ContentCache.setObject(getString(R.string.webcontent), c);
-            	startActivity(new Intent(getApplicationContext(), WebViewActivity.class));
+                Intent i = new Intent(getApplicationContext(), WebViewActivity.class);
+                i.putExtra("webcontent",c);
+            	//ContentCache.setObject(getString(R.string.webcontent), c);
+            	startActivity(i);
                 
             }
         });
