@@ -178,10 +178,12 @@ public class ViewBookmarksActivity extends ListActivity
           {
             public void run() 
             {
+
+                String order = "fav_icon DESC, fav_title ASC";
                 
-                content = DBUtils.readCursorIntoList(getContentResolver().query(Bookmarks.CONTENT_URI, null, null, null, null));
+                content = DBUtils.readCursorIntoList(getContentResolver().query(Bookmarks.CONTENT_URI, null, null, null, order));
                 
-               Collections.sort((List<Content>)content);
+               //Collections.sort((List<Content>)content);
                 
                 fillData(content);
                 handler.post(finishedLoadingListTask);
