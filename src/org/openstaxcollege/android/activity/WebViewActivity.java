@@ -8,12 +8,14 @@ package org.openstaxcollege.android.activity;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.regex.Pattern;
 
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.view.*;
+import android.webkit.CookieManager;
 import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.beans.Content;
 import org.openstaxcollege.android.handlers.MenuHandler;
@@ -75,14 +77,14 @@ public class WebViewActivity extends Activity
         {
             super.onLoadResource(view, url);
             
-            Log.d("WebViewClient.onLoadResource()", "Called");
+            //Log.d("WebViewClient.onLoadResource()", "Called");
         }
         
         /** loads URL into view */
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) 
         {
-        	Log.d("WebViewClient.shouldOverrideUrlLo()", "Called");
+        	//Log.d("WebViewClient.shouldOverrideUrlLo()", "Called");
         	if(!progressBarRunning)
             {
             	setProgressBarIndeterminateVisibility(true);
@@ -108,11 +110,13 @@ public class WebViewActivity extends Activity
         public void onPageFinished(WebView view, String url)
         {
             //Log.d("WebViewClient.onPageFinished", "title: " + view.getTitle());
-            //Log.d("WebViewClient.onPageFinished", "url: " + url);
+            Log.d("WebViewClient.onPageFinished", "url: " + url);
+
+            String newURL = fixURL(url);
             content.setTitle(view.getTitle());
             try
             {
-                content.setUrl(new URL(url));
+                content.setUrl(new URL(newURL));
                 
             }
             catch (MalformedURLException e)
@@ -120,12 +124,54 @@ public class WebViewActivity extends Activity
                 Log.d("WebViewActivity.onPageFinished()", "Error: " + e.toString(),e);
             }
             
-            setLayout(url);
+            setLayout(newURL);
             setProgressBarIndeterminateVisibility(false);
             progressBarRunning = false;
-            Log.d("WebViewClient.onPageFinished", "setSupportProgressBarIndeterminateVisibility(false) Called");
+            //Log.d("WebViewClient.onPageFinished", "setSupportProgressBarIndeterminateVisibility(false) Called");
             yPosition = 0f;
 
+        }
+
+        private String fixURL(String url)
+        {
+            //check for collection id
+            int index = url.indexOf("/col");
+            if(index == -1)
+            {
+                index = url.indexOf("=col");
+            }
+            String col;
+            String version;
+            String newURL = url;
+
+            //if none found, get cookie and add to URL
+            if(index == -1)
+            {
+                String cookie = CookieManager.getInstance().getCookie("m.cnx.org");
+                Log.d("WebViewClient.onPageFinished", "cookie: " + cookie);
+                String[] cookieArray = Pattern.compile(";").split(cookie);
+                for(int i = 0;i < cookieArray.length;i++)
+                {
+                    String c = cookieArray[i];
+                    if(c.indexOf("viewed_cols") > -1)
+                    {
+                        int colIndex = c.indexOf('"');
+                        int plus = c.indexOf("+");
+                        col = c.substring(colIndex + 1,plus);
+                        int versionIndex = c.indexOf("+",plus + 1);
+                        version = c.substring(plus + 1,versionIndex);
+                        Log.d("WebViewClient.fixURL()", "collection: " + col);
+                        Log.d("WebViewClient.fixURL()", "version: " + version);
+                        newURL = url + "?collection=" + col + "/" + version;
+
+                    }
+
+                }
+
+            }
+
+            Log.d("WebViewClient.fixURL()", "newURL: " + newURL);
+            return newURL;
         }
 
     };
@@ -149,18 +195,18 @@ public class WebViewActivity extends Activity
         Intent intent = getIntent();
         content = (Content)intent.getSerializableExtra(getString(R.string.webcontent));
 
-        SharedPreferences sharedPref = getSharedPreferences("org.openstaxcollege.android",MODE_PRIVATE);
-        String url = sharedPref.getString(content.getIcon(),"");
-        if(!url.equals(""))
-        {
-            try {
-                content.setUrl(new URL(url));
-            }
-            catch(MalformedURLException mue)
-            {
-                Log.e("WebViewActivity.onResume","Error: " + mue.toString());
-            }
-        }
+//        SharedPreferences sharedPref = getSharedPreferences("org.openstaxcollege.android",MODE_PRIVATE);
+//        String url = sharedPref.getString(content.getIcon(),"");
+//        if(!url.equals(""))
+//        {
+//            try {
+//                content.setUrl(new URL(url));
+//            }
+//            catch(MalformedURLException mue)
+//            {
+//                Log.e("WebViewActivity.onResume","Error: " + mue.toString());
+//            }
+//        }
         aBar.setTitle(getString(R.string.app_name));
         if(content != null && content.getUrl() != null)
         {
@@ -277,34 +323,36 @@ public class WebViewActivity extends Activity
     /* (non-Javadoc)
      * @see android.app.Activity#onResume()
      */
-    @Override
-    protected void onResume() 
-    {
-        super.onResume();
-        SharedPreferences sharedPref = getSharedPreferences("org.openstaxcollege.android",MODE_PRIVATE);
-        String url = sharedPref.getString(content.getIcon(),"");
-        if(!url.equals(""))
-        {
-            try {
-                content.setUrl(new URL(url));
-            }
-            catch(MalformedURLException mue)
-            {
-                Log.e("WebViewActivity.onResume","Error: " + mue.toString());
-            }
-        }
+//    @Override
+//    protected void onResume()
+//    {
+//        super.onResume();
+//        SharedPreferences sharedPref = getSharedPreferences("org.openstaxcollege.android",MODE_PRIVATE);
+//        String url = sharedPref.getString(content.getIcon(),"");
+//        Log.d("WebViewActivity.onResume()","URL retrieved: " + url);
+//        if(!url.equals(""))
+//        {
+//            try {
+//                content.setUrl(new URL(url));
+//            }
+//            catch(MalformedURLException mue)
+//            {
+//                Log.e("WebViewActivity.onResume","Error: " + mue.toString());
+//            }
+//        }
+//
+//    }
 
-    }
-
-    @Override
-    protected void onPause()
-    {
-        super.onPause();
-        SharedPreferences sharedPref = getSharedPreferences("org.openstaxcollege.android",MODE_PRIVATE);
-        SharedPreferences.Editor ed = sharedPref.edit();
-        ed.putString(content.getIcon(), content.getUrl().toString());
-        ed.commit();
-    }
+//    @Override
+//    protected void onPause()
+//    {
+//        super.onPause();
+//        SharedPreferences sharedPref = getSharedPreferences("org.openstaxcollege.android",MODE_PRIVATE);
+//        SharedPreferences.Editor ed = sharedPref.edit();
+//        Log.d("WebViewActivity.onPause()","URL saved: " + content.getUrl().toString());
+//        ed.putString(content.getIcon(), content.getUrl().toString());
+//        ed.commit();
+//    }
 
     
     @Override
