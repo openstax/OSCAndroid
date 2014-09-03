@@ -195,18 +195,18 @@ public class WebViewActivity extends Activity
         Intent intent = getIntent();
         content = (Content)intent.getSerializableExtra(getString(R.string.webcontent));
 
-//        SharedPreferences sharedPref = getSharedPreferences("org.openstaxcollege.android",MODE_PRIVATE);
-//        String url = sharedPref.getString(content.getIcon(),"");
-//        if(!url.equals(""))
-//        {
-//            try {
-//                content.setUrl(new URL(url));
-//            }
-//            catch(MalformedURLException mue)
-//            {
-//                Log.e("WebViewActivity.onResume","Error: " + mue.toString());
-//            }
-//        }
+        SharedPreferences sharedPref = getSharedPreferences("org.openstaxcollege.android",MODE_PRIVATE);
+        String url = sharedPref.getString(content.getIcon(),"");
+        if(!url.equals(""))
+        {
+            try {
+                content.setUrl(new URL(url));
+            }
+            catch(MalformedURLException mue)
+            {
+                Log.e("WebViewActivity.onResume","Error: " + mue.toString());
+            }
+        }
         aBar.setTitle(getString(R.string.app_name));
         if(content != null && content.getUrl() != null)
         {
@@ -323,36 +323,36 @@ public class WebViewActivity extends Activity
     /* (non-Javadoc)
      * @see android.app.Activity#onResume()
      */
-//    @Override
-//    protected void onResume()
-//    {
-//        super.onResume();
-//        SharedPreferences sharedPref = getSharedPreferences("org.openstaxcollege.android",MODE_PRIVATE);
-//        String url = sharedPref.getString(content.getIcon(),"");
-//        Log.d("WebViewActivity.onResume()","URL retrieved: " + url);
-//        if(!url.equals(""))
-//        {
-//            try {
-//                content.setUrl(new URL(url));
-//            }
-//            catch(MalformedURLException mue)
-//            {
-//                Log.e("WebViewActivity.onResume","Error: " + mue.toString());
-//            }
-//        }
-//
-//    }
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        SharedPreferences sharedPref = getSharedPreferences("org.openstaxcollege.android",MODE_PRIVATE);
+        String url = sharedPref.getString(content.getIcon(),"");
+        Log.d("WebViewActivity.onResume()","URL retrieved: " + url);
+        if(!url.equals(""))
+        {
+            try {
+                content.setUrl(new URL(url));
+            }
+            catch(MalformedURLException mue)
+            {
+                Log.e("WebViewActivity.onResume","Error: " + mue.toString());
+            }
+        }
 
-//    @Override
-//    protected void onPause()
-//    {
-//        super.onPause();
-//        SharedPreferences sharedPref = getSharedPreferences("org.openstaxcollege.android",MODE_PRIVATE);
-//        SharedPreferences.Editor ed = sharedPref.edit();
-//        Log.d("WebViewActivity.onPause()","URL saved: " + content.getUrl().toString());
-//        ed.putString(content.getIcon(), content.getUrl().toString());
-//        ed.commit();
-//    }
+    }
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        SharedPreferences sharedPref = getSharedPreferences("org.openstaxcollege.android",MODE_PRIVATE);
+        SharedPreferences.Editor ed = sharedPref.edit();
+        Log.d("WebViewActivity.onPause()","URL saved: " + content.getUrl().toString());
+        ed.putString(content.getIcon(), content.getUrl().toString());
+        ed.commit();
+    }
 
     
     @Override
