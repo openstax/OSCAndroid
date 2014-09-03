@@ -110,7 +110,7 @@ public class WebViewActivity extends Activity
         public void onPageFinished(WebView view, String url)
         {
             //Log.d("WebViewClient.onPageFinished", "title: " + view.getTitle());
-            Log.d("WebViewClient.onPageFinished", "url: " + url);
+            //Log.d("WebViewClient.onPageFinished", "url: " + url);
 
             String newURL = fixURL(url);
             content.setTitle(view.getTitle());
@@ -160,8 +160,8 @@ public class WebViewActivity extends Activity
                         col = c.substring(colIndex + 1,plus);
                         int versionIndex = c.indexOf("+",plus + 1);
                         version = c.substring(plus + 1,versionIndex);
-                        Log.d("WebViewClient.fixURL()", "collection: " + col);
-                        Log.d("WebViewClient.fixURL()", "version: " + version);
+                        //Log.d("WebViewClient.fixURL()", "collection: " + col);
+                        //Log.d("WebViewClient.fixURL()", "version: " + version);
                         newURL = url + "?collection=" + col + "/" + version;
 
                     }
@@ -170,7 +170,7 @@ public class WebViewActivity extends Activity
 
             }
 
-            Log.d("WebViewClient.fixURL()", "newURL: " + newURL);
+            //Log.d("WebViewClient.fixURL()", "newURL: " + newURL);
             return newURL;
         }
 

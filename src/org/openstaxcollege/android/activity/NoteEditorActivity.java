@@ -103,7 +103,8 @@ public class NoteEditorActivity extends Activity
         super.onCreate(savedInstanceState);
         state = STATE_EDIT;
         
-        content = (Content)ContentCache.getObject(getString(R.string.content));
+        //content = (Content)ContentCache.getObject(getString(R.string.content));
+        content = (Content)getIntent().getSerializableExtra(getString(R.string.webcontent));
         if(content == null)
         {
             content = (Content)ContentCache.getObject(getString(R.string.cache_savednotecontent));

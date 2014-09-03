@@ -158,9 +158,12 @@ public class ViewBookmarksActivity extends ListActivity
       protected void onListItemClick(ListView l, View v, int position, long id) 
       {
           Content content = (Content)getListView().getItemAtPosition(position);
+          Log.d("ViewBookmarksActivity.onListItemClick()","URL: " + content.getUrl().toString());
+          Intent wv = new Intent(this, WebViewActivity.class);
+          wv.putExtra(getString(R.string.webcontent), content);
 
-          ContentCache.setObject(getString(R.string.webcontent), content);
-          startActivity(new Intent(this, WebViewActivity.class));
+          //ContentCache.setObject(getString(R.string.webcontent), content);
+          startActivity(wv);
       }
       
       /** Actions after list is loaded in View*/
