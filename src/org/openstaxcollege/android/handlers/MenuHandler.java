@@ -75,6 +75,7 @@ public class MenuHandler
 //                    cv.put(Bookmarks.TITLE, dateFormat.format(date)+ " - " + currentContent.getTitle());
                     cv.put(Bookmarks.TITLE, currentContent.getTitle());
                 }
+                Log.d("MenuHandler.handleContextMenu()","URL: " + currentContent.getUrl().toString());
                 cv.put(Bookmarks.URL, currentContent.getUrl().toString());
                 cv.put(Bookmarks.ICON, currentContent.getIcon());
                 //cv.put(Favs.OTHER, currentContent.getContentString());
