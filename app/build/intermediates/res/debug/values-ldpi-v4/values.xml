@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- From: file:/Users/ew2/AndroidStudioProjects/OSCAndroid/app/src/main/res/values-ldpi/dimens.xml -->
+    <eat-comment />
+
+    <dimen name="height">150dp</dimen>
+    <dimen name="width">150dp</dimen>
+
+</resources>
