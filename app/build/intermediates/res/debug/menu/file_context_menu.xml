@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/delete_file"
-          android:title="@string/menu_delete_file" 
-          android:showAsAction="ifRoom"/>
-</menu>
-<!-- From: file:/Users/ew2/AndroidStudioProjects/OSCAndroid/app/src/main/res/menu/file_context_menu.xml -->

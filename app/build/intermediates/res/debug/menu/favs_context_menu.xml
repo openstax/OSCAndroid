@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/delete_from__favs"
-          android:title="@string/menu_delete_from_favs" />
-</menu>
-<!-- From: file:/Users/ew2/AndroidStudioProjects/OSCAndroid/app/src/main/res/menu/favs_context_menu.xml -->
