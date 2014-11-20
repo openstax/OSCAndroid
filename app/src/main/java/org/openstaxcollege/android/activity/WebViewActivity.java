@@ -195,16 +195,23 @@ public class WebViewActivity extends Activity
         Intent intent = getIntent();
         content = (Content)intent.getSerializableExtra(getString(R.string.webcontent));
 
-        SharedPreferences sharedPref = getSharedPreferences("org.openstaxcollege.android",MODE_PRIVATE);
-        String url = sharedPref.getString(content.getIcon(),"");
-        if(!url.equals(""))
+        String contentURL = content.getUrl().toString();
+        //url from home screen
+        if(contentURL.contains("/content/col"))
         {
-            try {
-                content.setUrl(new URL(url));
-            }
-            catch(MalformedURLException mue)
+
+            SharedPreferences sharedPref = getSharedPreferences("org.openstaxcollege.android", MODE_PRIVATE);
+            String url = sharedPref.getString(content.getIcon(), "");
+            if(!url.equals(""))
             {
-                Log.e("WebViewActivity.onResume","Error: " + mue.toString());
+                try
+                {
+                    content.setUrl(new URL(url));
+                }
+                catch(MalformedURLException mue)
+                {
+                    Log.e("WebViewActivity.onResume", "Error: " + mue.toString());
+                }
             }
         }
         aBar.setTitle(getString(R.string.app_name));
