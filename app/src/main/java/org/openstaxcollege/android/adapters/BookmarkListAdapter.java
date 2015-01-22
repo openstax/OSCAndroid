@@ -64,6 +64,11 @@ public class BookmarkListAdapter extends ArrayAdapter<Content> implements Sectio
         for (int x = 0; x < size; x++) 
         {
             Content s = contentList.get(x);
+            if(s == null || s.title == null)
+            {
+                break;
+            }
+
 
             String ch =  s.title.substring(0, 1);
             if(!ch.equals(" "))
@@ -164,6 +169,18 @@ public class BookmarkListAdapter extends ArrayAdapter<Content> implements Sectio
                     else if(c.getIcon().equals("micro"))
                     {
                         holder.imageView.setImageResource(R.drawable.micro_econ_lg);
+                    }
+                    else if(c.getIcon().equals("precalculus"))
+                    {
+                        holder.imageView.setImageResource(R.drawable.precalculus_lg);
+                    }
+                    else if(c.getIcon().equals("psychology"))
+                    {
+                        holder.imageView.setImageResource(R.drawable.psychology_lg);
+                    }
+                    else if(c.getIcon().equals("history"))
+                    {
+                        holder.imageView.setImageResource(R.drawable.history_lg);
                     }
                 }
             }
