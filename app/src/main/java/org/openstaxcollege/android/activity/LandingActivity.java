@@ -19,7 +19,6 @@ import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.adapters.BooksAdapter;
 import org.openstaxcollege.android.beans.Content;
 import org.openstaxcollege.android.handlers.MenuHandler;
-import org.openstaxcollege.android.utils.ContentCache;
 import org.openstaxcollege.android.utils.OSCUtil;
 
 import android.content.Context;
@@ -38,9 +37,7 @@ import android.widget.AdapterView.OnItemClickListener;
 public class LandingActivity extends Activity
 {
    
-   /** Adaptor for Lens list display */ 
-    BooksAdapter adapter;
-    /** list of lenses as Content objects */ 
+    /** list of lenses as Content objects */
     ArrayList<Content> content;
     
     private ActionBar aBar;
@@ -79,7 +76,6 @@ public class LandingActivity extends Activity
         }
         else if(orient == Configuration.ORIENTATION_PORTRAIT && isTablet)
         {
-        	//gridView.setNumColumns(3);
 
             if(OSCUtil.isXLarge(this))
             {
@@ -95,7 +91,8 @@ public class LandingActivity extends Activity
         gridView.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View v,int position, long id) {
-            	if(position > 8)
+                Log.d("LandingActivity","position: " + position);
+            	if(position > 11)
             	{
             		Toast.makeText(LandingActivity.this, getString(R.string.coming_soon),  Toast.LENGTH_SHORT).show();
             		return;
@@ -228,26 +225,30 @@ public class LandingActivity extends Activity
             Content c8 = new Content();
             c8.setTitle(getString(R.string.precalculus));
             c8.setContentString(getString(R.string.coming_soon));
-            c8.setUrl(new URL(fakeURL));
+            c8.setUrl(new URL("http://m.cnx.org/content/col11667/latest/"));
             c8.setIconDrawable(R.drawable.precalculus_lg);
+            c8.setIcon("precalculus");
+
+            Content c13 = new Content();
+            c13.setTitle(getString(R.string.psychology));
+            c13.setContentString(getString(R.string.coming_soon));
+            c13.setUrl(new URL("http://m.cnx.org/content/col11629/latest/"));
+            c13.setIconDrawable(R.drawable.psychology_lg);
+            c13.setIcon("psychology");
+
+            Content c10 = new Content();
+            c10.setTitle(getString(R.string.history));
+            c10.setContentString(getString(R.string.coming_soon));
+            c10.setUrl(new URL("http://m.cnx.org/content/col11740/latest/"));
+            c10.setIconDrawable(R.drawable.history_lg);
+            c10.setIcon("history");
             
             Content c9 = new Content();
             c9.setTitle(getString(R.string.chemistry));
             c9.setContentString(getString(R.string.coming_soon));
             c9.setUrl(new URL(fakeURL));
             c9.setIconDrawable(R.drawable.chemistry_lg);
-            
-            Content c10 = new Content();
-            c10.setTitle(getString(R.string.history));
-            c10.setContentString(getString(R.string.coming_soon));
-            c10.setUrl(new URL(fakeURL));
-            c10.setIconDrawable(R.drawable.history_lg);
-            
-            Content c13 = new Content();
-            c13.setTitle(getString(R.string.psychology));
-            c13.setContentString(getString(R.string.coming_soon));
-            c13.setUrl(new URL(fakeURL));
-            c13.setIconDrawable(R.drawable.psychology_lg);
+
             
             if(content == null)
             {
@@ -264,10 +265,10 @@ public class LandingActivity extends Activity
             content.add(c11);
             content.add(c12);
             content.add(c8);
-            content.add(c9);
-            content.add(c10);
             content.add(c13);
-            
+            content.add(c10);
+            content.add(c9);
+
         }
         catch (MalformedURLException e)
         {
@@ -297,8 +298,11 @@ public class LandingActivity extends Activity
             bookcovers.add(new Bookcover("",R.drawable.micro_econ_lg));
             bookcovers.add(new Bookcover("",R.drawable.precalculus_lg));
             bookcovers.add(new Bookcover("",R.drawable.psychology_lg));
-            bookcovers.add(new Bookcover("",R.drawable.chemistry_lg));
             bookcovers.add(new Bookcover("",R.drawable.history_lg));
+            bookcovers.add(new Bookcover("",R.drawable.chemistry_lg));
+
+
+
 
     	}
 
