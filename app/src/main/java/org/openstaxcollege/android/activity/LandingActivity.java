@@ -246,8 +246,20 @@ public class LandingActivity extends Activity
             Content c9 = new Content();
             c9.setTitle(getString(R.string.chemistry));
             c9.setContentString(getString(R.string.coming_soon));
-            c9.setUrl(new URL(fakeURL));
+            c9.setUrl(new URL("http://m.cnx.org/content/col11760/latest/"));
             c9.setIconDrawable(R.drawable.chemistry_lg);
+
+            Content c14 = new Content();
+            c14.setTitle(getString(R.string.algebra));
+            c14.setContentString(getString(R.string.coming_soon));
+            c14.setUrl(new URL("http://m.cnx.org/content/col11759/latest/"));
+            c14.setIconDrawable(R.drawable.algebra_lg);
+
+            Content c15 = new Content();
+            c15.setTitle(getString(R.string.trig));
+            c15.setContentString(getString(R.string.coming_soon));
+            c15.setUrl(new URL("http://m.cnx.org/content/col11758/latest/"));
+            c15.setIconDrawable(R.drawable.trig_lg);
 
             
             if(content == null)
@@ -268,11 +280,13 @@ public class LandingActivity extends Activity
             content.add(c13);
             content.add(c10);
             content.add(c9);
+            content.add(c14);
+            content.add(c15);
 
         }
         catch (MalformedURLException e)
         {
-            Log.d("LandingActivity.createList()", "Error: " + e.toString(),e);
+            Log.d("Landing.createList()", "Error: " + e.toString(),e);
         }
         
     }
@@ -300,6 +314,8 @@ public class LandingActivity extends Activity
             bookcovers.add(new Bookcover("",R.drawable.psychology_lg));
             bookcovers.add(new Bookcover("",R.drawable.history_lg));
             bookcovers.add(new Bookcover("",R.drawable.chemistry_lg));
+            bookcovers.add(new Bookcover("",R.drawable.algebra_lg));
+            bookcovers.add(new Bookcover("",R.drawable.trig_lg));
 
 
 
