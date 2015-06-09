@@ -92,11 +92,11 @@ public class LandingActivity extends Activity
             @Override
             public void onItemClick(AdapterView<?> parent, View v,int position, long id) {
                 Log.d("LandingActivity","position: " + position);
-            	if(position > 11)
-            	{
-            		Toast.makeText(LandingActivity.this, getString(R.string.coming_soon),  Toast.LENGTH_SHORT).show();
-            		return;
-            	}
+//            	if(position > 11)
+//            	{
+//            		Toast.makeText(LandingActivity.this, getString(R.string.coming_soon),  Toast.LENGTH_SHORT).show();
+//            		return;
+//            	}
             	Content c = content.get(position);
                 Intent i = new Intent(getApplicationContext(), WebViewActivity.class);
                 i.putExtra("webcontent",c);
@@ -248,18 +248,21 @@ public class LandingActivity extends Activity
             c9.setContentString(getString(R.string.coming_soon));
             c9.setUrl(new URL("http://m.cnx.org/content/col11760/latest/"));
             c9.setIconDrawable(R.drawable.chemistry_lg);
+            c9.setIcon("chemistry");
 
             Content c14 = new Content();
             c14.setTitle(getString(R.string.algebra));
             c14.setContentString(getString(R.string.coming_soon));
             c14.setUrl(new URL("http://m.cnx.org/content/col11759/latest/"));
             c14.setIconDrawable(R.drawable.algebra_lg);
+            c14.setIcon("algebra");
 
             Content c15 = new Content();
             c15.setTitle(getString(R.string.trig));
             c15.setContentString(getString(R.string.coming_soon));
             c15.setUrl(new URL("http://m.cnx.org/content/col11758/latest/"));
             c15.setIconDrawable(R.drawable.trig_lg);
+            c15.setIcon("trig");
 
             
             if(content == null)
