@@ -92,11 +92,11 @@ public class LandingActivity extends Activity
             @Override
             public void onItemClick(AdapterView<?> parent, View v,int position, long id) {
                 Log.d("LandingActivity","position: " + position);
-            	if(position > 11)
-            	{
-            		Toast.makeText(LandingActivity.this, getString(R.string.coming_soon),  Toast.LENGTH_SHORT).show();
-            		return;
-            	}
+//            	if(position > 11)
+//            	{
+//            		Toast.makeText(LandingActivity.this, getString(R.string.coming_soon),  Toast.LENGTH_SHORT).show();
+//            		return;
+//            	}
             	Content c = content.get(position);
                 Intent i = new Intent(getApplicationContext(), WebViewActivity.class);
                 i.putExtra("webcontent",c);
@@ -246,8 +246,23 @@ public class LandingActivity extends Activity
             Content c9 = new Content();
             c9.setTitle(getString(R.string.chemistry));
             c9.setContentString(getString(R.string.coming_soon));
-            c9.setUrl(new URL(fakeURL));
+            c9.setUrl(new URL("http://m.cnx.org/content/col11760/latest/"));
             c9.setIconDrawable(R.drawable.chemistry_lg);
+            c9.setIcon("chemistry");
+
+            Content c14 = new Content();
+            c14.setTitle(getString(R.string.algebra));
+            c14.setContentString(getString(R.string.coming_soon));
+            c14.setUrl(new URL("http://m.cnx.org/content/col11759/latest/"));
+            c14.setIconDrawable(R.drawable.algebra_lg);
+            c14.setIcon("algebra");
+
+            Content c15 = new Content();
+            c15.setTitle(getString(R.string.trig));
+            c15.setContentString(getString(R.string.coming_soon));
+            c15.setUrl(new URL("http://m.cnx.org/content/col11758/latest/"));
+            c15.setIconDrawable(R.drawable.trig_lg);
+            c15.setIcon("trig");
 
             
             if(content == null)
@@ -268,11 +283,13 @@ public class LandingActivity extends Activity
             content.add(c13);
             content.add(c10);
             content.add(c9);
+            content.add(c14);
+            content.add(c15);
 
         }
         catch (MalformedURLException e)
         {
-            Log.d("LandingActivity.createList()", "Error: " + e.toString(),e);
+            Log.d("Landing.createList()", "Error: " + e.toString(),e);
         }
         
     }
@@ -300,6 +317,8 @@ public class LandingActivity extends Activity
             bookcovers.add(new Bookcover("",R.drawable.psychology_lg));
             bookcovers.add(new Bookcover("",R.drawable.history_lg));
             bookcovers.add(new Bookcover("",R.drawable.chemistry_lg));
+            bookcovers.add(new Bookcover("",R.drawable.algebra_lg));
+            bookcovers.add(new Bookcover("",R.drawable.trig_lg));
 
 
 

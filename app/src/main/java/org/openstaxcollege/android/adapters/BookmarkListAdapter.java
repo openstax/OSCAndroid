@@ -182,6 +182,18 @@ public class BookmarkListAdapter extends ArrayAdapter<Content> implements Sectio
                     {
                         holder.imageView.setImageResource(R.drawable.history_lg);
                     }
+                    else if(c.getIcon().equals("chemistry"))
+                    {
+                        holder.imageView.setImageResource(R.drawable.chemistry_lg);
+                    }
+                    else if(c.getIcon().equals("algebra"))
+                    {
+                        holder.imageView.setImageResource(R.drawable.algebra_lg);
+                    }
+                    else if(c.getIcon().equals("trig"))
+                    {
+                        holder.imageView.setImageResource(R.drawable.trig_lg);
+                    }
                 }
             }
             if(text != null){

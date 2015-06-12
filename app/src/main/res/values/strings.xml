@@ -87,5 +87,7 @@
     <string name="landing_title_sociology">Sociology</string>
     <string name="landing_title_economics">Economics</string>
     <string name="landing_title_anatomy">Anatomy</string>
+    <string name="algebra">College Algebra</string>
+    <string name="trig">Algebra and Trigonometry</string>
 </resources>
  
