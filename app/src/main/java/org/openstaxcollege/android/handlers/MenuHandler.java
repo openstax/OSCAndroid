@@ -6,20 +6,13 @@
  */
 package org.openstaxcollege.android.handlers;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 
 import android.view.MenuItem;
 import android.widget.Toast;
 import org.openstaxcollege.android.R;
-import org.openstaxcollege.android.activity.LandingActivity;
-import org.openstaxcollege.android.activity.NoteEditorActivity;
 import org.openstaxcollege.android.activity.ViewBookmarksActivity;
-import org.openstaxcollege.android.activity.WebViewActivity;
 import org.openstaxcollege.android.beans.Content;
 import org.openstaxcollege.android.providers.Bookmarks;
-import org.openstaxcollege.android.utils.Constants;
-import org.openstaxcollege.android.utils.ContentCache;
 import org.openstaxcollege.android.utils.MenuUtil;
 
 import android.content.ContentValues;
@@ -72,32 +65,10 @@ public class MenuHandler
                 Intent intent = new Intent(context, ViewBookmarksActivity.class);
                 context.startActivity(intent);
                 return true;
-//            case R.id.help:
-//                try
-//                {
-//                    Content content = new Content();
-//                    content.setUrl(new URL(Constants.HELP_FILE_URL));
-//                    ContentCache.setObject(context.getString(R.string.webcontent), content);
-//                    context.startActivity(new Intent(context, WebViewActivity.class));
-//
-//                }
-//                catch (MalformedURLException e)
-//                {
-//                    e.printStackTrace();
-//                }
-//                return true;
+
             case R.id.delete_from__favs:
                 context.getContentResolver().delete(Bookmarks.CONTENT_URI, "_id="+ currentContent.getId(), null);
                 return true;
-//            case R.id.home:
-//                Intent homeIntent = new Intent(context, LandingActivity.class);
-//                context.startActivity(homeIntent);
-//                return true;
-//            case R.id.note:
-//                ContentCache.setObject("content", currentContent);
-//                Intent noteIntent = new Intent(context, NoteEditorActivity.class);
-//                context.startActivity(noteIntent);
-//                return true;
             default:
                 return false;
         }
