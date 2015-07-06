@@ -181,7 +181,6 @@ public class WebViewActivity extends Activity
         ActionBar aBar = this.getActionBar();
         setProgressBarIndeterminateVisibility(true);
         aBar.setDisplayHomeAsUpEnabled(true);
-        //content = (Content)ContentCache.getObject(getString(R.string.webcontent));
         Intent intent = getIntent();
         content = (Content)intent.getSerializableExtra(getString(R.string.webcontent));
 

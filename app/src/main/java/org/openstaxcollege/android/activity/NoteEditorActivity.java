@@ -104,10 +104,10 @@ public class NoteEditorActivity extends Activity
         state = STATE_EDIT;
         
         content = (Content)getIntent().getSerializableExtra(getString(R.string.webcontent));
-        if(content == null)
-        {
-            content = (Content)ContentCache.getObject(getString(R.string.cache_savednotecontent));
-        }
+//        if(content == null)
+//        {
+//            content = (Content)ContentCache.getObject(getString(R.string.cache_savednotecontent));
+//        }
         
         if(content == null)
         {

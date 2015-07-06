@@ -38,7 +38,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
                 + Bookmarks.ICON + " TEXT,"
                 + Bookmarks.OTHER + " TEXT"
                 + ");");
-        db.execSQL("CREATE TABLE " + OSCProvider.NOTES_TABLE + " ("
+        db.execSQL("CREATE TABLE " + NotesProvider.NOTES_TABLE + " ("
                 + Notes._ID + " INTEGER PRIMARY KEY,"
                 + Notes.TITLE + " TEXT,"
                 + Notes.NOTE + " TEXT,"
@@ -50,8 +50,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) 
     {
-        //db.execSQL("alter table " + FAVS_TABLE + " add column " + Favs.OTHER + " text");
-        db.execSQL("CREATE TABLE " + OSCProvider.NOTES_TABLE + " ("
+        db.execSQL("CREATE TABLE " + NotesProvider.NOTES_TABLE + " ("
                 + Notes._ID + " INTEGER PRIMARY KEY,"
                 + Notes.TITLE + " TEXT,"
                 + Notes.NOTE + " TEXT,"
