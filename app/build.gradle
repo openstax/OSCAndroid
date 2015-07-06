@@ -8,8 +8,8 @@ android {
         applicationId "org.openstaxcollege.android"
         minSdkVersion 14
         targetSdkVersion 21
-        versionCode 7
-        versionName "1.6"
+        versionCode 8
+        versionName "1.7"
     }
     dependencies{
         compile 'com.android.support:support-v4:21.0.3'

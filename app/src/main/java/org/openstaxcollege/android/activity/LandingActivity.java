@@ -16,7 +16,6 @@ import android.app.Activity;
 import android.view.*;
 import android.widget.*;
 import org.openstaxcollege.android.R;
-import org.openstaxcollege.android.adapters.BooksAdapter;
 import org.openstaxcollege.android.beans.Content;
 import org.openstaxcollege.android.handlers.MenuHandler;
 import org.openstaxcollege.android.utils.OSCUtil;
@@ -92,15 +91,10 @@ public class LandingActivity extends Activity
             @Override
             public void onItemClick(AdapterView<?> parent, View v,int position, long id) {
                 Log.d("LandingActivity","position: " + position);
-//            	if(position > 11)
-//            	{
-//            		Toast.makeText(LandingActivity.this, getString(R.string.coming_soon),  Toast.LENGTH_SHORT).show();
-//            		return;
-//            	}
+
             	Content c = content.get(position);
                 Intent i = new Intent(getApplicationContext(), WebViewActivity.class);
                 i.putExtra("webcontent",c);
-            	//ContentCache.setObject(getString(R.string.webcontent), c);
             	startActivity(i);
                 
             }
@@ -126,15 +120,7 @@ public class LandingActivity extends Activity
     public boolean onOptionsItemSelected(MenuItem item) 
     {
         MenuHandler mh = new MenuHandler();
-        boolean returnVal = mh.handleContextMenu(item, this, null);
-//        if(returnVal)
-//        {
-            return returnVal;
-//        }
-//        else
-//        {
-//            return super.onOptionsItemSelected(item);
-//        }
+        return mh.handleContextMenu(item, this, null);
     }
     
     /* (non-Javadoc)
@@ -361,22 +347,18 @@ public class LandingActivity extends Activity
 
     		View v = convertView;
             ImageView picture;
-            //TextView name;
 
             if(v == null) {
             	
                 v = LayoutInflater.from(context).inflate(R.layout.gridcell, parent, false);
                 v.setTag(R.id.grid_item_image, v.findViewById(R.id.grid_item_image));
-                //v.setTag(R.id.text, v.findViewById(R.id.text));
             }
 
             picture = (ImageView)v.getTag(R.id.grid_item_image);
-            //name = (TextView)v.getTag(R.id.text);
 
             Bookcover item = (Bookcover)getItem(position);
 
             picture.setImageResource(item.drawableId);
-            //name.setText(item.name);
 
             return v;
     	}

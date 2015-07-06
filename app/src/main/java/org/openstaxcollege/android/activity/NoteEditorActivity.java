@@ -103,7 +103,6 @@ public class NoteEditorActivity extends Activity
         super.onCreate(savedInstanceState);
         state = STATE_EDIT;
         
-        //content = (Content)ContentCache.getObject(getString(R.string.content));
         content = (Content)getIntent().getSerializableExtra(getString(R.string.webcontent));
         if(content == null)
         {
@@ -163,7 +162,7 @@ public class NoteEditorActivity extends Activity
         // Save away the original text, so we still have it if the activity
         // needs to be killed while paused.
         outState.putString(ORIGINAL_CONTENT, originalContent);
-        ContentCache.setObject(getString(R.string.cache_savednotecontent), content);
+        //ContentCache.setObject(getString(R.string.cache_savednotecontent), content);
     }
 
     /* (non-Javadoc)

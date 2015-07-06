@@ -12,7 +12,6 @@ import java.util.regex.Pattern;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.view.*;
 import android.webkit.CookieManager;
@@ -20,7 +19,6 @@ import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.beans.Content;
 import org.openstaxcollege.android.handlers.MenuHandler;
 import org.openstaxcollege.android.utils.OSCUtil;
-//import org.openstaxcollege.android.utils.ContentCache;
 import org.openstaxcollege.android.views.ObservableWebView;
 import org.openstaxcollege.android.views.ObservableWebView.OnScrollChangedCallback;
 
@@ -52,18 +50,10 @@ public class WebViewActivity extends Activity
     private Content content;
     /** Constant for serialized object passed to Activity */
     public static final String WEB_MENU = "web";
-    public static final String HELP_MENU = "help";
-    
-    private ActionBar aBar;
-    
+
     private float yPosition = 0f;
     
     private boolean progressBarRunning;
-    
-    /**
-     * Progress bar when page is loading
-     */
-    private ProgressDialog progressBar;
     
     /**
      * keeps track of the previous menu for when the back button is used.
@@ -97,7 +87,7 @@ public class WebViewActivity extends Activity
             }
             catch (MalformedURLException e)
             {
-                Log.d("WebViewActivity.shouldOverrideUrlLoading()", "Error: " + e.toString(),e);
+                Log.d("WVA.shouldOverrideUr...", "Error: " + e.toString(),e);
             }
             return true;
         }
@@ -121,7 +111,7 @@ public class WebViewActivity extends Activity
             }
             catch (MalformedURLException e)
             {
-                Log.d("WebViewActivity.onPageFinished()", "Error: " + e.toString(),e);
+                Log.d("WVA.onPageFinished()", "Error: " + e.toString(),e);
             }
             
             setLayout(newURL);
@@ -148,12 +138,12 @@ public class WebViewActivity extends Activity
             if(index == -1)
             {
                 String cookie = CookieManager.getInstance().getCookie("m.cnx.org");
-                Log.d("WebViewClient.onPageFinished", "cookie: " + cookie);
+                Log.d("WVClient.onPageFinished", "cookie: " + cookie);
                 String[] cookieArray = Pattern.compile(";").split(cookie);
                 for(int i = 0;i < cookieArray.length;i++)
                 {
                     String c = cookieArray[i];
-                    if(c.indexOf("viewed_cols") > -1)
+                    if(c.contains("viewed_cols"))
                     {
                         int colIndex = c.indexOf('"');
                         int plus = c.indexOf("+");
@@ -188,7 +178,7 @@ public class WebViewActivity extends Activity
         //Log.d("LensWebView.onCreate()", "Called");
         
         setContentView(R.layout.new_web_view);
-        aBar = this.getActionBar();
+        ActionBar aBar = this.getActionBar();
         setProgressBarIndeterminateVisibility(true);
         aBar.setDisplayHomeAsUpEnabled(true);
         //content = (Content)ContentCache.getObject(getString(R.string.webcontent));
@@ -210,7 +200,7 @@ public class WebViewActivity extends Activity
                 }
                 catch(MalformedURLException mue)
                 {
-                    Log.e("WebViewActivity.onResume", "Error: " + mue.toString());
+                    Log.e("WViewActivity.onResume", "Error: " + mue.toString());
                 }
             }
         }
@@ -285,15 +275,7 @@ public class WebViewActivity extends Activity
     	else
     	{
 	        MenuHandler mh = new MenuHandler();
-	        boolean returnVal = mh.handleContextMenu(item, this, content);
-//	        if(returnVal)
-//	        {
-	            return returnVal;
-//	        }
-//	        else
-//	        {
-//	            return super.onOptionsItemSelected(item);
-//	        }
+	        return mh.handleContextMenu(item, this, content);
     	}
         
     }
@@ -336,7 +318,7 @@ public class WebViewActivity extends Activity
         super.onResume();
         SharedPreferences sharedPref = getSharedPreferences("org.openstaxcollege.android",MODE_PRIVATE);
         String url = sharedPref.getString(content.getIcon(),"");
-        Log.d("WebViewActivity.onResume()","URL retrieved: " + url);
+        //Log.d("WebViewActivity.onResume()","URL retrieved: " + url);
         if(!url.equals(""))
         {
             try {
@@ -344,7 +326,7 @@ public class WebViewActivity extends Activity
             }
             catch(MalformedURLException mue)
             {
-                Log.e("WebViewActivity.onResume","Error: " + mue.toString());
+                Log.e("WViewActivity.onResume","Error: " + mue.toString());
             }
         }
 
@@ -356,9 +338,9 @@ public class WebViewActivity extends Activity
         super.onPause();
         SharedPreferences sharedPref = getSharedPreferences("org.openstaxcollege.android",MODE_PRIVATE);
         SharedPreferences.Editor ed = sharedPref.edit();
-        Log.d("WebViewActivity.onPause()","URL saved: " + content.getUrl().toString());
+        Log.d("WVA.onPause()","URL saved: " + content.getUrl().toString());
         ed.putString(content.getIcon(), content.getUrl().toString());
-        ed.commit();
+        ed.apply();
     }
 
     
@@ -367,12 +349,11 @@ public class WebViewActivity extends Activity
     {
         super.onSaveInstanceState(outState);
         //Log.d("ViewLenses.onSaveInstanceState()", "saving data");
-        //ContentCache.setObject(getString(R.string.webcontent), content);
         outState.putSerializable(getString(R.string.webcontent),content);
         SharedPreferences sharedPref = getSharedPreferences("org.openstaxcollege.android",MODE_PRIVATE);
         SharedPreferences.Editor ed = sharedPref.edit();
         ed.putString(content.getIcon(), content.getUrl().toString());
-        ed.commit();
+        ed.apply();
         
     }
     
@@ -501,7 +482,6 @@ public class WebViewActivity extends Activity
                       public void onClick(View v) 
                       {
                           Intent noteintent = new Intent(getApplicationContext(), NoteEditorActivity.class);
-                          //ContentCache.setObject(getString(R.string.content), content);
                           noteintent.putExtra(getString(R.string.webcontent),content);
                           startActivity(noteintent);
                       }

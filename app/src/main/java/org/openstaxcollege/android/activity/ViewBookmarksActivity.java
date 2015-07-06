@@ -7,8 +7,6 @@
 package org.openstaxcollege.android.activity;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 import android.app.ActionBar;
 import android.app.ListActivity;
@@ -19,9 +17,7 @@ import org.openstaxcollege.android.beans.Content;
 import org.openstaxcollege.android.handlers.MenuHandler;
 import org.openstaxcollege.android.providers.Bookmarks;
 import org.openstaxcollege.android.providers.utils.DBUtils;
-import org.openstaxcollege.android.utils.ContentCache;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -117,7 +113,6 @@ public class ViewBookmarksActivity extends ListActivity
           boolean returnVal = mh.handleContextMenu(item, this, content);
           if(item.getItemId() == R.id.delete_from__favs)
           {
-              //readDB();
               adapter.remove(content);
           }
           if(returnVal)
@@ -127,7 +122,6 @@ public class ViewBookmarksActivity extends ListActivity
           else
           {
               return super.onContextItemSelected(item);
-              //return true;
           }
       }
       
@@ -158,11 +152,10 @@ public class ViewBookmarksActivity extends ListActivity
       protected void onListItemClick(ListView l, View v, int position, long id) 
       {
           Content content = (Content)getListView().getItemAtPosition(position);
-          Log.d("ViewBookmarksActivity.onListItemClick()","URL: " + content.getUrl().toString());
+          Log.d("VBkmrksActvty.onLIC()","URL: " + content.getUrl().toString());
           Intent wv = new Intent(this, WebViewActivity.class);
           wv.putExtra(getString(R.string.webcontent), content);
 
-          //ContentCache.setObject(getString(R.string.webcontent), content);
           startActivity(wv);
       }
       

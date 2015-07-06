@@ -58,7 +58,7 @@ public class BookmarkListAdapter extends ArrayAdapter<Content> implements Sectio
         this.context = context;
         this.contentList = contentList;
         
-        alphaIndexer = new HashMap<String, Integer>();
+        alphaIndexer = new HashMap<>();
         int size = contentList.size();
 
         for (int x = 0; x < size; x++) 
@@ -225,7 +225,7 @@ public class BookmarkListAdapter extends ArrayAdapter<Content> implements Sectio
      */
     public int getPositionForSection(int section) 
     {
-    	String letter="a";
+    	String letter;
         
     	if(section < sections.length)
     	{
