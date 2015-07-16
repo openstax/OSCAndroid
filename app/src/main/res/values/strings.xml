@@ -89,5 +89,8 @@
     <string name="landing_title_anatomy">Anatomy</string>
     <string name="algebra">College Algebra</string>
     <string name="trig">Algebra and Trigonometry</string>
+    <string name="osc_package">org.openstaxcollege.android</string>
+    <string name="app_name_html">open&lt;b>stax&lt;/b> college</string>
+
 </resources>
  

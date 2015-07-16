@@ -13,6 +13,7 @@ import java.util.List;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.text.Html;
 import android.view.*;
 import android.widget.*;
 import org.openstaxcollege.android.R;
@@ -52,7 +53,8 @@ public class LandingActivity extends Activity
         setContentView(R.layout.gridview);
         createList();
         aBar = getActionBar();
-        aBar.setTitle(getString(R.string.app_name));
+        aBar.setTitle(Html.fromHtml(getString(R.string.app_name_html)));
+
         aBar.setDisplayHomeAsUpEnabled(false);
         GridView gridView = (GridView) findViewById(R.id.gridView);
         int orient = getResources().getConfiguration().orientation;

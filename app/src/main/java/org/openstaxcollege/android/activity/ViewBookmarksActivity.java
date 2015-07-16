@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import android.app.ActionBar;
 import android.app.ListActivity;
+import android.view.MenuItem;
 import android.view.Window;
 import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.adapters.BookmarkListAdapter;
@@ -67,6 +68,7 @@ public class ViewBookmarksActivity extends ListActivity
           
           ActionBar aBar = getActionBar();
           aBar.setTitle(getString(R.string.title_favs));
+          aBar.setDisplayHomeAsUpEnabled(true);
           setProgressBarIndeterminateVisibility(true);
           //get already retrieved feed and reuse if it is there
           content = (ArrayList<Content>)getLastNonConfigurationInstance();
@@ -99,6 +101,27 @@ public class ViewBookmarksActivity extends ListActivity
           super.onCreateContextMenu(menu, v, menuInfo);
           getMenuInflater().inflate(R.menu.favs_context_menu, menu);
       }
+
+    /* (non-Javadoc)
+     * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+     * Handles selected options menu item
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        if(item.getItemId() == android.R.id.home)
+        {
+            Intent mainIntent = new Intent(getApplicationContext(), LandingActivity.class);
+            mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(mainIntent);
+            return true;
+        }
+        else
+        {
+            return true;
+        }
+
+    }
       
       /* (non-Javadoc)
        * @see android.app.Activity#onContextItemSelected(android.view.MenuItem)
