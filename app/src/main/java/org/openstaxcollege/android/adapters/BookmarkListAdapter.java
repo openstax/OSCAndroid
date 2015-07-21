@@ -58,7 +58,7 @@ public class BookmarkListAdapter extends ArrayAdapter<Content> implements Sectio
         this.context = context;
         this.contentList = contentList;
         
-        alphaIndexer = new HashMap<String, Integer>();
+        alphaIndexer = new HashMap<>();
         int size = contentList.size();
 
         for (int x = 0; x < size; x++) 
@@ -129,10 +129,10 @@ public class BookmarkListAdapter extends ArrayAdapter<Content> implements Sectio
             TextView text = holder.textView;
             TextView other = holder.otherView;
             holder.imageView.setTag(position);
-            if (holder.imageView != null) 
+            if (holder.imageView != null && c.icon != null)
             {
-                if(c.icon != null)
-               {
+                //if(c.icon != null)
+               //{
                     //set correct icon based on URL
                     if(c.getIcon().equals("physics"))
                     {
@@ -194,7 +194,7 @@ public class BookmarkListAdapter extends ArrayAdapter<Content> implements Sectio
                     {
                         holder.imageView.setImageResource(R.drawable.trig_lg);
                     }
-                }
+                //}
             }
             if(text != null){
                 holder.textView.setText(c.title);
@@ -225,7 +225,7 @@ public class BookmarkListAdapter extends ArrayAdapter<Content> implements Sectio
      */
     public int getPositionForSection(int section) 
     {
-    	String letter="a";
+    	String letter;
         
     	if(section < sections.length)
     	{

@@ -7,11 +7,10 @@
 package org.openstaxcollege.android.activity;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 import android.app.ActionBar;
 import android.app.ListActivity;
+import android.view.MenuItem;
 import android.view.Window;
 import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.adapters.BookmarkListAdapter;
@@ -19,9 +18,7 @@ import org.openstaxcollege.android.beans.Content;
 import org.openstaxcollege.android.handlers.MenuHandler;
 import org.openstaxcollege.android.providers.Bookmarks;
 import org.openstaxcollege.android.providers.utils.DBUtils;
-import org.openstaxcollege.android.utils.ContentCache;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -71,6 +68,7 @@ public class ViewBookmarksActivity extends ListActivity
           
           ActionBar aBar = getActionBar();
           aBar.setTitle(getString(R.string.title_favs));
+          aBar.setDisplayHomeAsUpEnabled(true);
           setProgressBarIndeterminateVisibility(true);
           //get already retrieved feed and reuse if it is there
           content = (ArrayList<Content>)getLastNonConfigurationInstance();
@@ -103,6 +101,27 @@ public class ViewBookmarksActivity extends ListActivity
           super.onCreateContextMenu(menu, v, menuInfo);
           getMenuInflater().inflate(R.menu.favs_context_menu, menu);
       }
+
+    /* (non-Javadoc)
+     * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+     * Handles selected options menu item
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        if(item.getItemId() == android.R.id.home)
+        {
+            Intent mainIntent = new Intent(getApplicationContext(), LandingActivity.class);
+            mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(mainIntent);
+            return true;
+        }
+        else
+        {
+            return true;
+        }
+
+    }
       
       /* (non-Javadoc)
        * @see android.app.Activity#onContextItemSelected(android.view.MenuItem)
@@ -117,7 +136,6 @@ public class ViewBookmarksActivity extends ListActivity
           boolean returnVal = mh.handleContextMenu(item, this, content);
           if(item.getItemId() == R.id.delete_from__favs)
           {
-              //readDB();
               adapter.remove(content);
           }
           if(returnVal)
@@ -127,7 +145,6 @@ public class ViewBookmarksActivity extends ListActivity
           else
           {
               return super.onContextItemSelected(item);
-              //return true;
           }
       }
       
@@ -158,11 +175,10 @@ public class ViewBookmarksActivity extends ListActivity
       protected void onListItemClick(ListView l, View v, int position, long id) 
       {
           Content content = (Content)getListView().getItemAtPosition(position);
-          Log.d("ViewBookmarksActivity.onListItemClick()","URL: " + content.getUrl().toString());
+          Log.d("VBkmrksActvty.onLIC()","URL: " + content.getUrl().toString());
           Intent wv = new Intent(this, WebViewActivity.class);
           wv.putExtra(getString(R.string.webcontent), content);
 
-          //ContentCache.setObject(getString(R.string.webcontent), content);
           startActivity(wv);
       }
       

@@ -6,35 +6,18 @@
  */
 package org.openstaxcollege.android.handlers;
 
-import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import android.view.MenuItem;
 import android.widget.Toast;
 import org.openstaxcollege.android.R;
-import org.openstaxcollege.android.activity.LandingActivity;
-import org.openstaxcollege.android.activity.NoteEditorActivity;
 import org.openstaxcollege.android.activity.ViewBookmarksActivity;
-import org.openstaxcollege.android.activity.WebViewActivity;
 import org.openstaxcollege.android.beans.Content;
 import org.openstaxcollege.android.providers.Bookmarks;
-import org.openstaxcollege.android.utils.Constants;
-import org.openstaxcollege.android.utils.ContentCache;
 import org.openstaxcollege.android.utils.MenuUtil;
 
-import android.app.AlertDialog;
-import android.app.DownloadManager;
-import android.app.DownloadManager.Request;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Environment;
 import android.util.Log;
 
 /**
@@ -70,15 +53,11 @@ public class MenuHandler
                 }
                 else
                 {
-//                    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-//                    Date date = new Date();
-//                    cv.put(Bookmarks.TITLE, dateFormat.format(date)+ " - " + currentContent.getTitle());
                     cv.put(Bookmarks.TITLE, currentContent.getTitle());
                 }
-                Log.d("MenuHandler.handleContextMenu()","URL: " + currentContent.getUrl().toString());
+                //Log.d("MnHndlr.handleCont...()","URL: " + currentContent.getUrl().toString());
                 cv.put(Bookmarks.URL, currentContent.getUrl().toString());
                 cv.put(Bookmarks.ICON, currentContent.getIcon());
-                //cv.put(Favs.OTHER, currentContent.getContentString());
                 context.getContentResolver().insert(Bookmarks.CONTENT_URI, cv);
                 Toast.makeText(context, "Bookmark added", Toast.LENGTH_SHORT).show();
                 return true;
@@ -86,110 +65,12 @@ public class MenuHandler
                 Intent intent = new Intent(context, ViewBookmarksActivity.class);
                 context.startActivity(intent);
                 return true;
-            case R.id.help:
-                try
-                {
-                    Content content = new Content();
-                    content.setUrl(new URL(Constants.HELP_FILE_URL)); 
-                    ContentCache.setObject(context.getString(R.string.webcontent), content);
-                    context.startActivity(new Intent(context, WebViewActivity.class));
-                    
-                }
-                catch (MalformedURLException e)
-                {
-                    e.printStackTrace();
-                }
-                return true;
+
             case R.id.delete_from__favs:
                 context.getContentResolver().delete(Bookmarks.CONTENT_URI, "_id="+ currentContent.getId(), null);
                 return true;
-            case R.id.home:
-                Intent homeIntent = new Intent(context, LandingActivity.class);
-                context.startActivity(homeIntent);
-                return true;
-            case R.id.note:
-                ContentCache.setObject("content", currentContent);
-                Intent noteIntent = new Intent(context, NoteEditorActivity.class);
-                context.startActivity(noteIntent);
-                return true;
-//            case R.id.menu_save:
-//                return true;
-            //case R.id.rate:
-            //	context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=org.cnx.android")));
-              //  return true;
             default:
                 return false;
         }
-    }
-    
-    
-    /**
-     * Displays alert telling user where the downloaded files are located, the size of the files to download and confirms download.
-     * If download is confirmed, DownloadHandler is called.
-     * @param context - Context - the current context
-     * @param currentContent - Content - current content object
-     * @param type - the type of download: pdf or epub
-     */
-    public void displayAlert(final Context context, final Content currentContent, final String type)
-    {
-        if(!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()))
-        {
-            MenuUtil.showMissingMediaDialog(context);
-            return;
-        }
-
-        
-        String message = "";
-        if(type.equals(Constants.PDF_TYPE))
-        {
-            message = "PDF files are saved in an OpenStaxCollege folder on the SDCard or on the device's internal memory.  Press OK to continue.";
-        }
-        else
-        {
-            message = "EPUB files are saved in an OpenStaxCollege folder on the SDCard or on the device's internal memory.  Press OK to continue.";
-        }
-        AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-        alertDialog.setTitle("Download");
-        alertDialog.setMessage(message);
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, Constants.OK, new DialogInterface.OnClickListener() 
-        {
-              public void onClick(DialogInterface dialog, int which) 
-              {
-                  String url = currentContent.getUrl().toString();
-                  File cnxDir = new File(Environment.getExternalStorageDirectory(), "OpenStaxCollege/");
-                  if(!cnxDir.exists())
-                  {
-                      cnxDir.mkdir();
-                  }
-                  //Intent intent = new Intent(context, DownloadService.class);
-                  
-            	  DownloadManager dm = (DownloadManager)context.getSystemService(Context.DOWNLOAD_SERVICE);
-            	  if(type.equals(Constants.PDF_TYPE))
-            	  {
-            		  Uri uri = Uri.parse(MenuUtil.fixPdfURL(currentContent.getUrl().toString(), MenuUtil.getContentType(url)));
-            		  DownloadManager.Request request = new Request(uri);
-            		  request.setDestinationInExternalPublicDir("/OpenStaxCollege", MenuUtil.getTitle(currentContent.getTitle()) + Constants.PDF_EXTENSION);
-            		  request.setTitle(currentContent.getTitle() + Constants.PDF_EXTENSION);
-            		  dm.enqueue(request);
-            	  }
-            	  else
-            	  {
-            		  Uri uri = Uri.parse(MenuUtil.fixEpubURL(currentContent.getUrl().toString(), MenuUtil.getContentType(url)));
-            		  DownloadManager.Request request = new Request(uri);
-            		  request.setDestinationInExternalPublicDir("/OpenStaxCollege", MenuUtil.getTitle(currentContent.getTitle()) + Constants.EPUB_EXTENSION);
-            		  request.setTitle(currentContent.getTitle() + Constants.EPUB_EXTENSION);
-            		  dm.enqueue(request);
-            	  }
-                	  
-
-            } }); 
-        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, Constants.CANCEL, new DialogInterface.OnClickListener() 
-        {
-              public void onClick(DialogInterface dialog, int which) 
-              {
-                  //do nothing
-         
-            } }); 
-        alertDialog.show();
     }
 }

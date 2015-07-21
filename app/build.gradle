@@ -1,15 +1,17 @@
 apply plugin: 'com.android.application'
+apply from: '../config/quality.gradle'
 
 android {
     compileSdkVersion 21
     buildToolsVersion "21.1.2"
+    project.archivesBaseName = "OSCAndroid";
 
     defaultConfig {
         applicationId "org.openstaxcollege.android"
         minSdkVersion 14
         targetSdkVersion 21
-        versionCode 7
-        versionName "1.6"
+        versionCode 8
+        versionName "1.7"
     }
     dependencies{
         compile 'com.android.support:support-v4:21.0.3'
@@ -20,6 +22,11 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    output.outputFile = new File(output.outputFile.parent, output.outputFile.name.replace(".apk", "-" + defaultConfig.versionName + ".apk"))
+                }
+            }
         }
     }
 }

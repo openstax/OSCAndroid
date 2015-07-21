@@ -26,21 +26,16 @@ import android.net.Uri;
 */
 public class OSCProvider extends ContentProvider
 {
-    public static final String AUTHORITY = "org.openstaxcollege.android.providers.OSCProvider";
     /** Favorites table name */
     public static final String FAVS_TABLE = "favs";
-    public static final String NOTES_TABLE = "notes";
-    /** database name */
-   
-    /** Tag for database updates */
-    //private static final String TAG = "ConnexionsProvider";
+
     /** Map of Fav table columns */
     private static HashMap<String, String> FavsProjectionMap;
     
     /** static section to initialize fav table map */
     static
     {
-        FavsProjectionMap = new HashMap<String,String>();
+        FavsProjectionMap = new HashMap<>();
         FavsProjectionMap.put(Bookmarks.ID, Bookmarks.ID);
         FavsProjectionMap.put(Bookmarks.TITLE, Bookmarks.TITLE);
         FavsProjectionMap.put(Bookmarks.URL, Bookmarks.URL);

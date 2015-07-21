@@ -6,9 +6,6 @@
  */
 package org.openstaxcollege.android.utils;
 
-
-import org.openstaxcollege.android.beans.Content;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
@@ -16,7 +13,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Display;
 import android.widget.Toast;
 
 /**
@@ -61,11 +57,10 @@ public class OSCUtil
         {
             xlarge = true;
         }
-        //boolean xlarge = ((activityContext.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE);
         int test = activityContext.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK;
 
-        Log.d("OSCUtil.isTabletDevice()","screenLayout = " + test);
-        Log.d("OSCUtil.isTabletDevice()","screenlayout size mask = " + Configuration.SCREENLAYOUT_SIZE_MASK);
+        Log.d("OSCU.isTabletDevice()","screenLayout = " + test);
+        Log.d("OSCU.isTabletDevice()","screenlayout size mask = " + Configuration.SCREENLAYOUT_SIZE_MASK);
 
         if (xlarge)
         {

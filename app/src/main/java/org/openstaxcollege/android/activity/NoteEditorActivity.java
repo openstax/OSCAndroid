@@ -15,7 +15,6 @@ import android.app.Activity;
 import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.beans.Content;
 import org.openstaxcollege.android.providers.Notes;
-import org.openstaxcollege.android.utils.ContentCache;
 import org.openstaxcollege.android.utils.MenuUtil;
 
 import android.content.ContentValues;
@@ -103,13 +102,8 @@ public class NoteEditorActivity extends Activity
         super.onCreate(savedInstanceState);
         state = STATE_EDIT;
         
-        //content = (Content)ContentCache.getObject(getString(R.string.content));
         content = (Content)getIntent().getSerializableExtra(getString(R.string.webcontent));
-        if(content == null)
-        {
-            content = (Content)ContentCache.getObject(getString(R.string.cache_savednotecontent));
-        }
-        
+
         if(content == null)
         {
             Toast.makeText(NoteEditorActivity.this, "Cannot create note.  Please try again.",  Toast.LENGTH_SHORT).show();
@@ -163,7 +157,6 @@ public class NoteEditorActivity extends Activity
         // Save away the original text, so we still have it if the activity
         // needs to be killed while paused.
         outState.putString(ORIGINAL_CONTENT, originalContent);
-        ContentCache.setObject(getString(R.string.cache_savednotecontent), content);
     }
 
     /* (non-Javadoc)
