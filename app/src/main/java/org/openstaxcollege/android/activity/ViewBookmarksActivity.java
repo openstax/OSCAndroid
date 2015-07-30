@@ -7,13 +7,20 @@
 package org.openstaxcollege.android.activity;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.ListActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.Window;
 import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.adapters.BookmarkListAdapter;
+import org.openstaxcollege.android.adapters.BookmarkRecyclerViewAdapter;
 import org.openstaxcollege.android.beans.Content;
 import org.openstaxcollege.android.handlers.MenuHandler;
 import org.openstaxcollege.android.providers.Bookmarks;
@@ -35,10 +42,11 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
  * @author Ed Woodward
  *
  */
-public class ViewBookmarksActivity extends ListActivity
+public class ViewBookmarksActivity extends Activity
 {
-    /** Adaptor for Lens list display */ 
-    BookmarkListAdapter adapter;
+    /** Adaptor for Lens list display */
+    BookmarkRecyclerViewAdapter adapter;
+    RecyclerView recyclerView;
     /** list of lenses as Content objects */ 
     ArrayList<Content> content;
     
@@ -63,13 +71,16 @@ public class ViewBookmarksActivity extends ListActivity
       {
           super.onCreate(savedInstanceState);
           requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-          setContentView(R.layout.list_view);
-          registerForContextMenu(getListView());
+          setContentView(R.layout.card_view);
+          //registerForContextMenu(getListView());
           
           ActionBar aBar = getActionBar();
           aBar.setTitle(getString(R.string.title_favs));
           aBar.setDisplayHomeAsUpEnabled(true);
           setProgressBarIndeterminateVisibility(true);
+          recyclerView = (RecyclerView)findViewById(R.id.recycler_view);
+          recyclerView.setLayoutManager(new LinearLayoutManager(this));
+          recyclerView.setItemAnimator(new DefaultItemAnimator());
           //get already retrieved feed and reuse if it is there
           content = (ArrayList<Content>)getLastNonConfigurationInstance();
           if(content == null)
@@ -79,10 +90,10 @@ public class ViewBookmarksActivity extends ListActivity
           }
           else
           {
-                  //reuse existing feed data
-                  adapter = new BookmarkListAdapter(ViewBookmarksActivity.this, content);
-                  setListAdapter(adapter);
-                  setProgressBarIndeterminateVisibility(false);
+              //reuse existing feed data
+              adapter = new BookmarkRecyclerViewAdapter(content, R.layout.card_row);
+              recyclerView.setAdapter(adapter);
+              setProgressBarIndeterminateVisibility(false);
              
           }
       }
@@ -91,16 +102,16 @@ public class ViewBookmarksActivity extends ListActivity
        * @see android.app.Activity#onCreateContextMenu(android.view.ContextMenu, android.view.View, android.view.ContextMenu.ContextMenuInfo)
        * Creates context menu from lenses_context_menu.xml
        */
-      @Override
-      public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) 
-      {
-          //Log.d("ViewLenses.onCreateContextMenu()", "Called");
-          AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
-          Content content = (Content)getListView().getItemAtPosition(info.position);
-          menu.setHeaderTitle(content.getTitle());
-          super.onCreateContextMenu(menu, v, menuInfo);
-          getMenuInflater().inflate(R.menu.favs_context_menu, menu);
-      }
+//      @Override
+//      public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo)
+//      {
+//          //Log.d("ViewLenses.onCreateContextMenu()", "Called");
+//          AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+//          Content content = (Content)getListView().getItemAtPosition(info.position);
+//          menu.setHeaderTitle(content.getTitle());
+//          super.onCreateContextMenu(menu, v, menuInfo);
+//          getMenuInflater().inflate(R.menu.favs_context_menu, menu);
+//      }
 
     /* (non-Javadoc)
      * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
@@ -127,26 +138,26 @@ public class ViewBookmarksActivity extends ListActivity
        * @see android.app.Activity#onContextItemSelected(android.view.MenuItem)
        * Passes menu selection to MenuHandler
        */
-      @Override
-      public boolean onContextItemSelected(android.view.MenuItem item) 
-      {
-          AdapterContextMenuInfo info= (AdapterContextMenuInfo) item.getMenuInfo();
-          Content content = (Content)getListView().getItemAtPosition(info.position);
-          MenuHandler mh = new MenuHandler();
-          boolean returnVal = mh.handleContextMenu(item, this, content);
-          if(item.getItemId() == R.id.delete_from__favs)
-          {
-              adapter.remove(content);
-          }
-          if(returnVal)
-          {
-              return returnVal;
-          }
-          else
-          {
-              return super.onContextItemSelected(item);
-          }
-      }
+//      @Override
+//      public boolean onContextItemSelected(android.view.MenuItem item)
+//      {
+//          AdapterContextMenuInfo info= (AdapterContextMenuInfo) item.getMenuInfo();
+//          Content content = (Content)getListView().getItemAtPosition(info.position);
+//          MenuHandler mh = new MenuHandler();
+//          boolean returnVal = mh.handleContextMenu(item, this, content);
+//          if(item.getItemId() == R.id.delete_from__favs)
+//          {
+//              adapter.remove(content);
+//          }
+//          if(returnVal)
+//          {
+//              return returnVal;
+//          }
+//          else
+//          {
+//              return super.onContextItemSelected(item);
+//          }
+//      }
       
      /* (non-Javadoc)
      * @see android.app.Activity#onResume()
@@ -171,22 +182,23 @@ public class ViewBookmarksActivity extends ListActivity
        * Handles selection of an item in the Lenses list
        * @see android.app.ListActivity#onListItemClick(android.widget.ListView, android.view.View, int, long)
        */
-      @Override
-      protected void onListItemClick(ListView l, View v, int position, long id) 
-      {
-          Content content = (Content)getListView().getItemAtPosition(position);
-          Log.d("VBkmrksActvty.onLIC()","URL: " + content.getUrl().toString());
-          Intent wv = new Intent(this, WebViewActivity.class);
-          wv.putExtra(getString(R.string.webcontent), content);
-
-          startActivity(wv);
-      }
+//      @Override
+//      protected void onListItemClick(ListView l, View v, int position, long id)
+//      {
+//          Content content = (Content)getListView().getItemAtPosition(position);
+//          Log.d("VBkmrksActvty.onLIC()","URL: " + content.getUrl().toString());
+//          Intent wv = new Intent(this, WebViewActivity.class);
+//          wv.putExtra(getString(R.string.webcontent), content);
+//
+//          startActivity(wv);
+//      }
       
       /** Actions after list is loaded in View*/
       protected void finishedLoadingList() 
       {
-          setListAdapter(adapter);
-          getListView().setSelection(0);
+          //setListAdapter(adapter);
+          //getListView().setSelection(0);
+          recyclerView.setAdapter(adapter);
           setProgressBarIndeterminateVisibility(false);
       }
       
@@ -202,7 +214,7 @@ public class ViewBookmarksActivity extends ListActivity
                 
                 content = DBUtils.readCursorIntoList(getContentResolver().query(Bookmarks.CONTENT_URI, null, null, null, order));
                 
-               //Collections.sort((List<Content>)content);
+               Collections.sort(content);
                 
                 fillData(content);
                 handler.post(finishedLoadingListTask);
@@ -218,7 +230,8 @@ public class ViewBookmarksActivity extends ListActivity
       private void fillData(ArrayList<Content> contentList) 
       {
           //Log.d("LensViewer", "fillData() called");
-          adapter = new BookmarkListAdapter(ViewBookmarksActivity.this, contentList);
+          //adapter = new BookmarkListAdapter(ViewBookmarksActivity.this, contentList);
+          adapter = new BookmarkRecyclerViewAdapter(content, R.layout.card_row);
       }
       
       /**
