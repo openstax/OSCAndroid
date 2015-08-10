@@ -13,8 +13,10 @@ import java.util.List;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.text.Html;
 import android.view.*;
+import android.webkit.WebView;
 import android.widget.*;
 import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.beans.Content;
@@ -281,8 +283,8 @@ public class LandingActivity extends Activity
         }
         
     }
-    
-    class ImageAdapter extends BaseAdapter 
+
+    class ImageAdapter extends BaseAdapter
     {
     	private Context context;
     	

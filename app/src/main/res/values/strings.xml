@@ -91,6 +91,7 @@
     <string name="trig">Algebra and Trigonometry</string>
     <string name="osc_package">org.openstaxcollege.android</string>
     <string name="app_name_html">open&lt;b>stax&lt;/b> college</string>
+    <string name="license_title">Open Source Licenses</string>
 
 </resources>
  

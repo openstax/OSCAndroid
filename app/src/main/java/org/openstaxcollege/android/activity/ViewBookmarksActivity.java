@@ -16,6 +16,7 @@ import android.app.ListActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.MenuItem;
 import android.view.Window;
 import org.openstaxcollege.android.R;
@@ -38,11 +39,14 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 
+import co.paulburke.android.itemtouchhelperdemo.helper.OnStartDragListener;
+import co.paulburke.android.itemtouchhelperdemo.helper.SimpleItemTouchHelperCallback;
+
 /**
  * @author Ed Woodward
  *
  */
-public class ViewBookmarksActivity extends Activity
+public class ViewBookmarksActivity extends Activity implements OnStartDragListener
 {
     /** Adaptor for Lens list display */
     BookmarkRecyclerViewAdapter adapter;
@@ -61,6 +65,8 @@ public class ViewBookmarksActivity extends Activity
           finishedLoadingList();
         }
       };
+
+    private ItemTouchHelper itemTouchHelper;
       
       /* (non-Javadoc)
        * @see android.app.Activity#onCreate(android.os.Bundle)
@@ -72,8 +78,7 @@ public class ViewBookmarksActivity extends Activity
           super.onCreate(savedInstanceState);
           requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
           setContentView(R.layout.card_view);
-          //registerForContextMenu(getListView());
-          
+
           ActionBar aBar = getActionBar();
           aBar.setTitle(getString(R.string.title_favs));
           aBar.setDisplayHomeAsUpEnabled(true);
@@ -81,6 +86,8 @@ public class ViewBookmarksActivity extends Activity
           recyclerView = (RecyclerView)findViewById(R.id.recycler_view);
           recyclerView.setLayoutManager(new LinearLayoutManager(this));
           recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+
           //get already retrieved feed and reuse if it is there
           content = (ArrayList<Content>)getLastNonConfigurationInstance();
           if(content == null)
@@ -91,27 +98,16 @@ public class ViewBookmarksActivity extends Activity
           else
           {
               //reuse existing feed data
-              adapter = new BookmarkRecyclerViewAdapter(content, R.layout.card_row);
+              adapter = new BookmarkRecyclerViewAdapter(content, R.layout.card_row, this);
               recyclerView.setAdapter(adapter);
+              ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapter);
+              itemTouchHelper = new ItemTouchHelper(callback);
+              itemTouchHelper.attachToRecyclerView(recyclerView);
               setProgressBarIndeterminateVisibility(false);
              
           }
       }
       
-      /* (non-Javadoc)
-       * @see android.app.Activity#onCreateContextMenu(android.view.ContextMenu, android.view.View, android.view.ContextMenu.ContextMenuInfo)
-       * Creates context menu from lenses_context_menu.xml
-       */
-//      @Override
-//      public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo)
-//      {
-//          //Log.d("ViewLenses.onCreateContextMenu()", "Called");
-//          AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
-//          Content content = (Content)getListView().getItemAtPosition(info.position);
-//          menu.setHeaderTitle(content.getTitle());
-//          super.onCreateContextMenu(menu, v, menuInfo);
-//          getMenuInflater().inflate(R.menu.favs_context_menu, menu);
-//      }
 
     /* (non-Javadoc)
      * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
@@ -134,30 +130,11 @@ public class ViewBookmarksActivity extends Activity
 
     }
       
-      /* (non-Javadoc)
-       * @see android.app.Activity#onContextItemSelected(android.view.MenuItem)
-       * Passes menu selection to MenuHandler
-       */
-//      @Override
-//      public boolean onContextItemSelected(android.view.MenuItem item)
-//      {
-//          AdapterContextMenuInfo info= (AdapterContextMenuInfo) item.getMenuInfo();
-//          Content content = (Content)getListView().getItemAtPosition(info.position);
-//          MenuHandler mh = new MenuHandler();
-//          boolean returnVal = mh.handleContextMenu(item, this, content);
-//          if(item.getItemId() == R.id.delete_from__favs)
-//          {
-//              adapter.remove(content);
-//          }
-//          if(returnVal)
-//          {
-//              return returnVal;
-//          }
-//          else
-//          {
-//              return super.onContextItemSelected(item);
-//          }
-//      }
+    @Override
+    public void onStartDrag(RecyclerView.ViewHolder viewHolder)
+    {
+        itemTouchHelper.startDrag(viewHolder);
+    }
       
      /* (non-Javadoc)
      * @see android.app.Activity#onResume()
@@ -178,27 +155,13 @@ public class ViewBookmarksActivity extends Activity
           }
       }
       
-      /* (non-Javadoc)
-       * Handles selection of an item in the Lenses list
-       * @see android.app.ListActivity#onListItemClick(android.widget.ListView, android.view.View, int, long)
-       */
-//      @Override
-//      protected void onListItemClick(ListView l, View v, int position, long id)
-//      {
-//          Content content = (Content)getListView().getItemAtPosition(position);
-//          Log.d("VBkmrksActvty.onLIC()","URL: " + content.getUrl().toString());
-//          Intent wv = new Intent(this, WebViewActivity.class);
-//          wv.putExtra(getString(R.string.webcontent), content);
-//
-//          startActivity(wv);
-//      }
-      
       /** Actions after list is loaded in View*/
       protected void finishedLoadingList() 
       {
-          //setListAdapter(adapter);
-          //getListView().setSelection(0);
           recyclerView.setAdapter(adapter);
+          ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapter);
+          itemTouchHelper = new ItemTouchHelper(callback);
+          itemTouchHelper.attachToRecyclerView(recyclerView);
           setProgressBarIndeterminateVisibility(false);
       }
       
@@ -230,8 +193,7 @@ public class ViewBookmarksActivity extends Activity
       private void fillData(ArrayList<Content> contentList) 
       {
           //Log.d("LensViewer", "fillData() called");
-          //adapter = new BookmarkListAdapter(ViewBookmarksActivity.this, contentList);
-          adapter = new BookmarkRecyclerViewAdapter(content, R.layout.card_row);
+          adapter = new BookmarkRecyclerViewAdapter(content, R.layout.card_row,this);
       }
       
       /**

@@ -6,6 +6,7 @@
  */
 package org.openstaxcollege.android.adapters;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,24 +18,29 @@ import android.widget.TextView;
 import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.activity.WebViewActivity;
 import org.openstaxcollege.android.beans.Content;
+import org.openstaxcollege.android.providers.Bookmarks;
 
 import java.util.List;
+
+import co.paulburke.android.itemtouchhelperdemo.helper.ItemTouchHelperAdapter;
 
 /** Adapter to properly display bookmarks in RecyclerView
  * @author Ed Woodward
  * */
-public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRecyclerViewAdapter.ViewHolder>
+public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRecyclerViewAdapter.ViewHolder> implements ItemTouchHelperAdapter
 {
     /** List of Content objects to display*/
     private List<Content> contentList;
     Content content;
+    Context context;
 
     private int rowLayout;
 
-    public BookmarkRecyclerViewAdapter(List<Content> content, int rowLayout)
+    public BookmarkRecyclerViewAdapter(List<Content> content, int rowLayout, Context context)
     {
         contentList = content;
         this.rowLayout = rowLayout;
+        this.context = context;
     }
 
     @Override
@@ -115,15 +121,15 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
                 viewHolder.logo.setImageResource(R.drawable.trig_lg);
             }
         }
-        //set onClickListener here?
+
         viewHolder.itemView.setOnClickListener(new View.OnClickListener()
         {
             @Override public void onClick(View v)
             {
-                Intent wv = new Intent(v.getContext(), WebViewActivity.class);
+                Intent wv = new Intent(context, WebViewActivity.class);
                 wv.putExtra(v.getContext().getString(R.string.webcontent), content);
 
-                v.getContext().startActivity(wv);
+                context.startActivity(wv);
             }
         });
     }
@@ -132,6 +138,23 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
     public int getItemCount()
     {
         return contentList == null ? 0 : contentList.size();
+    }
+
+    @Override
+    public void onItemDismiss(int position)
+    {
+        Content currentContent = contentList.get(position);
+        context.getContentResolver().delete(Bookmarks.CONTENT_URI, "_id="+ currentContent.getId(), null);
+        contentList.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    @Override
+    public boolean onItemMove(int fromPosition, int toPosition)
+    {
+//        Collections.swap(mItems, fromPosition, toPosition);
+//        notifyItemMoved(fromPosition, toPosition);
+        return true;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder
