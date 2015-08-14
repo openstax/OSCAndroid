@@ -8,11 +8,9 @@ package org.openstaxcollege.android.activity;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.ListActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,10 +18,8 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.MenuItem;
 import android.view.Window;
 import org.openstaxcollege.android.R;
-import org.openstaxcollege.android.adapters.BookmarkListAdapter;
 import org.openstaxcollege.android.adapters.BookmarkRecyclerViewAdapter;
 import org.openstaxcollege.android.beans.Content;
-import org.openstaxcollege.android.handlers.MenuHandler;
 import org.openstaxcollege.android.providers.Bookmarks;
 import org.openstaxcollege.android.providers.utils.DBUtils;
 
@@ -32,18 +28,13 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.ContextMenu;
-import android.view.View;
-import android.view.ContextMenu.ContextMenuInfo;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.AdapterView.AdapterContextMenuInfo;
 
 import co.paulburke.android.itemtouchhelperdemo.helper.OnStartDragListener;
 import co.paulburke.android.itemtouchhelperdemo.helper.SimpleItemTouchHelperCallback;
 
 /**
  * @author Ed Woodward
+ * Used to display cardview of saved Favorites
  *
  */
 public class ViewBookmarksActivity extends Activity implements OnStartDragListener
@@ -129,7 +120,11 @@ public class ViewBookmarksActivity extends Activity implements OnStartDragListen
         }
 
     }
-      
+
+    /**
+     * For OnStartDragListener
+     * @param viewHolder The holder of the view to drag.
+     */
     @Override
     public void onStartDrag(RecyclerView.ViewHolder viewHolder)
     {
@@ -193,7 +188,7 @@ public class ViewBookmarksActivity extends Activity implements OnStartDragListen
       private void fillData(ArrayList<Content> contentList) 
       {
           //Log.d("LensViewer", "fillData() called");
-          adapter = new BookmarkRecyclerViewAdapter(content, R.layout.card_row,this);
+          adapter = new BookmarkRecyclerViewAdapter(contentList, R.layout.card_row,this);
       }
       
       /**

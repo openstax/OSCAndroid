@@ -14,12 +14,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.activity.WebViewActivity;
 import org.openstaxcollege.android.beans.Content;
 import org.openstaxcollege.android.providers.Bookmarks;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import co.paulburke.android.itemtouchhelperdemo.helper.ItemTouchHelperAdapter;
@@ -30,13 +32,13 @@ import co.paulburke.android.itemtouchhelperdemo.helper.ItemTouchHelperAdapter;
 public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRecyclerViewAdapter.ViewHolder> implements ItemTouchHelperAdapter
 {
     /** List of Content objects to display*/
-    private List<Content> contentList;
+    private ArrayList<Content> contentList;
     Content content;
     Context context;
 
     private int rowLayout;
 
-    public BookmarkRecyclerViewAdapter(List<Content> content, int rowLayout, Context context)
+    public BookmarkRecyclerViewAdapter(ArrayList<Content> content, int rowLayout, Context context)
     {
         contentList = content;
         this.rowLayout = rowLayout;
@@ -47,14 +49,13 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i)
     {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(rowLayout, viewGroup, false);
-        return new ViewHolder(v);
+        return new ViewHolder(v,contentList);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i)
     {
         content = contentList.get(i);
-        //viewHolder.logo.setImageDrawable(content.getIconImage());
         viewHolder.title.setText(content.getTitle());
         if (viewHolder.logo != null && content.icon != null)
         {
@@ -120,18 +121,23 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
             {
                 viewHolder.logo.setImageResource(R.drawable.trig_lg);
             }
+            else if(content.getIcon().equals("ap-physics"))
+            {
+                viewHolder.logo.setImageResource(R.drawable.ap_physics_lg);
+            }
         }
 
-        viewHolder.itemView.setOnClickListener(new View.OnClickListener()
-        {
-            @Override public void onClick(View v)
-            {
-                Intent wv = new Intent(context, WebViewActivity.class);
-                wv.putExtra(v.getContext().getString(R.string.webcontent), content);
-
-                context.startActivity(wv);
-            }
-        });
+//        viewHolder.itemView.setOnClickListener(new View.OnClickListener()
+//        {
+//            @Override public void onClick(View v)
+//            {
+//                contentList.get(i);
+//                Intent wv = new Intent(context, WebViewActivity.class);
+//                wv.putExtra(v.getContext().getString(R.string.webcontent), content);
+//
+//                context.startActivity(wv);
+//            }
+//        });
     }
 
     @Override
@@ -152,31 +158,39 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
     @Override
     public boolean onItemMove(int fromPosition, int toPosition)
     {
-//        Collections.swap(mItems, fromPosition, toPosition);
-//        notifyItemMoved(fromPosition, toPosition);
         return true;
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
         public ImageView logo;
         public TextView title;
         public View view;
+        ArrayList<Content> contentList;
 
-        public ViewHolder(View itemView)
+        public ViewHolder(View itemView, ArrayList<Content> contentList)
         {
             super(itemView);
             view = itemView;
-//            view.setOnClickListener(new View.OnClickListener()
-//            {
-//                @Override public void onClick(View v)
-//                {
-//                    //
-//                }
-//            });
+            this.contentList = contentList;
+
             logo = (ImageView) itemView.findViewById(R.id.logoView);
             title = (TextView)itemView.findViewById(R.id.bookName);
+            itemView.setOnClickListener(this);
         }
+
+
+        @Override
+        public void onClick(View v)
+        {
+            Content content = contentList.get(getAdapterPosition());
+            Context context = v.getContext();
+            Intent wv = new Intent(v.getContext(), WebViewActivity.class);
+            wv.putExtra(v.getContext().getString(R.string.webcontent), content);
+
+            context.startActivity(wv);
+        }
+
 
     }
 }

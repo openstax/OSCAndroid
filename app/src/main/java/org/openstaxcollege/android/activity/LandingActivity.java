@@ -13,10 +13,8 @@ import java.util.List;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.text.Html;
 import android.view.*;
-import android.webkit.WebView;
 import android.widget.*;
 import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.beans.Content;
@@ -254,6 +252,14 @@ public class LandingActivity extends Activity
             c15.setIconDrawable(R.drawable.trig_lg);
             c15.setIcon("trig");
 
+            Content c16 = new Content();
+            c16.setTitle(getString(R.string.ap_physics));
+            c16.setContentString(getString(R.string.coming_soon));
+            c16.setUrl(new URL("http://m.cnx.org/content/col11844/latest/"));
+            c16.setIconDrawable(R.drawable.ap_physics_lg);
+            c16.setIcon("ap-physics");
+
+
             
             if(content == null)
             {
@@ -275,6 +281,7 @@ public class LandingActivity extends Activity
             content.add(c9);
             content.add(c14);
             content.add(c15);
+            content.add(c16);
 
         }
         catch (MalformedURLException e)
@@ -309,6 +316,7 @@ public class LandingActivity extends Activity
             bookcovers.add(new Bookcover("",R.drawable.chemistry_lg));
             bookcovers.add(new Bookcover("",R.drawable.algebra_lg));
             bookcovers.add(new Bookcover("",R.drawable.trig_lg));
+            bookcovers.add(new Bookcover("",R.drawable.ap_physics_lg));
 
 
 
