@@ -15,11 +15,13 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.adapters.BookmarkRecyclerViewAdapter;
 import org.openstaxcollege.android.beans.Content;
+import org.openstaxcollege.android.handlers.MenuHandler;
 import org.openstaxcollege.android.providers.Bookmarks;
 import org.openstaxcollege.android.providers.utils.DBUtils;
 
@@ -116,7 +118,8 @@ public class ViewBookmarksActivity extends Activity implements OnStartDragListen
         }
         else
         {
-            return true;
+            MenuHandler mh = new MenuHandler();
+            return mh.handleContextMenu(item, this, null);
         }
 
     }
@@ -130,7 +133,16 @@ public class ViewBookmarksActivity extends Activity implements OnStartDragListen
     {
         itemTouchHelper.startDrag(viewHolder);
     }
-      
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.bookmark_options_menu, menu);
+        return true;
+
+    }
+
      /* (non-Javadoc)
      * @see android.app.Activity#onResume()
      */

@@ -4,8 +4,4 @@
           android:icon="@drawable/favorites"
           android:title="@string/menu_go_to_favs"
           android:showAsAction="ifRoom" />
-      <item android:id="@+id/viewLicense"
-          android:title="@string/license_title"
-          android:icon="@drawable/ic_action_new"
-          android:showAsAction="never"/>
 </menu>
