@@ -7,7 +7,10 @@
 package org.openstaxcollege.android.handlers;
 
 
+import android.app.AlertDialog;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.webkit.WebView;
 import android.widget.Toast;
 import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.activity.ViewBookmarksActivity;
@@ -67,10 +70,24 @@ public class MenuHandler
                 return true;
 
             case R.id.delete_from__favs:
-                context.getContentResolver().delete(Bookmarks.CONTENT_URI, "_id="+ currentContent.getId(), null);
+                context.getContentResolver().delete(Bookmarks.CONTENT_URI, "_id=" + currentContent.getId(), null);
+                return true;
+            case R.id.viewLicense:
+                displayLicensesAlert(context);
                 return true;
             default:
                 return false;
         }
+    }
+
+    private void displayLicensesAlert(Context context)
+    {
+        WebView view = (WebView) LayoutInflater.from(context).inflate(R.layout.license_dialog, null);
+        view.loadUrl("file:///android_asset/licenses.html");
+        AlertDialog alertDialog = new AlertDialog.Builder(context, R.style.Theme_AppCompat_Light_Dialog)
+                .setTitle(context.getString(R.string.license_title))
+                .setView(view)
+                .setPositiveButton(android.R.string.ok, null)
+                .show();
     }
 }
