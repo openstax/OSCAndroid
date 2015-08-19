@@ -68,10 +68,6 @@ public class MenuHandler
                 Intent intent = new Intent(context, ViewBookmarksActivity.class);
                 context.startActivity(intent);
                 return true;
-
-            case R.id.delete_from__favs:
-                context.getContentResolver().delete(Bookmarks.CONTENT_URI, "_id=" + currentContent.getId(), null);
-                return true;
             case R.id.viewLicense:
                 displayLicensesAlert(context);
                 return true;
