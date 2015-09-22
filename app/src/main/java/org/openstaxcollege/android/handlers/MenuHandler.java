@@ -36,6 +36,7 @@ public class MenuHandler
     {
         return handleContextMenu(item.getItemId(), context, currentContent);
     }
+
     /**
      * Handles selected menu item actions
      * @param item MenuItem - the selected menu item
@@ -49,15 +50,15 @@ public class MenuHandler
         {
             case R.id.add_to_favs:
                 ContentValues cv = new ContentValues();
-                if(currentContent.getUrl().toString().indexOf("http://mobile.cnx.org/content/search") > -1 || currentContent.getUrl().toString().indexOf("http://m.cnx.org/content/search") > -1)
-                {
-                    String title = MenuUtil.getSearchTitle(currentContent.getUrl().toString());
-                    cv.put(Bookmarks.TITLE, title);
-                }
-                else
-                {
+//                if(currentContent.getUrl().toString().indexOf("http://mobile.cnx.org/content/search") > -1 || currentContent.getUrl().toString().indexOf("http://m.cnx.org/content/search") > -1)
+//                {
+//                    String title = MenuUtil.getSearchTitle(currentContent.getUrl().toString());
+//                    cv.put(Bookmarks.TITLE, title);
+//                }
+//                else
+//                {
                     cv.put(Bookmarks.TITLE, currentContent.getTitle());
-                }
+                //}
                 //Log.d("MnHndlr.handleCont...()","URL: " + currentContent.getUrl().toString());
                 cv.put(Bookmarks.URL, currentContent.getUrl().toString());
                 cv.put(Bookmarks.ICON, currentContent.getIcon());

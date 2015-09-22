@@ -12,14 +12,12 @@ import java.util.regex.Pattern;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.FragmentTransaction;
 import android.content.SharedPreferences;
 import android.text.Html;
 import android.view.*;
 import android.webkit.CookieManager;
 import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.beans.Content;
-import org.openstaxcollege.android.fragment.GridFragment;
 import org.openstaxcollege.android.handlers.MenuHandler;
 import org.openstaxcollege.android.utils.OSCUtil;
 import org.openstaxcollege.android.views.ObservableWebView;
@@ -176,19 +174,7 @@ public class WebViewActivity extends Activity
     @Override
     public void onCreate(Bundle savedInstanceState) 
     {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.main_layout);
-//        ActionBar aBar = getActionBar();
-//        aBar.setTitle(Html.fromHtml(getString(R.string.app_name_html)));
-//
-//        aBar.setDisplayHomeAsUpEnabled(false);
-//        if(getFragmentManager().findFragmentByTag(GRIDFRAG) == null)
-//        {
-//            FragmentTransaction transaction = getFragmentManager().beginTransaction();
-//            GridFragment fragment = new GridFragment();
-//            transaction.replace(R.id.contentFragment, fragment);
-//            transaction.commit();
-//        }
+
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         super.onCreate(savedInstanceState);
         //Log.d("LensWebView.onCreate()", "Called");
