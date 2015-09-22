@@ -12,12 +12,14 @@ import java.util.regex.Pattern;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.content.SharedPreferences;
 import android.text.Html;
 import android.view.*;
 import android.webkit.CookieManager;
 import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.beans.Content;
+import org.openstaxcollege.android.fragment.GridFragment;
 import org.openstaxcollege.android.handlers.MenuHandler;
 import org.openstaxcollege.android.utils.OSCUtil;
 import org.openstaxcollege.android.views.ObservableWebView;
@@ -64,16 +66,16 @@ public class WebViewActivity extends Activity
     /** inner class for WebViewClient*/
     private WebViewClient webViewClient = new WebViewClient() {
         @Override
-        public void onLoadResource(WebView view, String url) 
+        public void onLoadResource(WebView view, String url)
         {
             super.onLoadResource(view, url);
-            
+
             //Log.d("WebViewClient.onLoadResource()", "Called");
         }
-        
+
         /** loads URL into view */
         @Override
-        public boolean shouldOverrideUrlLoading(WebView view, String url) 
+        public boolean shouldOverrideUrlLoading(WebView view, String url)
         {
         	//Log.d("WebViewClient.shouldOverrideUrlLo()", "Called");
         	if(!progressBarRunning)
@@ -84,7 +86,7 @@ public class WebViewActivity extends Activity
             try
             {
                 content.setUrl(new URL(url));
-                
+
             }
             catch (MalformedURLException e)
             {
@@ -92,7 +94,7 @@ public class WebViewActivity extends Activity
             }
             return true;
         }
-        
+
         /* (non-Javadoc)
          * @see android.webkit.WebViewClient#onPageFinished(android.webkit.WebView, java.lang.String)
          * Sets title and URL correctly after the page is fully loaded
@@ -108,13 +110,13 @@ public class WebViewActivity extends Activity
             try
             {
                 content.setUrl(new URL(newURL));
-                
+
             }
             catch (MalformedURLException e)
             {
                 Log.d("WVA.onPageFinished()", e.toString(),e);
             }
-            
+
             setLayout(newURL);
             setProgressBarIndeterminateVisibility(false);
             progressBarRunning = false;
@@ -174,10 +176,23 @@ public class WebViewActivity extends Activity
     @Override
     public void onCreate(Bundle savedInstanceState) 
     {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.main_layout);
+//        ActionBar aBar = getActionBar();
+//        aBar.setTitle(Html.fromHtml(getString(R.string.app_name_html)));
+//
+//        aBar.setDisplayHomeAsUpEnabled(false);
+//        if(getFragmentManager().findFragmentByTag(GRIDFRAG) == null)
+//        {
+//            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+//            GridFragment fragment = new GridFragment();
+//            transaction.replace(R.id.contentFragment, fragment);
+//            transaction.commit();
+//        }
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         super.onCreate(savedInstanceState);
         //Log.d("LensWebView.onCreate()", "Called");
-        
+
         setContentView(R.layout.new_web_view);
         ActionBar aBar = this.getActionBar();
         setProgressBarIndeterminateVisibility(true);
@@ -213,11 +228,11 @@ public class WebViewActivity extends Activity
         {
             setLayout(getString(R.string.mobile_url));
         }
-        
+
         if(OSCUtil.isConnected(this))
         {
             setUpViews();
-            
+
         }
         else
         {

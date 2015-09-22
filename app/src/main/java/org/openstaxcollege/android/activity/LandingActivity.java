@@ -60,25 +60,29 @@ public class LandingActivity extends Activity implements GridFragment.OnBookSele
         aBar.setTitle(Html.fromHtml(getString(R.string.app_name_html)));
 
         aBar.setDisplayHomeAsUpEnabled(false);
-        if(getFragmentManager().findFragmentByTag(GRIDFRAG) == null)
-        {
+//        if(getFragmentManager().findFragmentByTag(GRIDFRAG) == null)
+//        {
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
             GridFragment fragment = new GridFragment();
             transaction.replace(R.id.contentFragment, fragment);
             transaction.commit();
-        }
+        //}
     }
 
     public void onBookSelected(Content content)
     {
-        Bundle bundles = new Bundle();
-        bundles.putSerializable("webcontent", content);
-        WebFragment wf = new WebFragment();
-        wf.setArguments(bundles);
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.contentFragment,wf);
-        transaction.addToBackStack(null);
-        transaction.commit();
+//        Bundle bundles = new Bundle();
+//        bundles.putSerializable("webcontent", content);
+//        WebFragment wf = new WebFragment();
+//        wf.setArguments(bundles);
+//        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+//        transaction.replace(R.id.contentFragment,wf);
+//        transaction.addToBackStack(null);
+//        transaction.commit();
+        //Content c = content.get(position);
+        Intent i = new Intent(getApplicationContext(), WebViewActivity.class);
+        i.putExtra("webcontent",content);
+        startActivity(i);
 
 
     }
