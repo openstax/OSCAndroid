@@ -32,7 +32,8 @@ import co.paulburke.android.itemtouchhelperdemo.helper.OnStartDragListener;
 import co.paulburke.android.itemtouchhelperdemo.helper.SimpleItemTouchHelperCallback;
 
 /**
- * Created by ew2 on 9/16/15.
+ * Fragment for displaying cards of bookmarks
+ * @author Ed Woodward
  */
 public class BookmarkFragment extends Fragment implements OnStartDragListener
 {

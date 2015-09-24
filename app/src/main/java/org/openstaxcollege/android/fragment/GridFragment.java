@@ -32,7 +32,8 @@ import java.util.List;
 
 
 /**
- * A placeholder fragment containing a simple view.
+ * Fragment for displaying grid of book covers
+ * @author Ed Woodward
  */
 public class GridFragment extends Fragment
 {

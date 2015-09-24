@@ -37,7 +37,8 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
 /**
- * Created by ew2 on 9/22/15.
+ * Fragment for displaying note editor
+ * @author Ed Woodward
  */
 public class NoteEditorFragment extends Fragment
 {
