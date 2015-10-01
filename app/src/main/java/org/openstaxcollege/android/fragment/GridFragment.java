@@ -247,6 +247,20 @@ public class GridFragment extends Fragment
             c16.setIconDrawable(R.drawable.ap_physics_lg);
             c16.setIcon("ap-physics");
 
+            Content c17 = new Content();
+            c17.setTitle(getString(R.string.ap_macro));
+            c17.setContentString(getString(R.string.coming_soon));
+            c17.setUrl(new URL("http://m.cnx.org/content/col11864/latest/"));
+            c17.setIconDrawable(R.drawable.ap_macro);
+            c17.setIcon("ap-macro");
+
+            Content c18 = new Content();
+            c18.setTitle(getString(R.string.ap_micro));
+            c18.setContentString(getString(R.string.coming_soon));
+            c18.setUrl(new URL("http://m.cnx.org/content/col11858/latest/"));
+            c18.setIconDrawable(R.drawable.ap_micro);
+            c18.setIcon("ap-micro");
+
 
 
             if(content == null)
@@ -270,6 +284,8 @@ public class GridFragment extends Fragment
             content.add(c14);
             content.add(c15);
             content.add(c16);
+            content.add(c17);
+            content.add(c18);
 
         }
         catch (MalformedURLException e)
@@ -305,6 +321,8 @@ public class GridFragment extends Fragment
             bookcovers.add(new Bookcover("", R.drawable.algebra_lg));
             bookcovers.add(new Bookcover("", R.drawable.trig_lg));
             bookcovers.add(new Bookcover("", R.drawable.ap_physics_lg));
+            bookcovers.add(new Bookcover("", R.drawable.ap_macro));
+            bookcovers.add(new Bookcover("", R.drawable.ap_micro));
 
 
 
