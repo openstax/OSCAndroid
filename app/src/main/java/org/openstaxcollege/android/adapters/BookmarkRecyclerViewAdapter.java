@@ -125,19 +125,16 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
             {
                 viewHolder.logo.setImageResource(R.drawable.ap_physics_lg);
             }
+            else if(content.getIcon().equals("ap-macro"))
+            {
+                viewHolder.logo.setImageResource(R.drawable.ap_macro);
+            }
+            else if(content.getIcon().equals("ap-micro"))
+            {
+                viewHolder.logo.setImageResource(R.drawable.ap_micro);
+            }
         }
 
-//        viewHolder.itemView.setOnClickListener(new View.OnClickListener()
-//        {
-//            @Override public void onClick(View v)
-//            {
-//                contentList.get(i);
-//                Intent wv = new Intent(context, WebViewActivity.class);
-//                wv.putExtra(v.getContext().getString(R.string.webcontent), content);
-//
-//                context.startActivity(wv);
-//            }
-//        });
     }
 
     @Override
