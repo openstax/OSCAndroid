@@ -257,8 +257,6 @@ public class GridFragment extends Fragment
             c18.setIconDrawable(R.drawable.ap_micro);
             c18.setIcon("ap-micro");
 
-
-
             if(content == null)
             {
                 content = new ArrayList<>();
