@@ -42,10 +42,9 @@ public class GridFragment extends Fragment
 
     OnBookSelectedListener bookListener;
 
-    // Container Activity must implement this interface
     public interface OnBookSelectedListener
     {
-        public void onBookSelected(Content content);
+        void onBookSelected(Content content);
     }
 
 
@@ -100,9 +99,6 @@ public class GridFragment extends Fragment
 
                 Content c = content.get(position);
                 bookListener.onBookSelected(c);
-//                Intent i = new Intent(activity, WebViewActivity.class);
-//                i.putExtra("webcontent", c);
-//                startActivity(i);
 
             }
         });
@@ -144,7 +140,7 @@ public class GridFragment extends Fragment
             Content c2 = new Content();
             c2.setTitle(getString(R.string.sociology));
             c2.setContentString(getString(R.string.sociology_desc));
-            c2.setUrl(new URL("http://m.cnx.org/content/col11407/latest/"));
+            c2.setUrl(new URL("http://m.cnx.org/content/col11762/latest/"));
             c2.setIconDrawable(R.drawable.sociology_lg);
             c2.setIcon("sociology");
 
@@ -260,8 +256,6 @@ public class GridFragment extends Fragment
             c18.setUrl(new URL("http://m.cnx.org/content/col11858/latest/"));
             c18.setIconDrawable(R.drawable.ap_micro);
             c18.setIcon("ap-micro");
-
-
 
             if(content == null)
             {
