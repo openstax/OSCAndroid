@@ -65,7 +65,7 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
             {
                 viewHolder.logo.setImageResource(R.drawable.physics_lg);
             }
-            else if(content.getIcon().equals("sociology"))
+            else if(content.getIcon().equals("sociology2e"))
             {
                 viewHolder.logo.setImageResource(R.drawable.sociology_lg);
             }
