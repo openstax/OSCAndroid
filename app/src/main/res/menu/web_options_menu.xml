@@ -8,4 +8,12 @@
           android:icon="@drawable/favorites"
           android:title="@string/menu_go_to_favs"
           android:showAsAction="ifRoom"/>
+    <item android:id="@+id/notes"
+          android:icon="@drawable/notesicon_low_sm"
+          android:title="Take Notes"
+          android:showAsAction="ifRoom"/>
+    <item android:id="@+id/share"
+          android:icon="@drawable/ic_action_share"
+          android:title="Share"
+          android:showAsAction="ifRoom"/>
 </menu>

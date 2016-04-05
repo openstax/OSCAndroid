@@ -79,7 +79,7 @@
     <string name="precalculus">Precalculus</string>
     <string name="psychology">Psychology</string>
     <string name="chemistry">Chemistry</string>
-    <string name="history">US History</string>
+    <string name="history">U.S. History</string>
     <string name="econ">Principles of Economics</string>
     <string name="micro_econ">Micro-Economics</string>
     <string name="macro_econ">Macro-Economics</string>
@@ -90,7 +90,7 @@
     <string name="algebra">College Algebra</string>
     <string name="trig">Algebra and Trigonometry</string>
     <string name="osc_package">org.openstaxcollege.android</string>
-    <string name="app_name_html">open&lt;b>stax&lt;/b> college</string>
+    <string name="app_name_html">open&lt;b>stax&lt;/b></string>
     <string name="license_title">Open Source Licenses</string>
     <string name="ap_physics">College Physics For AP® Courses</string>
     <string name="ap_macro">Principles of Macroeconomics For AP® Courses</string>

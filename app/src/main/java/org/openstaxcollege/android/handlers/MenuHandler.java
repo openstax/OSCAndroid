@@ -57,7 +57,8 @@ public class MenuHandler
 //                }
 //                else
 //                {
-                    cv.put(Bookmarks.TITLE, currentContent.getTitle());
+                Log.d("MenuHandler","title - " + currentContent.getTitle())  ;
+                cv.put(Bookmarks.TITLE, currentContent.getTitle());
                 //}
                 //Log.d("MnHndlr.handleCont...()","URL: " + currentContent.getUrl().toString());
                 cv.put(Bookmarks.URL, currentContent.getUrl().toString());

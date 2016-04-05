@@ -29,6 +29,7 @@ public class Content implements Serializable, Comparable<Content>
     public String title;
     /** icon of content.  Only used for Lenses */
     public String icon;
+    private String bookTitle;
     /**
      * String to hold lens description and keywords
      */
@@ -41,7 +42,17 @@ public class Content implements Serializable, Comparable<Content>
     private Drawable iconImage;
     
     private int iconDrawable = -1;
-       
+
+    public String getBookTitle()
+    {
+        return bookTitle;
+    }
+
+    public void setBookTitle(String bookTitle)
+    {
+        this.bookTitle = bookTitle;
+    }
+
     public int getIconDrawable()
     {
         return iconDrawable;
@@ -102,6 +113,17 @@ public class Content implements Serializable, Comparable<Content>
         this.icon = icon;
     }
 
+    public void setContentString(String chars)
+    {
+        contentString = chars;
+
+    }
+
+    public String getContentString()
+    {
+        return contentString;
+    }
+
     /* (non-Javadoc)
      * @see java.lang.Comparable#compareTo(java.lang.Object)
      * Required method for Comparable interface
@@ -121,15 +143,6 @@ public class Content implements Serializable, Comparable<Content>
         
     }
 
-    public void setContentString(String chars)
-    {
-        contentString = chars;
-        
-    }
-    
-    public String getContentString()
-    {
-        return contentString;
-    }
+
 
 }

@@ -211,7 +211,7 @@ public class NoteEditorFragment extends Fragment
             Toast.makeText(activity, getString(R.string.nothing_to_save), Toast.LENGTH_SHORT).show();
             return;
         }
-        String title = content.getTitle();//.substring(0, Math.min(30, length));
+        String title = content.getBookTitle();//.substring(0, Math.min(30, length));
         if (length > 30)
         {
             int lastSpace = title.lastIndexOf(' ');

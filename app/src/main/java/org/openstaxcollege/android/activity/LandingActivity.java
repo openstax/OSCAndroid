@@ -34,10 +34,6 @@ public class LandingActivity extends Activity implements GridFragment.OnBookSele
     /** list of lenses as Content objects */
     ArrayList<Content> content;
     
-    private ActionBar aBar;
-
-    public static final String GRIDFRAG = "GridFragment";
-
     /* (non-Javadoc)
      * @see android.app.Activity#onCreate(android.os.Bundle)
      * Called when the activity is first created.
@@ -47,7 +43,7 @@ public class LandingActivity extends Activity implements GridFragment.OnBookSele
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_layout);
-        aBar = getActionBar();
+        ActionBar aBar = getActionBar();
         aBar.setTitle(Html.fromHtml(getString(R.string.app_name_html)));
 
         aBar.setDisplayHomeAsUpEnabled(false);
@@ -62,7 +58,7 @@ public class LandingActivity extends Activity implements GridFragment.OnBookSele
     {
 
         Intent i = new Intent(getApplicationContext(), WebViewActivity.class);
-        i.putExtra("webcontent",content);
+        i.putExtra(getString(R.string.webcontent),content);
         startActivity(i);
 
 
