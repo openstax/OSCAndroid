@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.webkit.WebView;
 import android.widget.Toast;
 import org.openstaxcollege.android.R;
+import org.openstaxcollege.android.activity.NoteEditorActivity;
 import org.openstaxcollege.android.activity.ViewBookmarksActivity;
 import org.openstaxcollege.android.beans.Content;
 import org.openstaxcollege.android.providers.Bookmarks;
@@ -50,21 +51,15 @@ public class MenuHandler
         {
             case R.id.add_to_favs:
                 ContentValues cv = new ContentValues();
-//                if(currentContent.getUrl().toString().indexOf("http://mobile.cnx.org/content/search") > -1 || currentContent.getUrl().toString().indexOf("http://m.cnx.org/content/search") > -1)
-//                {
-//                    String title = MenuUtil.getSearchTitle(currentContent.getUrl().toString());
-//                    cv.put(Bookmarks.TITLE, title);
-//                }
-//                else
-//                {
-                Log.d("MenuHandler","title - " + currentContent.getTitle())  ;
+
+                //Log.d("MenuHandler","title - " + currentContent.getTitle())  ;
                 cv.put(Bookmarks.TITLE, currentContent.getTitle());
-                //}
                 //Log.d("MnHndlr.handleCont...()","URL: " + currentContent.getUrl().toString());
-                cv.put(Bookmarks.URL, currentContent.getUrl().toString());
+                String url = currentContent.getUrl().toString();
+                cv.put(Bookmarks.URL, url.replaceAll("@\\d+(\\.\\d+)?","")+ "?bookmark=1");
                 cv.put(Bookmarks.ICON, currentContent.getIcon());
                 context.getContentResolver().insert(Bookmarks.CONTENT_URI, cv);
-                Toast.makeText(context, "Bookmark added", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Bookmark added for " + currentContent.getTitle(), Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.go_to_favs:
                 Intent intent = new Intent(context, ViewBookmarksActivity.class);
@@ -73,6 +68,10 @@ public class MenuHandler
             case R.id.viewLicense:
                 displayLicensesAlert(context);
                 return true;
+            case R.id.notes:
+                Intent noteintent = new Intent(context, NoteEditorActivity.class);
+                noteintent.putExtra(context.getString(R.string.webcontent),currentContent);
+                context.startActivity(noteintent);
             default:
                 return false;
         }

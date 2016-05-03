@@ -43,6 +43,18 @@ public class Content implements Serializable, Comparable<Content>
     
     private int iconDrawable = -1;
 
+    private String bookURL;
+
+    public String getBookURL()
+    {
+        return bookURL;
+    }
+
+    public void setBookURL(String bookURL)
+    {
+        this.bookURL = bookURL;
+    }
+
     public String getBookTitle()
     {
         return bookTitle;
