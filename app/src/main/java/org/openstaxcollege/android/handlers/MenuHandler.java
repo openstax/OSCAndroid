@@ -17,7 +17,6 @@ import org.openstaxcollege.android.activity.NoteEditorActivity;
 import org.openstaxcollege.android.activity.ViewBookmarksActivity;
 import org.openstaxcollege.android.beans.Content;
 import org.openstaxcollege.android.providers.Bookmarks;
-import org.openstaxcollege.android.utils.MenuUtil;
 
 import android.content.ContentValues;
 import android.content.Context;

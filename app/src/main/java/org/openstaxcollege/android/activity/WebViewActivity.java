@@ -30,7 +30,7 @@ import android.webkit.WebViewClient;
 import android.webkit.WebSettings.LayoutAlgorithm;
 
 /**
- * Activity to view selected lens content in a web browser.  
+ * Activity to view selected content in a web browser.
  * 
  * @author Ed Woodward
  *
@@ -67,10 +67,7 @@ public class WebViewActivity extends Activity
             {
             	setProgressBarIndeterminateVisibility(true);
             }
-//            if(!url.contains("?minimal=true"))
-//            {
-//                url = url + "?minimal=true";
-//            }
+
             view.loadUrl(url);
             try
             {
@@ -149,10 +146,6 @@ public class WebViewActivity extends Activity
                 if(!url.equals(""))
                 {
                     url = convertURL(url);
-//                    if(url.contains("//m."))
-//                    {
-//                        url.replace("m.", "");
-//                    }
                     try
                     {
                         content.setUrl(new URL(url));
