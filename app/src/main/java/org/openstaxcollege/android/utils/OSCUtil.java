@@ -59,8 +59,8 @@ public class OSCUtil
         }
         int test = activityContext.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK;
 
-        Log.d("OSCU.isTabletDevice()","screenLayout = " + test);
-        Log.d("OSCU.isTabletDevice()","screenlayout size mask = " + Configuration.SCREENLAYOUT_SIZE_MASK);
+        //Log.d("OSCU.isTabletDevice()","screenLayout = " + test);
+        //Log.d("OSCU.isTabletDevice()","screenlayout size mask = " + Configuration.SCREENLAYOUT_SIZE_MASK);
 
         if (xlarge)
         {

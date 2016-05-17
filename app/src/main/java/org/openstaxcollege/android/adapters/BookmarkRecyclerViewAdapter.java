@@ -22,7 +22,6 @@ import org.openstaxcollege.android.beans.Content;
 import org.openstaxcollege.android.providers.Bookmarks;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import co.paulburke.android.itemtouchhelperdemo.helper.ItemTouchHelperAdapter;
 
@@ -61,75 +60,75 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
         {
 
             //set correct icon based on URL
-            if(content.getIcon().equals("physics"))
+            if(content.getIcon().equals(context.getString(R.string.physics_icon)))
             {
                 viewHolder.logo.setImageResource(R.drawable.physics_lg);
             }
-            else if(content.getIcon().equals("sociology"))
+            else if(content.getIcon().equals(context.getString(R.string.sociology_icon)))
             {
                 viewHolder.logo.setImageResource(R.drawable.sociology_lg);
             }
-            else if(content.getIcon().equals("biology"))
+            else if(content.getIcon().equals(context.getString(R.string.biology_icon)))
             {
                 viewHolder.logo.setImageResource(R.drawable.biology_lg);
             }
-            else if(content.getIcon().equals("concepts") )
+            else if(content.getIcon().equals(context.getString(R.string.concepts_icon)) )
             {
                 viewHolder.logo.setImageResource(R.drawable.concepts_biology_lg);
             }
-            else if(content.getIcon().equals("anatomy"))
+            else if(content.getIcon().equals(context.getString(R.string.anatomy_icon)))
             {
                 viewHolder.logo.setImageResource(R.drawable.anatomy_lg);
             }
-            else if(content.getIcon().equals("statistics"))
+            else if(content.getIcon().equals(context.getString(R.string.statistics_icon)))
             {
                 viewHolder.logo.setImageResource(R.drawable.statistics_lg);
             }
-            else if(content.getIcon().equals("econ"))
+            else if(content.getIcon().equals(context.getString(R.string.econ_icon)))
             {
                 viewHolder.logo.setImageResource(R.drawable.econ_lg);
             }
-            else if(content.getIcon().equals("macro"))
+            else if(content.getIcon().equals(context.getString(R.string.macro_icon)))
             {
                 viewHolder.logo.setImageResource(R.drawable.macro_econ_lg);
             }
-            else if(content.getIcon().equals("micro"))
+            else if(content.getIcon().equals(context.getString(R.string.micro_icon)))
             {
                 viewHolder.logo.setImageResource(R.drawable.micro_econ_lg);
             }
-            else if(content.getIcon().equals("precalculus"))
+            else if(content.getIcon().equals(context.getString(R.string.precalculus_icon)))
             {
                 viewHolder.logo.setImageResource(R.drawable.precalculus_lg);
             }
-            else if(content.getIcon().equals("psychology"))
+            else if(content.getIcon().equals(context.getString(R.string.psychology_icon)))
             {
                 viewHolder.logo.setImageResource(R.drawable.psychology_lg);
             }
-            else if(content.getIcon().equals("history"))
+            else if(content.getIcon().equals(context.getString(R.string.history_icon)))
             {
                 viewHolder.logo.setImageResource(R.drawable.history_lg);
             }
-            else if(content.getIcon().equals("chemistry"))
+            else if(content.getIcon().equals(context.getString(R.string.chemistry_icon)))
             {
                 viewHolder.logo.setImageResource(R.drawable.chemistry_lg);
             }
-            else if(content.getIcon().equals("algebra"))
+            else if(content.getIcon().equals(context.getString(R.string.algebra_icon)))
             {
                 viewHolder.logo.setImageResource(R.drawable.algebra_lg);
             }
-            else if(content.getIcon().equals("trig"))
+            else if(content.getIcon().equals(context.getString(R.string.trig_icon)))
             {
                 viewHolder.logo.setImageResource(R.drawable.trig_lg);
             }
-            else if(content.getIcon().equals("ap-physics"))
+            else if(content.getIcon().equals(context.getString(R.string.ap_physics_icon)))
             {
                 viewHolder.logo.setImageResource(R.drawable.ap_physics_lg);
             }
-            else if(content.getIcon().equals("ap-macro"))
+            else if(content.getIcon().equals(context.getString(R.string.ap_macro_icon)))
             {
                 viewHolder.logo.setImageResource(R.drawable.ap_macro);
             }
-            else if(content.getIcon().equals("ap-micro"))
+            else if(content.getIcon().equals(context.getString(R.string.ap_micro_icon)))
             {
                 viewHolder.logo.setImageResource(R.drawable.ap_micro);
             }
@@ -150,6 +149,7 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
         context.getContentResolver().delete(Bookmarks.CONTENT_URI, "_id="+ currentContent.getId(), null);
         contentList.remove(position);
         notifyItemRemoved(position);
+        Toast.makeText(context, "Bookmark deleted for " + currentContent.getTitle(), Toast.LENGTH_SHORT).show();
     }
 
     @Override

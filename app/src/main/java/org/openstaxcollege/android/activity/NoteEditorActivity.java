@@ -54,7 +54,7 @@ public class NoteEditorActivity extends Activity
         }
         else
         {
-            aBar.setTitle("Note for " + content.getTitle());
+            aBar.setTitle("Note for " + content.getBookTitle());
         }
 
         FragmentTransaction transaction = getFragmentManager().beginTransaction();

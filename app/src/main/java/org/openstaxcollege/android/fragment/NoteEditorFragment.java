@@ -211,7 +211,7 @@ public class NoteEditorFragment extends Fragment
             Toast.makeText(activity, getString(R.string.nothing_to_save), Toast.LENGTH_SHORT).show();
             return;
         }
-        String title = content.getTitle();//.substring(0, Math.min(30, length));
+        String title = content.getBookTitle();//.substring(0, Math.min(30, length));
         if (length > 30)
         {
             int lastSpace = title.lastIndexOf(' ');
@@ -223,14 +223,14 @@ public class NoteEditorFragment extends Fragment
         values.put(Notes.TITLE, title);
 
         values.put(Notes.NOTE, text);
-        values.put(Notes.URL, content.getUrl().toString());
+        values.put(Notes.URL, content.getBookURL());
 
         try
         {
             if (state == STATE_UPDATE)
             {
                 //Log.d("NoteEditorActivity", "updating note");
-                activity.getContentResolver().update(Notes.CONTENT_URI, values, "notes_url=?", new String[]{content.getUrl().toString()});
+                activity.getContentResolver().update(Notes.CONTENT_URI, values, "notes_url=?", new String[]{content.getBookURL()});
             }
             else
             {
@@ -248,7 +248,7 @@ public class NoteEditorFragment extends Fragment
      */
     private final void deleteNote()
     {
-        activity.getContentResolver().delete(Notes.CONTENT_URI, "notes_url=?", new String[]{content.getUrl().toString()});
+        activity.getContentResolver().delete(Notes.CONTENT_URI, "notes_url=?", new String[]{content.getBookURL()});
         editText.setText("");
         activity.finish();
     }
@@ -261,7 +261,7 @@ public class NoteEditorFragment extends Fragment
     {
         if(content != null)
         {
-            cursor = activity.getContentResolver().query(Notes.CONTENT_URI, null, "notes_url='" + content.getUrl().toString() + "'", null, null);
+            cursor = activity.getContentResolver().query(Notes.CONTENT_URI, null, "notes_url='" + content.getBookURL() + "'", null, null);
             if(cursor.getCount()>0)
             {
                 cursor.moveToNext();
