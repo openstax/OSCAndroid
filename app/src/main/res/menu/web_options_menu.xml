@@ -9,7 +9,7 @@
           android:title="Take Notes"
           android:showAsAction="ifRoom"/>
     <item android:id="@+id/go_to_favs"
-          android:icon="@drawable/favorites"
+          android:icon="@drawable/ic_star_white_24dp"
           android:title="@string/menu_go_to_favs"
           android:showAsAction="ifRoom"/>
     <item android:id="@+id/share"

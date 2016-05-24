@@ -71,6 +71,24 @@ public class MenuHandler
                 Intent noteintent = new Intent(context, NoteEditorActivity.class);
                 noteintent.putExtra(context.getString(R.string.webcontent),currentContent);
                 context.startActivity(noteintent);
+                return true;
+            case R.id.share:
+                Intent shareintent = new Intent(Intent.ACTION_SEND);
+                shareintent.setType(context.getString(R.string.mimetype_text));
+
+                if(currentContent != null)
+                {
+                    shareintent.putExtra(Intent.EXTRA_SUBJECT, currentContent.getBookTitle() + " : " + currentContent.getTitle());
+                    shareintent.putExtra(Intent.EXTRA_TEXT, currentContent.getUrl().toString() + "\n\n " + context.getString(R.string.shared_via));
+
+                    Intent chooser = Intent.createChooser(shareintent, context.getString(R.string.tell_friend) + " "+ currentContent.getBookTitle());
+                    context.startActivity(chooser);
+                }
+                else
+                {
+                    Toast.makeText(context, context.getString(R.string.no_data_msg),  Toast.LENGTH_LONG).show();
+                }
+                return true;
             default:
                 return false;
         }

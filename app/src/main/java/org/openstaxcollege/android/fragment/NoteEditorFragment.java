@@ -112,25 +112,6 @@ public class NoteEditorFragment extends Fragment
 
         state = STATE_EDIT;
 
-//        if(content == null)
-//        {
-//            Toast.makeText(activity, "Cannot create note.  Please try again.", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-
-//        setContentView(R.layout.note_editor);
-//
-//        ActionBar aBar = getActionBar();
-//
-//        if(content == null)
-//        {
-//            aBar.setTitle("Note not created correctly.");
-//        }
-//        else
-//        {
-//            aBar.setTitle("Note for " + content.getTitle());
-//        }
-
         editText = (EditText) v.findViewById(R.id.note);
         checkDBForNote();
 
@@ -292,7 +273,7 @@ public class NoteEditorFragment extends Fragment
      */
     private void exportNote()
     {
-        File cnxDir = new File(Environment.getExternalStorageDirectory(), "OpenStaxCollege/");
+        File cnxDir = new File(Environment.getExternalStorageDirectory(), "OpenStax/");
         if(!cnxDir.exists())
         {
             cnxDir.mkdir();
@@ -308,7 +289,7 @@ public class NoteEditorFragment extends Fragment
             pw.write(text);
             pw.flush();
             //pw.close();
-            Toast.makeText(activity, fileName + " saved to OpenStaxCollege folder.", Toast.LENGTH_LONG).show();
+            Toast.makeText(activity, fileName + " saved to OpenStax folder.", Toast.LENGTH_LONG).show();
         }
         catch (FileNotFoundException e)
         {
@@ -373,7 +354,7 @@ public class NoteEditorFragment extends Fragment
 
                 if(content != null)
                 {
-                    intent.putExtra(Intent.EXTRA_SUBJECT, "Note for " + content.getTitle());
+                    intent.putExtra(Intent.EXTRA_SUBJECT, "Note for " + content.getBookTitle());
                     String text = editText.getText().toString();
                     intent.putExtra(Intent.EXTRA_TEXT, text + "\n\n" + getString(R.string.shared_via));
 
