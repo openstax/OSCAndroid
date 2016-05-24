@@ -278,7 +278,7 @@ public class NoteEditorFragment extends Fragment
         {
             cnxDir.mkdir();
         }
-        String fileName = MenuUtil.getTitle(content.getTitle()) + ".txt";
+        String fileName = MenuUtil.getTitle(content.getBookTitle()) + ".txt";
         File file = new File(cnxDir, fileName);
         String text = editText.getText().toString();
         PrintWriter pw = null;
