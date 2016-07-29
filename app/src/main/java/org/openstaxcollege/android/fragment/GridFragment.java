@@ -24,9 +24,11 @@ import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.beans.Content;
 import org.openstaxcollege.android.utils.OSCUtil;
 
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -292,6 +294,60 @@ public class GridFragment extends Fragment
             c18.setIcon(getString(R.string.ap_micro_icon));
             c18.setBookURL("http://cnx.org/contents/yjROLWcx:CSCWn8lc?minimal=true");
 
+            Content c19 = new Content();
+            c19.setTitle(getString(R.string.american_gov));
+            c19.setBookTitle(getString(R.string.american_gov));
+            c19.setContentString(getString(R.string.coming_soon));
+            c19.setUrl(new URL("http://cnx.org/contents/W8wOWXNF:SjdU64Og?minimal=true"));
+            c19.setIconDrawable(R.drawable.american_gov);
+            c19.setIcon(getString(R.string.american_gov_icon));
+            c19.setBookURL("http://cnx.org/contents/W8wOWXNF:SjdU64Og?minimal=true");
+
+            Content c20 = new Content();
+            c20.setTitle(getString(R.string.calculus1));
+            c20.setBookTitle(getString(R.string.calculus1));
+            c20.setContentString(getString(R.string.coming_soon));
+            c20.setUrl(new URL("http://cnx.org/contents/i4nRcikn:H2TLb2-S?minimal=true"));
+            c20.setIconDrawable(R.drawable.calculus1);
+            c20.setIcon(getString(R.string.calculus1_icon));
+            c20.setBookURL("http://cnx.org/contents/i4nRcikn:H2TLb2-S?minimal=true");
+
+            Content c21 = new Content();
+            c21.setTitle(getString(R.string.calculus2));
+            c21.setBookTitle(getString(R.string.calculus2));
+            c21.setContentString(getString(R.string.coming_soon));
+            c21.setUrl(new URL("http://cnx.org/contents/HTmjSAcf:rrzms6rP?minimal=true"));
+            c21.setIconDrawable(R.drawable.calculus2);
+            c21.setIcon(getString(R.string.calculus2_icon));
+            c21.setBookURL("http://cnx.org/contents/HTmjSAcf:rrzms6rP?minimal=true");
+
+            Content c22 = new Content();
+            c22.setTitle(getString(R.string.calculus3));
+            c22.setBookTitle(getString(R.string.calculus3));
+            c22.setContentString(getString(R.string.coming_soon));
+            c22.setUrl(new URL("http://cnx.org/contents/oxzXkyFi:72YaCFgv?minimal=true"));
+            c22.setIconDrawable(R.drawable.calculus3);
+            c22.setIcon(getString(R.string.calculus3_icon));
+            c22.setBookURL("http://cnx.org/contents/oxzXkyFi:72YaCFgv?minimal=true");
+
+            Content c23 = new Content();
+            c23.setTitle(getString(R.string.chemistry_atoms));
+            c23.setBookTitle(getString(R.string.chemistry_atoms));
+            c23.setContentString(getString(R.string.coming_soon));
+            c23.setUrl(new URL("http://cnx.org/contents/RTmuIxzM:uXg0kUa-?minimal=true"));
+            c23.setIconDrawable(R.drawable.chemistry_atoms);
+            c23.setIcon(getString(R.string.chemistry_atoms_icon));
+            c23.setBookURL("http://cnx.org/contents/RTmuIxzM:uXg0kUa-?minimal=true");
+
+            Content c24 = new Content();
+            c24.setTitle(getString(R.string.prealgebra));
+            c24.setBookTitle(getString(R.string.prealgebra));
+            c24.setContentString(getString(R.string.coming_soon));
+            c24.setUrl(new URL("http://cnx.org/contents/yqV9q0HH:plLt9FYr?minimal=true"));
+            c24.setIconDrawable(R.drawable.prealgebra);
+            c24.setIcon(getString(R.string.prealgebra_icon));
+            c24.setBookURL("http://cnx.org/contents/yqV9q0HH:plLt9FYr?minimal=true");
+
             if(content == null)
             {
                 content = new ArrayList<>();
@@ -315,6 +371,14 @@ public class GridFragment extends Fragment
             content.add(c16);
             content.add(c17);
             content.add(c18);
+            content.add(c19);
+            content.add(c20);
+            content.add(c21);
+            content.add(c22);
+            content.add(c23);
+            content.add(c24);
+
+            Collections.sort(content);
 
         }
         catch (MalformedURLException e)
@@ -334,24 +398,32 @@ public class GridFragment extends Fragment
         {
             context = c;
 
-            bookcovers.add(new Bookcover("", R.drawable.physics_lg));
-            bookcovers.add(new Bookcover("", R.drawable.sociology_lg));
-            bookcovers.add(new Bookcover("", R.drawable.biology_lg));
-            bookcovers.add(new Bookcover("", R.drawable.concepts_biology_lg));
-            bookcovers.add(new Bookcover("", R.drawable.anatomy_lg));
-            bookcovers.add(new Bookcover("", R.drawable.statistics_lg));
-            bookcovers.add(new Bookcover("", R.drawable.econ_lg));
-            bookcovers.add(new Bookcover("", R.drawable.macro_econ_lg));
-            bookcovers.add(new Bookcover("", R.drawable.micro_econ_lg));
-            bookcovers.add(new Bookcover("", R.drawable.precalculus_lg));
-            bookcovers.add(new Bookcover("", R.drawable.psychology_lg));
-            bookcovers.add(new Bookcover("", R.drawable.history_lg));
-            bookcovers.add(new Bookcover("", R.drawable.chemistry_lg));
-            bookcovers.add(new Bookcover("", R.drawable.algebra_lg));
-            bookcovers.add(new Bookcover("", R.drawable.trig_lg));
-            bookcovers.add(new Bookcover("", R.drawable.ap_physics_lg));
-            bookcovers.add(new Bookcover("", R.drawable.ap_macro));
-            bookcovers.add(new Bookcover("", R.drawable.ap_micro));
+            bookcovers.add(new Bookcover(getString(R.string.physics), R.drawable.physics_lg));
+            bookcovers.add(new Bookcover(getString(R.string.sociology), R.drawable.sociology_lg));
+            bookcovers.add(new Bookcover(getString(R.string.biology), R.drawable.biology_lg));
+            bookcovers.add(new Bookcover(getString(R.string.concepts_biology), R.drawable.concepts_biology_lg));
+            bookcovers.add(new Bookcover(getString(R.string.anatomy), R.drawable.anatomy_lg));
+            bookcovers.add(new Bookcover(getString(R.string.statistics), R.drawable.statistics_lg));
+            bookcovers.add(new Bookcover(getString(R.string.econ), R.drawable.econ_lg));
+            bookcovers.add(new Bookcover(getString(R.string.macro_econ), R.drawable.macro_econ_lg));
+            bookcovers.add(new Bookcover(getString(R.string.micro_econ), R.drawable.micro_econ_lg));
+            bookcovers.add(new Bookcover(getString(R.string.precalculus), R.drawable.precalculus_lg));
+            bookcovers.add(new Bookcover(getString(R.string.psychology), R.drawable.psychology_lg));
+            bookcovers.add(new Bookcover(getString(R.string.history), R.drawable.history_lg));
+            bookcovers.add(new Bookcover(getString(R.string.chemistry), R.drawable.chemistry_lg));
+            bookcovers.add(new Bookcover(getString(R.string.algebra), R.drawable.algebra_lg));
+            bookcovers.add(new Bookcover(getString(R.string.trig), R.drawable.trig_lg));
+            bookcovers.add(new Bookcover(getString(R.string.ap_physics), R.drawable.ap_physics_lg));
+            bookcovers.add(new Bookcover(getString(R.string.ap_macro), R.drawable.ap_macro));
+            bookcovers.add(new Bookcover(getString(R.string.ap_micro), R.drawable.ap_micro));
+            bookcovers.add(new Bookcover(getString(R.string.american_gov), R.drawable.american_gov));
+            bookcovers.add(new Bookcover(getString(R.string.calculus1), R.drawable.calculus1));
+            bookcovers.add(new Bookcover(getString(R.string.calculus2), R.drawable.calculus2));
+            bookcovers.add(new Bookcover(getString(R.string.calculus3), R.drawable.calculus3));
+            bookcovers.add(new Bookcover(getString(R.string.chemistry_atoms), R.drawable.chemistry_atoms));
+            bookcovers.add(new Bookcover(getString(R.string.prealgebra), R.drawable.prealgebra));
+
+            Collections.sort(bookcovers);
 
 
 
@@ -412,7 +484,7 @@ public class GridFragment extends Fragment
 
     }
 
-    private class Bookcover
+    private class Bookcover implements Comparable<Bookcover>
     {
 
         final String name;
@@ -422,6 +494,12 @@ public class GridFragment extends Fragment
         {
             this.name = name;
             this.drawableId = drawableId;
+        }
+
+        public int compareTo(Bookcover another)
+        {
+            return name.toUpperCase().trim().compareTo(another.name.toUpperCase().trim());
+
         }
 
 
