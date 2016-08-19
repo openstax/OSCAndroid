@@ -6,19 +6,15 @@
  */
 package org.openstaxcollege.android.activity;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.SharedPreferences;
-import android.text.Html;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.*;
 import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.beans.Content;
 import org.openstaxcollege.android.handlers.MenuHandler;
+import org.openstaxcollege.android.logic.WebviewLogic;
 import org.openstaxcollege.android.utils.OSCUtil;
-import org.openstaxcollege.android.views.ObservableWebView;
 
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -35,10 +31,10 @@ import android.webkit.WebSettings.LayoutAlgorithm;
  * @author Ed Woodward
  *
  */
-public class WebViewActivity extends Activity
+public class WebViewActivity extends AppCompatActivity
 {
     /** Web browser view for Activity */
-    private ObservableWebView webView;
+    private WebView webView;
     /** Variable for serialized Content object */
     private Content content;
 
@@ -71,10 +67,10 @@ public class WebViewActivity extends Activity
             view.loadUrl(url);
             try
             {
-                content.setUrl(new URL(url));
+                content.setUrl(url);
 
             }
-            catch (MalformedURLException e)
+            catch (Exception e)
             {
                 Log.d("WVA.shouldOverrideUr...", e.toString(),e);
             }
@@ -99,11 +95,11 @@ public class WebViewActivity extends Activity
             }
             try
             {
-                //content.setUrl(new URL(url));
-                content.setUrl(new URL(view.getUrl()));
+                content.setUrl(url);
+                //content.setUrl(new URL(view.getUrl()));
 
             }
-            catch (MalformedURLException e)
+            catch (Exception e)
             {
                 Log.d("WVA.onPageFinished()", e.toString(),e);
             }
@@ -124,14 +120,14 @@ public class WebViewActivity extends Activity
     public void onCreate(Bundle savedInstanceState) 
     {
 
-        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+        //requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         super.onCreate(savedInstanceState);
-        //Log.d("LensWebView.onCreate()", "Called");
+        setContentView(R.layout.web_view);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        setContentView(R.layout.new_web_view);
-        ActionBar aBar = this.getActionBar();
-        setProgressBarIndeterminateVisibility(true);
-        aBar.setDisplayHomeAsUpEnabled(true);
+        
         Intent intent = getIntent();
         content = (Content)intent.getSerializableExtra(getString(R.string.webcontent));
 
@@ -148,9 +144,9 @@ public class WebViewActivity extends Activity
                     url = convertURL(url);
                     try
                     {
-                        content.setUrl(new URL(url));
+                        content.setUrl(url);
                     }
-                    catch(MalformedURLException mue)
+                    catch(Exception mue)
                     {
                         Log.e("WViewActivity.onResume", mue.toString());
                     }
@@ -159,17 +155,16 @@ public class WebViewActivity extends Activity
             else
             {
                 //remove bookmark parameter
-                String newURL = content.getUrl().toString().replace("?bookmark=1","");
-                content.setUrl(new URL(newURL));
+                String newURL = content.getUrl().replace("?bookmark=1","");
+                content.setUrl(newURL);
 
             }
         }
-        catch(MalformedURLException mue)
+        catch(Exception mue)
         {
             Log.e("WViewActivity.onResume", mue.toString());
         }
 
-        aBar.setTitle(Html.fromHtml(getString(R.string.app_name_html)));
 
         if(OSCUtil.isConnected(this))
         {
@@ -178,7 +173,7 @@ public class WebViewActivity extends Activity
         }
         else
         {
-            webView = (ObservableWebView)findViewById(R.id.web_view);
+            webView = (WebView)findViewById(R.id.web_view);
             OSCUtil.makeNoDataToast(this);
         }
     }
@@ -234,10 +229,12 @@ public class WebViewActivity extends Activity
             {
 
                 content.setTitle(webView.getTitle().replace(" - " + content.getBookTitle() + " - OpenStax CNX",""));
-                content.setUrl(new URL(webView.getUrl()));
+                content.setUrl(webView.getUrl());
+                WebviewLogic wl = new WebviewLogic();
+                content.setBookTitle(wl.getBookTitle(webView.getTitle()));
 
             }
-            catch(MalformedURLException mue)
+            catch(Exception mue)
             {
 
             }
@@ -289,9 +286,9 @@ public class WebViewActivity extends Activity
             url = convertURL(url);
             try
             {
-                content.setUrl(new URL(url));
+                //content.setUrl(new URL(url));
             }
-            catch(MalformedURLException mue)
+            catch(Exception mue)
             {
                 Log.e("WViewActivity.onResume",mue.toString());
             }
@@ -306,9 +303,12 @@ public class WebViewActivity extends Activity
         SharedPreferences sharedPref = getSharedPreferences(getString(R.string.osc_package),MODE_PRIVATE);
         SharedPreferences.Editor ed = sharedPref.edit();
         //Log.d("WVA.onPause()","URL saved: " + content.getUrl().toString());
-        String url = webView.getUrl().replace("?bookmark=1","");
-        ed.putString(content.getIcon(), url);
-        ed.apply();
+        if(webView != null && content != null)
+        {
+            String url = webView.getUrl().replace("?bookmark=1", "");
+            ed.putString(content.getIcon(), url);
+            ed.apply();
+        }
     }
 
     
@@ -320,22 +320,25 @@ public class WebViewActivity extends Activity
         outState.putSerializable(getString(R.string.webcontent),content);
         SharedPreferences sharedPref = getSharedPreferences(getString(R.string.osc_package),MODE_PRIVATE);
         SharedPreferences.Editor ed = sharedPref.edit();
-        String url = webView.getUrl().replace("?bookmark=1","");
-        ed.putString(content.getIcon(), url);
-        ed.apply();
+        if(webView != null && content != null)
+        {
+            String url = webView.getUrl().replace("?bookmark=1", "");
+            ed.putString(content.getIcon(), url);
+            ed.apply();
+        }
         
     }
     
     /** sets properties on WebView and loads selected content into browser. */
     private void setUpViews() 
     {
-        if(content == null || content.url == null)
+        if(content == null || content.getUrl().equals(""))
         {
             return;
         }
         
         //Log.d("WebViewView.setupViews()", "Called");
-        webView = (ObservableWebView)findViewById(R.id.web_view);
+        webView = (WebView)findViewById(R.id.web_view);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setDefaultFontSize(17);
         webView.getSettings().setSupportZoom(true);
@@ -349,7 +352,7 @@ public class WebViewActivity extends Activity
         });
         
         webView.setWebViewClient(webViewClient);
-        webView.loadUrl(content.url.toString());
+        webView.loadUrl(content.getUrl());
     }
 
     private String convertURL(String url)

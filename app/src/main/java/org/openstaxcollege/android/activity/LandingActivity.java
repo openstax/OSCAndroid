@@ -8,14 +8,17 @@ package org.openstaxcollege.android.activity;
 
 import java.util.ArrayList;
 
-import android.app.ActionBar;
-import android.app.Activity;
-import android.app.FragmentTransaction;
+import android.content.Context;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.support.v4.app.FragmentTransaction;
 import android.text.Html;
 import android.view.*;
 import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.beans.Content;
-import org.openstaxcollege.android.fragment.GridFragment;
+import org.openstaxcollege.android.fragment.LandingListFragment;
 import org.openstaxcollege.android.handlers.MenuHandler;
 
 import android.content.Intent;
@@ -28,7 +31,7 @@ import android.os.Bundle;
  * @author Ed Woodward
  *
  */
-public class LandingActivity extends Activity implements GridFragment.OnBookSelectedListener
+public class LandingActivity extends AppCompatActivity
 {
    
     /** list of lenses as Content objects */
@@ -42,16 +45,29 @@ public class LandingActivity extends Activity implements GridFragment.OnBookSele
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_layout);
-        ActionBar aBar = getActionBar();
-        aBar.setTitle(Html.fromHtml(getString(R.string.app_name_html)));
+        setContentView(R.layout.activity_landing);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        CollapsingToolbarLayout toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
+        toolbarLayout.setTitle(Html.fromHtml(getString(R.string.app_name_html)));
 
-        aBar.setDisplayHomeAsUpEnabled(false);
 
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        GridFragment fragment = new GridFragment();
-        transaction.replace(R.id.contentFragment, fragment);
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        LandingListFragment fragment = new LandingListFragment();
+        transaction.replace(R.id.sample_content_fragment, fragment);
         transaction.commit();
+
+        final Context context = this;
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(context, ViewBookmarksActivity.class);
+                context.startActivity(intent);
+            }
+        });
     }
 
     public void onBookSelected(Content content)

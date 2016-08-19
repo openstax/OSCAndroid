@@ -27,7 +27,7 @@
 
             <ImageView
                 android:id="@+id/image"
-                android:background="@drawable/os_feature"
+                android:background="@drawable/books"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
@@ -44,7 +44,7 @@
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_main"/>
+    <include layout="@layout/content_landing"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

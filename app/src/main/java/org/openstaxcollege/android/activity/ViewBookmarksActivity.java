@@ -6,9 +6,11 @@
  */
 package org.openstaxcollege.android.activity;
 
-import android.app.ActionBar;
-import android.app.Activity;
-import android.app.FragmentTransaction;
+import android.support.v4.app.FragmentTransaction;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import org.openstaxcollege.android.R;
@@ -23,7 +25,7 @@ import android.os.Bundle;
  * Used to display cardview of saved Favorites
  *
  */
-public class ViewBookmarksActivity extends Activity
+public class ViewBookmarksActivity extends AppCompatActivity
 {
 
       /* (non-Javadoc)
@@ -34,13 +36,14 @@ public class ViewBookmarksActivity extends Activity
       public void onCreate(Bundle savedInstanceState) 
       {
           super.onCreate(savedInstanceState);
-          setContentView(R.layout.bookmark_layout);
-          ActionBar aBar = getActionBar();
-          aBar.setTitle(getString(R.string.title_favs));
+          setContentView(R.layout.activity_bookmark);
+          Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+          setSupportActionBar(toolbar);
+          CollapsingToolbarLayout toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
+          toolbarLayout.setTitle(Html.fromHtml(getString(R.string.app_name_html)));
+          getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-          aBar.setDisplayHomeAsUpEnabled(false);
-
-          FragmentTransaction transaction = getFragmentManager().beginTransaction();
+          FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
           BookmarkFragment fragment = new BookmarkFragment();
           transaction.add(R.id.container, fragment);
           transaction.commit();

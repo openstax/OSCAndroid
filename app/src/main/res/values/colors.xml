@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<color name="colorPrimary">#3F51B5</color>
+	<color name="colorPrimaryDark">#303F9F</color>
+	<color name="colorAccent">#76b143</color>
 	<color name="color_foreground">#FFBBBBBB</color>
 	<color name="color_background">#FFBBBBBB</color>
 	<color name="blue_background">#006699</color>
     <color name="beige">#f2f2f2</color>
 	<!--<color name="yellow_background">#FFDD33</color>-->
-	<color name="yellow_background">#45FCDB</color>
+	<color name="yellow_background">#FFFFCC</color>
 	<color name="white_text">#FFFFFF</color>
 	<color name="color_foreground_inverse">#FF444444</color>
 

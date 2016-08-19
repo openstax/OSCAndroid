@@ -56,7 +56,8 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
     {
         content = contentList.get(i);
         viewHolder.title.setText(content.getTitle());
-        if (viewHolder.logo != null && content.icon != null)
+        viewHolder.other.setText(content.getContentString());
+        if (viewHolder.logo != null && content.getIcon() != null)
         {
 
             //set correct icon based on URL
@@ -186,6 +187,7 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
     {
         public ImageView logo;
         public TextView title;
+        public TextView other;
         public View view;
         ArrayList<Content> contentList;
 
@@ -197,6 +199,7 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
 
             logo = (ImageView) itemView.findViewById(R.id.logoView);
             title = (TextView)itemView.findViewById(R.id.bookName);
+            other = (TextView)itemView.findViewById(R.id.other);
             itemView.setOnClickListener(this);
         }
 
