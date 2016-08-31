@@ -7,9 +7,6 @@
 package org.openstaxcollege.android.beans;
 
 import java.io.Serializable;
-import java.net.URL;
-
-import android.graphics.drawable.Drawable;
 
 /** Class for holding Content details.  Used for Lenses, collections and modules. */
 public class Content implements Serializable, Comparable<Content>
@@ -31,16 +28,16 @@ public class Content implements Serializable, Comparable<Content>
      */
     private int id;
     
-    private String bookURL;
+    private String bookUrl;
 
-    public String getBookURL()
+    public String getBookUrl()
     {
-        return bookURL;
+        return bookUrl;
     }
 
-    public void setBookURL(String bookURL)
+    public void setBookUrl(String bookUrl)
     {
-        this.bookURL = bookURL;
+        this.bookUrl = bookUrl;
     }
 
     public String getBookTitle()

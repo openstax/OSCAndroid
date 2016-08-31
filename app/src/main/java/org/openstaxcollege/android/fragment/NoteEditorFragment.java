@@ -7,7 +7,6 @@
 package org.openstaxcollege.android.fragment;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -17,18 +16,21 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.app.Fragment;
 import android.text.util.Linkify;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import org.openstaxcollege.android.R;
+import org.openstaxcollege.android.activity.LandingActivity;
 import org.openstaxcollege.android.beans.Content;
+import org.openstaxcollege.android.handlers.MenuHandler;
 import org.openstaxcollege.android.providers.Notes;
 import org.openstaxcollege.android.utils.MenuUtil;
 
@@ -93,6 +95,10 @@ public class NoteEditorFragment extends Fragment
         }
     }
 
+//    public NoteEditorFragment()
+//    {
+//    }
+
     public static NoteEditorFragment newInstance(Content c)
     {
         NoteEditorFragment nef = new NoteEditorFragment();
@@ -101,6 +107,13 @@ public class NoteEditorFragment extends Fragment
         nef.setArguments(args);
         return nef;
 
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -121,6 +134,38 @@ public class NoteEditorFragment extends Fragment
         }
         setActionBar(v);
         return v;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        if(item.getItemId() == android.R.id.home)
+        {
+            Intent mainIntent = new Intent(getContext(), LandingActivity.class);
+            mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(mainIntent);
+            return true;
+        }
+        else if(item.getItemId() == R.id.delete_note)
+        {
+            deleteNote();
+            getActivity().finish();
+            return true;
+
+        }
+        else if(item.getItemId() == R.id.export_note)
+        {
+            exportNote();
+            return true;
+
+        }
+        else
+        {
+
+            MenuHandler mh = new MenuHandler();
+            return mh.handleContextMenu(item, getContext(), content);
+        }
+
     }
 
     @Override
@@ -178,7 +223,7 @@ public class NoteEditorFragment extends Fragment
      * If the note has text, the title is set and the note placed in the database.
      * Handles updating or inserting a new note based on the flag set in checkDBForNote()
      */
-    private final void saveNote()
+    public final void saveNote()
     {
 
         ContentValues values = new ContentValues();
@@ -204,14 +249,14 @@ public class NoteEditorFragment extends Fragment
         values.put(Notes.TITLE, title);
 
         values.put(Notes.NOTE, text);
-        values.put(Notes.URL, content.getBookURL());
+        values.put(Notes.URL, content.getBookUrl());
 
         try
         {
             if (state == STATE_UPDATE)
             {
                 //Log.d("NoteEditorActivity", "updating note");
-                activity.getContentResolver().update(Notes.CONTENT_URI, values, "notes_url=?", new String[]{content.getBookURL()});
+                activity.getContentResolver().update(Notes.CONTENT_URI, values, "notes_url=?", new String[]{content.getBookUrl()});
             }
             else
             {
@@ -229,7 +274,7 @@ public class NoteEditorFragment extends Fragment
      */
     private final void deleteNote()
     {
-        activity.getContentResolver().delete(Notes.CONTENT_URI, "notes_url=?", new String[]{content.getBookURL()});
+        activity.getContentResolver().delete(Notes.CONTENT_URI, "notes_url=?", new String[]{content.getBookUrl()});
         editText.setText("");
         activity.finish();
     }
@@ -242,7 +287,7 @@ public class NoteEditorFragment extends Fragment
     {
         if(content != null)
         {
-            cursor = activity.getContentResolver().query(Notes.CONTENT_URI, null, "notes_url='" + content.getBookURL() + "'", null, null);
+            cursor = activity.getContentResolver().query(Notes.CONTENT_URI, null, "notes_url='" + content.getBookUrl() + "'", null, null);
             if(cursor.getCount()>0)
             {
                 cursor.moveToNext();
@@ -309,65 +354,65 @@ public class NoteEditorFragment extends Fragment
      */
     private void setActionBar(View v)
     {
-        ImageButton saveButton = (ImageButton)v.findViewById(R.id.saveButton);
-        saveButton.setOnClickListener(new View.OnClickListener()
-        {
-
-            public void onClick(View v)
-            {
-                saveNote();
-                activity.finish();
-            }
-        });
-
-        ImageButton exportButton = (ImageButton)v.findViewById(R.id.exportButton);
-        exportButton.setOnClickListener(new View.OnClickListener()
-        {
-
-            public void onClick(View v)
-            {
-                exportNote();
-
-            }
-        });
-
-        ImageButton deleteButton = (ImageButton)v.findViewById(R.id.deleteButton);
-        deleteButton.setOnClickListener(new View.OnClickListener()
-        {
-
-            public void onClick(View v)
-            {
-                deleteNote();
-                activity.finish();
-
-            }
-        });
-
-        ImageButton shareButton = (ImageButton)v.findViewById(R.id.shareButton);
-        shareButton.setOnClickListener(new View.OnClickListener()
-        {
-
-            public void onClick(View v)
-            {
-                Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.setType(getString(R.string.mimetype_text));
-
-                if(content != null)
-                {
-                    intent.putExtra(Intent.EXTRA_SUBJECT, "Note for " + content.getBookTitle());
-                    String text = editText.getText().toString();
-                    intent.putExtra(Intent.EXTRA_TEXT, text + "\n\n" + getString(R.string.shared_via));
-
-                    Intent chooser = Intent.createChooser(intent, getString(R.string.tell_friend) + " " + content.getTitle());
-                    startActivity(chooser);
-                }
-                else
-                {
-                    Toast.makeText(activity, getString(R.string.no_data_msg), Toast.LENGTH_LONG).show();
-                }
-
-            }
-        });
+//        ImageButton saveButton = (ImageButton)v.findViewById(R.id.saveButton);
+//        saveButton.setOnClickListener(new View.OnClickListener()
+//        {
+//
+//            public void onClick(View v)
+//            {
+//                saveNote();
+//                activity.finish();
+//            }
+//        });
+//
+//        ImageButton exportButton = (ImageButton)v.findViewById(R.id.exportButton);
+//        exportButton.setOnClickListener(new View.OnClickListener()
+//        {
+//
+//            public void onClick(View v)
+//            {
+//                exportNote();
+//
+//            }
+//        });
+//
+//        ImageButton deleteButton = (ImageButton)v.findViewById(R.id.deleteButton);
+//        deleteButton.setOnClickListener(new View.OnClickListener()
+//        {
+//
+//            public void onClick(View v)
+//            {
+//                deleteNote();
+//                activity.finish();
+//
+//            }
+//        });
+//
+//        ImageButton shareButton = (ImageButton)v.findViewById(R.id.shareButton);
+//        shareButton.setOnClickListener(new View.OnClickListener()
+//        {
+//
+//            public void onClick(View v)
+//            {
+//                Intent intent = new Intent(Intent.ACTION_SEND);
+//                intent.setType(getString(R.string.mimetype_text));
+//
+//                if(content != null)
+//                {
+//                    intent.putExtra(Intent.EXTRA_SUBJECT, "Note for " + content.getBookTitle());
+//                    String text = editText.getText().toString();
+//                    intent.putExtra(Intent.EXTRA_TEXT, text + "\n\n" + getString(R.string.shared_via));
+//
+//                    Intent chooser = Intent.createChooser(intent, getString(R.string.tell_friend) + " " + content.getTitle());
+//                    startActivity(chooser);
+//                }
+//                else
+//                {
+//                    Toast.makeText(activity, getString(R.string.no_data_msg), Toast.LENGTH_LONG).show();
+//                }
+//
+//            }
+//        });
     }
 
 }

@@ -76,5 +76,8 @@
     <string name="chemistry_atoms_icon">chemistry-atoms</string>
     <string name="prealgebra">Prealgebra</string>
     <string name="prealgebra_icon">prealgebra</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_export">Export Note</string>
+    <string name="menu_delete">Delete Note</string>
 </resources>
  
