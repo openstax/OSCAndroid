@@ -10,7 +10,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import org.openstaxcollege.android.R;
@@ -40,7 +39,7 @@ public class ViewBookmarksActivity extends AppCompatActivity
           Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
           setSupportActionBar(toolbar);
           CollapsingToolbarLayout toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
-          toolbarLayout.setTitle(Html.fromHtml(getString(R.string.app_name_html)));
+          toolbarLayout.setTitle(getString(R.string.title_favs));
           getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
           FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

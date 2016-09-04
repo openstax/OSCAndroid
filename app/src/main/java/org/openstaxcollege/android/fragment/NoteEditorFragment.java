@@ -29,6 +29,7 @@ import android.widget.Toast;
 
 import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.activity.LandingActivity;
+import org.openstaxcollege.android.activity.NoteEditorActivity;
 import org.openstaxcollege.android.beans.Content;
 import org.openstaxcollege.android.handlers.MenuHandler;
 import org.openstaxcollege.android.providers.Notes;
@@ -44,10 +45,8 @@ import java.io.PrintWriter;
  */
 public class NoteEditorFragment extends Fragment
 {
-    // This is our state data that is stored when freezing.
     private static final String ORIGINAL_CONTENT = "origContent";
 
-    // The different distinct states the activity can be run in.
     private static final int STATE_EDIT = 0;
     private static final int STATE_UPDATE = 1;
 
@@ -95,10 +94,6 @@ public class NoteEditorFragment extends Fragment
         }
     }
 
-//    public NoteEditorFragment()
-//    {
-//    }
-
     public static NoteEditorFragment newInstance(Content c)
     {
         NoteEditorFragment nef = new NoteEditorFragment();
@@ -132,7 +127,6 @@ public class NoteEditorFragment extends Fragment
         {
             originalContent = savedInstanceState.getString(ORIGINAL_CONTENT);
         }
-        setActionBar(v);
         return v;
     }
 
@@ -186,8 +180,6 @@ public class NoteEditorFragment extends Fragment
     @Override
     public void onSaveInstanceState(Bundle outState)
     {
-        // Save away the original text, so we still have it if the activity
-        // needs to be killed while paused.
         outState.putString(ORIGINAL_CONTENT, originalContent);
     }
 
@@ -201,7 +193,7 @@ public class NoteEditorFragment extends Fragment
 
         if(editText == null)
         {
-            activity.setResult(activity.RESULT_CANCELED);
+            activity.setResult(NoteEditorActivity.RESULT_CANCELED);
             return;
         }
 
@@ -210,7 +202,7 @@ public class NoteEditorFragment extends Fragment
 
         if (activity.isFinishing() && (length == 0) && cursor != null)
         {
-            activity.setResult(activity.RESULT_CANCELED);
+            activity.setResult(NoteEditorActivity.RESULT_CANCELED);
         }
         else
         {
@@ -237,7 +229,7 @@ public class NoteEditorFragment extends Fragment
             Toast.makeText(activity, getString(R.string.nothing_to_save), Toast.LENGTH_SHORT).show();
             return;
         }
-        String title = content.getBookTitle();//.substring(0, Math.min(30, length));
+        String title = content.getBookTitle();
         if (length > 30)
         {
             int lastSpace = title.lastIndexOf(' ');
@@ -347,72 +339,6 @@ public class NoteEditorFragment extends Fragment
                 pw.close();
             }
         }
-    }
-
-    /**
-     * Sets up the buttons for the Action Bar
-     */
-    private void setActionBar(View v)
-    {
-//        ImageButton saveButton = (ImageButton)v.findViewById(R.id.saveButton);
-//        saveButton.setOnClickListener(new View.OnClickListener()
-//        {
-//
-//            public void onClick(View v)
-//            {
-//                saveNote();
-//                activity.finish();
-//            }
-//        });
-//
-//        ImageButton exportButton = (ImageButton)v.findViewById(R.id.exportButton);
-//        exportButton.setOnClickListener(new View.OnClickListener()
-//        {
-//
-//            public void onClick(View v)
-//            {
-//                exportNote();
-//
-//            }
-//        });
-//
-//        ImageButton deleteButton = (ImageButton)v.findViewById(R.id.deleteButton);
-//        deleteButton.setOnClickListener(new View.OnClickListener()
-//        {
-//
-//            public void onClick(View v)
-//            {
-//                deleteNote();
-//                activity.finish();
-//
-//            }
-//        });
-//
-//        ImageButton shareButton = (ImageButton)v.findViewById(R.id.shareButton);
-//        shareButton.setOnClickListener(new View.OnClickListener()
-//        {
-//
-//            public void onClick(View v)
-//            {
-//                Intent intent = new Intent(Intent.ACTION_SEND);
-//                intent.setType(getString(R.string.mimetype_text));
-//
-//                if(content != null)
-//                {
-//                    intent.putExtra(Intent.EXTRA_SUBJECT, "Note for " + content.getBookTitle());
-//                    String text = editText.getText().toString();
-//                    intent.putExtra(Intent.EXTRA_TEXT, text + "\n\n" + getString(R.string.shared_via));
-//
-//                    Intent chooser = Intent.createChooser(intent, getString(R.string.tell_friend) + " " + content.getTitle());
-//                    startActivity(chooser);
-//                }
-//                else
-//                {
-//                    Toast.makeText(activity, getString(R.string.no_data_msg), Toast.LENGTH_LONG).show();
-//                }
-//
-//            }
-//        });
     }
 
 }

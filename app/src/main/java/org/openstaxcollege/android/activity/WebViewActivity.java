@@ -9,6 +9,7 @@ package org.openstaxcollege.android.activity;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.*;
 import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.beans.Content;
@@ -96,7 +97,6 @@ public class WebViewActivity extends AppCompatActivity
             try
             {
                 content.setUrl(url);
-                //content.setUrl(new URL(view.getUrl()));
 
             }
             catch (Exception e)
@@ -120,12 +120,12 @@ public class WebViewActivity extends AppCompatActivity
     public void onCreate(Bundle savedInstanceState) 
     {
 
-        //requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.web_view);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(Html.fromHtml(getString(R.string.app_name_html)));;
 
         
         Intent intent = getIntent();

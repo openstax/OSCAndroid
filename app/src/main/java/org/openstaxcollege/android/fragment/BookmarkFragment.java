@@ -90,12 +90,11 @@ public class BookmarkFragment extends Fragment implements OnStartDragListener
         else
         {
             //reuse existing feed data
-            adapter = new BookmarkRecyclerViewAdapter(content, R.layout.card_row, activity);
+            adapter = new BookmarkRecyclerViewAdapter(content, R.layout.bookmark, activity);
             recyclerView.setAdapter(adapter);
             ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapter);
             itemTouchHelper = new ItemTouchHelper(callback);
             itemTouchHelper.attachToRecyclerView(recyclerView);
-            //setProgressBarIndeterminateVisibility(false);
 
         }
     }
@@ -126,17 +125,14 @@ public class BookmarkFragment extends Fragment implements OnStartDragListener
         }
     }
 
-    /** Actions after list is loaded in View*/
     protected void finishedLoadingList()
     {
         recyclerView.setAdapter(adapter);
         ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapter);
         itemTouchHelper = new ItemTouchHelper(callback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
-        //setProgressBarIndeterminateVisibility(false);
     }
 
-    /** reads feed in a separate thread.  Starts progress dialog*/
     private void readDB()
     {
         Thread loadFavsThread = new Thread()
@@ -158,13 +154,13 @@ public class BookmarkFragment extends Fragment implements OnStartDragListener
 
     }
     /**
-     * Loads feed data into adapter on initial reading of feed
+     * Puts data in adapter
      * @param contentList ArrayList<Content>
      */
     private void fillData(ArrayList<Content> contentList)
     {
         //Log.d("LensViewer", "fillData() called");
-        adapter = new BookmarkRecyclerViewAdapter(contentList, R.layout.card_row,activity);
+        adapter = new BookmarkRecyclerViewAdapter(contentList, R.layout.bookmark,activity);
     }
 
     /**

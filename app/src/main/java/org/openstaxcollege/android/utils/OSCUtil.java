@@ -15,6 +15,8 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.widget.Toast;
 
+import org.openstaxcollege.android.R;
+
 /**
  * General Utility Class
  * @author Ed Woodward
@@ -42,45 +44,109 @@ public class OSCUtil
         return isConnected;
     }
 
-    public static boolean isXLarge(Context activityContext)
-    {
-        return ((activityContext.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE);
+   public static int getCoverId(String icon, Context context)
+   {
+       int coverId = 0;
 
-    }
-    
-    public static boolean isTabletDevice(Context activityContext) 
-    {
+       if(icon.equals(context.getString(R.string.physics_icon)))
+       {
+           coverId = R.drawable.physics_lg;
+       }
+       else if(icon.equals(context.getString(R.string.sociology_icon)))
+       {
+           coverId = R.drawable.sociology_lg;
+       }
+       else if(icon.equals(context.getString(R.string.biology_icon)))
+       {
+           coverId = R.drawable.biology_lg;
+       }
+       else if(icon.equals(context.getString(R.string.concepts_icon)) )
+       {
+           coverId = R.drawable.concepts_biology_lg;
+       }
+       else if(icon.equals(context.getString(R.string.anatomy_icon)))
+       {
+           coverId = R.drawable.anatomy_lg;
+       }
+       else if(icon.equals(context.getString(R.string.statistics_icon)))
+       {
+           coverId = R.drawable.statistics_lg;
+       }
+       else if(icon.equals(context.getString(R.string.econ_icon)))
+       {
+           coverId = R.drawable.econ_lg;
+       }
+       else if(icon.equals(context.getString(R.string.macro_icon)))
+       {
+           coverId = R.drawable.macro_econ_lg;
+       }
+       else if(icon.equals(context.getString(R.string.micro_icon)))
+       {
+           coverId = R.drawable.micro_econ_lg;
+       }
+       else if(icon.equals(context.getString(R.string.precalculus_icon)))
+       {
+           coverId = R.drawable.precalculus_lg;
+       }
+       else if(icon.equals(context.getString(R.string.psychology_icon)))
+       {
+           coverId = R.drawable.psychology_lg;
+       }
+       else if(icon.equals(context.getString(R.string.history_icon)))
+       {
+           coverId = R.drawable.history_lg;
+       }
+       else if(icon.equals(context.getString(R.string.chemistry_icon)))
+       {
+           coverId = R.drawable.chemistry_lg;
+       }
+       else if(icon.equals(context.getString(R.string.algebra_icon)))
+       {
+           coverId = R.drawable.algebra_lg;
+       }
+       else if(icon.equals(context.getString(R.string.trig_icon)))
+       {
+           coverId = R.drawable.trig_lg;
+       }
+       else if(icon.equals(context.getString(R.string.ap_physics_icon)))
+       {
+           coverId = R.drawable.ap_physics_lg;
+       }
+       else if(icon.equals(context.getString(R.string.ap_macro_icon)))
+       {
+           coverId = R.drawable.ap_macro;
+       }
+       else if(icon.equals(context.getString(R.string.ap_micro_icon)))
+       {
+           coverId = R.drawable.ap_micro;
+       }
+       else if(icon.equals(context.getString(R.string.american_gov_icon)))
+       {
+           coverId = R.drawable.american_gov;
+       }
+       else if(icon.equals(context.getString(R.string.calculus1_icon)))
+       {
+           coverId = R.drawable.calculus1;
+       }
+       else if(icon.equals(context.getString(R.string.calculus2_icon)))
+       {
+           coverId = R.drawable.calculus2;
+       }
+       else if(icon.equals(context.getString(R.string.calculus3_icon)))
+       {
+           coverId = R.drawable.calculus3;
+       }
+       else if(icon.equals(context.getString(R.string.chemistry_atoms_icon)))
+       {
+           coverId = R.drawable.chemistry_atoms;
+       }
+       else if(icon.equals(context.getString(R.string.prealgebra_icon)))
+       {
+           coverId = R.drawable.prealgebra;
+       }
 
-        boolean xlarge = false;
-
-        if((activityContext.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE || (activityContext.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == 3)
-        {
-            xlarge = true;
-        }
-        int test = activityContext.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK;
-
-        //Log.d("OSCU.isTabletDevice()","screenLayout = " + test);
-        //Log.d("OSCU.isTabletDevice()","screenlayout size mask = " + Configuration.SCREENLAYOUT_SIZE_MASK);
-
-        if (xlarge)
-        {
-            DisplayMetrics metrics = new DisplayMetrics();
-            Activity activity = (Activity) activityContext;
-            activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
-
-            if (metrics.densityDpi == DisplayMetrics.DENSITY_DEFAULT
-                    || metrics.densityDpi == DisplayMetrics.DENSITY_HIGH
-                    || metrics.densityDpi == DisplayMetrics.DENSITY_MEDIUM
-                    || metrics.densityDpi == DisplayMetrics.DENSITY_TV
-                    || metrics.densityDpi == DisplayMetrics.DENSITY_XHIGH) 
-            {
-
-                return true;
-            }
-        }
-
-        return false;
-    }
+       return coverId;
+   }
     
     public static void makeNoDataToast(Context context)
     {

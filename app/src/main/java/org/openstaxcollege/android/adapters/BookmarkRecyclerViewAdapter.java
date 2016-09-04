@@ -20,6 +20,7 @@ import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.activity.WebViewActivity;
 import org.openstaxcollege.android.beans.Content;
 import org.openstaxcollege.android.providers.Bookmarks;
+import org.openstaxcollege.android.utils.OSCUtil;
 
 import java.util.ArrayList;
 
@@ -59,104 +60,8 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
         viewHolder.other.setText(content.getContentString());
         if (viewHolder.logo != null && content.getIcon() != null)
         {
+            viewHolder.logo.setImageResource(OSCUtil.getCoverId(content.getIcon(), context));
 
-            //set correct icon based on URL
-            if(content.getIcon().equals(context.getString(R.string.physics_icon)))
-            {
-                viewHolder.logo.setImageResource(R.drawable.physics_lg);
-            }
-            else if(content.getIcon().equals(context.getString(R.string.sociology_icon)))
-            {
-                viewHolder.logo.setImageResource(R.drawable.sociology_lg);
-            }
-            else if(content.getIcon().equals(context.getString(R.string.biology_icon)))
-            {
-                viewHolder.logo.setImageResource(R.drawable.biology_lg);
-            }
-            else if(content.getIcon().equals(context.getString(R.string.concepts_icon)) )
-            {
-                viewHolder.logo.setImageResource(R.drawable.concepts_biology_lg);
-            }
-            else if(content.getIcon().equals(context.getString(R.string.anatomy_icon)))
-            {
-                viewHolder.logo.setImageResource(R.drawable.anatomy_lg);
-            }
-            else if(content.getIcon().equals(context.getString(R.string.statistics_icon)))
-            {
-                viewHolder.logo.setImageResource(R.drawable.statistics_lg);
-            }
-            else if(content.getIcon().equals(context.getString(R.string.econ_icon)))
-            {
-                viewHolder.logo.setImageResource(R.drawable.econ_lg);
-            }
-            else if(content.getIcon().equals(context.getString(R.string.macro_icon)))
-            {
-                viewHolder.logo.setImageResource(R.drawable.macro_econ_lg);
-            }
-            else if(content.getIcon().equals(context.getString(R.string.micro_icon)))
-            {
-                viewHolder.logo.setImageResource(R.drawable.micro_econ_lg);
-            }
-            else if(content.getIcon().equals(context.getString(R.string.precalculus_icon)))
-            {
-                viewHolder.logo.setImageResource(R.drawable.precalculus_lg);
-            }
-            else if(content.getIcon().equals(context.getString(R.string.psychology_icon)))
-            {
-                viewHolder.logo.setImageResource(R.drawable.psychology_lg);
-            }
-            else if(content.getIcon().equals(context.getString(R.string.history_icon)))
-            {
-                viewHolder.logo.setImageResource(R.drawable.history_lg);
-            }
-            else if(content.getIcon().equals(context.getString(R.string.chemistry_icon)))
-            {
-                viewHolder.logo.setImageResource(R.drawable.chemistry_lg);
-            }
-            else if(content.getIcon().equals(context.getString(R.string.algebra_icon)))
-            {
-                viewHolder.logo.setImageResource(R.drawable.algebra_lg);
-            }
-            else if(content.getIcon().equals(context.getString(R.string.trig_icon)))
-            {
-                viewHolder.logo.setImageResource(R.drawable.trig_lg);
-            }
-            else if(content.getIcon().equals(context.getString(R.string.ap_physics_icon)))
-            {
-                viewHolder.logo.setImageResource(R.drawable.ap_physics_lg);
-            }
-            else if(content.getIcon().equals(context.getString(R.string.ap_macro_icon)))
-            {
-                viewHolder.logo.setImageResource(R.drawable.ap_macro);
-            }
-            else if(content.getIcon().equals(context.getString(R.string.ap_micro_icon)))
-            {
-                viewHolder.logo.setImageResource(R.drawable.ap_micro);
-            }
-            else if(content.getIcon().equals(context.getString(R.string.american_gov_icon)))
-            {
-                viewHolder.logo.setImageResource(R.drawable.american_gov);
-            }
-            else if(content.getIcon().equals(context.getString(R.string.calculus1_icon)))
-            {
-                viewHolder.logo.setImageResource(R.drawable.calculus1);
-            }
-            else if(content.getIcon().equals(context.getString(R.string.calculus2_icon)))
-            {
-                viewHolder.logo.setImageResource(R.drawable.calculus2);
-            }
-            else if(content.getIcon().equals(context.getString(R.string.calculus3_icon)))
-            {
-                viewHolder.logo.setImageResource(R.drawable.calculus3);
-            }
-            else if(content.getIcon().equals(context.getString(R.string.chemistry_atoms_icon)))
-            {
-                viewHolder.logo.setImageResource(R.drawable.chemistry_atoms);
-            }
-            else if(content.getIcon().equals(context.getString(R.string.prealgebra_icon)))
-            {
-                viewHolder.logo.setImageResource(R.drawable.prealgebra);
-            }
         }
 
     }

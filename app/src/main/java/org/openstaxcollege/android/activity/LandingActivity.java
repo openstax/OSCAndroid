@@ -34,7 +34,7 @@ import android.os.Bundle;
 public class LandingActivity extends AppCompatActivity
 {
    
-    /** list of lenses as Content objects */
+    /** list of books as Content objects */
     ArrayList<Content> content;
     
     /* (non-Javadoc)
@@ -49,7 +49,7 @@ public class LandingActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         CollapsingToolbarLayout toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
-        toolbarLayout.setTitle(Html.fromHtml(getString(R.string.app_name_html)));
+        getSupportActionBar().setTitle(Html.fromHtml(getString(R.string.app_name_html)));
 
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -70,17 +70,6 @@ public class LandingActivity extends AppCompatActivity
         });
     }
 
-    public void onBookSelected(Content content)
-    {
-
-        Intent i = new Intent(getApplicationContext(), WebViewActivity.class);
-        i.putExtra(getString(R.string.webcontent),content);
-        startActivity(i);
-
-
-    }
-
-    
     /* (non-Javadoc)
      * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
      */
@@ -88,7 +77,7 @@ public class LandingActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu)
     {
         super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.lenses_options_menu, menu);
+        getMenuInflater().inflate(R.menu.landing_options_menu, menu);
         return true;
         
     }

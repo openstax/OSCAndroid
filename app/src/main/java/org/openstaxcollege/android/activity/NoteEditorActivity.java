@@ -9,13 +9,8 @@ package org.openstaxcollege.android.activity;
 import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.beans.Content;
 import org.openstaxcollege.android.fragment.NoteEditorFragment;
-import org.openstaxcollege.android.handlers.MenuHandler;
-import org.openstaxcollege.android.logic.WebviewLogic;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
@@ -23,7 +18,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -55,7 +49,7 @@ public class NoteEditorActivity extends AppCompatActivity
             return;
         }
 
-        setContentView(R.layout.main_layout);
+        setContentView(R.layout.activity_noteeditor);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar aBar = getSupportActionBar();
@@ -74,7 +68,6 @@ public class NoteEditorActivity extends AppCompatActivity
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         final NoteEditorFragment fragment = NoteEditorFragment.newInstance(content);
-        //NoteEditorFragment fragment = new NoteEditorFragment();
         transaction.replace(R.id.contentFragment, fragment);
         transaction.commit();
 
