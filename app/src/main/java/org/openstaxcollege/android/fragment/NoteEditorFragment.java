@@ -6,17 +6,22 @@
  */
 package org.openstaxcollege.android.fragment;
 
-import android.app.Activity;
+import android.Manifest;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.text.util.Linkify;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -46,6 +51,10 @@ import java.io.PrintWriter;
 public class NoteEditorFragment extends Fragment
 {
     private static final String ORIGINAL_CONTENT = "origContent";
+    private static final String[] STORAGE_PERMS={
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
+    private int REQUEST = 1337;
 
     private static final int STATE_EDIT = 0;
     private static final int STATE_UPDATE = 1;
@@ -55,7 +64,7 @@ public class NoteEditorFragment extends Fragment
     private EditText editText;
     private String originalContent;
     private Content content;
-    Activity activity;
+    AppCompatActivity activity;
 
     /**
      * A custom EditText that draws lines between each line of text that is displayed.
@@ -114,7 +123,7 @@ public class NoteEditorFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        activity = getActivity();
+        activity = (AppCompatActivity)getActivity();
         content = (Content)getArguments().get("content");
         View v = inflater.inflate(R.layout.note_editor, container, false);
 
@@ -310,35 +319,62 @@ public class NoteEditorFragment extends Fragment
      */
     private void exportNote()
     {
-        File cnxDir = new File(Environment.getExternalStorageDirectory(), "OpenStax/");
-        if(!cnxDir.exists())
+        if(ContextCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE )== PackageManager.PERMISSION_GRANTED )
         {
-            cnxDir.mkdir();
-        }
-        String fileName = MenuUtil.getTitle(content.getBookTitle()) + ".txt";
-        File file = new File(cnxDir, fileName);
-        String text = editText.getText().toString();
-        PrintWriter pw = null;
-
-        try
-        {
-            pw = new PrintWriter(file);
-            pw.write(text);
-            pw.flush();
-            //pw.close();
-            Toast.makeText(activity, fileName + " saved to OpenStax folder.", Toast.LENGTH_LONG).show();
-        }
-        catch (FileNotFoundException e)
-        {
-            Log.d("NoteEditorActivity", "Error exporting note: " + e.toString(), e);
-        }
-        finally
-        {
-            if(pw != null)
+            File cnxDir = new File(Environment.getExternalStorageDirectory(), "OpenStax/");
+            if(!cnxDir.exists())
             {
-                pw.close();
+                cnxDir.mkdir();
+            }
+            String fileName = MenuUtil.getTitle(content.getBookTitle()) + ".txt";
+            File file = new File(cnxDir, fileName);
+            String text = editText.getText().toString();
+            PrintWriter pw = null;
+
+            try
+            {
+                pw = new PrintWriter(file);
+                pw.write(text);
+                pw.flush();
+                //pw.close();
+                Toast.makeText(activity, fileName + " saved to OpenStax folder.", Toast.LENGTH_LONG).show();
+            }
+            catch(FileNotFoundException e)
+            {
+                Log.d("NoteEditorActivity", "Error exporting note: " + e.toString(), e);
+            }
+            finally
+            {
+                if(pw != null)
+                {
+                    pw.close();
+                }
             }
         }
+        else
+        {
+            requestPermissions(STORAGE_PERMS, REQUEST);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults)
+    {
+//        switch (requestCode)
+//        {
+            //case ConstantVariables.WRITE_EXTERNAL_STORAGE:
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                {
+
+                    // permission was granted, proceed to the normal flow.
+                    exportNote();
+                }
+                else
+                {
+                }
+        //}
+
     }
 
 }
