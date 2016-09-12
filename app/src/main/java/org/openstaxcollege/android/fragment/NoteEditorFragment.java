@@ -15,10 +15,9 @@ import android.database.Cursor;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v4.app.ActivityCompat;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -360,21 +359,25 @@ public class NoteEditorFragment extends Fragment
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults)
     {
-//        switch (requestCode)
-//        {
-            //case ConstantVariables.WRITE_EXTERNAL_STORAGE:
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
-                {
 
-                    // permission was granted, proceed to the normal flow.
-                    exportNote();
-                }
-                else
-                {
-                }
-        //}
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+        {
+
+            exportNote();
+        }
+        else if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE))
+        {
+            Snackbar.make(getView(), getString(R.string.external_storage_request),Snackbar.LENGTH_INDEFINITE)
+                    .setAction(getString(R.string.ok_button), new View.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View view)
+                        {
+                            requestPermissions(STORAGE_PERMS,REQUEST);
+                        }
+                    })
+                    .show();
+        }
 
     }
-
 }
