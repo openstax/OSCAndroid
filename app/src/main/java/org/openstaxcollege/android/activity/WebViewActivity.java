@@ -228,10 +228,10 @@ public class WebViewActivity extends AppCompatActivity
             try
             {
 
-                content.setTitle(webView.getTitle().replace(" - " + content.getBookTitle() + " - OpenStax CNX",""));
-                content.setUrl(webView.getUrl());
                 WebviewLogic wl = new WebviewLogic();
                 content.setBookTitle(wl.getBookTitle(webView.getTitle()));
+                content.setTitle(webView.getTitle().replace(" - " + content.getBookTitle() + " - OpenStax CNX",""));
+                content.setUrl(webView.getUrl());
 
             }
             catch(Exception mue)

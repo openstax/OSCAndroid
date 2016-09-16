@@ -53,9 +53,6 @@ public class NoteEditorActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar aBar = getSupportActionBar();
-        aBar.setDisplayHomeAsUpEnabled(true);
-        //CollapsingToolbarLayout toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
-
 
         if(content == null)
         {
