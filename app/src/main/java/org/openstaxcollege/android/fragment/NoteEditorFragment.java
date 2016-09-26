@@ -335,7 +335,6 @@ public class NoteEditorFragment extends Fragment
                 pw = new PrintWriter(file);
                 pw.write(text);
                 pw.flush();
-                //pw.close();
                 Toast.makeText(activity, fileName + " saved to OpenStax folder.", Toast.LENGTH_LONG).show();
             }
             catch(FileNotFoundException e)
@@ -350,21 +349,6 @@ public class NoteEditorFragment extends Fragment
                 }
             }
         }
-        else
-        {
-            requestPermissions(STORAGE_PERMS, REQUEST);
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults)
-    {
-
-        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
-        {
-
-            exportNote();
-        }
         else if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE))
         {
             Snackbar.make(getView(), getString(R.string.external_storage_request),Snackbar.LENGTH_INDEFINITE)
@@ -378,6 +362,21 @@ public class NoteEditorFragment extends Fragment
                     })
                     .show();
         }
+        else
+        {
+            requestPermissions(STORAGE_PERMS, REQUEST);
 
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults)
+    {
+
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+        {
+
+            exportNote();
+        }
     }
 }
