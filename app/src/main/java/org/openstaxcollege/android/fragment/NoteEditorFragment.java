@@ -6,29 +6,36 @@
  */
 package org.openstaxcollege.android.fragment;
 
-import android.app.Activity;
-import android.app.Fragment;
+import android.Manifest;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.text.util.Linkify;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import org.openstaxcollege.android.R;
+import org.openstaxcollege.android.activity.LandingActivity;
+import org.openstaxcollege.android.activity.NoteEditorActivity;
 import org.openstaxcollege.android.beans.Content;
+import org.openstaxcollege.android.handlers.MenuHandler;
 import org.openstaxcollege.android.providers.Notes;
 import org.openstaxcollege.android.utils.MenuUtil;
 
@@ -42,10 +49,12 @@ import java.io.PrintWriter;
  */
 public class NoteEditorFragment extends Fragment
 {
-    // This is our state data that is stored when freezing.
     private static final String ORIGINAL_CONTENT = "origContent";
+    private static final String[] STORAGE_PERMS={
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
+    private int REQUEST = 1337;
 
-    // The different distinct states the activity can be run in.
     private static final int STATE_EDIT = 0;
     private static final int STATE_UPDATE = 1;
 
@@ -54,7 +63,7 @@ public class NoteEditorFragment extends Fragment
     private EditText editText;
     private String originalContent;
     private Content content;
-    Activity activity;
+    AppCompatActivity activity;
 
     /**
      * A custom EditText that draws lines between each line of text that is displayed.
@@ -104,9 +113,16 @@ public class NoteEditorFragment extends Fragment
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        activity = getActivity();
+        activity = (AppCompatActivity)getActivity();
         content = (Content)getArguments().get("content");
         View v = inflater.inflate(R.layout.note_editor, container, false);
 
@@ -119,8 +135,39 @@ public class NoteEditorFragment extends Fragment
         {
             originalContent = savedInstanceState.getString(ORIGINAL_CONTENT);
         }
-        setActionBar(v);
         return v;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        if(item.getItemId() == android.R.id.home)
+        {
+            Intent mainIntent = new Intent(getContext(), LandingActivity.class);
+            mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(mainIntent);
+            return true;
+        }
+        else if(item.getItemId() == R.id.delete_note)
+        {
+            deleteNote();
+            getActivity().finish();
+            return true;
+
+        }
+        else if(item.getItemId() == R.id.export_note)
+        {
+            exportNote();
+            return true;
+
+        }
+        else
+        {
+
+            MenuHandler mh = new MenuHandler();
+            return mh.handleContextMenu(item, getContext(), content);
+        }
+
     }
 
     @Override
@@ -141,8 +188,6 @@ public class NoteEditorFragment extends Fragment
     @Override
     public void onSaveInstanceState(Bundle outState)
     {
-        // Save away the original text, so we still have it if the activity
-        // needs to be killed while paused.
         outState.putString(ORIGINAL_CONTENT, originalContent);
     }
 
@@ -156,7 +201,7 @@ public class NoteEditorFragment extends Fragment
 
         if(editText == null)
         {
-            activity.setResult(activity.RESULT_CANCELED);
+            activity.setResult(NoteEditorActivity.RESULT_CANCELED);
             return;
         }
 
@@ -165,7 +210,7 @@ public class NoteEditorFragment extends Fragment
 
         if (activity.isFinishing() && (length == 0) && cursor != null)
         {
-            activity.setResult(activity.RESULT_CANCELED);
+            activity.setResult(NoteEditorActivity.RESULT_CANCELED);
         }
         else
         {
@@ -178,7 +223,7 @@ public class NoteEditorFragment extends Fragment
      * If the note has text, the title is set and the note placed in the database.
      * Handles updating or inserting a new note based on the flag set in checkDBForNote()
      */
-    private final void saveNote()
+    public final void saveNote()
     {
 
         ContentValues values = new ContentValues();
@@ -192,7 +237,7 @@ public class NoteEditorFragment extends Fragment
             Toast.makeText(activity, getString(R.string.nothing_to_save), Toast.LENGTH_SHORT).show();
             return;
         }
-        String title = content.getBookTitle();//.substring(0, Math.min(30, length));
+        String title = content.getBookTitle();
         if (length > 30)
         {
             int lastSpace = title.lastIndexOf(' ');
@@ -204,14 +249,14 @@ public class NoteEditorFragment extends Fragment
         values.put(Notes.TITLE, title);
 
         values.put(Notes.NOTE, text);
-        values.put(Notes.URL, content.getBookURL());
+        values.put(Notes.URL, content.getBookUrl());
 
         try
         {
             if (state == STATE_UPDATE)
             {
                 //Log.d("NoteEditorActivity", "updating note");
-                activity.getContentResolver().update(Notes.CONTENT_URI, values, "notes_url=?", new String[]{content.getBookURL()});
+                activity.getContentResolver().update(Notes.CONTENT_URI, values, "notes_url=?", new String[]{content.getBookUrl()});
             }
             else
             {
@@ -229,7 +274,7 @@ public class NoteEditorFragment extends Fragment
      */
     private final void deleteNote()
     {
-        activity.getContentResolver().delete(Notes.CONTENT_URI, "notes_url=?", new String[]{content.getBookURL()});
+        activity.getContentResolver().delete(Notes.CONTENT_URI, "notes_url=?", new String[]{content.getBookUrl()});
         editText.setText("");
         activity.finish();
     }
@@ -242,7 +287,7 @@ public class NoteEditorFragment extends Fragment
     {
         if(content != null)
         {
-            cursor = activity.getContentResolver().query(Notes.CONTENT_URI, null, "notes_url='" + content.getBookURL() + "'", null, null);
+            cursor = activity.getContentResolver().query(Notes.CONTENT_URI, null, "notes_url='" + content.getBookUrl() + "'", null, null);
             if(cursor.getCount()>0)
             {
                 cursor.moveToNext();
@@ -273,101 +318,65 @@ public class NoteEditorFragment extends Fragment
      */
     private void exportNote()
     {
-        File cnxDir = new File(Environment.getExternalStorageDirectory(), "OpenStax/");
-        if(!cnxDir.exists())
+        if(ContextCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE )== PackageManager.PERMISSION_GRANTED )
         {
-            cnxDir.mkdir();
-        }
-        String fileName = MenuUtil.getTitle(content.getBookTitle()) + ".txt";
-        File file = new File(cnxDir, fileName);
-        String text = editText.getText().toString();
-        PrintWriter pw = null;
-
-        try
-        {
-            pw = new PrintWriter(file);
-            pw.write(text);
-            pw.flush();
-            //pw.close();
-            Toast.makeText(activity, fileName + " saved to OpenStax folder.", Toast.LENGTH_LONG).show();
-        }
-        catch (FileNotFoundException e)
-        {
-            Log.d("NoteEditorActivity", "Error exporting note: " + e.toString(), e);
-        }
-        finally
-        {
-            if(pw != null)
+            File cnxDir = new File(Environment.getExternalStorageDirectory(), "OpenStax/");
+            if(!cnxDir.exists())
             {
-                pw.close();
+                cnxDir.mkdir();
             }
+            String fileName = MenuUtil.getTitle(content.getBookTitle()) + ".txt";
+            File file = new File(cnxDir, fileName);
+            String text = editText.getText().toString();
+            PrintWriter pw = null;
+
+            try
+            {
+                pw = new PrintWriter(file);
+                pw.write(text);
+                pw.flush();
+                Toast.makeText(activity, fileName + " saved to OpenStax folder.", Toast.LENGTH_LONG).show();
+            }
+            catch(FileNotFoundException e)
+            {
+                Log.d("NoteEditorActivity", "Error exporting note: " + e.toString(), e);
+            }
+            finally
+            {
+                if(pw != null)
+                {
+                    pw.close();
+                }
+            }
+        }
+        else if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE))
+        {
+            Snackbar.make(getView(), getString(R.string.external_storage_request),Snackbar.LENGTH_INDEFINITE)
+                    .setAction(getString(R.string.ok_button), new View.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View view)
+                        {
+                            requestPermissions(STORAGE_PERMS,REQUEST);
+                        }
+                    })
+                    .show();
+        }
+        else
+        {
+            requestPermissions(STORAGE_PERMS, REQUEST);
+
         }
     }
 
-    /**
-     * Sets up the buttons for the Action Bar
-     */
-    private void setActionBar(View v)
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults)
     {
-        ImageButton saveButton = (ImageButton)v.findViewById(R.id.saveButton);
-        saveButton.setOnClickListener(new View.OnClickListener()
+
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
         {
 
-            public void onClick(View v)
-            {
-                saveNote();
-                activity.finish();
-            }
-        });
-
-        ImageButton exportButton = (ImageButton)v.findViewById(R.id.exportButton);
-        exportButton.setOnClickListener(new View.OnClickListener()
-        {
-
-            public void onClick(View v)
-            {
-                exportNote();
-
-            }
-        });
-
-        ImageButton deleteButton = (ImageButton)v.findViewById(R.id.deleteButton);
-        deleteButton.setOnClickListener(new View.OnClickListener()
-        {
-
-            public void onClick(View v)
-            {
-                deleteNote();
-                activity.finish();
-
-            }
-        });
-
-        ImageButton shareButton = (ImageButton)v.findViewById(R.id.shareButton);
-        shareButton.setOnClickListener(new View.OnClickListener()
-        {
-
-            public void onClick(View v)
-            {
-                Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.setType(getString(R.string.mimetype_text));
-
-                if(content != null)
-                {
-                    intent.putExtra(Intent.EXTRA_SUBJECT, "Note for " + content.getBookTitle());
-                    String text = editText.getText().toString();
-                    intent.putExtra(Intent.EXTRA_TEXT, text + "\n\n" + getString(R.string.shared_via));
-
-                    Intent chooser = Intent.createChooser(intent, getString(R.string.tell_friend) + " " + content.getTitle());
-                    startActivity(chooser);
-                }
-                else
-                {
-                    Toast.makeText(activity, getString(R.string.no_data_msg), Toast.LENGTH_LONG).show();
-                }
-
-            }
-        });
+            exportNote();
+        }
     }
-
 }

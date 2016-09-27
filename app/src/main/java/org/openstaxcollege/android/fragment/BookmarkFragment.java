@@ -7,10 +7,10 @@
 package org.openstaxcollege.android.fragment;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -63,7 +63,7 @@ public class BookmarkFragment extends Fragment implements OnStartDragListener
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         activity = getActivity();
-        View v = inflater.inflate(R.layout.card_view, container, false);
+        View v = inflater.inflate(R.layout.fragment_book_list, container, false);
 
 
         return v;
@@ -73,10 +73,11 @@ public class BookmarkFragment extends Fragment implements OnStartDragListener
     public void onActivityCreated(Bundle savedInstanceState)
     {
         super.onActivityCreated(savedInstanceState);
-        recyclerView = (RecyclerView)getView().findViewById(R.id.recycler_view);
+        recyclerView = (RecyclerView)getView().findViewById(R.id.book_list);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setNestedScrollingEnabled(false);
 
 
         //get already retrieved feed and reuse if it is there
@@ -89,12 +90,11 @@ public class BookmarkFragment extends Fragment implements OnStartDragListener
         else
         {
             //reuse existing feed data
-            adapter = new BookmarkRecyclerViewAdapter(content, R.layout.card_row, activity);
+            adapter = new BookmarkRecyclerViewAdapter(content, R.layout.bookmark, activity);
             recyclerView.setAdapter(adapter);
             ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapter);
             itemTouchHelper = new ItemTouchHelper(callback);
             itemTouchHelper.attachToRecyclerView(recyclerView);
-            //setProgressBarIndeterminateVisibility(false);
 
         }
     }
@@ -125,17 +125,14 @@ public class BookmarkFragment extends Fragment implements OnStartDragListener
         }
     }
 
-    /** Actions after list is loaded in View*/
     protected void finishedLoadingList()
     {
         recyclerView.setAdapter(adapter);
         ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapter);
         itemTouchHelper = new ItemTouchHelper(callback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
-        //setProgressBarIndeterminateVisibility(false);
     }
 
-    /** reads feed in a separate thread.  Starts progress dialog*/
     private void readDB()
     {
         Thread loadFavsThread = new Thread()
@@ -157,13 +154,13 @@ public class BookmarkFragment extends Fragment implements OnStartDragListener
 
     }
     /**
-     * Loads feed data into adapter on initial reading of feed
+     * Puts data in adapter
      * @param contentList ArrayList<Content>
      */
     private void fillData(ArrayList<Content> contentList)
     {
         //Log.d("LensViewer", "fillData() called");
-        adapter = new BookmarkRecyclerViewAdapter(contentList, R.layout.card_row,activity);
+        adapter = new BookmarkRecyclerViewAdapter(contentList, R.layout.bookmark,activity);
     }
 
     /**

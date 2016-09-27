@@ -57,6 +57,7 @@ public class MenuHandler
                 String url = currentContent.getUrl().toString();
                 cv.put(Bookmarks.URL, url.replaceAll("@\\d+(\\.\\d+)?","")+ "?bookmark=1");
                 cv.put(Bookmarks.ICON, currentContent.getIcon());
+                cv.put(Bookmarks.OTHER, currentContent.getBookTitle());
                 context.getContentResolver().insert(Bookmarks.CONTENT_URI, cv);
                 Toast.makeText(context, "Bookmark added for " + currentContent.getTitle(), Toast.LENGTH_SHORT).show();
                 return true;
