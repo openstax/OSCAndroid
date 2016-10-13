@@ -144,6 +144,18 @@ public class OSCUtil
        {
            coverId = R.drawable.prealgebra;
        }
+       else if(icon.equals(context.getString(R.string.univ_physics1_icon)))
+       {
+           coverId = R.drawable.university_physics_vol1;
+       }
+       else if(icon.equals(context.getString(R.string.univ_physics2_icon)))
+       {
+           coverId = R.drawable.university_physics_vol2;
+       }
+       else if(icon.equals(context.getString(R.string.univ_physics3_icon)))
+       {
+           coverId = R.drawable.university_physics_vol3;
+       }
 
        return coverId;
    }
