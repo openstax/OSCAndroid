@@ -156,6 +156,10 @@ public class OSCUtil
        {
            coverId = R.drawable.university_physics_vol3;
        }
+       else if(icon.equals(context.getString(R.string.astronomy_icon)))
+       {
+           coverId = R.drawable.astronomy;
+       }
 
        return coverId;
    }
