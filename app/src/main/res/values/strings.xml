@@ -46,5 +46,33 @@
     <string name="menu_delete">Delete Note</string>
     <string name="external_storage_request">Permission is needed to store the exported notes on your device</string>
     <string name="ok_button">OK</string>
+    <string name="univ_physics1_icon">University Physics Volume 1</string>
+    <string name="univ_physics2_icon">University Physics Volume 2</string>
+    <string name="univ_physics3_icon">University Physics Volume 3</string>
+    <string name="college_physics_title">College Physics</string>
+    <string name="sociology_title">Introduction to Sociology 2e</string>
+    <string name="biology_title">Biology</string>
+    <string name="concepts_biology_title">Concepts of Biology</string>
+    <string name="anatomy_title">Anatomy &amp; Physiology</string>
+    <string name="statistics_title">Introductory Statistics</string>
+    <string name="econ_title">Principles of Economics</string>
+    <string name="macroecon_title">Macroeconomics</string>
+    <string name="microecon_title">Microeconomics</string>
+    <string name="precalculus_title">Precalculus</string>
+    <string name="psychology_title">Psychology</string>
+    <string name="hostory_title">U.S. History</string>
+    <string name="chemistry_title">Chemistry</string>
+    <string name="algebra_title">College Algebra</string>
+    <string name="trig_title">Algebra and Trigonometry</string>
+    <string name="ap_physics_title">College Physics For AP® Courses</string>
+    <string name="ap_macroecon_title">Principles of Macroeconomics for AP® Courses</string>
+    <string name="ap_microecon_title">Principles of Microeconomics for AP® Courses</string>
+    <string name="american_gov_title">American Government</string>
+    <string name="calc1_title">Calculus Volume 1</string>
+    <string name="calc2_title">Calculus Volume 2</string>
+    <string name="calc3_title">Calculus Volume 3</string>
+    <string name="chem_atoms_first_title">Chemistry: Atoms First</string>
+    <string name="prealgebra_title">Prealgebra</string>
+    <string name="astronomy_icon">Astronomy</string>
 </resources>
  
