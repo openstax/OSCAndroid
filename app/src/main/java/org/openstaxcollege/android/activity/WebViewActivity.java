@@ -6,7 +6,19 @@
  */
 package org.openstaxcollege.android.activity;
 
+import android.Manifest;
+import android.app.AlertDialog;
+import android.app.DownloadManager;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Environment;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
@@ -15,6 +27,7 @@ import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.beans.Content;
 import org.openstaxcollege.android.handlers.MenuHandler;
 import org.openstaxcollege.android.logic.WebviewLogic;
+import org.openstaxcollege.android.utils.MenuUtil;
 import org.openstaxcollege.android.utils.OSCUtil;
 
 import android.content.Intent;
@@ -25,6 +38,8 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.webkit.WebSettings.LayoutAlgorithm;
+
+import java.io.File;
 
 /**
  * Activity to view selected content in a web browser.
@@ -40,6 +55,11 @@ public class WebViewActivity extends AppCompatActivity
     private Content content;
 
     private boolean progressBarRunning;
+
+    private static final String[] STORAGE_PERMS={
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
+    private int REQUEST = 1336;
     
     /**
      * keeps track of the previous menu for when the back button is used.
@@ -216,6 +236,7 @@ public class WebViewActivity extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) 
     {
+        final WebViewActivity activity = this;
     	if(item.getItemId() == android.R.id.home)
         {
             Intent mainIntent = new Intent(getApplicationContext(), LandingActivity.class);
@@ -223,6 +244,38 @@ public class WebViewActivity extends AppCompatActivity
             startActivity(mainIntent);
             return true;
         }
+        else if(item.getItemId() == R.id.download)
+        {
+            if((int) Build.VERSION.SDK_INT < 23)
+            {
+                displayDownloadAlert(content);
+
+            }
+            else
+            {
+                if(ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
+                {
+                    displayDownloadAlert(content);
+                }
+                else if(ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.WRITE_EXTERNAL_STORAGE))
+                {
+                    Snackbar.make(webView, getString(R.string.pdf_download_request), Snackbar.LENGTH_INDEFINITE).setAction(getString(R.string.ok_button), new View.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View view)
+                        {
+                            ActivityCompat.requestPermissions(activity,STORAGE_PERMS, REQUEST);
+                        }
+                    }).show();
+                }
+                else
+                {
+                    ActivityCompat.requestPermissions(this,STORAGE_PERMS, REQUEST);
+
+                }
+            }
+        }
+
     	else
     	{
             try
@@ -241,7 +294,19 @@ public class WebViewActivity extends AppCompatActivity
 	        MenuHandler mh = new MenuHandler();
 	        return mh.handleContextMenu(item, this, content);
     	}
+        return true;
         
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults)
+    {
+
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+        {
+
+            displayDownloadAlert(content);
+        }
     }
     
     /* (non-Javadoc)
@@ -366,5 +431,53 @@ public class WebViewActivity extends AppCompatActivity
         {
             return url;
         }
+    }
+
+    /**
+     * Displays alert telling user where the downloaded files are located, the size of the files to download and confirms download.
+     * If download is confirmed, DownloadHandler is called.
+     * @param currentContent - Content - current content object
+     */
+    private void displayDownloadAlert(final Content currentContent)
+    {
+
+        String message = "PDF files are saved in an OpenStax folder on the SDCard or on the device's internal memory.  Press OK to continue.";
+
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle("Download");
+        alertDialog.setMessage(message);
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.ok), new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int which)
+            {
+                File cnxDir = new File(Environment.getExternalStorageDirectory(), "OpenStax/");
+                if(!cnxDir.exists())
+                {
+                    cnxDir.mkdir();
+                }
+                DownloadManager dm = (DownloadManager)getSystemService(Context.DOWNLOAD_SERVICE);
+                WebviewLogic wl = new WebviewLogic();
+                Log.d("WeviewLogic", "title: " + currentContent.getBookTitle());
+                String pdfUrl = wl.getPDFUrl(currentContent.getBookTitle());
+
+                Uri uri = Uri.parse(pdfUrl);
+
+                DownloadManager.Request request = new DownloadManager.Request(uri);
+                request.setDestinationInExternalPublicDir("/" + getString(R.string.folder_name), MenuUtil.getTitle(currentContent.getBookTitle()) + ".pdf");
+                request.setTitle(currentContent.getBookTitle() + ".pdf");
+                dm.enqueue(request);
+
+
+
+
+            } });
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.cancel), new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int which)
+            {
+                //do nothing
+
+            } });
+        alertDialog.show();
     }
 }

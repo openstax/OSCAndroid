@@ -7,13 +7,19 @@
 package org.openstaxcollege.android.handlers;
 
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.DownloadManager;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Environment;
+import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.WebView;
 import android.widget.Toast;
 import org.openstaxcollege.android.R;
@@ -80,9 +86,6 @@ public class MenuHandler
                 noteintent.putExtra(context.getString(R.string.webcontent),currentContent);
                 context.startActivity(noteintent);
                 return true;
-            case R.id.download:
-                displayDownloadAlert(context, currentContent);
-                return true;
             case R.id.share:
                 Intent shareintent = new Intent(Intent.ACTION_SEND);
                 shareintent.setType(context.getString(R.string.mimetype_text));
@@ -116,56 +119,5 @@ public class MenuHandler
                 .show();
     }
 
-    /**
-     * Displays alert telling user where the downloaded files are located, the size of the files to download and confirms download.
-     * If download is confirmed, DownloadHandler is called.
-     * @param context - Context - the current context
-     * @param currentContent - Content - current content object
-     */
-    private void displayDownloadAlert(final Context context, final Content currentContent)
-    {
-
-        String message = "PDF files are saved in an OpenStax folder on the SDCard or on the device's internal memory.  Press OK to continue.";
-
-        AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-        alertDialog.setTitle("Download");
-        alertDialog.setMessage(message);
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, context.getString(R.string.ok), new DialogInterface.OnClickListener()
-        {
-            public void onClick(DialogInterface dialog, int which)
-            {
-                File cnxDir = new File(Environment.getExternalStorageDirectory(), "OpenStax/");
-                if(!cnxDir.exists())
-                {
-                    cnxDir.mkdir();
-                }
-                DownloadManager dm = (DownloadManager)context.getSystemService(Context.DOWNLOAD_SERVICE);
-                WebviewLogic wl = new WebviewLogic();
-                String pdfUrl = wl.getPDFUrl(currentContent.getBookTitle());
-
-                Uri uri = Uri.parse(pdfUrl);
-                DownloadManager.Request request = new DownloadManager.Request(uri);
-                request.setDestinationInExternalPublicDir("/" + context.getString(R.string.folder_name), MenuUtil.getTitle(currentContent.getBookTitle()) + ".pdf");
-                request.setTitle(currentContent.getBookTitle() + ".pdf");
-                dm.enqueue(request);
-
-
-
-            } });
-        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, context.getString(R.string.cancel), new DialogInterface.OnClickListener()
-        {
-            public void onClick(DialogInterface dialog, int which)
-            {
-                //do nothing
-
-            } });
-        alertDialog.show();
-    }
-
-    private void displayNoMediaToast(Context context)
-    {
-        Toast.makeText(context, "The requested file cannot be downloaded because the app cannot write to memory.", Toast.LENGTH_LONG).show();
-
-    }
 
 }

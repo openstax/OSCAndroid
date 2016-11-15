@@ -78,5 +78,6 @@
     <string name="cancel">Cancel</string>
     <string name="folder_name">OpenStax</string>
     <string name="menu_download">Download PDF</string>
+    <string name="pdf_download_request">Permission is needed to store the PDF on your device</string>
 </resources>
  
