@@ -6,7 +6,7 @@
  */
 package org.openstaxcollege.android.logic;
 
-import java.util.HashMap;
+import android.util.ArrayMap;
 
 /**
  * Testable class for business logic
@@ -16,7 +16,7 @@ import java.util.HashMap;
  */
 public class WebviewLogic
 {
-    public static HashMap<String, String> bookPDFMap;
+    public static ArrayMap<String, String> bookPDFMap;
 
     public String getBookTitle(String title)
     {
@@ -54,7 +54,7 @@ public class WebviewLogic
 
     private void setPDFMap()
     {
-        bookPDFMap = new HashMap<>();
+        bookPDFMap = new ArrayMap<>();
 
         bookPDFMap.put("College Physics","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/College_Physics-LR.pdf");
         bookPDFMap.put("Concepts of Biology","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/Concepts_of_Biology-LR.pdf");

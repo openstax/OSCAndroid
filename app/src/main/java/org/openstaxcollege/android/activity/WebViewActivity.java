@@ -440,6 +440,7 @@ public class WebViewActivity extends AppCompatActivity
      */
     private void displayDownloadAlert(final Content currentContent)
     {
+        final Context context = this;
 
         String message = "PDF files are saved in an OpenStax folder on the SDCard or on the device's internal memory.  Press OK to continue.";
 
@@ -450,22 +451,31 @@ public class WebViewActivity extends AppCompatActivity
         {
             public void onClick(DialogInterface dialog, int which)
             {
-                File cnxDir = new File(Environment.getExternalStorageDirectory(), "OpenStax/");
-                if(!cnxDir.exists())
+
+                if(OSCUtil.isConnected(context))
                 {
-                    cnxDir.mkdir();
+
+                    File cnxDir = new File(Environment.getExternalStorageDirectory(), "OpenStax/");
+                    if(!cnxDir.exists())
+                    {
+                        cnxDir.mkdir();
+                    }
+                    DownloadManager dm = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+                    WebviewLogic wl = new WebviewLogic();
+                    Log.d("WeviewLogic", "title: " + currentContent.getBookTitle());
+                    String pdfUrl = wl.getPDFUrl(currentContent.getBookTitle());
+
+                    Uri uri = Uri.parse(pdfUrl);
+
+                    DownloadManager.Request request = new DownloadManager.Request(uri);
+                    request.setDestinationInExternalPublicDir("/" + getString(R.string.folder_name), MenuUtil.getTitle(currentContent.getBookTitle()) + ".pdf");
+                    request.setTitle(currentContent.getBookTitle() + ".pdf");
+                    dm.enqueue(request);
                 }
-                DownloadManager dm = (DownloadManager)getSystemService(Context.DOWNLOAD_SERVICE);
-                WebviewLogic wl = new WebviewLogic();
-                Log.d("WeviewLogic", "title: " + currentContent.getBookTitle());
-                String pdfUrl = wl.getPDFUrl(currentContent.getBookTitle());
-
-                Uri uri = Uri.parse(pdfUrl);
-
-                DownloadManager.Request request = new DownloadManager.Request(uri);
-                request.setDestinationInExternalPublicDir("/" + getString(R.string.folder_name), MenuUtil.getTitle(currentContent.getBookTitle()) + ".pdf");
-                request.setTitle(currentContent.getBookTitle() + ".pdf");
-                dm.enqueue(request);
+                else
+                {
+                    OSCUtil.makeNoDataToast(context);
+                }
 
 
 
