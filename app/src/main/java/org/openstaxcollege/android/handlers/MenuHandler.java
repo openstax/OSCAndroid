@@ -7,21 +7,34 @@
 package org.openstaxcollege.android.handlers;
 
 
+import android.Manifest;
 import android.app.AlertDialog;
+import android.app.DownloadManager;
+import android.content.DialogInterface;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Environment;
+import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.WebView;
 import android.widget.Toast;
 import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.activity.NoteEditorActivity;
 import org.openstaxcollege.android.activity.ViewBookmarksActivity;
 import org.openstaxcollege.android.beans.Content;
+import org.openstaxcollege.android.logic.WebviewLogic;
 import org.openstaxcollege.android.providers.Bookmarks;
+import org.openstaxcollege.android.utils.MenuUtil;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
+
+import java.io.File;
 
 /**
  * Handler for context and other menus
@@ -105,4 +118,6 @@ public class MenuHandler
                 .setPositiveButton(android.R.string.ok, null)
                 .show();
     }
+
+
 }

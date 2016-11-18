@@ -74,5 +74,10 @@
     <string name="chem_atoms_first_title">Chemistry: Atoms First</string>
     <string name="prealgebra_title">Prealgebra</string>
     <string name="astronomy_icon">Astronomy</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="folder_name">OpenStax</string>
+    <string name="menu_download">Download Book PDF</string>
+    <string name="pdf_download_request">Permission is needed to store the PDF on your device</string>
 </resources>
  
