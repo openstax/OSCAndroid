@@ -79,5 +79,6 @@
     <string name="folder_name">OpenStax</string>
     <string name="menu_download">Download Book PDF</string>
     <string name="pdf_download_request">Permission is needed to store the PDF on your device</string>
+    <string name="pdf_url_missing">PDF download is not yet available. Try again once the book has finished loading.</string>
 </resources>
  

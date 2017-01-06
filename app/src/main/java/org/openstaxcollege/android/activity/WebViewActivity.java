@@ -38,6 +38,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.webkit.WebSettings.LayoutAlgorithm;
+import android.widget.Toast;
 
 import java.io.File;
 
@@ -465,12 +466,20 @@ public class WebViewActivity extends AppCompatActivity
                     Log.d("WeviewLogic", "title: " + currentContent.getBookTitle());
                     String pdfUrl = wl.getPDFUrl(currentContent.getBookTitle());
 
-                    Uri uri = Uri.parse(pdfUrl);
+                    if(pdfUrl == null || pdfUrl.equals(""))
+                    {
+                        Toast.makeText(context, getString(R.string.pdf_url_missing),  Toast.LENGTH_LONG).show();
+                    }
+                    else
+                    {
+                        Log.d("Webview","PDF URL: " + pdfUrl);
+                        Uri uri = Uri.parse(pdfUrl);
 
-                    DownloadManager.Request request = new DownloadManager.Request(uri);
-                    request.setDestinationInExternalPublicDir("/" + getString(R.string.folder_name), MenuUtil.getTitle(currentContent.getBookTitle()) + ".pdf");
-                    request.setTitle(currentContent.getBookTitle() + ".pdf");
-                    dm.enqueue(request);
+                        DownloadManager.Request request = new DownloadManager.Request(uri);
+                        request.setDestinationInExternalPublicDir("/" + getString(R.string.folder_name), MenuUtil.getTitle(currentContent.getBookTitle()) + ".pdf");
+                        request.setTitle(currentContent.getBookTitle() + ".pdf");
+                        dm.enqueue(request);
+                    }
                 }
                 else
                 {
