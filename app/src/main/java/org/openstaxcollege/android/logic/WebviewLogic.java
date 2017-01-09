@@ -64,7 +64,7 @@ public class WebviewLogic
         bookPDFMap.put("Biology","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/Biology-LR.pdf");
         bookPDFMap.put("Algebra and Trigonometry","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/Algebra_and_Trigonometry-LR.pdf");
         bookPDFMap.put("Prealgebra","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/Prealgebra-LR.pdf");
-        bookPDFMap.put("Calculus Volume 2","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/Calculus_Volume_2-LR.pdf");
+        bookPDFMap.put("Calculus Volume 2","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/CalculusVolume2-LR.pdf");
         bookPDFMap.put("American Government","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/American_Government_-_LR_20161114.pdf");
         bookPDFMap.put("Microeconomics","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/Principles_of_Microeconomics-LR.pdf");
         bookPDFMap.put("Principles of Macroeconomics for AP® Courses","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/Principles_of_Macroeconomics_for_AP_Courses-LR.pdf");
@@ -78,12 +78,12 @@ public class WebviewLogic
         bookPDFMap.put("Psychology","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/Psychology-LR.pdf");
         bookPDFMap.put("Chemistry: Atoms First","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/Chemistry_Atoms_First-LR.pdf");
         bookPDFMap.put("University Physics Volume 2","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/University_Physics_Volume_2-LR_20161006.pdf");
-        bookPDFMap.put("Calculus Volume 1","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/Calculus_Volume_1-LR.pdf");
+        bookPDFMap.put("Calculus Volume 1","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/CalculusVolume1-LR.pdf");
         bookPDFMap.put("Precalculus","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/OpenStax_Precalc_2015_v2-LR.pdf");
         bookPDFMap.put("University Physics Volume 1","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/University_Physics_Volume_1-LR.pdf");
         bookPDFMap.put("Anatomy & Physiology","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/Anatomy_and_Physiology-LR.pdf");
         bookPDFMap.put("Macroeconomics","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/Principles_of_Macroeconomics-LR.pdf");
-        bookPDFMap.put("Calculus Volume 3","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/Calculus_Voume_3-LR.pdf");
+        bookPDFMap.put("Calculus Volume 3","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/CalculusVolume3-LR.pdf");
         bookPDFMap.put("Principles of Economics","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/Principles_of_Economics-LR.pdf");
 
     }
