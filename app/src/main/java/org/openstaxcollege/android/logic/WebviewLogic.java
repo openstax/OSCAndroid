@@ -65,13 +65,13 @@ public class WebviewLogic
         bookPDFMap.put("Algebra and Trigonometry","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/Algebra_and_Trigonometry-LR.pdf");
         bookPDFMap.put("Prealgebra","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/Prealgebra-LR.pdf");
         bookPDFMap.put("Calculus Volume 2","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/Calculus_Volume_2-LR.pdf");
-        bookPDFMap.put("American Government","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/American_Government_-_LR.pdf");
+        bookPDFMap.put("American Government","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/American_Government_-_LR_20161114.pdf");
         bookPDFMap.put("Microeconomics","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/Principles_of_Microeconomics-LR.pdf");
         bookPDFMap.put("Principles of Macroeconomics for AP® Courses","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/Principles_of_Macroeconomics_for_AP_Courses-LR.pdf");
         bookPDFMap.put("Astronomy","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/Astronomy-LR.pdf");
         bookPDFMap.put("Chemistry","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/Chemistry-LR.pdf");
         bookPDFMap.put("College Physics For AP® Courses","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/CollegePhysicsforAPCourses-LR.pdf");
-        bookPDFMap.put("Introduction to Sociology 2e","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/Sociology_2e-LR.pdf");
+        bookPDFMap.put("Introduction to Sociology 2e","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/IntroductionToSociology2e-LR.pdf");
         bookPDFMap.put("Microbiology","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/Microbiology-LR.pdf");
         bookPDFMap.put("College Algebra","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/College_Algebra-LR.pdf");
         bookPDFMap.put("Introductory Statistics","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/Introductory_Statistics-LR.pdf");

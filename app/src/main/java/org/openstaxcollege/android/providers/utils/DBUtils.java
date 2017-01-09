@@ -53,6 +53,7 @@ public class DBUtils
                 {
                     Content con = new Content();
                     con.setTitle(c.getString(titleColumn));
+                    con.setBookTitle(c.getString(otherColumn));
                     con.setUrl(c.getString(urlColumn));
                     con.setId(c.getInt(idColumn));
                     con.setIcon(c.getString(iconColumn));
