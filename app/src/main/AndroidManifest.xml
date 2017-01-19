@@ -10,7 +10,7 @@
       android:normalScreens="true"
       android:largeScreens="true"
       android:anyDensity="true" /> 
-    <application android:icon="@drawable/logo" android:label="@string/app_name" android:configChanges="orientation|keyboardHidden|screenSize"
+    <application android:icon="@drawable/logo" android:roundIcon="@drawable/round_logo" android:label="@string/app_name" android:configChanges="orientation|keyboardHidden|screenSize"
         android:theme="@style/AppTheme" android:hardwareAccelerated="true">
         <provider android:name="org.openstaxcollege.android.providers.OSCProvider" android:authorities="org.openstaxcollege.android.providers.OSCProvider" />
         <provider android:name="org.openstaxcollege.android.providers.NotesProvider" android:authorities="org.openstaxcollege.android.providers.NotesProvider" />
