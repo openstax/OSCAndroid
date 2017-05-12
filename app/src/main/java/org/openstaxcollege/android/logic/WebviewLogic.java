@@ -85,7 +85,8 @@ public class WebviewLogic
         bookPDFMap.put("Macroeconomics","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/Principles_of_Macroeconomics-LR.pdf");
         bookPDFMap.put("Calculus Volume 3","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/CalculusVolume3-LR.pdf");
         bookPDFMap.put("Principles of Economics","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/Principles_of_Economics-LR.pdf");
-
+        bookPDFMap.put("Elementary Algebra","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/ElementaryAlgebra-LR.pdf");
+        bookPDFMap.put("Intermediate Algebra","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/IntermediateAlgebra-LR.pdf");
     }
 
 
