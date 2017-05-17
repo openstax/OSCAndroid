@@ -9,6 +9,7 @@ package org.openstaxcollege.android.activity;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.DownloadManager;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -20,6 +21,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.*;
@@ -41,6 +43,8 @@ import android.webkit.WebSettings.LayoutAlgorithm;
 import android.widget.Toast;
 
 import java.io.File;
+
+import static android.R.id.message;
 
 /**
  * Activity to view selected content in a web browser.
@@ -478,7 +482,14 @@ public class WebViewActivity extends AppCompatActivity
                         DownloadManager.Request request = new DownloadManager.Request(uri);
                         request.setDestinationInExternalPublicDir("/" + getString(R.string.folder_name), MenuUtil.getTitle(currentContent.getBookTitle()) + ".pdf");
                         request.setTitle(currentContent.getBookTitle() + ".pdf");
-                        dm.enqueue(request);
+                        try
+                        {
+                            dm.enqueue(request);
+                        }
+                        catch(IllegalArgumentException iae)
+                        {
+                            createDialog(context);
+                        }
                     }
                 }
                 else
@@ -499,4 +510,41 @@ public class WebViewActivity extends AppCompatActivity
             } });
         alertDialog.show();
     }
+
+    private void enableDownloadManager(Context context)
+    {
+        try
+        {
+            Intent intent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+            intent.setData(Uri.parse("package:com.android.providers.downloads"));
+            context.startActivity(intent);
+        }
+        catch (ActivityNotFoundException e)
+        {
+            Intent intent = new Intent(android.provider.Settings.ACTION_MANAGE_APPLICATIONS_SETTINGS);
+            context.startActivity(intent);
+        }
+    }
+
+    private void createDialog(final Context context) {
+        new AlertDialog.Builder(context)
+                .setTitle("DownloadManager")
+                .setMessage(getString(R.string.download_mgr_missing))
+                .setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        enableDownloadManager(context);
+                    }
+                })
+                .setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //do nothing
+                    }
+                })
+                .setCancelable(true)
+                .create()
+                .show();
+    }
+
 }
