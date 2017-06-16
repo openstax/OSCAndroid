@@ -375,9 +375,12 @@ public class WebViewActivity extends AppCompatActivity
         //Log.d("WVA.onPause()","URL saved: " + content.getUrl().toString());
         if(webView != null && content != null)
         {
-            String url = webView.getUrl().replace("?bookmark=1", "");
-            ed.putString(content.getIcon(), url);
-            ed.apply();
+            if(webView.getUrl() != null)
+            {
+                String url = webView.getUrl().replace("?bookmark=1", "");
+                ed.putString(content.getIcon(), url);
+                ed.apply();
+            }
         }
     }
 
