@@ -34,7 +34,7 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
     /** List of Content objects to display*/
     private ArrayList<Content> contentList;
     Content content;
-    Context context;
+    static Context context;
 
     private int rowLayout;
 
@@ -113,6 +113,8 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
         public void onClick(View v)
         {
             Content content = contentList.get(getAdapterPosition());
+            Content bookTitle = OSCUtil.getTitle(content.getBookTitle(), context);
+            content.setBookUrl(bookTitle.getBookUrl());
             Context context = v.getContext();
             Intent wv = new Intent(v.getContext(), WebViewActivity.class);
             wv.putExtra(v.getContext().getString(R.string.webcontent), content);

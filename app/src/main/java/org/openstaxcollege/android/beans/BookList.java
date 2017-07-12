@@ -6,6 +6,8 @@
  */
 package org.openstaxcollege.android.beans;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 /**
@@ -24,5 +26,18 @@ public class BookList
     public void setBookList(ArrayList<Content> bookList)
     {
         this.bookList = bookList;
+    }
+
+    public Content findTitle(String title)
+    {
+        for(int i = 0; i < bookList.size();i++)
+        {
+            Content c = bookList.get(i);
+            if(c.getBookTitle().equals(title))
+            {
+                return c;
+            }
+        }
+        return null;
     }
 }

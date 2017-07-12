@@ -182,6 +182,8 @@ public class WebViewActivity extends AppCompatActivity
                 //remove bookmark parameter
                 String newURL = content.getUrl().replace("?bookmark=1","");
                 content.setUrl(newURL);
+                Content bookTitle = OSCUtil.getTitle(content.getBookTitle(), this);
+                content.setBookUrl(bookTitle.getBookUrl());
 
             }
         }
@@ -290,6 +292,9 @@ public class WebViewActivity extends AppCompatActivity
                 content.setBookTitle(wl.getBookTitle(webView.getTitle()));
                 content.setTitle(webView.getTitle().replace(" - " + content.getBookTitle() + " - OpenStax CNX",""));
                 content.setUrl(webView.getUrl());
+                Content bookUrlContent = OSCUtil.getTitle(content.getBookTitle(), this);
+                content.setBookUrl(bookUrlContent.getBookUrl());
+                //Log.d("webviewl", "book url: " + content.getBookUrl());
 
             }
             catch(Exception mue)
@@ -470,7 +475,7 @@ public class WebViewActivity extends AppCompatActivity
                     }
                     DownloadManager dm = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
                     WebviewLogic wl = new WebviewLogic();
-                    Log.d("WeviewLogic", "title: " + currentContent.getBookTitle());
+                    //Log.d("WeviewLogic", "title: " + currentContent.getBookTitle());
                     String pdfUrl = wl.getPDFUrl(currentContent.getBookTitle());
 
                     if(pdfUrl == null || pdfUrl.equals(""))

@@ -8,6 +8,7 @@ package org.openstaxcollege.android.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -15,7 +16,17 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import org.openstaxcollege.android.R;
+import org.openstaxcollege.android.beans.BookList;
+import org.openstaxcollege.android.beans.Content;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Collections;
 
 /**
  * General Utility Class
@@ -24,6 +35,7 @@ import org.openstaxcollege.android.R;
  */
 public class OSCUtil
 {
+    public static BookList bookList;
     /**
      * Checks to see if there is a mobile or wifi connection
      * @param context - the current Context
@@ -176,7 +188,40 @@ public class OSCUtil
     {
         Toast.makeText(context, "No data connection",  Toast.LENGTH_LONG).show();
     }
-    
+
+    public static Content getTitle(String title, Context context)
+    {
+        if(bookList == null)
+        {
+            bookList = readJson(context);
+        }
+
+        return bookList.findTitle(title);
+
+    }
+
+    public static BookList readJson(Context context)
+    {
+        AssetManager assets = context.getAssets();
+        BookList aboutList = new BookList();
+
+        Gson gson = new Gson();
+
+        try
+        {
+            InputStream is = assets.open("bookList.json");
+            BufferedReader bf = new BufferedReader(new InputStreamReader(is));
+            aboutList = gson.fromJson(bf,BookList.class);
+        }
+        catch(IOException ioe)
+        {
+            Log.d("json", "Some problem: " + ioe.toString());
+        }
+
+        Collections.sort(aboutList.getBookList());
+
+        return aboutList;
+    }
 
 
 }
