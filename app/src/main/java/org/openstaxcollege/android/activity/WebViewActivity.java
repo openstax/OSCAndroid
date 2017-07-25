@@ -398,7 +398,7 @@ public class WebViewActivity extends AppCompatActivity
         outState.putSerializable(getString(R.string.webcontent),content);
         SharedPreferences sharedPref = getSharedPreferences(getString(R.string.osc_package),MODE_PRIVATE);
         SharedPreferences.Editor ed = sharedPref.edit();
-        if(webView != null && content != null)
+        if(webView != null && content != null && webView.getUrl() != null)
         {
             String url = webView.getUrl().replace("?bookmark=1", "");
             ed.putString(content.getIcon(), url);

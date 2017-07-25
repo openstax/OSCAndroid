@@ -116,7 +116,10 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
             Content content = contentList.get(getAdapterPosition());
             Log.d("BRVA", "title: " + content.getBookTitle());
             Content bookTitle = OSCUtil.getTitle(content.getBookTitle(), context);
-            content.setBookUrl(bookTitle.getBookUrl());
+            if(bookTitle != null)
+            {
+                content.setBookUrl(bookTitle.getBookUrl());
+            }
             Context context = v.getContext();
             Intent wv = new Intent(v.getContext(), WebViewActivity.class);
             wv.putExtra(v.getContext().getString(R.string.webcontent), content);
