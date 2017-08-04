@@ -67,8 +67,16 @@ public class MenuHandler
                 //Log.d("MenuHandler","title - " + currentContent.getTitle())  ;
                 cv.put(Bookmarks.TITLE, currentContent.getTitle());
                 //Log.d("MnHndlr.handleCont...()","URL: " + currentContent.getUrl().toString());
-                String url = currentContent.getUrl().toString();
-                cv.put(Bookmarks.URL, url.replaceAll("@\\d+(\\.\\d+)?","")+ "?bookmark=1");
+                if(currentContent.getUrl() != null)
+                {
+                    String url = currentContent.getUrl().toString();
+                    cv.put(Bookmarks.URL, url.replaceAll("@\\d+(\\.\\d+)?", "") + "?bookmark=1");
+                }
+                else
+                {
+                    Toast.makeText(context, "Could not add Bookmark. Please try again.", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
                 cv.put(Bookmarks.ICON, currentContent.getIcon());
                 cv.put(Bookmarks.OTHER, currentContent.getBookTitle());
                 context.getContentResolver().insert(Bookmarks.CONTENT_URI, cv);
