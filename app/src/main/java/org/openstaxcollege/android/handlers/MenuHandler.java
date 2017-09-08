@@ -98,10 +98,10 @@ public class MenuHandler
                 Intent shareintent = new Intent(Intent.ACTION_SEND);
                 shareintent.setType(context.getString(R.string.mimetype_text));
 
-                if(currentContent != null)
+                if(currentContent != null && currentContent.getUrl() != null)
                 {
                     shareintent.putExtra(Intent.EXTRA_SUBJECT, currentContent.getBookTitle() + " : " + currentContent.getTitle());
-                    shareintent.putExtra(Intent.EXTRA_TEXT, currentContent.getUrl().toString() + "\n\n " + context.getString(R.string.shared_via));
+                    shareintent.putExtra(Intent.EXTRA_TEXT, currentContent.getUrl() + "\n\n " + context.getString(R.string.shared_via));
 
                     Intent chooser = Intent.createChooser(shareintent, context.getString(R.string.tell_friend) + " "+ currentContent.getBookTitle());
                     context.startActivity(chooser);
