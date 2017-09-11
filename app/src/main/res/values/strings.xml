@@ -8,7 +8,7 @@
     <string name="shared_via"> Shared via OpenStax Android app.</string>
     <string name="tell_friend">Tell a friend about </string>
     <string name="cache_lenstypes">lenstypes</string>
-    <string name="no_data_msg">Data needed to share not available.  Use the back button to refresh and try again.</string>
+    <string name="no_data_msg">Data needed to share is not available.</string>
     <string name="note_error_msg">Cannot create note.  Please try again.</string>
     <string name="note_sql_url">notes_url=?\'</string>
     <string name="mimetype_text">text/plain</string>
