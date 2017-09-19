@@ -180,6 +180,10 @@ public class OSCUtil
        {
            coverId = R.drawable.intermediate_algebra;
        }
+       else if(icon.equals(context.getString(R.string.microecon_2e_icon)))
+       {
+           coverId = R.drawable.microeconomics_2e;
+       }
 
        return coverId;
    }
