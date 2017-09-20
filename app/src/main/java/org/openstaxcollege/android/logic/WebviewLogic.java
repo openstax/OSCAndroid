@@ -66,7 +66,7 @@ public class WebviewLogic
         bookPDFMap.put("Prealgebra","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/Prealgebra-LR.pdf");
         bookPDFMap.put("Calculus Volume 2","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/CalculusVolume2-LR.pdf");
         bookPDFMap.put("American Government","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/AmericanGovernment-LR.pdf");
-        bookPDFMap.put("Microeconomics","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/PrinciplesofMicroeconomicsforAPCourses-LR.pdf");
+        bookPDFMap.put("Principles of Microeconomics","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/PrinciplesofMicroeconomicsforAPCourses-LR.pdf");
         bookPDFMap.put("Principles of Macroeconomics for AP® Courses","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/PrinciplesofMacroeconomicsforAPCourses-LR.pdf");
         bookPDFMap.put("Astronomy","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/Astronomy-LR.pdf");
         bookPDFMap.put("Chemistry","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/Chemistry-LR.pdf");
@@ -82,11 +82,12 @@ public class WebviewLogic
         bookPDFMap.put("Precalculus","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/Precalculus-LR.pdf");
         bookPDFMap.put("University Physics Volume 1","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/UniversityPhysicsVolume1-LR.pdf");
         bookPDFMap.put("Anatomy & Physiology","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/AnatomyandPhysiology-LR.pdf");
-        bookPDFMap.put("Macroeconomics","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/PrinciplesofMacroeconomics-LR.pdf");
+        bookPDFMap.put("Principles of Macroeconomics","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/PrinciplesofMacroeconomics-LR.pdf");
         bookPDFMap.put("Calculus Volume 3","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/CalculusVolume3-LR.pdf");
         bookPDFMap.put("Principles of Economics","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/PrinciplesofEconomics-LR.pdf");
         bookPDFMap.put("Elementary Algebra","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/ElementaryAlgebra-LR.pdf");
         bookPDFMap.put("Intermediate Algebra","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/IntermediateAlgebra-LR.pdf");
+        bookPDFMap.put("Principles of Microeconomics 2e","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/Microeconomics2e-LR.pdf");
     }
 
 
