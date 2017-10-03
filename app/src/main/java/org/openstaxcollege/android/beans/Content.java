@@ -101,11 +101,6 @@ public class Content implements Serializable, Comparable<Content>
         return contentString;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Comparable#compareTo(java.lang.Object)
-     * Required method for Comparable interface
-     */
-    //@Override
     public int compareTo(Content another)
     {
         int titleCompare = title.toUpperCase().trim().compareTo(another.title.toUpperCase().trim());

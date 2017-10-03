@@ -34,8 +34,7 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
 {
     /** List of Content objects to display*/
     private ArrayList<Content> contentList;
-    Content content;
-    static Context context;
+    private Context context;
 
     private int rowLayout;
 
@@ -56,7 +55,7 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i)
     {
-        content = contentList.get(i);
+        Content content = contentList.get(i);
         viewHolder.title.setText(content.getTitle());
         viewHolder.other.setText(content.getContentString());
         if (viewHolder.logo != null && content.getIcon() != null)
@@ -80,7 +79,7 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
         context.getContentResolver().delete(Bookmarks.CONTENT_URI, "_id="+ currentContent.getId(), null);
         contentList.remove(position);
         notifyItemRemoved(position);
-        Toast.makeText(context, "Bookmark deleted for " + currentContent.getTitle(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, context.getString(R.string.bookmark_deleted) + currentContent.getTitle(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -89,15 +88,15 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
         return true;
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
-        public ImageView logo;
+        private ImageView logo;
         public TextView title;
         public TextView other;
         public View view;
         ArrayList<Content> contentList;
 
-        public ViewHolder(View itemView, ArrayList<Content> contentList)
+        private ViewHolder(View itemView, ArrayList<Content> contentList)
         {
             super(itemView);
             view = itemView;
@@ -114,8 +113,8 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
         public void onClick(View v)
         {
             Content content = contentList.get(getAdapterPosition());
-            Log.d("BRVA", "title: " + content.getBookTitle());
-            Content bookTitle = OSCUtil.getTitle(content.getBookTitle(), context);
+            //Log.d("BRVA", "title: " + content.getBookTitle());
+            Content bookTitle = OSCUtil.getTitle(content.getBookTitle(), v.getContext());
             if(bookTitle != null)
             {
                 content.setBookUrl(bookTitle.getBookUrl());

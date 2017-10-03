@@ -69,18 +69,18 @@ public class MenuHandler
                 //Log.d("MnHndlr.handleCont...()","URL: " + currentContent.getUrl().toString());
                 if(currentContent.getUrl() != null)
                 {
-                    String url = currentContent.getUrl().toString();
-                    cv.put(Bookmarks.URL, url.replaceAll("@\\d+(\\.\\d+)?", "") + "?bookmark=1");
+                    String url = currentContent.getUrl();
+                    cv.put(Bookmarks.URL, url.replaceAll("@\\d+(\\.\\d+)?", "") + context.getString(R.string.bookmarks_url_snippet));
                 }
                 else
                 {
-                    Toast.makeText(context, "Could not add Bookmark. Please try again.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, context.getString(R.string.bookmark_failure), Toast.LENGTH_SHORT).show();
                     return true;
                 }
                 cv.put(Bookmarks.ICON, currentContent.getIcon());
                 cv.put(Bookmarks.OTHER, currentContent.getBookTitle());
                 context.getContentResolver().insert(Bookmarks.CONTENT_URI, cv);
-                Toast.makeText(context, "Bookmark added for " + currentContent.getTitle(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, context.getString(R.string.bookmark_added) + currentContent.getTitle(), Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.go_to_favs:
                 Intent intent = new Intent(context, ViewBookmarksActivity.class);
@@ -103,7 +103,7 @@ public class MenuHandler
                     shareintent.putExtra(Intent.EXTRA_SUBJECT, currentContent.getBookTitle() + " : " + currentContent.getTitle());
                     shareintent.putExtra(Intent.EXTRA_TEXT, currentContent.getUrl() + "\n\n " + context.getString(R.string.shared_via));
 
-                    Intent chooser = Intent.createChooser(shareintent, context.getString(R.string.tell_friend) + " "+ currentContent.getBookTitle());
+                    Intent chooser = Intent.createChooser(shareintent, context.getString(R.string.tell_friend) + currentContent.getBookTitle());
                     context.startActivity(chooser);
                 }
                 else

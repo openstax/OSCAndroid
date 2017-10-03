@@ -16,7 +16,7 @@ import android.util.ArrayMap;
  */
 public class WebviewLogic
 {
-    public static ArrayMap<String, String> bookPDFMap;
+    private static ArrayMap<String, String> bookPDFMap;
 
     public String getBookTitle(String title)
     {

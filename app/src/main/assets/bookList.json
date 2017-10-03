@@ -58,7 +58,7 @@
     },
     {
       "bookTitle":"Principles of Macroeconomics",
-      "title":"Macroeconomics",
+      "title":"Principles of Macroeconomics",
       "contentString":"Principles of Macroeconomics covers the scope and sequence for a one-semester economics course. The text also includes many current examples, including: the housing bubble and housing crisis, Zimbabwe’s hyperinflation, global unemployment, and the appointment of the United States’ first female Federal Reserve chair, Janet Yellen.",
       "url":"http://cnx.org/contents/QGHIMgmO:JgDXaOLP?minimal=true",
       "bookUrl":"http://cnx.org/contents/QGHIMgmO:JgDXaOLP?minimal=true",
@@ -66,7 +66,7 @@
     },
     {
       "bookTitle":"Principles of Microeconomics",
-      "title":"Microeconomics",
+      "title":"Principles of Microeconomics",
       "contentString":"Principles of Microeconomics covers the scope and sequence for a one-semester economics course. The text also includes many current examples, including; the Keystone Pipeline, Occupy Wall Street, and debates over the minimum wage.",
       "url":"http://cnx.org/contents/6i8iXmBj:JgDXaOLP?minimal=true",
       "bookUrl":"http://cnx.org/contents/6i8iXmBj:JgDXaOLP?minimal=true",
@@ -239,6 +239,14 @@
       "url":"http://cnx.org/contents/AndhM9Sd:HCaG_W5c?minimal=true",
       "bookUrl":"http://cnx.org/contents/AndhM9Sd:HCaG_W5c?minimal=true",
       "icon":"Intermediate Algebra"
+    },
+    {
+      "bookTitle":"Principles of Microeconomics 2e",
+      "title":"Principles of Microeconomics 2e",
+      "contentString":"",
+      "url":"http://cnx.org/contents/XAl2LLVA:3ZlSW1C7?minimal=true",
+      "bookUrl":"http://cnx.org/contents/XAl2LLVA:3ZlSW1C7?minimal=true",
+      "icon":"Principles of Microeconomics 2e"
     }
   ]
 }

@@ -1,7 +1,6 @@
 package org.openstaxcollege.android.fragment;
 
 import android.app.Activity;
-import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -12,20 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.gson.Gson;
-
 import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.adapters.LandingListRecyclerViewAdapter;
 import org.openstaxcollege.android.beans.BookList;
 import org.openstaxcollege.android.beans.Content;
 import org.openstaxcollege.android.utils.OSCUtil;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Collections;
 
 
 /**
