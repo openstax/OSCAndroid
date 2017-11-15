@@ -59,8 +59,6 @@ public class WebViewActivity extends AppCompatActivity
     /** Variable for serialized Content object */
     private Content content;
 
-    //private boolean progressBarRunning;
-
     private static final String[] STORAGE_PERMS={
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
@@ -84,15 +82,9 @@ public class WebViewActivity extends AppCompatActivity
         {
 
             view.loadUrl(url);
-            //try
-            //{
-                content.setUrl(url);
 
-            //}
-            //catch (Exception e)
-            //{
-            //    Log.d("WVA.shouldOverrideUr...", e.toString(),e);
-            //}
+            content.setUrl(url);
+
             return true;
         }
 
@@ -102,15 +94,9 @@ public class WebViewActivity extends AppCompatActivity
             String url=request.getUrl().toString();
 
             view.loadUrl(url);
-            //try
-            //{
-                content.setUrl(url);
 
-            //}
-            //catch (Exception e)
-            //{
-            //    Log.d("WVA.shouldOverrideUr...", e.toString(),e);
-            //}
+            content.setUrl(url);
+
             return true;
         }
 
@@ -126,15 +112,8 @@ public class WebViewActivity extends AppCompatActivity
                 url = url + getString(R.string.minimal_url_snippet);
                 view.loadUrl(url);
             }
-            //try
-            //{
-                content.setUrl(url);
 
-            //}
-            //catch (Exception e)
-            //{
-            //    Log.d("WVA.onPageFinished()", e.toString(),e);
-            //}
+            content.setUrl(url);
 
         }
 
@@ -159,43 +138,31 @@ public class WebViewActivity extends AppCompatActivity
         Intent intent = getIntent();
         content = (Content)intent.getSerializableExtra(getString(R.string.webcontent));
 
-        //try
-        //{
-            if(!content.getUrl().contains(getString(R.string.bookmarks_url_snippet)))
-            {
 
-                SharedPreferences sharedPref = getSharedPreferences(getString(R.string.osc_package), MODE_PRIVATE);
-                String url = sharedPref.getString(content.getIcon(), "");
+        if(!content.getUrl().contains(getString(R.string.bookmarks_url_snippet)))
+        {
 
-                if(!url.equals(""))
-                {
-                    url = convertURL(url);
-                    //try
-                    //{
-                        content.setUrl(url);
-                    //}
-                    //catch(Exception mue)
-                    //{
-                   //     Log.e("WViewActivity.onCreate", mue.toString());
-                    //}
-                }
-            }
-            else
+            SharedPreferences sharedPref = getSharedPreferences(getString(R.string.osc_package), MODE_PRIVATE);
+            String url = sharedPref.getString(content.getIcon(), "");
+
+            if(!url.equals(""))
             {
-                //remove bookmark parameter
-                String newURL = content.getUrl().replace(getString(R.string.bookmarks_url_snippet),"");
-                //Log.d("onCreate","url: " + newURL);
-                content.setUrl(newURL);
-                Content bookTitle = OSCUtil.getTitle(content.getBookTitle(), this);
-                content.setBookUrl(bookTitle.getBookUrl());
+                url = convertURL(url);
+
+                content.setUrl(url);
 
             }
-        //}
-        //catch(Exception mue)
-        //{
-        //    Log.e("WViewActivity.onResume", mue.toString());
-        //}
+        }
+        else
+        {
+            //remove bookmark parameter
+            String newURL = content.getUrl().replace(getString(R.string.bookmarks_url_snippet),"");
+            //Log.d("onCreate","url: " + newURL);
+            content.setUrl(newURL);
+            Content bookTitle = OSCUtil.getTitle(content.getBookTitle(), this);
+            content.setBookUrl(bookTitle.getBookUrl());
 
+        }
 
         if(OSCUtil.isConnected(this))
         {
@@ -334,21 +301,10 @@ public class WebViewActivity extends AppCompatActivity
     protected void onResume()
     {
         super.onResume();
-        SharedPreferences sharedPref = getSharedPreferences(getString(R.string.osc_package),MODE_PRIVATE);
-        String url = sharedPref.getString(content.getIcon(), "");
+        //SharedPreferences sharedPref = getSharedPreferences(getString(R.string.osc_package),MODE_PRIVATE);
+        //String url = sharedPref.getString(content.getIcon(), "");
         //Log.d("WebViewActivity.onResume()","URL retrieved: " + url);
-        if(!url.equals(""))
-        {
-            url = convertURL(url);
-//            try
-//            {
-//                //content.setUrl(new URL(url));
-//            }
-//            catch(Exception mue)
-//            {
-//                Log.e("WViewActivity.onResume",mue.toString());
-//            }
-        }
+
 
     }
 
@@ -470,7 +426,7 @@ public class WebViewActivity extends AppCompatActivity
                         Uri uri = Uri.parse(pdfUrl);
 
                         DownloadManager.Request request = new DownloadManager.Request(uri);
-                        request.setDestinationInExternalPublicDir("/" + getString(R.string.folder_name), MenuUtil.getTitle(currentContent.getBookTitle()) + ".pdf");
+                        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "/" + MenuUtil.getTitle(currentContent.getBookTitle()) + ".pdf");
                         request.setTitle(currentContent.getBookTitle() + ".pdf");
                         try
                         {
