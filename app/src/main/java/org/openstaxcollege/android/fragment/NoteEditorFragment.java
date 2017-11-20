@@ -21,6 +21,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatEditText;
 import android.text.util.Linkify;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -68,7 +69,7 @@ public class NoteEditorFragment extends Fragment
     /**
      * A custom EditText that draws lines between each line of text that is displayed.
      */
-    public static class LinedEditText extends EditText
+    public static class LinedEditText extends AppCompatEditText
     {
         private Rect rect;
         private Paint paint;
@@ -182,18 +183,12 @@ public class NoteEditorFragment extends Fragment
 
     }
 
-    /* (non-Javadoc)
-     * @see android.app.Activity#onSaveInstanceState(android.os.Bundle)
-     */
     @Override
     public void onSaveInstanceState(Bundle outState)
     {
         outState.putString(ORIGINAL_CONTENT, originalContent);
     }
 
-    /* (non-Javadoc)
-     * @see android.app.Activity#onPause()
-     */
     @Override
     public void onPause()
     {
@@ -309,7 +304,7 @@ public class NoteEditorFragment extends Fragment
         else
         {
             state = STATE_EDIT;
-            editText.setText("Please the note and try again.  It was not created correctly.");
+            editText.setText(getString(R.string.bad_note_msg));
         }
     }
 
@@ -335,7 +330,7 @@ public class NoteEditorFragment extends Fragment
                 pw = new PrintWriter(file);
                 pw.write(text);
                 pw.flush();
-                Toast.makeText(activity, fileName + " saved to OpenStax folder.", Toast.LENGTH_LONG).show();
+                Toast.makeText(activity, fileName + getString(R.string.note_saved_snippet), Toast.LENGTH_LONG).show();
             }
             catch(FileNotFoundException e)
             {

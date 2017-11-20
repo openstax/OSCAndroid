@@ -6,7 +6,7 @@
     <string name="webcontent">webcontent</string>
     <string name="nothing_to_save">There is nothing to save.</string>
     <string name="shared_via"> Shared via OpenStax Android app.</string>
-    <string name="tell_friend">Tell a friend about </string>
+    <string name="tell_friend">Tell a friend about\u0020</string>
     <string name="cache_lenstypes">lenstypes</string>
     <string name="no_data_msg">Data needed to share is not available.</string>
     <string name="note_error_msg">Cannot create note.  Please try again.</string>
@@ -86,6 +86,17 @@
     <string name="bookmarks_shortcut_short_label">Bookmarks</string>
     <string name="bookmarks_shortcut_long_label">Open Bookmarks</string>
     <string name="bookmarks_shortcut_disabled_message">Shortcut is disabled</string>
+    <string name="bookmarks_url_snippet">\?bookmark&#61;1</string>
+    <string name="minimal_url_snippet">\?minimal&#61;true</string>
+    <string name="cnx_title_snippet">\u0020-\u0020OpenStax CNX</string>
+    <string name="download">Download</string>
+    <string name="download_manager">Download Manager</string>
+    <string name="bookmark_deleted">Bookmark deleted for\u0020</string>
+    <string name="bookmark_added">Bookmark added for\u0020</string>
+    <string name="note_saved_snippet">\u0020saved to OpenStax folder.</string>
+    <string name="bookmark_failure">Could not add Bookmark. Please try again.</string>
+    <string name="bad_note_msg">Please delete the note and try again.  It was not created correctly.</string>
+    <string name="pdf_download_message">PDF files are saved in the Download folder on your device.  Press OK to continue.</string>
     <string name="download_mgr_missing">Not able to download PDF because DownloadManager is disabled. Click OK to enable it.</string>
 </resources>
  

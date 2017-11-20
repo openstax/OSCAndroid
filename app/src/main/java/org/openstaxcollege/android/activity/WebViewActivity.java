@@ -7,6 +7,7 @@
 package org.openstaxcollege.android.activity;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.DownloadManager;
 import android.content.ActivityNotFoundException;
@@ -21,7 +22,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.*;
@@ -37,6 +37,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.webkit.WebSettings.LayoutAlgorithm;
@@ -44,7 +45,6 @@ import android.widget.Toast;
 
 import java.io.File;
 
-import static android.R.id.message;
 
 /**
  * Activity to view selected content in a web browser.
@@ -59,16 +59,11 @@ public class WebViewActivity extends AppCompatActivity
     /** Variable for serialized Content object */
     private Content content;
 
-    private boolean progressBarRunning;
-
     private static final String[] STORAGE_PERMS={
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
     private int REQUEST = 1336;
     
-    /**
-     * keeps track of the previous menu for when the back button is used.
-     */
 
     /** inner class for WebViewClient*/
     private WebViewClient webViewClient = new WebViewClient() {
@@ -81,32 +76,30 @@ public class WebViewActivity extends AppCompatActivity
         }
 
         /** loads URL into view */
+        @SuppressWarnings("deprecation")
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url)
         {
-        	//Log.d("WebViewClient.shouldOverrideUrlLo()", "Called");
-        	if(!progressBarRunning)
-            {
-            	setProgressBarIndeterminateVisibility(true);
-            }
 
             view.loadUrl(url);
-            try
-            {
-                content.setUrl(url);
 
-            }
-            catch (Exception e)
-            {
-                Log.d("WVA.shouldOverrideUr...", e.toString(),e);
-            }
+            content.setUrl(url);
+
             return true;
         }
 
-        /* (non-Javadoc)
-         * @see android.webkit.WebViewClient#onPageFinished(android.webkit.WebView, java.lang.String)
-         * Sets title and URL correctly after the page is fully loaded
-         */
+        @TargetApi(Build.VERSION_CODES.N)
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+            String url=request.getUrl().toString();
+
+            view.loadUrl(url);
+
+            content.setUrl(url);
+
+            return true;
+        }
+
         @Override
         public void onPageFinished(WebView view, String url)
         {
@@ -114,33 +107,19 @@ public class WebViewActivity extends AppCompatActivity
             //Log.d("WebViewClient.onPageFinished", "url: " + url);
 
             content.setTitle(view.getTitle());
-            if(!url.contains("?minimal=true"))
+            if(!url.contains(getString(R.string.minimal_url_snippet)))
             {
-                url = url + "?minimal=true";
+                url = url + getString(R.string.minimal_url_snippet);
                 view.loadUrl(url);
             }
-            try
-            {
-                content.setUrl(url);
 
-            }
-            catch (Exception e)
-            {
-                Log.d("WVA.onPageFinished()", e.toString(),e);
-            }
-
-            setProgressBarIndeterminateVisibility(false);
-            progressBarRunning = false;
-            //Log.d("WebViewClient.onPageFinished", "setSupportProgressBarIndeterminateVisibility(false) Called");
+            content.setUrl(url);
 
         }
 
     };
-    
-    /* (non-Javadoc)
-     * @see android.app.Activity#onCreate(android.os.Bundle)
-     * Called when the activity is first created.
-     */
+
+    @SuppressWarnings("deprecation")
     @Override
     public void onCreate(Bundle savedInstanceState) 
     {
@@ -150,48 +129,40 @@ public class WebViewActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(Html.fromHtml(getString(R.string.app_name_html)));;
+        if (Build.VERSION.SDK_INT >= 24) {
+            getSupportActionBar().setTitle(Html.fromHtml(getString(R.string.app_name_html), Html.FROM_HTML_MODE_LEGACY));
+        } else {
+            getSupportActionBar().setTitle(Html.fromHtml(getString(R.string.app_name_html)));
+        }
 
-        
         Intent intent = getIntent();
         content = (Content)intent.getSerializableExtra(getString(R.string.webcontent));
 
-        try
+
+        if(!content.getUrl().contains(getString(R.string.bookmarks_url_snippet)))
         {
-            if(!content.getUrl().toString().contains("?bookmark=1"))
-            {
 
-                SharedPreferences sharedPref = getSharedPreferences(getString(R.string.osc_package), MODE_PRIVATE);
-                String url = sharedPref.getString(content.getIcon(), "");
+            SharedPreferences sharedPref = getSharedPreferences(getString(R.string.osc_package), MODE_PRIVATE);
+            String url = sharedPref.getString(content.getIcon(), "");
 
-                if(!url.equals(""))
-                {
-                    url = convertURL(url);
-                    try
-                    {
-                        content.setUrl(url);
-                    }
-                    catch(Exception mue)
-                    {
-                        Log.e("WViewActivity.onResume", mue.toString());
-                    }
-                }
-            }
-            else
+            if(!url.equals(""))
             {
-                //remove bookmark parameter
-                String newURL = content.getUrl().replace("?bookmark=1","");
-                content.setUrl(newURL);
-                Content bookTitle = OSCUtil.getTitle(content.getBookTitle(), this);
-                content.setBookUrl(bookTitle.getBookUrl());
+                url = convertURL(url);
+
+                content.setUrl(url);
 
             }
         }
-        catch(Exception mue)
+        else
         {
-            Log.e("WViewActivity.onResume", mue.toString());
-        }
+            //remove bookmark parameter
+            String newURL = content.getUrl().replace(getString(R.string.bookmarks_url_snippet),"");
+            //Log.d("onCreate","url: " + newURL);
+            content.setUrl(newURL);
+            Content bookTitle = OSCUtil.getTitle(content.getBookTitle(), this);
+            content.setBookUrl(bookTitle.getBookUrl());
 
+        }
 
         if(OSCUtil.isConnected(this))
         {
@@ -205,10 +176,6 @@ public class WebViewActivity extends AppCompatActivity
         }
     }
     
-    /* (non-Javadoc)
-     * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
-     * Creates option menu
-     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
@@ -224,9 +191,6 @@ public class WebViewActivity extends AppCompatActivity
         return true;
     }
     
-    /* (non-Javadoc)
-     * @see android.app.Activity#onPrepareOptionsMenu(android.view.Menu)
-     */
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) 
     {
@@ -236,10 +200,6 @@ public class WebViewActivity extends AppCompatActivity
     }
 
     
-    /* (non-Javadoc)
-     * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
-     * Handles selected options menu item
-     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) 
     {
@@ -253,7 +213,7 @@ public class WebViewActivity extends AppCompatActivity
         }
         else if(item.getItemId() == R.id.download)
         {
-            if((int) Build.VERSION.SDK_INT < 23)
+            if(Build.VERSION.SDK_INT < 23)
             {
                 displayDownloadAlert(content);
 
@@ -271,7 +231,7 @@ public class WebViewActivity extends AppCompatActivity
                         @Override
                         public void onClick(View view)
                         {
-                            ActivityCompat.requestPermissions(activity,STORAGE_PERMS, REQUEST);
+                            ActivityCompat.requestPermissions(activity, STORAGE_PERMS, REQUEST);
                         }
                     }).show();
                 }
@@ -282,7 +242,6 @@ public class WebViewActivity extends AppCompatActivity
                 }
             }
         }
-
     	else
     	{
             try
@@ -290,7 +249,7 @@ public class WebViewActivity extends AppCompatActivity
 
                 WebviewLogic wl = new WebviewLogic();
                 content.setBookTitle(wl.getBookTitle(webView.getTitle()));
-                content.setTitle(webView.getTitle().replace(" - " + content.getBookTitle() + " - OpenStax CNX",""));
+                content.setTitle(webView.getTitle().replace(" - " + content.getBookTitle() + getString(R.string.cnx_title_snippet),""));
                 content.setUrl(webView.getUrl());
                 Content bookUrlContent = OSCUtil.getTitle(content.getBookTitle(), this);
                 content.setBookUrl(bookUrlContent.getBookUrl());
@@ -299,7 +258,7 @@ public class WebViewActivity extends AppCompatActivity
             }
             catch(Exception mue)
             {
-
+                Log.d("WVMenu","Error: " + mue.toString());
             }
 	        MenuHandler mh = new MenuHandler();
 	        return mh.handleContextMenu(item, this, content);
@@ -319,10 +278,6 @@ public class WebViewActivity extends AppCompatActivity
         }
     }
     
-    /* (non-Javadoc)
-     * @see android.app.Activity#onKeyDown(int, android.view.KeyEvent)
-     * Handles use of back button on browser 
-     */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) 
     {
@@ -335,10 +290,6 @@ public class WebViewActivity extends AppCompatActivity
         return super.onKeyDown(keyCode, event);
     }
     
-    /* (non-Javadoc)
-     * @see android.app.Activity#onConfigurationChanged(android.content.res.Configuration)
-     * added to handle orientation change.  Not sure why this is needed, but it is.
-     */
     @Override
     public void onConfigurationChanged(Configuration newConfig)
     {        
@@ -346,28 +297,14 @@ public class WebViewActivity extends AppCompatActivity
     }
     
     
-    /* (non-Javadoc)
-     * @see android.app.Activity#onResume()
-     */
     @Override
     protected void onResume()
     {
         super.onResume();
-        SharedPreferences sharedPref = getSharedPreferences(getString(R.string.osc_package),MODE_PRIVATE);
-        String url = sharedPref.getString(content.getIcon(), "");
+        //SharedPreferences sharedPref = getSharedPreferences(getString(R.string.osc_package),MODE_PRIVATE);
+        //String url = sharedPref.getString(content.getIcon(), "");
         //Log.d("WebViewActivity.onResume()","URL retrieved: " + url);
-        if(!url.equals(""))
-        {
-            url = convertURL(url);
-            try
-            {
-                //content.setUrl(new URL(url));
-            }
-            catch(Exception mue)
-            {
-                Log.e("WViewActivity.onResume",mue.toString());
-            }
-        }
+
 
     }
 
@@ -382,7 +319,7 @@ public class WebViewActivity extends AppCompatActivity
         {
             if(webView.getUrl() != null)
             {
-                String url = webView.getUrl().replace("?bookmark=1", "");
+                String url = webView.getUrl().replace(getString(R.string.bookmarks_url_snippet), "");
                 ed.putString(content.getIcon(), url);
                 ed.apply();
             }
@@ -400,7 +337,7 @@ public class WebViewActivity extends AppCompatActivity
         SharedPreferences.Editor ed = sharedPref.edit();
         if(webView != null && content != null && webView.getUrl() != null)
         {
-            String url = webView.getUrl().replace("?bookmark=1", "");
+            String url = webView.getUrl().replace(getString(R.string.bookmarks_url_snippet), "");
             ed.putString(content.getIcon(), url);
             ed.apply();
         }
@@ -422,17 +359,17 @@ public class WebViewActivity extends AppCompatActivity
         webView.getSettings().setSupportZoom(true);
         webView.getSettings().setBuiltInZoomControls(true);
         webView.getSettings().setLayoutAlgorithm(LayoutAlgorithm.NARROW_COLUMNS); 
-
-        webView.setWebChromeClient(new WebChromeClient() 
-        {
-            
-
-        });
-        
+        webView.setWebChromeClient(new WebChromeClient());
         webView.setWebViewClient(webViewClient);
         webView.loadUrl(content.getUrl());
     }
 
+    /**
+     * Converts Legacy style url to rewrite style
+     * Removes m. from the url since that no longer exists
+     * but could be book marked
+     * @param url - String - the url to convert
+     */
     private String convertURL(String url)
     {
 
@@ -451,14 +388,15 @@ public class WebViewActivity extends AppCompatActivity
      * If download is confirmed, DownloadHandler is called.
      * @param currentContent - Content - current content object
      */
+    //@TODO Move download logic to logic class
     private void displayDownloadAlert(final Content currentContent)
     {
         final Context context = this;
 
-        String message = "PDF files are saved in an OpenStax folder on the SDCard or on the device's internal memory.  Press OK to continue.";
+        String message = getString(R.string.pdf_download_message);
 
         AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-        alertDialog.setTitle("Download");
+        alertDialog.setTitle(getString(R.string.download));
         alertDialog.setMessage(message);
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.ok), new DialogInterface.OnClickListener()
         {
@@ -484,11 +422,11 @@ public class WebViewActivity extends AppCompatActivity
                     }
                     else
                     {
-                        Log.d("Webview","PDF URL: " + pdfUrl);
+                        //Log.d("Webview","PDF URL: " + pdfUrl);
                         Uri uri = Uri.parse(pdfUrl);
 
                         DownloadManager.Request request = new DownloadManager.Request(uri);
-                        request.setDestinationInExternalPublicDir("/" + getString(R.string.folder_name), MenuUtil.getTitle(currentContent.getBookTitle()) + ".pdf");
+                        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "/" + MenuUtil.getTitle(currentContent.getBookTitle()) + ".pdf");
                         request.setTitle(currentContent.getBookTitle() + ".pdf");
                         try
                         {
@@ -536,7 +474,7 @@ public class WebViewActivity extends AppCompatActivity
 
     private void createDialog(final Context context) {
         new AlertDialog.Builder(context)
-                .setTitle("DownloadManager")
+                .setTitle(getString(R.string.download_manager))
                 .setMessage(getString(R.string.download_mgr_missing))
                 .setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
                     @Override

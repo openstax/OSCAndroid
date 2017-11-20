@@ -30,7 +30,7 @@ public class LandingListRecyclerViewAdapter extends RecyclerView.Adapter<Landing
 {
 
     private int rowLayout;
-    Context context;
+    private Context context;
     private ArrayList<Content> contentList;
 
     public LandingListRecyclerViewAdapter(ArrayList<Content> content, int rowLayout, Context context)
