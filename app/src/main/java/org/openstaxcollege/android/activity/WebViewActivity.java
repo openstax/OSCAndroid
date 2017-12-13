@@ -206,7 +206,7 @@ public class WebViewActivity extends AppCompatActivity
         final WebViewActivity activity = this;
     	if(item.getItemId() == android.R.id.home)
         {
-            Intent mainIntent = new Intent(getApplicationContext(), LandingActivity.class);
+            Intent mainIntent = new Intent(getApplicationContext(), BookshelfActivity.class);
             mainIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(mainIntent);
             return true;

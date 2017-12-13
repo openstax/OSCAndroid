@@ -6,6 +6,7 @@
  */
 package org.openstaxcollege.android.adapters;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -14,10 +15,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.activity.WebViewActivity;
 import org.openstaxcollege.android.beans.Content;
+import org.openstaxcollege.android.providers.Bookmarks;
+import org.openstaxcollege.android.providers.ShelfBooks;
 import org.openstaxcollege.android.utils.OSCUtil;
 
 import java.util.ArrayList;
@@ -83,13 +87,25 @@ public class LandingListRecyclerViewAdapter extends RecyclerView.Adapter<Landing
         @Override
         public void onClick(View v)
         {
-            int position = getAdapterPosition();
-            Content book = contentList.get(position);
-            Context context = v.getContext();
-            Intent wv = new Intent(v.getContext(), WebViewActivity.class);
-            wv.putExtra(context.getString(R.string.webcontent), book);
+            Content content = contentList.get(getAdapterPosition());
+            ContentValues cv = new ContentValues();
 
-            context.startActivity(wv);
+            //Log.d("MenuHandler","title - " + currentContent.getTitle())  ;
+            cv.put(ShelfBooks.TITLE, content.getTitle());
+            //Log.d("MnHndlr.handleCont...()","URL: " + currentContent.getUrl().toString());
+            if(content.getUrl() != null)
+            {
+                String url = content.getUrl();
+                cv.put(ShelfBooks.URL, url.replaceAll("@\\d+(\\.\\d+)?", "") + context.getString(R.string.bookmarks_url_snippet));
+            }
+            else
+            {
+                Toast.makeText(context, context.getString(R.string.bookmark_failure), Toast.LENGTH_SHORT).show();
+            }
+            cv.put(ShelfBooks.ICON, content.getIcon());
+            cv.put(ShelfBooks.OTHER, content.getBookTitle());
+            context.getContentResolver().insert(ShelfBooks.CONTENT_URI, cv);
+            Toast.makeText(context,content.getTitle() + " added to Bookshelf", Toast.LENGTH_SHORT).show();
         }
     }
 }

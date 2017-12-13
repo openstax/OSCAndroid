@@ -48,8 +48,9 @@ public class LandingActivity extends AppCompatActivity
         setContentView(R.layout.activity_landing);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        CollapsingToolbarLayout toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
-        getSupportActionBar().setTitle(Html.fromHtml(getString(R.string.app_name_html)));
+        //CollapsingToolbarLayout toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
+        getSupportActionBar().setTitle(getString(R.string.select_book));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -88,8 +89,18 @@ public class LandingActivity extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) 
     {
-        MenuHandler mh = new MenuHandler();
-        return mh.handleContextMenu(item, this, null);
+        if(item.getItemId() == android.R.id.home)
+        {
+            Intent mainIntent = new Intent(getApplicationContext(), BookshelfActivity.class);
+            mainIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            startActivity(mainIntent);
+            return true;
+        }
+        else
+        {
+            MenuHandler mh = new MenuHandler();
+            return mh.handleContextMenu(item, this, null);
+        }
     }
     
     /* (non-Javadoc)

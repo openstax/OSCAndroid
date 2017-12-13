@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import org.openstaxcollege.android.beans.Content;
 import org.openstaxcollege.android.providers.Bookmarks;
+import org.openstaxcollege.android.providers.ShelfBooks;
 
 import android.database.Cursor;
 
@@ -70,6 +71,48 @@ public class DBUtils
         
         return contentList;
         
+    }
+
+    /**
+     * Read Cursor into ArrayList of Content objects.  Closes the cursor when read is finished.
+     * @param c - the Cursor to read
+     * @return ArrayList<Content>
+     */
+    public static ArrayList<Content> readShelfCursorIntoList(Cursor c)
+    {
+        ArrayList<Content> contentList = new ArrayList<Content>();
+
+        int titleColumn = c.getColumnIndex(ShelfBooks.TITLE);
+        int urlColumn = c.getColumnIndex(ShelfBooks.URL);
+        int idColumn = c.getColumnIndex(ShelfBooks.ID);
+        int iconColumn = c.getColumnIndex(ShelfBooks.ICON);
+        int otherColumn = c.getColumnIndex(ShelfBooks.OTHER);
+        if(c.getCount() > 0)
+        {
+            c.moveToNext();
+            do
+            {
+                try
+                {
+                    Content con = new Content();
+                    con.setTitle(c.getString(titleColumn));
+                    con.setBookTitle(c.getString(otherColumn));
+                    con.setUrl(c.getString(urlColumn));
+                    con.setId(c.getInt(idColumn));
+                    con.setIcon(c.getString(iconColumn));
+                    con.setContentString(c.getString(otherColumn));
+                    contentList.add(con);
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }while(c.moveToNext());
+        }
+        c.close();
+
+        return contentList;
+
     }
 
 }

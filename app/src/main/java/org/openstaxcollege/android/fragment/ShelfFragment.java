@@ -16,6 +16,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -91,7 +92,7 @@ public class ShelfFragment extends Fragment implements OnStartDragListener
         else
         {
             //reuse existing feed data
-            adapter = new ShelfRecyclerViewAdapter(content, R.layout.bookmark, activity);
+            adapter = new ShelfRecyclerViewAdapter(content, R.layout.fragment_book, activity);
             recyclerView.setAdapter(adapter);
             ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapter);
             itemTouchHelper = new ItemTouchHelper(callback);
@@ -114,6 +115,7 @@ public class ShelfFragment extends Fragment implements OnStartDragListener
     public void onResume()
     {
         super.onResume();
+        Log.d("SF", "onResume called");
         //if database state has changed, reload the display
         if(content != null)
         {
@@ -143,7 +145,7 @@ public class ShelfFragment extends Fragment implements OnStartDragListener
 
                 String order = "shelf_icon DESC, shelf_title ASC";
 
-                content = DBUtils.readCursorIntoList(activity.getContentResolver().query(ShelfBooks.CONTENT_URI, null, null, null, order));
+                content = DBUtils.readShelfCursorIntoList(activity.getContentResolver().query(ShelfBooks.CONTENT_URI, null, null, null, order));
 
                 Collections.sort(content);
 
@@ -161,7 +163,7 @@ public class ShelfFragment extends Fragment implements OnStartDragListener
     private void fillData(ArrayList<Content> contentList)
     {
         //Log.d("LensViewer", "fillData() called");
-        adapter = new ShelfRecyclerViewAdapter(contentList, R.layout.bookmark,activity);
+        adapter = new ShelfRecyclerViewAdapter(contentList, R.layout.fragment_book,activity);
     }
 
     /**

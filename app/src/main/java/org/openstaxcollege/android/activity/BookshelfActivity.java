@@ -7,14 +7,18 @@
 
 package org.openstaxcollege.android.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.fragment.ShelfFragment;
@@ -31,17 +35,29 @@ public class BookshelfActivity extends AppCompatActivity
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bookmark);
+        setContentView(R.layout.activity_bookshelf);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        CollapsingToolbarLayout toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
-        toolbarLayout.setTitle(getString(R.string.title_favs));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //CollapsingToolbarLayout toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
+        getSupportActionBar().setTitle(Html.fromHtml(getString(R.string.app_name_html)));;
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         ShelfFragment fragment = new ShelfFragment();
-        transaction.add(R.id.container, fragment);
+        transaction.add(R.id.sample_content_fragment, fragment);
         transaction.commit();
+
+        final Context context = this;
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(context, LandingActivity.class);
+                context.startActivity(intent);
+            }
+        });
 
     }
 
@@ -50,7 +66,7 @@ public class BookshelfActivity extends AppCompatActivity
     {
         if(item.getItemId() == android.R.id.home)
         {
-            Intent mainIntent = new Intent(getApplicationContext(), LandingActivity.class);
+            Intent mainIntent = new Intent(getApplicationContext(), BookshelfActivity.class);
             mainIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(mainIntent);
             return true;
@@ -68,7 +84,7 @@ public class BookshelfActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu)
     {
         super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.bookmark_options_menu, menu);
+        getMenuInflater().inflate(R.menu.landing_options_menu, menu);
         return true;
 
     }

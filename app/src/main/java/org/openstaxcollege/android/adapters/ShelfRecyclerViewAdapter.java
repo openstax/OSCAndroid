@@ -10,6 +10,7 @@ package org.openstaxcollege.android.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +42,7 @@ public class ShelfRecyclerViewAdapter extends RecyclerView.Adapter<ShelfRecycler
     public ShelfRecyclerViewAdapter(ArrayList<Content> content, int rowLayout, Context context)
     {
         contentList = content;
+        Log.d("SRVA","Content size = " + contentList.size());
         this.rowLayout = rowLayout;
         this.context = context;
     }
@@ -56,8 +58,8 @@ public class ShelfRecyclerViewAdapter extends RecyclerView.Adapter<ShelfRecycler
     public void onBindViewHolder(ShelfRecyclerViewAdapter.ViewHolder viewHolder, int i)
     {
         Content content = contentList.get(i);
-        viewHolder.title.setText(content.getTitle());
-        viewHolder.other.setText(content.getContentString());
+        viewHolder.bookTitle.setText(content.getTitle());
+        //viewHolder.other.setText(content.getContentString());
         if (viewHolder.logo != null && content.getIcon() != null)
         {
             viewHolder.logo.setImageResource(OSCUtil.getCoverId(content.getIcon(), context));
@@ -79,7 +81,7 @@ public class ShelfRecyclerViewAdapter extends RecyclerView.Adapter<ShelfRecycler
         context.getContentResolver().delete(ShelfBooks.CONTENT_URI, "_id="+ currentContent.getId(), null);
         contentList.remove(position);
         notifyItemRemoved(position);
-        Toast.makeText(context, context.getString(R.string.bookmark_deleted) + currentContent.getTitle(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, currentContent.getTitle() + " removed from Bookshelf", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -91,8 +93,8 @@ public class ShelfRecyclerViewAdapter extends RecyclerView.Adapter<ShelfRecycler
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
         private ImageView logo;
-        public TextView title;
-        public TextView other;
+        public TextView bookTitle;
+        //public TextView other;
         public View view;
         ArrayList<Content> contentList;
 
@@ -103,8 +105,8 @@ public class ShelfRecyclerViewAdapter extends RecyclerView.Adapter<ShelfRecycler
             this.contentList = contentList;
 
             logo = (ImageView) itemView.findViewById(R.id.logoView);
-            title = (TextView)itemView.findViewById(R.id.bookName);
-            other = (TextView)itemView.findViewById(R.id.other);
+            bookTitle = (TextView)itemView.findViewById(R.id.title);
+            //other = (TextView)itemView.findViewById(R.id.other);
             itemView.setOnClickListener(this);
         }
 

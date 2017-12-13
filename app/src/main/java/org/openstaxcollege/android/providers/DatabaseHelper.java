@@ -20,7 +20,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
 {
     private static final String DATABASE_NAME = "osc.db";
     /**  database version */
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     /**  Constructor*/
     DatabaseHelper(Context context) 
     {
@@ -44,17 +44,26 @@ public class DatabaseHelper extends SQLiteOpenHelper
                 + Notes.NOTE + " TEXT,"
                 + Notes.URL + " TEXT"
                 + ");");
+        db.execSQL("CREATE TABLE " + ShelfProvider.SHELF_TABLE + " ("
+                + ShelfBooks.ID + " INTEGER PRIMARY KEY,"
+                + ShelfBooks.TITLE + " TEXT,"
+                + ShelfBooks.URL + " TEXT,"
+                + ShelfBooks.ICON + " TEXT,"
+                + ShelfBooks.OTHER + " TEXT"
+                + ");");
     }
 
     /** For upgrading database */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) 
     {
-        db.execSQL("CREATE TABLE " + NotesProvider.NOTES_TABLE + " ("
-                + Notes._ID + " INTEGER PRIMARY KEY,"
-                + Notes.TITLE + " TEXT,"
-                + Notes.NOTE + " TEXT,"
-                + Notes.URL + " TEXT"
+        db.execSQL("CREATE TABLE " + ShelfProvider.SHELF_TABLE + " ("
+                + ShelfBooks.ID + " INTEGER PRIMARY KEY,"
+                + ShelfBooks.TITLE + " TEXT,"
+                + ShelfBooks.URL + " TEXT,"
+                + ShelfBooks.ICON + " TEXT,"
+                + ShelfBooks.OTHER + " TEXT"
                 + ");");
+
     }
 }
