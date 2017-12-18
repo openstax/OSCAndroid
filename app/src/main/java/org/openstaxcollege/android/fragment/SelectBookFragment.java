@@ -6,13 +6,12 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import org.openstaxcollege.android.R;
-import org.openstaxcollege.android.adapters.LandingListRecyclerViewAdapter;
+import org.openstaxcollege.android.adapters.SelectBookRecyclerViewAdapter;
 import org.openstaxcollege.android.beans.BookList;
 import org.openstaxcollege.android.beans.Content;
 import org.openstaxcollege.android.utils.OSCUtil;
@@ -24,7 +23,7 @@ import java.util.ArrayList;
  * Fragment for Display of list of books
  * @author Ed Woodward
  */
-public class LandingListFragment extends Fragment
+public class SelectBookFragment extends Fragment
 {
     RecyclerView recyclerView;
 
@@ -34,7 +33,7 @@ public class LandingListFragment extends Fragment
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public LandingListFragment()
+    public SelectBookFragment()
     {
     }
 
@@ -56,7 +55,7 @@ public class LandingListFragment extends Fragment
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setNestedScrollingEnabled(false);
-        LandingListRecyclerViewAdapter adapter = new LandingListRecyclerViewAdapter(getContent(), R.layout.fragment_book, activity);
+        SelectBookRecyclerViewAdapter adapter = new SelectBookRecyclerViewAdapter(getContent(), R.layout.fragment_book, activity);
         recyclerView.setAdapter(adapter);
     }
 

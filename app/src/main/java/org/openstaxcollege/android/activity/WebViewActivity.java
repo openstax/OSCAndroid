@@ -160,7 +160,10 @@ public class WebViewActivity extends AppCompatActivity
             //Log.d("onCreate","url: " + newURL);
             content.setUrl(newURL);
             Content bookTitle = OSCUtil.getTitle(content.getBookTitle(), this);
-            content.setBookUrl(bookTitle.getBookUrl());
+            if(bookTitle != null)
+            {
+                content.setBookUrl(bookTitle.getBookUrl());
+            }
 
         }
 

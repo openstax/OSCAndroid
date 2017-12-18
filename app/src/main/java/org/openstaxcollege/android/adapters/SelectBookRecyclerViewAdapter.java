@@ -8,7 +8,6 @@ package org.openstaxcollege.android.adapters;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,9 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.openstaxcollege.android.R;
-import org.openstaxcollege.android.activity.WebViewActivity;
 import org.openstaxcollege.android.beans.Content;
-import org.openstaxcollege.android.providers.Bookmarks;
 import org.openstaxcollege.android.providers.ShelfBooks;
 import org.openstaxcollege.android.utils.OSCUtil;
 
@@ -30,14 +27,14 @@ import java.util.ArrayList;
  * Adapter for displaying list of books
  * @author Ed Woodward
  */
-public class LandingListRecyclerViewAdapter extends RecyclerView.Adapter<LandingListRecyclerViewAdapter.ViewHolder>
+public class SelectBookRecyclerViewAdapter extends RecyclerView.Adapter<SelectBookRecyclerViewAdapter.ViewHolder>
 {
 
     private int rowLayout;
     private Context context;
     private ArrayList<Content> contentList;
 
-    public LandingListRecyclerViewAdapter(ArrayList<Content> content, int rowLayout, Context context)
+    public SelectBookRecyclerViewAdapter(ArrayList<Content> content, int rowLayout, Context context)
     {
         contentList = content;
         this.rowLayout = rowLayout;
@@ -105,7 +102,7 @@ public class LandingListRecyclerViewAdapter extends RecyclerView.Adapter<Landing
             cv.put(ShelfBooks.ICON, content.getIcon());
             cv.put(ShelfBooks.OTHER, content.getBookTitle());
             context.getContentResolver().insert(ShelfBooks.CONTENT_URI, cv);
-            Toast.makeText(context,content.getTitle() + " added to Bookshelf", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context,content.getTitle() + context.getString(R.string.added_to_bookshelf), Toast.LENGTH_SHORT).show();
         }
     }
 }

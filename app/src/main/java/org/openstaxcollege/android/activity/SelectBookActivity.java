@@ -9,16 +9,14 @@ package org.openstaxcollege.android.activity;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.support.v4.app.FragmentTransaction;
-import android.text.Html;
 import android.view.*;
 import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.beans.Content;
-import org.openstaxcollege.android.fragment.LandingListFragment;
+import org.openstaxcollege.android.fragment.SelectBookFragment;
 import org.openstaxcollege.android.handlers.MenuHandler;
 
 import android.content.Intent;
@@ -31,7 +29,7 @@ import android.os.Bundle;
  * @author Ed Woodward
  *
  */
-public class LandingActivity extends AppCompatActivity
+public class SelectBookActivity extends AppCompatActivity
 {
    
     /** list of books as Content objects */
@@ -45,16 +43,15 @@ public class LandingActivity extends AppCompatActivity
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_landing);
+        setContentView(R.layout.activity_selectbook);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //CollapsingToolbarLayout toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
         getSupportActionBar().setTitle(getString(R.string.select_book));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        LandingListFragment fragment = new LandingListFragment();
+        SelectBookFragment fragment = new SelectBookFragment();
         transaction.replace(R.id.sample_content_fragment, fragment);
         transaction.commit();
 
@@ -71,9 +68,6 @@ public class LandingActivity extends AppCompatActivity
         });
     }
 
-    /* (non-Javadoc)
-     * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
-     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
@@ -83,16 +77,12 @@ public class LandingActivity extends AppCompatActivity
         
     }
     
-    /* (non-Javadoc)
-     * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
-     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) 
     {
         if(item.getItemId() == android.R.id.home)
         {
             Intent mainIntent = new Intent(getApplicationContext(), BookshelfActivity.class);
-            mainIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(mainIntent);
             return true;
         }
@@ -103,9 +93,6 @@ public class LandingActivity extends AppCompatActivity
         }
     }
     
-    /* (non-Javadoc)
-     * @see android.app.Activity#onSaveInstanceState(android.os.Bundle)
-     */
     @Override
     protected void onSaveInstanceState(Bundle outState)
     {

@@ -10,7 +10,6 @@ package org.openstaxcollege.android.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -38,9 +37,7 @@ public class BookshelfActivity extends AppCompatActivity
         setContentView(R.layout.activity_bookshelf);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //CollapsingToolbarLayout toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
         getSupportActionBar().setTitle(Html.fromHtml(getString(R.string.app_name_html)));;
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         ShelfFragment fragment = new ShelfFragment();
@@ -54,7 +51,7 @@ public class BookshelfActivity extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                Intent intent = new Intent(context, LandingActivity.class);
+                Intent intent = new Intent(context, SelectBookActivity.class);
                 context.startActivity(intent);
             }
         });

@@ -16,7 +16,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
+//import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -86,11 +86,13 @@ public class ShelfFragment extends Fragment implements OnStartDragListener
         content = (ArrayList<Content>)activity.getLastNonConfigurationInstance();
         if(content == null)
         {
+            //Log.d("SF","content is null");
             //no previous data, so database must be read
             readDB();
         }
         else
         {
+            //Log.d("SF","content is not null");
             //reuse existing feed data
             adapter = new ShelfRecyclerViewAdapter(content, R.layout.fragment_book, activity);
             recyclerView.setAdapter(adapter);
@@ -115,7 +117,7 @@ public class ShelfFragment extends Fragment implements OnStartDragListener
     public void onResume()
     {
         super.onResume();
-        Log.d("SF", "onResume called");
+        //Log.d("SF", "onResume called");
         //if database state has changed, reload the display
         if(content != null)
         {

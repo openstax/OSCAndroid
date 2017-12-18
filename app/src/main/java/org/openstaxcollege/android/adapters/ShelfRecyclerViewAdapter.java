@@ -42,7 +42,7 @@ public class ShelfRecyclerViewAdapter extends RecyclerView.Adapter<ShelfRecycler
     public ShelfRecyclerViewAdapter(ArrayList<Content> content, int rowLayout, Context context)
     {
         contentList = content;
-        Log.d("SRVA","Content size = " + contentList.size());
+        //Log.d("SRVA","Content size = " + contentList.size());
         this.rowLayout = rowLayout;
         this.context = context;
     }
@@ -57,6 +57,7 @@ public class ShelfRecyclerViewAdapter extends RecyclerView.Adapter<ShelfRecycler
     @Override
     public void onBindViewHolder(ShelfRecyclerViewAdapter.ViewHolder viewHolder, int i)
     {
+        //Log.d("SRVA","BVH: Content size = " + contentList.size());
         Content content = contentList.get(i);
         viewHolder.bookTitle.setText(content.getTitle());
         //viewHolder.other.setText(content.getContentString());
@@ -77,11 +78,13 @@ public class ShelfRecyclerViewAdapter extends RecyclerView.Adapter<ShelfRecycler
     @Override
     public void onItemDismiss(int position)
     {
+        //Log.d("SRVA","Dismiss: Content size = " + contentList.size());
+        //Log.d("SRVA","Dismiss: position = " + position);
         Content currentContent = contentList.get(position);
         context.getContentResolver().delete(ShelfBooks.CONTENT_URI, "_id="+ currentContent.getId(), null);
         contentList.remove(position);
         notifyItemRemoved(position);
-        Toast.makeText(context, currentContent.getTitle() + " removed from Bookshelf", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, currentContent.getTitle() + context.getString(R.string.removed_from_bookshelf), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -93,8 +96,7 @@ public class ShelfRecyclerViewAdapter extends RecyclerView.Adapter<ShelfRecycler
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
         private ImageView logo;
-        public TextView bookTitle;
-        //public TextView other;
+        private TextView bookTitle;
         public View view;
         ArrayList<Content> contentList;
 
@@ -106,7 +108,6 @@ public class ShelfRecyclerViewAdapter extends RecyclerView.Adapter<ShelfRecycler
 
             logo = (ImageView) itemView.findViewById(R.id.logoView);
             bookTitle = (TextView)itemView.findViewById(R.id.title);
-            //other = (TextView)itemView.findViewById(R.id.other);
             itemView.setOnClickListener(this);
         }
 
