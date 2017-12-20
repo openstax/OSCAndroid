@@ -93,7 +93,7 @@ public class SelectBookRecyclerViewAdapter extends RecyclerView.Adapter<SelectBo
             if(content.getUrl() != null)
             {
                 String url = content.getUrl();
-                cv.put(ShelfBooks.URL, url.replaceAll("@\\d+(\\.\\d+)?", "") + context.getString(R.string.bookmarks_url_snippet));
+                cv.put(ShelfBooks.URL, url.replaceAll("@\\d+(\\.\\d+)?", ""));
             }
             else
             {
