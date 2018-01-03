@@ -98,5 +98,10 @@
     <string name="bad_note_msg">Please delete the note and try again.  It was not created correctly.</string>
     <string name="pdf_download_message">PDF files are saved in the Download folder on your device.  Press OK to continue.</string>
     <string name="download_mgr_missing">Not able to download PDF because DownloadManager is disabled. Click OK to enable it.</string>
+    <string name="title_bookshelf">Bookshelf</string>
+    <string name="select_book">Select Book</string>
+    <string name="added_to_bookshelf">\u0020added to Bookshelf</string>
+    <string name="removed_from_bookshelf">\u0020removed from Bookshelf</string>
+    <string name="bookshelf_help">No books found. Click the + button to add books to your bookshelf</string>
 </resources>
  

@@ -160,7 +160,10 @@ public class WebViewActivity extends AppCompatActivity
             //Log.d("onCreate","url: " + newURL);
             content.setUrl(newURL);
             Content bookTitle = OSCUtil.getTitle(content.getBookTitle(), this);
-            content.setBookUrl(bookTitle.getBookUrl());
+            if(bookTitle != null)
+            {
+                content.setBookUrl(bookTitle.getBookUrl());
+            }
 
         }
 
@@ -206,7 +209,7 @@ public class WebViewActivity extends AppCompatActivity
         final WebViewActivity activity = this;
     	if(item.getItemId() == android.R.id.home)
         {
-            Intent mainIntent = new Intent(getApplicationContext(), LandingActivity.class);
+            Intent mainIntent = new Intent(getApplicationContext(), BookshelfActivity.class);
             mainIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(mainIntent);
             return true;

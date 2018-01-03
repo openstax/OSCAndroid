@@ -6,14 +6,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".activity.LandingActivity"
-    tools:showIn="@layout/activity_landing">
+    tools:context=".activity.SelectBookActivity"
+    tools:showIn="@layout/activity_selectbook"
+    android:background="@color/gray_background">
 
     <FrameLayout
         android:id="@+id/sample_content_fragment"
         android:layout_weight="2"
         android:layout_width="match_parent"
         android:background="@color/gray_background"
-        android:layout_height="0px"/>
+        android:layout_height="0px">
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.Title"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
+            android:padding="10dp"
+            android:textSize="24sp"
+            android:text="@string/bookshelf_help"
+            android:layout_marginStart="10dip"
+            android:layout_marginEnd="10dip"
+            android:layout_marginTop="30dip"/>
+    </FrameLayout>
 
 </android.support.v4.widget.NestedScrollView>

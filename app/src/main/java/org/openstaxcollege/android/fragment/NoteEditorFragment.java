@@ -33,7 +33,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import org.openstaxcollege.android.R;
-import org.openstaxcollege.android.activity.LandingActivity;
+import org.openstaxcollege.android.activity.SelectBookActivity;
 import org.openstaxcollege.android.activity.NoteEditorActivity;
 import org.openstaxcollege.android.beans.Content;
 import org.openstaxcollege.android.handlers.MenuHandler;
@@ -144,7 +144,7 @@ public class NoteEditorFragment extends Fragment
     {
         if(item.getItemId() == android.R.id.home)
         {
-            Intent mainIntent = new Intent(getContext(), LandingActivity.class);
+            Intent mainIntent = new Intent(getContext(), SelectBookActivity.class);
             mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(mainIntent);
             return true;

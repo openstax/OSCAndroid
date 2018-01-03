@@ -1,9 +1,10 @@
 /**
- * Copyright (c) 2015 Rice University
+ * Copyright (c) 2017 Rice University
  *
  * This software is subject to the provisions of the GNU Lesser General
  * Public License Version 2.1 (LGPL).  See LICENSE.txt for details.
  */
+
 package org.openstaxcollege.android.adapters;
 
 import android.content.Context;
@@ -20,44 +21,46 @@ import android.widget.Toast;
 import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.activity.WebViewActivity;
 import org.openstaxcollege.android.beans.Content;
-import org.openstaxcollege.android.providers.Bookmarks;
+import org.openstaxcollege.android.providers.ShelfBooks;
 import org.openstaxcollege.android.utils.OSCUtil;
 
 import java.util.ArrayList;
 
 import co.paulburke.android.itemtouchhelperdemo.helper.ItemTouchHelperAdapter;
 
-/** Adapter to properly display bookmarks in RecyclerView
+/** Adapter to properly display bookshelf in RecyclerView
  * @author Ed Woodward
  * */
-public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRecyclerViewAdapter.ViewHolder> implements ItemTouchHelperAdapter
+
+public class ShelfRecyclerViewAdapter extends RecyclerView.Adapter<ShelfRecyclerViewAdapter.ViewHolder> implements ItemTouchHelperAdapter
 {
-    /** List of Content objects to display*/
     private ArrayList<Content> contentList;
     private Context context;
 
     private int rowLayout;
 
-    public BookmarkRecyclerViewAdapter(ArrayList<Content> content, int rowLayout, Context context)
+    public ShelfRecyclerViewAdapter(ArrayList<Content> content, int rowLayout, Context context)
     {
         contentList = content;
+        //Log.d("SRVA","Content size = " + contentList.size());
         this.rowLayout = rowLayout;
         this.context = context;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i)
+    public ShelfRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i)
     {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(rowLayout, viewGroup, false);
-        return new ViewHolder(v,contentList);
+        return new ShelfRecyclerViewAdapter.ViewHolder(v,contentList);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int i)
+    public void onBindViewHolder(ShelfRecyclerViewAdapter.ViewHolder viewHolder, int i)
     {
+        //Log.d("SRVA","BVH: Content size = " + contentList.size());
         Content content = contentList.get(i);
-        viewHolder.title.setText(content.getTitle());
-        viewHolder.other.setText(content.getContentString());
+        viewHolder.bookTitle.setText(content.getTitle());
+        //viewHolder.other.setText(content.getContentString());
         if (viewHolder.logo != null && content.getIcon() != null)
         {
             viewHolder.logo.setImageResource(OSCUtil.getCoverId(content.getIcon(), context));
@@ -75,13 +78,13 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
     @Override
     public void onItemDismiss(int position)
     {
-        Log.d("BRVA","position = " + position);
-        Log.d("BRVA","content list size = " + contentList.size());
+        //Log.d("SRVA","Dismiss: Content size = " + contentList.size());
+        //Log.d("SRVA","Dismiss: position = " + position);
         Content currentContent = contentList.get(position);
-        context.getContentResolver().delete(Bookmarks.CONTENT_URI, "_id="+ currentContent.getId(), null);
+        context.getContentResolver().delete(ShelfBooks.CONTENT_URI, "_id="+ currentContent.getId(), null);
         contentList.remove(position);
         notifyItemRemoved(position);
-        Toast.makeText(context, context.getString(R.string.bookmark_deleted) + currentContent.getTitle(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, currentContent.getTitle() + context.getString(R.string.removed_from_bookshelf), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -93,8 +96,7 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
         private ImageView logo;
-        public TextView title;
-        public TextView other;
+        private TextView bookTitle;
         public View view;
         ArrayList<Content> contentList;
 
@@ -105,8 +107,7 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
             this.contentList = contentList;
 
             logo = (ImageView) itemView.findViewById(R.id.logoView);
-            title = (TextView)itemView.findViewById(R.id.bookName);
-            other = (TextView)itemView.findViewById(R.id.other);
+            bookTitle = (TextView)itemView.findViewById(R.id.title);
             itemView.setOnClickListener(this);
         }
 
