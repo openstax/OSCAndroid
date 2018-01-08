@@ -184,6 +184,18 @@ public class OSCUtil
        {
            coverId = R.drawable.microeconomics_2e;
        }
+       else if(icon.equals(context.getString(R.string.intro_business_stats_icon)))
+       {
+           coverId = R.drawable.intro_business_statistics;
+       }
+       else if(icon.equals(context.getString(R.string.microbiology_icon)))
+       {
+           coverId = R.drawable.microbiology;
+       }
+       else if(icon.equals(context.getString(R.string.econ_2e_icon)))
+       {
+           coverId = R.drawable.econ_2e;
+       }
 
        return coverId;
    }

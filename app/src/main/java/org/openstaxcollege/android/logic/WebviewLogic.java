@@ -88,6 +88,10 @@ public class WebviewLogic
         bookPDFMap.put("Elementary Algebra","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/ElementaryAlgebra-LR.pdf");
         bookPDFMap.put("Intermediate Algebra","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/IntermediateAlgebra-LR.pdf");
         bookPDFMap.put("Principles of Microeconomics 2e","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/Microeconomics2e-LR.pdf");
+        bookPDFMap.put("Introductory Business Statistics","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/IntroductoryBusinessStatistics-LR.pdf");
+        bookPDFMap.put("Microbiology","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/Microbiology-LR.pdf");
+        bookPDFMap.put("Principles of Economics 2e","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/Economics2e-LR.pdf");
+        //bookPDFMap.put("Biology for AP® Courses","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/APBiology-Draft.pdf");
     }
 
 

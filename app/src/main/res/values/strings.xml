@@ -77,6 +77,10 @@
     <string name="elem_algebra_icon">Elementary Algebra</string>
     <string name="intermediate_algebra_icon">Intermediate Algebra</string>
     <string name="microecon_2e_icon">Principles of Microeconomics 2e</string>
+    <string name="intro_business_stats_icon">Introductory Business Statistics</string>
+    <string name="microbiology_icon">Microbiology</string>
+    <string name="ap_biology_icon">ap_biology</string>
+    <string name="econ_2e_icon">econ_2e</string>
     <string name="ok">Ok</string>
     <string name="cancel">Cancel</string>
     <string name="folder_name">OpenStax</string>
