@@ -91,6 +91,9 @@ public class WebviewLogic
         bookPDFMap.put("Introductory Business Statistics","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/IntroductoryBusinessStatistics-LR.pdf");
         bookPDFMap.put("Microbiology","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/Microbiology-LR.pdf");
         bookPDFMap.put("Principles of Economics 2e","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/Economics2e-LR.pdf");
+        bookPDFMap.put("Principles of Macroeconomics 2e","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/Macroeconomics2e-LR.pdf");
+        bookPDFMap.put("Principles of Macroeconomics for AP® Courses 2e","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/APMacroeconomics2e-LR.pdf");
+        bookPDFMap.put("Principles of Microeconomics for AP® Courses 2e","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/APMicroeconomics2e-LR.pdf");
         //bookPDFMap.put("Biology for AP® Courses","https://d3bxy9euw4e147.cloudfront.net/oscms-prodcms/media/documents/APBiology-Draft.pdf");
     }
 

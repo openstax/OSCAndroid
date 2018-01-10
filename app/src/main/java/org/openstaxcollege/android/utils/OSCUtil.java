@@ -196,6 +196,18 @@ public class OSCUtil
        {
            coverId = R.drawable.econ_2e;
        }
+       else if(icon.equals(context.getString(R.string.macro_2e_icon)))
+       {
+           coverId = R.drawable.macro_2e;
+       }
+       else if(icon.equals(context.getString(R.string.ap_macro_2e_icon)))
+       {
+           coverId = R.drawable.ap_macro_2e;
+       }
+       else if(icon.equals(context.getString(R.string.ap_micro_2e_icon)))
+       {
+           coverId = R.drawable.ap_micro_2e;
+       }
 
        return coverId;
    }

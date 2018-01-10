@@ -34,6 +34,8 @@
     <string name="ap_physics_icon">ap-physics</string>
     <string name="ap_macro_icon">ap-macro</string>
     <string name="ap_micro_icon">ap-micro</string>
+    <string name="ap_macro_2e_icon">ap-macro-2e</string>
+    <string name="ap_micro_2e_icon">ap-micro-2e</string>
     <string name="american_gov">American Government</string>
     <string name="american_gov_icon">american-gov</string>
     <string name="calculus1_icon">calculus1</string>
@@ -77,6 +79,7 @@
     <string name="elem_algebra_icon">Elementary Algebra</string>
     <string name="intermediate_algebra_icon">Intermediate Algebra</string>
     <string name="microecon_2e_icon">Principles of Microeconomics 2e</string>
+    <string name="macro_2e_icon">macro_2e</string>
     <string name="intro_business_stats_icon">Introductory Business Statistics</string>
     <string name="microbiology_icon">Microbiology</string>
     <string name="ap_biology_icon">ap_biology</string>
