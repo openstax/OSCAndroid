@@ -80,11 +80,16 @@ public class ShelfRecyclerViewAdapter extends RecyclerView.Adapter<ShelfRecycler
     {
         //Log.d("SRVA","Dismiss: Content size = " + contentList.size());
         //Log.d("SRVA","Dismiss: position = " + position);
-        Content currentContent = contentList.get(position);
-        context.getContentResolver().delete(ShelfBooks.CONTENT_URI, "_id="+ currentContent.getId(), null);
-        contentList.remove(position);
-        notifyItemRemoved(position);
-        Toast.makeText(context, currentContent.getTitle() + context.getString(R.string.removed_from_bookshelf), Toast.LENGTH_SHORT).show();
+        if(contentList.size() >= position + 1)
+        {
+            Content currentContent = contentList.get(position);
+            context.getContentResolver().delete(ShelfBooks.CONTENT_URI, "_id="+ currentContent.getId(), null);
+
+            contentList.remove(position);
+
+            notifyItemRemoved(position);
+            Toast.makeText(context, currentContent.getTitle() + context.getString(R.string.removed_from_bookshelf), Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
