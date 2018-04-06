@@ -83,9 +83,20 @@ public class WebViewActivity extends AppCompatActivity
         public boolean shouldOverrideUrlLoading(WebView view, String url)
         {
 
-            view.loadUrl(url);
+            Log.d("WebviewCliet","url: " + url);
+            if(!(url.contains("cnx.org")))
+            {
+                //open url in a  browser
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(browserIntent);
+            }
+            else
+            {
 
-            content.setUrl(url);
+                view.loadUrl(url);
+
+                content.setUrl(url);
+            }
 
             return true;
         }
@@ -95,6 +106,7 @@ public class WebViewActivity extends AppCompatActivity
         public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
             String url=request.getUrl().toString();
 
+            Log.d("WebviewCliet2","url: " + url);
             if(!(url.contains("cnx.org")))
             {
                 //open url in a  browser
@@ -116,7 +128,7 @@ public class WebViewActivity extends AppCompatActivity
         public void onPageFinished(WebView view, String url)
         {
             //Log.d("WebViewClient.onPageFinished", "title: " + view.getTitle());
-            //Log.d("WebViewClient.onPageFinished", "url: " + url);
+            //Log.d("WebViewClient", "url: " + url);
 
             content.setTitle(view.getTitle());
             if(url.contains("cnx.org"))
