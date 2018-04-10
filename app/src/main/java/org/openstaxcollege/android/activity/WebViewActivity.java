@@ -83,7 +83,7 @@ public class WebViewActivity extends AppCompatActivity
         public boolean shouldOverrideUrlLoading(WebView view, String url)
         {
 
-            Log.d("WebviewCliet","url: " + url);
+            //Log.d("WebviewCliet","url: " + url);
             if(!(url.contains("cnx.org")))
             {
                 //open url in a  browser
@@ -106,7 +106,7 @@ public class WebViewActivity extends AppCompatActivity
         public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
             String url=request.getUrl().toString();
 
-            Log.d("WebviewCliet2","url: " + url);
+            //Log.d("WebviewCliet2","url: " + url);
             if(!(url.contains("cnx.org")))
             {
                 //open url in a  browser
@@ -274,7 +274,7 @@ public class WebViewActivity extends AppCompatActivity
         }
         else if(item.getItemId() == R.id.remove_location)
         {
-            Log.d("menuItem", "removing location: " + content.getIcon());
+            //Log.d("menuItem", "removing location: " + content.getIcon());
             SharedPreferences sharedPref = getSharedPreferences(getString(R.string.osc_package),MODE_PRIVATE);
             SharedPreferences.Editor ed = sharedPref.edit();
             ed.remove(content.getIcon());
@@ -352,7 +352,7 @@ public class WebViewActivity extends AppCompatActivity
     @Override
     protected void onPause()
     {
-        Log.d("onPause", "savedLocation: " + saveLocation);
+        //Log.d("onPause", "savedLocation: " + saveLocation);
         super.onPause();
         SharedPreferences sharedPref = getSharedPreferences(getString(R.string.osc_package),MODE_PRIVATE);
         SharedPreferences.Editor ed = sharedPref.edit();
@@ -363,7 +363,7 @@ public class WebViewActivity extends AppCompatActivity
             {
                 if(saveLocation && webView.getUrl().contains("cnx.org"))
                 {
-                    Log.d("onPause()", "saving data");
+                    //Log.d("onPause()", "saving data");
                     String url = webView.getUrl().replace(getString(R.string.bookmarks_url_snippet), "");
                     ed.putString(content.getIcon(), url);
                     ed.apply();
@@ -386,7 +386,7 @@ public class WebViewActivity extends AppCompatActivity
         {
             if(webView.getUrl().contains("cnx.org") && saveLocation)
             {
-                Log.d("onSaveInstanceState()", "saving data");
+                //Log.d("onSaveInstanceState()", "saving data");
                 String url = webView.getUrl().replace(getString(R.string.bookmarks_url_snippet), "");
                 ed.putString(content.getIcon(), url);
                 ed.apply();
