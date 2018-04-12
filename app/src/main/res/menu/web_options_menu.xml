@@ -21,4 +21,8 @@
           android:icon="@drawable/ic_share_white_24dp"
           android:title="Share"
           app:showAsAction="ifRoom"/>
+    <item android:id="@+id/remove_location"
+          android:icon="@drawable/ic_share_white_24dp"
+          android:title="Remove saved location"
+          app:showAsAction="never"/>
 </menu>

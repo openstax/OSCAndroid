@@ -76,8 +76,8 @@ public class ShelfProvider extends ContentProvider
     public Uri insert(Uri uri, ContentValues values)
     {
         //check if the URL is already in favorites
-        boolean duplicate = checkForDuplicate(values.getAsString(Bookmarks.URL));
-        //If not in favorites, save it
+        boolean duplicate = checkForDuplicate(values.getAsString(ShelfBooks.URL));
+        //If not in bookshelf, save it
         if(! duplicate)
         {
             SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -85,7 +85,7 @@ public class ShelfProvider extends ContentProvider
             db.close();
             if (rowId > 0)
             {
-                Uri favUri = ContentUris.withAppendedId(Bookmarks.CONTENT_URI, rowId);
+                Uri favUri = ContentUris.withAppendedId(ShelfBooks.CONTENT_URI, rowId);
                 getContext().getContentResolver().notifyChange(favUri, null);
                 return favUri;
             }
@@ -123,8 +123,8 @@ public class ShelfProvider extends ContentProvider
     private boolean checkForDuplicate(String url)
     {
         boolean dup = false;
-        Cursor c = query(Bookmarks.CONTENT_URI,null,"shelf_url='"+url+"'",null, null);
-        int urlColumn = c.getColumnIndex(Bookmarks.URL);
+        Cursor c = query(ShelfBooks.CONTENT_URI,null,"shelf_url='"+url+"'",null, null);
+        int urlColumn = c.getColumnIndex(ShelfBooks.URL);
         if(c.getCount()>0)
         {
             c.moveToNext();

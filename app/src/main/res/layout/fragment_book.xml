@@ -26,7 +26,7 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/TextAppearance.Title"
+            style="@style/OSTextAppearance.Title"
             android:layout_below="@+id/logoView"
             android:layout_centerHorizontal="true"
             android:gravity="center_horizontal"

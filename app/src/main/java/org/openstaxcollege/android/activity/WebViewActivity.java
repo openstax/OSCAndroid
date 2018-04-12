@@ -63,6 +63,8 @@ public class WebViewActivity extends AppCompatActivity
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
     private int REQUEST = 1336;
+
+    private boolean saveLocation = true;
     
 
     /** inner class for WebViewClient*/
@@ -81,9 +83,20 @@ public class WebViewActivity extends AppCompatActivity
         public boolean shouldOverrideUrlLoading(WebView view, String url)
         {
 
-            view.loadUrl(url);
+            //Log.d("WebviewCliet","url: " + url);
+            if(!(url.contains("cnx.org")))
+            {
+                //open url in a  browser
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(browserIntent);
+            }
+            else
+            {
 
-            content.setUrl(url);
+                view.loadUrl(url);
+
+                content.setUrl(url);
+            }
 
             return true;
         }
@@ -93,9 +106,20 @@ public class WebViewActivity extends AppCompatActivity
         public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
             String url=request.getUrl().toString();
 
-            view.loadUrl(url);
+            //Log.d("WebviewCliet2","url: " + url);
+            if(!(url.contains("cnx.org")))
+            {
+                //open url in a  browser
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(browserIntent);
+            }
+            else
+            {
 
-            content.setUrl(url);
+                view.loadUrl(url);
+
+                content.setUrl(url);
+            }
 
             return true;
         }
@@ -104,16 +128,19 @@ public class WebViewActivity extends AppCompatActivity
         public void onPageFinished(WebView view, String url)
         {
             //Log.d("WebViewClient.onPageFinished", "title: " + view.getTitle());
-            //Log.d("WebViewClient.onPageFinished", "url: " + url);
+            //Log.d("WebViewClient", "url: " + url);
 
             content.setTitle(view.getTitle());
-            if(!url.contains(getString(R.string.minimal_url_snippet)))
+            if(url.contains("cnx.org"))
             {
-                url = url + getString(R.string.minimal_url_snippet);
-                view.loadUrl(url);
-            }
+                if (!url.contains(getString(R.string.minimal_url_snippet)))
+                {
+                    url = url + getString(R.string.minimal_url_snippet);
+                    view.loadUrl(url);
+                }
 
-            content.setUrl(url);
+                content.setUrl(url);
+            }
 
         }
 
@@ -245,6 +272,16 @@ public class WebViewActivity extends AppCompatActivity
                 }
             }
         }
+        else if(item.getItemId() == R.id.remove_location)
+        {
+            //Log.d("menuItem", "removing location: " + content.getIcon());
+            SharedPreferences sharedPref = getSharedPreferences(getString(R.string.osc_package),MODE_PRIVATE);
+            SharedPreferences.Editor ed = sharedPref.edit();
+            ed.remove(content.getIcon());
+            ed.commit();
+            saveLocation = false;
+            Toast.makeText(this, "Saved location removed",  Toast.LENGTH_LONG).show();
+        }
     	else
     	{
             try
@@ -304,6 +341,7 @@ public class WebViewActivity extends AppCompatActivity
     protected void onResume()
     {
         super.onResume();
+        saveLocation = true;
         //SharedPreferences sharedPref = getSharedPreferences(getString(R.string.osc_package),MODE_PRIVATE);
         //String url = sharedPref.getString(content.getIcon(), "");
         //Log.d("WebViewActivity.onResume()","URL retrieved: " + url);
@@ -314,6 +352,7 @@ public class WebViewActivity extends AppCompatActivity
     @Override
     protected void onPause()
     {
+        //Log.d("onPause", "savedLocation: " + saveLocation);
         super.onPause();
         SharedPreferences sharedPref = getSharedPreferences(getString(R.string.osc_package),MODE_PRIVATE);
         SharedPreferences.Editor ed = sharedPref.edit();
@@ -322,9 +361,14 @@ public class WebViewActivity extends AppCompatActivity
         {
             if(webView.getUrl() != null)
             {
-                String url = webView.getUrl().replace(getString(R.string.bookmarks_url_snippet), "");
-                ed.putString(content.getIcon(), url);
-                ed.apply();
+                if(saveLocation && webView.getUrl().contains("cnx.org"))
+                {
+                    //Log.d("onPause()", "saving data");
+                    String url = webView.getUrl().replace(getString(R.string.bookmarks_url_snippet), "");
+                    ed.putString(content.getIcon(), url);
+                    ed.apply();
+                }
+
             }
         }
     }
@@ -340,9 +384,14 @@ public class WebViewActivity extends AppCompatActivity
         SharedPreferences.Editor ed = sharedPref.edit();
         if(webView != null && content != null && webView.getUrl() != null)
         {
-            String url = webView.getUrl().replace(getString(R.string.bookmarks_url_snippet), "");
-            ed.putString(content.getIcon(), url);
-            ed.apply();
+            if(webView.getUrl().contains("cnx.org") && saveLocation)
+            {
+                //Log.d("onSaveInstanceState()", "saving data");
+                String url = webView.getUrl().replace(getString(R.string.bookmarks_url_snippet), "");
+                ed.putString(content.getIcon(), url);
+                ed.apply();
+            }
+
         }
         
     }

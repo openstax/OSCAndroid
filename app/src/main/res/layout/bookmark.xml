@@ -20,7 +20,7 @@
 
         <TextView
             android:id="@+id/bookName"
-            style="@style/TextAppearance.Title"
+            style="@style/OSTextAppearance.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="3dip"
@@ -32,7 +32,7 @@
             android:layout_marginLeft="5dip"/>
         <TextView
             android:id="@+id/other"
-            style="@style/TextAppearance.Book"
+            style="@style/OSTextAppearance.Book"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="3dip"
