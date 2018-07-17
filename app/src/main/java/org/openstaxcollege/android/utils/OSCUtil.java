@@ -84,18 +84,6 @@ public class OSCUtil
        {
            coverId = R.drawable.statistics_lg;
        }
-       else if(icon.equals(context.getString(R.string.econ_icon)))
-       {
-           coverId = R.drawable.econ_lg;
-       }
-       else if(icon.equals(context.getString(R.string.macro_icon)))
-       {
-           coverId = R.drawable.macro_econ_lg;
-       }
-       else if(icon.equals(context.getString(R.string.micro_icon)))
-       {
-           coverId = R.drawable.micro_econ_lg;
-       }
        else if(icon.equals(context.getString(R.string.precalculus_icon)))
        {
            coverId = R.drawable.precalculus_lg;
@@ -123,14 +111,6 @@ public class OSCUtil
        else if(icon.equals(context.getString(R.string.ap_physics_icon)))
        {
            coverId = R.drawable.ap_physics_lg;
-       }
-       else if(icon.equals(context.getString(R.string.ap_macro_icon)))
-       {
-           coverId = R.drawable.ap_macro;
-       }
-       else if(icon.equals(context.getString(R.string.ap_micro_icon)))
-       {
-           coverId = R.drawable.ap_micro;
        }
        else if(icon.equals(context.getString(R.string.american_gov_icon)))
        {
@@ -207,6 +187,22 @@ public class OSCUtil
        else if(icon.equals(context.getString(R.string.ap_micro_2e_icon)))
        {
            coverId = R.drawable.ap_micro_2e;
+       }
+       else if(icon.equals(context.getString(R.string.biology_2e_icon)))
+       {
+           coverId = R.drawable.biology_2e;
+       }
+       else if(icon.equals(context.getString(R.string.biology_ap_icon)))
+       {
+           coverId = R.drawable.biology_ap;
+       }
+       else if(icon.equals(context.getString(R.string.fizyka_tom1)))
+       {
+           coverId = R.drawable.fizyka_tom1;
+       }
+       else if(icon.equals(context.getString(R.string.fizyka_tom2)))
+       {
+           coverId = R.drawable.fizyka_tom2;
        }
 
        return coverId;
