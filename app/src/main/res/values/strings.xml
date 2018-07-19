@@ -31,7 +31,6 @@
     <string name="ap_physics_icon">ap-physics</string>
     <string name="ap_macro_2e_icon">ap-macro-2e</string>
     <string name="ap_micro_2e_icon">ap-micro-2e</string>
-    <string name="american_gov">American Government</string>
     <string name="american_gov_icon">american-gov</string>
     <string name="calculus1_icon">calculus1</string>
     <string name="calculus2_icon">calculus2</string>
@@ -48,25 +47,6 @@
     <string name="univ_physics3_icon">University Physics Volume 3</string>
     <string name="biology_2e_icon">Biology 2e</string>
     <string name="biology_ap_icon">ap-biology</string>
-    <string name="college_physics_title">College Physics</string>
-    <string name="sociology_title">Introduction to Sociology 2e</string>
-    <string name="biology_title">Biology</string>
-    <string name="concepts_biology_title">Concepts of Biology</string>
-    <string name="anatomy_title">Anatomy &amp; Physiology</string>
-    <string name="statistics_title">Introductory Statistics</string>
-    <string name="precalculus_title">Precalculus</string>
-    <string name="psychology_title">Psychology</string>
-    <string name="hostory_title">U.S. History</string>
-    <string name="chemistry_title">Chemistry</string>
-    <string name="algebra_title">College Algebra</string>
-    <string name="trig_title">Algebra and Trigonometry</string>
-    <string name="ap_physics_title">College Physics For AP® Courses</string>
-    <string name="american_gov_title">American Government</string>
-    <string name="calc1_title">Calculus Volume 1</string>
-    <string name="calc2_title">Calculus Volume 2</string>
-    <string name="calc3_title">Calculus Volume 3</string>
-    <string name="chem_atoms_first_title">Chemistry: Atoms First</string>
-    <string name="prealgebra_title">Prealgebra</string>
     <string name="astronomy_icon">Astronomy</string>
     <string name="elem_algebra_icon">Elementary Algebra</string>
     <string name="intermediate_algebra_icon">Intermediate Algebra</string>
@@ -104,5 +84,10 @@
     <string name="added_to_bookshelf">\u0020added to Bookshelf</string>
     <string name="removed_from_bookshelf">\u0020removed from Bookshelf</string>
     <string name="bookshelf_help">No books found. Click the + button to add books to your bookshelf</string>
+    <string name="econ_icon">econ</string>
+    <string name="macro_icon">macro</string>
+    <string name="micro_icon">micro</string>
+    <string name="ap_macro_icon">ap-macro</string>
+    <string name="ap_micro_icon">ap-micro</string>
 </resources>
  

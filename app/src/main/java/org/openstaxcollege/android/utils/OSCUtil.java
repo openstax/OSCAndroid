@@ -6,13 +6,10 @@
  */
 package org.openstaxcollege.android.utils;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.AssetManager;
-import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -203,6 +200,22 @@ public class OSCUtil
        else if(icon.equals(context.getString(R.string.fizyka_tom2)))
        {
            coverId = R.drawable.fizyka_tom2;
+       }
+       else if(icon.equals(context.getString(R.string.macro_icon)))
+       {
+           coverId = R.drawable.macro_econ_lg;
+       }
+       else if(icon.equals(context.getString(R.string.micro_icon)))
+       {
+           coverId = R.drawable.micro_econ_lg;
+       }
+       else if(icon.equals(context.getString(R.string.ap_macro_icon)))
+       {
+           coverId = R.drawable.ap_macro;
+       }
+       else if(icon.equals(context.getString(R.string.ap_micro_icon)))
+       {
+           coverId = R.drawable.ap_micro;
        }
 
        return coverId;
