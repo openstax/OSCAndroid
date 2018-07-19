@@ -13,5 +13,5 @@ The OpenStax College Android app provides free textbooks covering Statistics, Ph
 
 License
 =======
-This software is subject to the provisions of the GNU Lesser General Public License Version 2.1 (LGPL). See license.txt for details. Copyright (c) 2013 Rice University
+This software is subject to the provisions of the GNU Lesser General Public License Version 2.1 (LGPL). See license.txt for details. Copyright (c) 2018 Rice University
 
