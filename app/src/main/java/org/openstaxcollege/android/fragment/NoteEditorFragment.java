@@ -388,7 +388,7 @@ public class NoteEditorFragment extends Fragment
 
         if(content != null)
         {
-            intent.putExtra(Intent.EXTRA_SUBJECT, "Note for " + content.getTitle());
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Note for " + content.getBookTitle());
             String text = editText.getText().toString();
             intent.putExtra(Intent.EXTRA_TEXT, text + "\n\n" + getString(R.string.shared_via));
 
