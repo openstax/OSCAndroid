@@ -162,6 +162,12 @@ public class NoteEditorFragment extends Fragment
             return true;
 
         }
+        else if(item.getItemId() == R.id.share)
+        {
+            shareNote();
+            return true;
+
+        }
         else
         {
 
@@ -373,5 +379,27 @@ public class NoteEditorFragment extends Fragment
 
             exportNote();
         }
+    }
+
+    private void shareNote()
+    {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType(getString(R.string.mimetype_text));
+
+        if(content != null)
+        {
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Note for " + content.getBookTitle());
+            String text = editText.getText().toString();
+            intent.putExtra(Intent.EXTRA_TEXT, text + "\n\n" + getString(R.string.shared_via));
+
+            Intent chooser = Intent.createChooser(intent, getString(R.string.tell_friend) + " "+ content.getTitle());
+            startActivity(chooser);
+
+        }
+        else
+        {
+            Toast.makeText(getActivity(), getString(R.string.no_data_msg),  Toast.LENGTH_LONG).show();
+        }
+
     }
 }

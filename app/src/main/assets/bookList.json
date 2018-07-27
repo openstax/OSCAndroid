@@ -4,297 +4,289 @@
       "bookTitle":"College Physics",
       "title":"College Physics",
       "contentString":"This introductory, algebra-based, two-semester college physics book is grounded with real-world examples, illustrations, and explanations to help students grasp key, fundamental physics concepts. This online, fully editable and customizable title includes learning objectives, concept questions, links to labs and simulations, and ample practice opportunities to solve traditional physics application problems.",
-      "url":"http://cnx.org/contents/Ax2o07Ul:HR_VN3f7?minimal=true",
-      "bookUrl":"http://cnx.org/contents/Ax2o07Ul:HR_VN3f7?minimal=true",
+      "url":"https://cnx.org/contents/Ax2o07Ul:HR_VN3f7?minimal=true",
+      "bookUrl":"https://cnx.org/contents/Ax2o07Ul:HR_VN3f7?minimal=true",
       "icon":"physics"
     },
     {
       "bookTitle":"Introduction to Sociology 2e",
       "title":"Introduction to Sociology 2e",
       "contentString":"Introduction to Sociology 2e adheres to the scope and sequence of a typical introductory sociology course. In addition to comprehensive coverage of core concepts, foundational scholars, and emerging theories we have incorporated section reviews with engaging questions, discussions that help students apply the sociological imagination, and features that draw learners into the discipline in meaningful ways",
-      "url":"http://cnx.org/contents/AgQDEnLI:TrIRM88K?minimal=true",
-      "bookUrl":"http://cnx.org/contents/AgQDEnLI:TrIRM88K?minimal=true",
+      "url":"https://cnx.org/contents/AgQDEnLI:TrIRM88K?minimal=true",
+      "bookUrl":"https://cnx.org/contents/AgQDEnLI:TrIRM88K?minimal=true",
       "icon":"sociology2e"
     },
     {
       "bookTitle":"Biology",
       "title":"Biology",
       "contentString":"Biology is designed for multi-semester biology courses for science majors. It is grounded on an evolutionary basis and includes exciting features that highlight careers in the biological sciences and everyday applications of the concepts at hand.",
-      "url":"http://cnx.org/contents/GFy_h8cu:rZudN6XP?minimal=true",
-      "bookUrl":"http://cnx.org/contents/GFy_h8cu:rZudN6XP?minimal=true",
+      "url":"https://cnx.org/contents/GFy_h8cu:rZudN6XP?minimal=true",
+      "bookUrl":"https://cnx.org/contents/GFy_h8cu:rZudN6XP?minimal=true",
       "icon":"biology"
+    },
+    {
+      "bookTitle":"Biology 2e",
+      "title":"Biology 2e",
+      "contentString":"Biology is designed for multi-semester biology courses for science majors. It is grounded on an evolutionary basis and includes exciting features that highlight careers in the biological sciences and everyday applications of the concepts at hand.",
+      "url":"https://cnx.org/contents/jVCgr5SL:IjCrkDE3?minimal=true",
+      "bookUrl":"https://cnx.org/contents/jVCgr5SL:IjCrkDE3?minimal=true",
+      "icon":"Biology 2e"
     },
     {
       "bookTitle":"Concepts of Biology",
       "title":"Concepts of Biology",
       "contentString":"Concepts of Biology is intended for the introductory biology course for non-science majors taught at most two- and four-year colleges.",
-      "url":"http://cnx.org/contents/s8Hh0oOc:Pj8cW7X1?minimal=true",
-      "bookUrl":"http://cnx.org/contents/s8Hh0oOc:Pj8cW7X1?minimal=true",
+      "url":"https://cnx.org/contents/s8Hh0oOc:Pj8cW7X1?minimal=true",
+      "bookUrl":"https://cnx.org/contents/s8Hh0oOc:Pj8cW7X1?minimal=true",
       "icon":"concepts"
     },
     {
       "bookTitle":"Anatomy & Physiology",
       "title":"Anatomy & Physiology",
       "contentString":"Human Anatomy and Physiology is designed for the two-semester anatomy and physiology course taken by life science and allied health students.",
-      "url":"http://cnx.org/contents/FPtK1zmh:zMTtFGyH?minimal=true",
-      "bookUrl":"http://cnx.org/contents/FPtK1zmh:zMTtFGyH?minimal=true",
+      "url":"https://cnx.org/contents/FPtK1zmh:zMTtFGyH?minimal=true",
+      "bookUrl":"https://cnx.org/contents/FPtK1zmh:zMTtFGyH?minimal=true",
       "icon":"anatomy"
     },
     {
       "bookTitle":"Introductory Statistics",
       "title":"Introductory Statistics",
       "contentString":"Introductory Statistics is intended for the one-semester introduction to statistics course for students who are not mathematics or engineering majors. It focuses on the interpretation of statistical results, especially in real world settings, and assumes that students have an understanding of intermediate algebra.",
-      "url":"http://cnx.org/contents/MBiUQmmY:2T34_25K?minimal=true",
-      "bookUrl":"http://cnx.org/contents/MBiUQmmY:2T34_25K?minimal=true",
+      "url":"https://cnx.org/contents/MBiUQmmY:2T34_25K?minimal=true",
+      "bookUrl":"https://cnx.org/contents/MBiUQmmY:2T34_25K?minimal=true",
       "icon":"statistics"
-    },
-    {
-      "bookTitle":"Principles of Economics",
-      "title":"Principles of Economics",
-      "contentString":"Principles of Economics covers the scope and sequence for a two-semester principles of economics course. The text also includes many current examples, including; discussions on the great recession, the controversy among economists over the Affordable Care Act (Obamacare), the recent government shutdown, and the appointment of the United States’ first female Federal Reserve chair, Janet Yellen.",
-      "url":"http://cnx.org/contents/aWGdK2jw:JgDXaOLP?minimal=true",
-      "bookUrl":"http://cnx.org/contents/aWGdK2jw:JgDXaOLP?minimal=true",
-      "icon":"econ"
-    },
-    {
-      "bookTitle":"Principles of Macroeconomics",
-      "title":"Principles of Macroeconomics",
-      "contentString":"Principles of Macroeconomics covers the scope and sequence for a one-semester economics course. The text also includes many current examples, including: the housing bubble and housing crisis, Zimbabwe’s hyperinflation, global unemployment, and the appointment of the United States’ first female Federal Reserve chair, Janet Yellen.",
-      "url":"http://cnx.org/contents/QGHIMgmO:JgDXaOLP?minimal=true",
-      "bookUrl":"http://cnx.org/contents/QGHIMgmO:JgDXaOLP?minimal=true",
-      "icon":"macro"
-    },
-    {
-      "bookTitle":"Principles of Microeconomics",
-      "title":"Principles of Microeconomics",
-      "contentString":"Principles of Microeconomics covers the scope and sequence for a one-semester economics course. The text also includes many current examples, including; the Keystone Pipeline, Occupy Wall Street, and debates over the minimum wage.",
-      "url":"http://cnx.org/contents/6i8iXmBj:JgDXaOLP?minimal=true",
-      "bookUrl":"http://cnx.org/contents/6i8iXmBj:JgDXaOLP?minimal=true",
-      "icon":"micro"
     },
     {
       "bookTitle":"Precalculus",
       "title":"Precalculus",
       "contentString":"Precalculus is intended for college-level Precalculus students. Since Precalculus courses vary from one institution to the next, we have attempted to meet the needs of as broad an audience as possible, including all of the content that might be covered in any particular course.",
-      "url":"http://cnx.org/contents/_VPq4foj:vEOnJry_?minimal=true",
-      "bookUrl":"http://cnx.org/contents/_VPq4foj:vEOnJry_?minimal=true",
+      "url":"https://cnx.org/contents/_VPq4foj:vEOnJry_?minimal=true",
+      "bookUrl":"https://cnx.org/contents/_VPq4foj:vEOnJry_?minimal=true",
       "icon":"precalculus"
     },
     {
       "bookTitle":"Psychology",
       "title":"Psychology",
       "contentString":"Psychology is designed to meet the scope and sequence for the single-semester introduction to psychology course. For many students, this may be their only college-level psychology course. As such, this textbook provides an important opportunity for students to learn the core concepts of psychology and understand how those concepts apply to their lives.",
-      "url":"http://cnx.org/contents/Sr8Ev5Og:6HoLG-TA?minimal=true",
-      "bookUrl":"http://cnx.org/contents/Sr8Ev5Og:6HoLG-TA?minimal=true",
+      "url":"https://cnx.org/contents/Sr8Ev5Og:6HoLG-TA?minimal=true",
+      "bookUrl":"https://cnx.org/contents/Sr8Ev5Og:6HoLG-TA?minimal=true",
       "icon":"psychology"
     },
     {
       "bookTitle":"U.S. History",
       "title":"U.S. History",
       "contentString":"U.S. History covers the breadth of the chronological history of the United States and also provides the necessary depth to ensure the course is manageable for instructors and students alike.",
-      "url":"http://cnx.org/contents/p7ovuIkl:gMXC1GEM?minimal=true",
-      "bookUrl":"http://cnx.org/contents/p7ovuIkl:gMXC1GEM?minimal=true",
+      "url":"https://cnx.org/contents/p7ovuIkl:gMXC1GEM?minimal=true",
+      "bookUrl":"https://cnx.org/contents/p7ovuIkl:gMXC1GEM?minimal=true",
       "icon":"history"
     },
     {
       "bookTitle":"Chemistry",
       "title":"Chemistry",
       "contentString":"Chemistry is designed for the two-semester general chemistry course. For many students, this course provides the foundation to a career in chemistry, while for others, this may be their only college-level science course. As such, this textbook provides an important opportunity for students to learn the core concepts of chemistry and understand how those concepts apply to their lives and the world around them.",
-      "url":"http://cnx.org/contents/havxkyvS:uXg0kUa-?minimal=true",
-      "bookUrl":"http://cnx.org/contents/havxkyvS:uXg0kUa-?minimal=true",
+      "url":"https://cnx.org/contents/havxkyvS:uXg0kUa-?minimal=true",
+      "bookUrl":"https://cnx.org/contents/havxkyvS:uXg0kUa-?minimal=true",
       "icon":"chemistry"
     },
     {
       "bookTitle":"College Algebra",
       "title":"College Algebra",
       "contentString":"College Algebra provides a comprehensive and multi-layered exploration of algebraic principles. The text is suitable for a typical introductory Algebra course, and was developed to be used flexibly. The modular approach and the richness of content ensures that the book meets the needs of a variety of programs. College Algebra guides and supports students with differing levels of preparation and experience with mathematics.",
-      "url":"http://cnx.org/contents/mwjClAV_:nU8Qkzwo?minimal=true",
-      "bookUrl":"http://cnx.org/contents/mwjClAV_:nU8Qkzwo?minimal=true",
+      "url":"https://cnx.org/contents/mwjClAV_:nU8Qkzwo?minimal=true",
+      "bookUrl":"https://cnx.org/contents/mwjClAV_:nU8Qkzwo?minimal=true",
       "icon":"algebra"
     },
     {
       "bookTitle":"Algebra and Trigonometry",
       "title":"Algebra and Trigonometry",
       "contentString":"Algebra and Trigonometry provides a comprehensive and multi-layered exploration of algebraic principles. The modular approach and the richness of content ensures that the book meets the needs of a variety of programs. Algebra and Trigonometry guides and supports students with differing levels of preparation and experience with mathematics.",
-      "url":"http://cnx.org/contents/E6wQevFf@:nU8Qkzwo?minimal=true",
-      "bookUrl":"http://cnx.org/contents/E6wQevFf@:nU8Qkzwo?minimal=true",
+      "url":"https://cnx.org/contents/E6wQevFf@:nU8Qkzwo?minimal=true",
+      "bookUrl":"https://cnx.org/contents/E6wQevFf@:nU8Qkzwo?minimal=true",
       "icon":"trig"
     },
     {
       "bookTitle":"College Physics For AP® Courses",
       "title":"College Physics For AP® Courses",
       "contentString":"College Physics for AP® Courses is designed to engage students in their exploration of physics and help them to relate what they learn in the classroom to their lives and to apply these concepts to the Advanced Placement® test. Physics underlies much of what is happening today in other sciences and in technology, therefore the book includes interesting facts and ideas that go beyond the scope of the AP® course to further student understanding.",
-      "url":"http://cnx.org/contents/jQSmhtXo:6pB5TgBD?minimal=true",
-      "bookUrl":"http://cnx.org/contents/jQSmhtXo:6pB5TgBD?minimal=true",
+      "url":"https://cnx.org/contents/jQSmhtXo:6pB5TgBD?minimal=true",
+      "bookUrl":"https://cnx.org/contents/jQSmhtXo:6pB5TgBD?minimal=true",
       "icon":"ap-physics"
-    },
-    {
-      "bookTitle":"Principles of Macroeconomics for AP® Courses",
-      "title":"Principles of Macroeconomics for AP® Courses",
-      "contentString":"Principles of Macroeconomics for AP® Courses covers the scope and sequence for a one-semester Advance Placement Macroeconomics® course. The book is on the example textbook list for the AP® course here. The text also includes many current examples, including the housing bubble and housing crisis, Zimbabwe’s hyperinflation, global unemployment, and the appointment of the United States’ first female Federal Reserve chair, Janet Yellen.",
-      "url":"http://cnx.org/contents/MwdgVOwd:CSCWn8lc?minimal=true",
-      "bookUrl":"http://cnx.org/contents/MwdgVOwd:CSCWn8lc?minimal=true",
-      "icon":"ap-macro"
-    },
-    {
-      "bookTitle":"Principles of Microeconomics for AP® Courses",
-      "title":"Principles of Microeconomics for AP® Courses",
-      "contentString":"Principles of Microeconomics for AP® Courses covers the scope and sequence for a one-semester Advance Placement Microeconomics® course. The book is on the example textbook list for the AP® course here. The text also includes many current examples, including; the Keystone Pipeline, Occupy Wall Street, and debates over the minimum wage.",
-      "url":"http://cnx.org/contents/yjROLWcx:CSCWn8lc?minimal=true",
-      "bookUrl":"http://cnx.org/contents/yjROLWcx:CSCWn8lc?minimal=true",
-      "icon":"ap-micro"
     },
     {
       "bookTitle":"American Government",
       "title":"American Government",
       "contentString":"American Government is designed to meet the scope and sequence requirements of the single-semester American Government course. This title includes innovative features designed to enhance student learning, including Insider Perspective features and a Get Connected module that shows students how they can get engaged in the political process.",
-      "url":"http://cnx.org/contents/W8wOWXNF:SjdU64Og?minimal=true",
-      "bookUrl":"http://cnx.org/contents/W8wOWXNF:SjdU64Og?minimal=true",
+      "url":"https://cnx.org/contents/W8wOWXNF:SjdU64Og?minimal=true",
+      "bookUrl":"https://cnx.org/contents/W8wOWXNF:SjdU64Og?minimal=true",
       "icon":"american-gov"
     },
     {
       "bookTitle":"Calculus Volume 1",
       "title":"Calculus Volume 1",
       "contentString":"Calculus Volume 1 is the first of three volumes designed for the two- or three-semester calculus course. For many students, this course provides the foundation to a career in mathematics, science, or engineering.",
-      "url":"http://cnx.org/contents/i4nRcikn:H2TLb2-S?minimal=true",
-      "bookUrl":"http://cnx.org/contents/i4nRcikn:H2TLb2-S?minimal=true",
+      "url":"https://cnx.org/contents/i4nRcikn:H2TLb2-S?minimal=true",
+      "bookUrl":"https://cnx.org/contents/i4nRcikn:H2TLb2-S?minimal=true",
       "icon":"calculus1"
     },
     {
       "bookTitle":"Calculus Volume 2",
       "title":"Calculus Volume 2",
       "contentString":"Calculus Volume 2 is the second of three volumes designed for the two- or three-semester calculus course. For many students, this course provides the foundation to a career in mathematics, science, or engineering.",
-      "url":"http://cnx.org/contents/HTmjSAcf:rrzms6rP?minimal=true",
-      "bookUrl":"http://cnx.org/contents/HTmjSAcf:rrzms6rP?minimal=true",
+      "url":"https://cnx.org/contents/HTmjSAcf:rrzms6rP?minimal=true",
+      "bookUrl":"https://cnx.org/contents/HTmjSAcf:rrzms6rP?minimal=true",
       "icon":"calculus2"
     },
     {
       "bookTitle":"Calculus Volume 3",
       "title":"Calculus Volume 3",
       "contentString":"Calculus Volume 3 is the third of three volumes designed for the two- or three-semester calculus course. For many students, this course provides the foundation to a career in mathematics, science, or engineering.",
-      "url":"http://cnx.org/contents/oxzXkyFi:72YaCFgv?minimal=true",
-      "bookUrl":"http://cnx.org/contents/oxzXkyFi:72YaCFgv?minimal=true",
+      "url":"https://cnx.org/contents/oxzXkyFi:72YaCFgv?minimal=true",
+      "bookUrl":"https://cnx.org/contents/oxzXkyFi:72YaCFgv?minimal=true",
       "icon":"calculus3"
     },
     {
       "bookTitle":"Chemistry: Atoms First",
       "title":"Chemistry: Atoms First",
       "contentString":"This text is an atoms-first adaptation of OpenStax Chemistry. The intention of “atoms-first” involves a few basic principles: first, it introduces atomic and molecular structure much earlier than the traditional approach, and it threads these themes through subsequent chapters.",
-      "url":"http://cnx.org/contents/RTmuIxzM:uXg0kUa-?minimal=true",
-      "bookUrl":"http://cnx.org/contents/RTmuIxzM:uXg0kUa-?minimal=true",
+      "url":"https://cnx.org/contents/RTmuIxzM:uXg0kUa-?minimal=true",
+      "bookUrl":"https://cnx.org/contents/RTmuIxzM:uXg0kUa-?minimal=true",
       "icon":"chemistry-atoms"
     },
     {
       "bookTitle":"Prealgebra",
       "title":"Prealgebra",
       "contentString":"The core of Prealgebra is a textbook for a one-semester course that serves as a bridge between arithmetic and algebra. The basic philosophy of this book is to strengthen students’ arithmetic skills and introduce the fundamental concepts and vocabulary of algebra in a nurturing, non-threatening environment while addressing the needs of students with diverse backgrounds and learning styles.",
-      "url":"http://cnx.org/contents/yqV9q0HH:plLt9FYr?minimal=true",
-      "bookUrl":"http://cnx.org/contents/yqV9q0HH:plLt9FYr?minimal=true",
+      "url":"https://cnx.org/contents/yqV9q0HH:plLt9FYr?minimal=true",
+      "bookUrl":"https://cnx.org/contents/yqV9q0HH:plLt9FYr?minimal=true",
       "icon":"prealgebra"
     },
     {
       "bookTitle":"University Physics Volume 1",
       "title":"University Physics Volume 1",
       "contentString":"",
-      "url":"http://cnx.org/contents/1Q9uMg_a:bG-_rWXy?minimal=true",
-      "bookUrl":"http://cnx.org/contents/1Q9uMg_a:bG-_rWXy?minimal=true",
+      "url":"https://cnx.org/contents/1Q9uMg_a:bG-_rWXy?minimal=true",
+      "bookUrl":"https://cnx.org/contents/1Q9uMg_a:bG-_rWXy?minimal=true",
       "icon":"University Physics Volume 1"
     },
     {
       "bookTitle":"University Physics Volume 2",
       "title":"University Physics Volume 2",
       "contentString":"",
-      "url":"http://cnx.org/contents/eg-XcBxE:DSrCtKWS?minimal=true",
-      "bookUrl":"http://cnx.org/contents/eg-XcBxE:DSrCtKWS?minimal=true",
+      "url":"https://cnx.org/contents/eg-XcBxE:DSrCtKWS?minimal=true",
+      "bookUrl":"https://cnx.org/contents/eg-XcBxE:DSrCtKWS?minimal=true",
       "icon":"University Physics Volume 2"
     },
     {
       "bookTitle":"University Physics Volume 3",
       "title":"University Physics Volume 3",
       "contentString":"",
-      "url":"http://cnx.org/contents/rydUIGBQ:bq-wv5M8?minimal=true",
-      "bookUrl":"http://cnx.org/contents/rydUIGBQ:bq-wv5M8?minimal=true",
+      "url":"https://cnx.org/contents/rydUIGBQ:bq-wv5M8?minimal=true",
+      "bookUrl":"https://cnx.org/contents/rydUIGBQ:bq-wv5M8?minimal=true",
       "icon":"University Physics Volume 3"
     },
     {
       "bookTitle":"Astronomy",
       "title":"Astronomy",
       "contentString":"",
-      "url":"http://cnx.org/contents/LnN76Opl:_45u6IpQ?minimal=true",
-      "bookUrl":"http://cnx.org/contents/LnN76Opl:_45u6IpQ?minimal=true",
+      "url":"https://cnx.org/contents/LnN76Opl:_45u6IpQ?minimal=true",
+      "bookUrl":"https://cnx.org/contents/LnN76Opl:_45u6IpQ?minimal=true",
       "icon":"Astronomy"
     },
     {
       "bookTitle":"Elementary Algebra",
       "title":"Elementary Algebra",
       "contentString":"",
-      "url":"http://cnx.org/contents/CImQfPDv:GfaWl1GG?minimal=true",
-      "bookUrl":"http://cnx.org/contents/CImQfPDv:GfaWl1GG?minimal=true",
+      "url":"https://cnx.org/contents/CImQfPDv:GfaWl1GG?minimal=true",
+      "bookUrl":"https://cnx.org/contents/CImQfPDv:GfaWl1GG?minimal=true",
       "icon":"Elementary Algebra"
     },
     {
       "bookTitle":"Intermediate Algebra",
       "title":"Intermediate Algebra",
       "contentString":"",
-      "url":"http://cnx.org/contents/AndhM9Sd:HCaG_W5c?minimal=true",
-      "bookUrl":"http://cnx.org/contents/AndhM9Sd:HCaG_W5c?minimal=true",
+      "url":"https://cnx.org/contents/AndhM9Sd:HCaG_W5c?minimal=true",
+      "bookUrl":"https://cnx.org/contents/AndhM9Sd:HCaG_W5c?minimal=true",
       "icon":"Intermediate Algebra"
     },
     {
       "bookTitle":"Principles of Microeconomics 2e",
       "title":"Principles of Microeconomics 2e",
       "contentString":"",
-      "url":"http://cnx.org/contents/XAl2LLVA:3ZlSW1C7?minimal=true",
-      "bookUrl":"http://cnx.org/contents/XAl2LLVA:3ZlSW1C7?minimal=true",
+      "url":"https://cnx.org/contents/XAl2LLVA:3ZlSW1C7?minimal=true",
+      "bookUrl":"https://cnx.org/contents/XAl2LLVA:3ZlSW1C7?minimal=true",
       "icon":"Principles of Microeconomics 2e"
     },
     {
       "bookTitle":"Introductory Business Statistics",
       "title":"Introductory Business Statistics",
       "contentString":"",
-      "url":"http://cnx.org/contents/tWu56V64:-mZCQZc7?minimal=true",
-      "bookUrl":"http://cnx.org/contents/tWu56V64:-mZCQZc7?minimal=true",
+      "url":"https://cnx.org/contents/tWu56V64:-mZCQZc7?minimal=true",
+      "bookUrl":"https://cnx.org/contents/tWu56V64:-mZCQZc7?minimal=true",
       "icon":"Introductory Business Statistics"
     },
     {
       "bookTitle":"Microbiology",
       "title":"Microbiology",
       "contentString":"",
-      "url":"http://cnx.org/contents/5CvTdmJL:rFziotaH?minimal=true",
-      "bookUrl":"http://cnx.org/contents/5CvTdmJL:rFziotaH?minimal=true",
+      "url":"https://cnx.org/contents/5CvTdmJL:rFziotaH?minimal=true",
+      "bookUrl":"https://cnx.org/contents/5CvTdmJL:rFziotaH?minimal=true",
       "icon":"Microbiology"
     },
     {
       "bookTitle":"Principles of Economics 2e",
       "title":"Principles of Economics 2e",
       "contentString":"",
-      "url":"http://cnx.org/contents/vEmOH-_p:3ZlSW1C7?minimal=true",
-      "bookUrl":"http://cnx.org/contents/vEmOH-_p:3ZlSW1C7?minimal=true",
+      "url":"https://cnx.org/contents/vEmOH-_p:3ZlSW1C7?minimal=true",
+      "bookUrl":"https://cnx.org/contents/vEmOH-_p:3ZlSW1C7?minimal=true",
       "icon":"econ_2e"
     },
     {
       "bookTitle":"Principles of Macroeconomics 2e",
       "title":"Principles of Macroeconomics 2e",
       "contentString":"",
-      "url":"http://cnx.org/contents/J_WQZJkO:3ZlSW1C7?minimal=true",
-      "bookUrl":"http://cnx.org/contents/J_WQZJkO:3ZlSW1C7?minimal=true",
+      "url":"https://cnx.org/contents/J_WQZJkO:3ZlSW1C7?minimal=true",
+      "bookUrl":"https://cnx.org/contents/J_WQZJkO:3ZlSW1C7?minimal=true",
       "icon":"macro_2e"
     },
     {
       "bookTitle":"Principles of Macroeconomics for AP® Courses 2e",
       "title":"Principles of Macroeconomics for AP® Courses 2e",
       "contentString":"",
-      "url":"http://cnx.org/contents/kRfPjKij:3ZlSW1C7?minimal=true",
-      "bookUrl":"http://cnx.org/contents/kRfPjKij:3ZlSW1C7?minimal=true",
+      "url":"https://cnx.org/contents/kRfPjKij:3ZlSW1C7?minimal=true",
+      "bookUrl":"https://cnx.org/contents/kRfPjKij:3ZlSW1C7?minimal=true",
       "icon":"ap-macro-2e"
     },
     {
       "bookTitle":"Principles of Microeconomics for AP® Courses 2e",
       "title":"Principles of Microeconomics for AP® Courses 2e",
       "contentString":"",
-      "url":"http://cnx.org/contents/Y2y_2U43:3ZlSW1C7?minimal=true",
-      "bookUrl":"http://cnx.org/contents/Y2y_2U43:3ZlSW1C7?minimal=true",
+      "url":"https://cnx.org/contents/Y2y_2U43:3ZlSW1C7?minimal=true",
+      "bookUrl":"https://cnx.org/contents/Y2y_2U43:3ZlSW1C7?minimal=true",
       "icon":"ap-micro-2e"
+    },
+    {
+      "bookTitle":"Biology for AP® Courses",
+      "title":"Biology for AP® Courses",
+      "contentString":"",
+      "url":"https://cnx.org/contents/bDIuMp-w:JWlEtS9z?minimal=true",
+      "bookUrl":"https://cnx.org/contents/bDIuMp-w:JWlEtS9z?minimal=true",
+      "icon":"ap-biology"
+    },
+    {
+      "bookTitle":"Fizyka dla szkół wyższych Tom 1",
+      "title":"Fizyka dla szkół wyższych Tom 1",
+      "contentString":"",
+      "url":"https://cnx.org/contents/TqqPA4io:pLGsuj0f?minimal=true",
+      "bookUrl":"https://cnx.org/contents/TqqPA4io:pLGsuj0f?minimal=true",
+      "icon":"fizyka tom1"
+    },
+    {
+      "bookTitle":"Fizyka dla szkół wyższych Tom 2",
+      "title":"Fizyka dla szkół wyższych Tom 2",
+      "contentString":"",
+      "url":"https://cnx.org/contents/FqtblkWY:pLGsuj0f?minimal=true",
+      "bookUrl":"https://cnx.org/contents/FqtblkWY:pLGsuj0f?minimal=true",
+      "icon":"fizyka tom2"
     }
   ]
 }
