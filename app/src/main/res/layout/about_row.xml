@@ -11,36 +11,36 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:cacheColorHint="#00000000">
-        <!--<ImageView
+        <ImageView
             android:id="@+id/logoView"
-            android:layout_width="48sp"
-            android:layout_height="48sp"
+            android:layout_width="200sp"
+            android:layout_height="259sp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
             android:padding="5dp"
-            android:src="@drawable/logo"/>-->
+            android:src="@drawable/logo_lg"/>
 
         <TextView
             android:id="@+id/title"
-            style="@style/OSTextAppearance.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="3dip"
-            android:layout_marginTop="3dip"
-            android:layout_weight="1"
-            android:layout_gravity="left|center_vertical"
+            style="@style/OSTextAppearance.Title"
+            android:layout_below="@+id/logoView"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
+            android:padding="10dp"
             android:textSize="24sp"
             android:layout_marginLeft="5dip"/>
         <TextView
             android:id="@+id/blurb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="3dip"
-            android:layout_marginTop="3dip"
-            android:layout_marginRight="3dp"
+            android:autoLink="web"
             android:layout_below="@+id/title"
-            android:layout_weight="1"
-            android:layout_gravity="left|center_vertical"
-            android:textSize="20sp"
-            android:layout_marginLeft="5dip"/>
+            android:layout_centerHorizontal="true"
+            android:padding="15dp"
+            android:textSize="20sp"/>
 
     </RelativeLayout>
 

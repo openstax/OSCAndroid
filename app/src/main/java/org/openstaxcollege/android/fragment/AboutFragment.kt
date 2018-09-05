@@ -40,7 +40,7 @@ class AboutFragment : Fragment()
     {
         super.onActivityCreated(savedInstanceState)
         val recyclerView:RecyclerView = view!!.findViewById(R.id.recycler_view)
-        recyclerView.layoutManager = LinearLayoutManager(getActivity())
+        recyclerView.layoutManager = LinearLayoutManager(this.activity)
         recyclerView.itemAnimator = DefaultItemAnimator()
         recyclerView.isNestedScrollingEnabled = false
         val adapter = AboutRecyclerViewAdapter(content, R.layout.about_row)

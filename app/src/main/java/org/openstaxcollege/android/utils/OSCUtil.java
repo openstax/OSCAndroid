@@ -18,6 +18,7 @@ import com.google.gson.Gson;
 import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.beans.BookList;
 import org.openstaxcollege.android.beans.Content;
+import org.openstaxcollege.android.handlers.JsonHelper;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -228,37 +229,16 @@ public class OSCUtil
 
     public static Content getTitle(String title, Context context)
     {
-        if(bookList == null)
-        {
-            bookList = readJson(context);
-        }
 
+        if(bookList != null)
+        {
+            JsonHelper helper = new JsonHelper();
+            BookList bookList = helper.getBookData(context, BookList.class, "bookList.json");
+            Collections.sort(bookList.getBookList());
+
+        }
         return bookList.findTitle(title);
 
     }
-
-    public static BookList readJson(Context context)
-    {
-        AssetManager assets = context.getAssets();
-        BookList aboutList = new BookList();
-
-        Gson gson = new Gson();
-
-        try
-        {
-            InputStream is = assets.open("bookList.json");
-            BufferedReader bf = new BufferedReader(new InputStreamReader(is));
-            aboutList = gson.fromJson(bf,BookList.class);
-        }
-        catch(IOException ioe)
-        {
-            Log.d("json", "Some problem: " + ioe.toString());
-        }
-
-        Collections.sort(aboutList.getBookList());
-
-        return aboutList;
-    }
-
 
 }
