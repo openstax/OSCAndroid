@@ -7,23 +7,16 @@
 package org.openstaxcollege.android.utils;
 
 import android.content.Context;
-import android.content.res.AssetManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
 import android.widget.Toast;
-
-import com.google.gson.Gson;
 
 import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.beans.BookList;
 import org.openstaxcollege.android.beans.Content;
 import org.openstaxcollege.android.handlers.JsonHelper;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.Collections;
 
 /**
@@ -229,11 +222,10 @@ public class OSCUtil
 
     public static Content getTitle(String title, Context context)
     {
-
-        if(bookList != null)
+        if(bookList == null)
         {
             JsonHelper helper = new JsonHelper();
-            BookList bookList = helper.getBookData(context, BookList.class, "bookList.json");
+            bookList = helper.getBookData(context, BookList.class, "bookList.json");
             Collections.sort(bookList.getBookList());
 
         }
