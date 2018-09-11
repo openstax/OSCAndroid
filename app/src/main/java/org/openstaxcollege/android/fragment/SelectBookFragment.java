@@ -14,9 +14,11 @@ import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.adapters.SelectBookRecyclerViewAdapter;
 import org.openstaxcollege.android.beans.BookList;
 import org.openstaxcollege.android.beans.Content;
+import org.openstaxcollege.android.handlers.JsonHelper;
 import org.openstaxcollege.android.utils.OSCUtil;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 /**
@@ -61,8 +63,17 @@ public class SelectBookFragment extends Fragment
 
     private ArrayList<Content> getContent()
     {
-        BookList bookList = OSCUtil.readJson(getActivity());
-        return bookList.getBookList();
+        JsonHelper helper = new JsonHelper();
+        BookList bookList = helper.getBookData(activity, BookList.class, "bookList.json");
+        if(bookList != null)
+        {
+            Collections.sort(bookList.getBookList());
+            return bookList.getBookList();
+        }
+        else
+        {
+            return new ArrayList<>();
+        }
     }
 
 }

@@ -3,7 +3,7 @@ OSCAndroid
 
 OpenStax Android App
 
-The OpenStax College Android app provides free textbooks covering Statistics, Physics, Sociology, Biology, Statistics and Anatomy and Physiology. Key features are
+The OpenStax Android app provides free textbooks covering Statistics, Physics, Sociology, Biology, Statistics and Anatomy and Physiology. Key features are
 - View textbooks in the app.
 - Take notes in the app, export them as text files to your phone or share via email or text.
 - Share the great content you find with others via email, text, Facebook, Twitter, etc.

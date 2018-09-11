@@ -89,5 +89,7 @@
     <string name="micro_icon">micro</string>
     <string name="ap_macro_icon">ap-macro</string>
     <string name="ap_micro_icon">ap-micro</string>
+    <string name="menu_about">About OpenStax</string>
+    <string name="about">About OpenStax</string>
 </resources>
  

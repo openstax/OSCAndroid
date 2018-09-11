@@ -23,6 +23,7 @@ import android.view.View;
 import android.webkit.WebView;
 import android.widget.Toast;
 import org.openstaxcollege.android.R;
+import org.openstaxcollege.android.activity.AboutActivity;
 import org.openstaxcollege.android.activity.NoteEditorActivity;
 import org.openstaxcollege.android.activity.ViewBookmarksActivity;
 import org.openstaxcollege.android.beans.Content;
@@ -85,6 +86,10 @@ public class MenuHandler
             case R.id.go_to_favs:
                 Intent intent = new Intent(context, ViewBookmarksActivity.class);
                 context.startActivity(intent);
+                return true;
+            case R.id.about:
+                Intent aboutIntent = new Intent(context, AboutActivity.class);
+                context.startActivity(aboutIntent);
                 return true;
             case R.id.viewLicense:
                 displayLicensesAlert(context);

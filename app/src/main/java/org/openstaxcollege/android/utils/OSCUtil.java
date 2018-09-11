@@ -7,22 +7,16 @@
 package org.openstaxcollege.android.utils;
 
 import android.content.Context;
-import android.content.res.AssetManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-
 import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.beans.BookList;
 import org.openstaxcollege.android.beans.Content;
+import org.openstaxcollege.android.handlers.JsonHelper;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.Collections;
 
 /**
@@ -230,35 +224,13 @@ public class OSCUtil
     {
         if(bookList == null)
         {
-            bookList = readJson(context);
-        }
+            JsonHelper helper = new JsonHelper();
+            bookList = helper.getBookData(context, BookList.class, "bookList.json");
+            Collections.sort(bookList.getBookList());
 
+        }
         return bookList.findTitle(title);
 
     }
-
-    public static BookList readJson(Context context)
-    {
-        AssetManager assets = context.getAssets();
-        BookList aboutList = new BookList();
-
-        Gson gson = new Gson();
-
-        try
-        {
-            InputStream is = assets.open("bookList.json");
-            BufferedReader bf = new BufferedReader(new InputStreamReader(is));
-            aboutList = gson.fromJson(bf,BookList.class);
-        }
-        catch(IOException ioe)
-        {
-            Log.d("json", "Some problem: " + ioe.toString());
-        }
-
-        Collections.sort(aboutList.getBookList());
-
-        return aboutList;
-    }
-
 
 }
