@@ -463,41 +463,45 @@ public class WebViewActivity extends AppCompatActivity
                     {
                         cnxDir.mkdir();
                     }
-                    DownloadManager dm = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-                    WebviewLogic wl = new WebviewLogic();
-                    //Log.d("WeviewLogic", "title: " + currentContent.getBookTitle());
-                    String pdfUrl = wl.getPDFUrl(currentContent.getBookTitle());
-
-                    if(pdfUrl == null || pdfUrl.equals(""))
+                    Thread downloadThread = new Thread()
                     {
-                        Toast.makeText(context, getString(R.string.pdf_url_missing),  Toast.LENGTH_LONG).show();
-                    }
-                    else
-                    {
-                        //Log.d("Webview","PDF URL: " + pdfUrl);
-                        Uri uri = Uri.parse(pdfUrl);
+                        public void run()
+                        {
+                            DownloadManager dm = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+                            WebviewLogic wl = new WebviewLogic();
+                            //Log.d("WeviewLogic","title: "+currentContent.getBookTitle());
+                            String pdfUrl = wl.getPDFUrl(currentContent.getBookTitle());
 
-                        DownloadManager.Request request = new DownloadManager.Request(uri);
-                        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "/" + MenuUtil.getTitle(currentContent.getBookTitle()) + ".pdf");
-                        request.setTitle(currentContent.getBookTitle() + ".pdf");
-                        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-                        try
-                        {
-                            dm.enqueue(request);
+                            if (pdfUrl == null || pdfUrl.equals(""))
+
+                            {
+                                Toast.makeText(context, getString(R.string.pdf_url_missing), Toast.LENGTH_LONG).show();
+                            } else
+
+                            {
+                                //Log.d("Webview","PDF URL: " + pdfUrl);
+                                Uri uri = Uri.parse(pdfUrl);
+
+                                DownloadManager.Request request = new DownloadManager.Request(uri);
+                                request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "/" + MenuUtil.getTitle(currentContent.getBookTitle()) + ".pdf");
+                                request.setTitle(currentContent.getBookTitle() + ".pdf");
+                                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+                                try
+                                {
+                                    dm.enqueue(request);
+                                } catch (IllegalArgumentException iae)
+                                {
+                                    createDialog(context);
+                                }
+                            }
                         }
-                        catch(IllegalArgumentException iae)
-                        {
-                            createDialog(context);
-                        }
-                    }
+                    };
+                    downloadThread.start();
                 }
                 else
                 {
                     OSCUtil.makeNoDataToast(context);
                 }
-
-
-
 
             } });
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.cancel), new DialogInterface.OnClickListener()
