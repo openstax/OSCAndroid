@@ -6,7 +6,12 @@
  */
 package org.openstaxcollege.android.beans
 
+/**
+ * Data class for about.json file
+ *
+ * @author Ed Woodward
+ */
 data class About(
-        val title:String? = null,
-        val blurb:String? = null
+    val title:String? = null,
+    val blurb:String? = null
 )
