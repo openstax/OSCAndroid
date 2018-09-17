@@ -471,13 +471,14 @@ public class WebViewActivity extends AppCompatActivity
                             WebviewLogic wl = new WebviewLogic();
                             //Log.d("WeviewLogic","title: "+currentContent.getBookTitle());
                             String pdfUrl = wl.getPDFUrl(currentContent.getBookTitle());
+                            pdfUrl = "";
 
                             if (pdfUrl == null || pdfUrl.equals(""))
 
                             {
-                                Toast.makeText(context, getString(R.string.pdf_url_missing), Toast.LENGTH_LONG).show();
-                            } else
-
+                                makePDFToast();
+                            }
+                            else
                             {
                                 //Log.d("Webview","PDF URL: " + pdfUrl);
                                 Uri uri = Uri.parse(pdfUrl);
@@ -548,6 +549,11 @@ public class WebViewActivity extends AppCompatActivity
                 .setCancelable(true)
                 .create()
                 .show();
+    }
+
+    private void makePDFToast()
+    {
+        Toast.makeText(this, getString(R.string.pdf_url_missing), Toast.LENGTH_LONG).show();
     }
 
 }

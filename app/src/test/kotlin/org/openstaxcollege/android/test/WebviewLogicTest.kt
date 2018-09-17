@@ -24,4 +24,15 @@ class WebviewLogicTest
         //val url: String? = webLogic.getPDFUrl("Bad Title")
         println(url)
     }
+
+    @Test
+    fun testGetBookTitle()
+    {
+        val webLogic = WebviewLogic()
+        //val title: String = webLogic.getBookTitle("Introduction to Science and the Realm of Physics, Physical Quantities, and Units - College Physics - OpenStax CNX")
+        //val title: String = webLogic.getBookTitle("Introduction to Functions - Precalculus - OpenStax CNX")
+        //val title: String = webLogic.getBookTitle("Introduction - Anatomy & Physiology - OpenStax CNX")
+        val title: String = webLogic.getBookTitle("Introduction - Biology for AP® Courses - OpenStax CNX")
+        println(title)
+    }
 }

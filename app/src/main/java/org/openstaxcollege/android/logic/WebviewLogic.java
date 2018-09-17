@@ -48,7 +48,8 @@ public class WebviewLogic
             {
                 newTitle = "Biology For AP® Courses";
             }
-            return newTitle;
+
+            return translateTitle(newTitle);
         }
         else
         {
@@ -86,6 +87,11 @@ public class WebviewLogic
         return pdfURL;
     }
 
+    /**
+     * Translate actual book title into title needed to fetch PDF URL
+     * @param bookTitle - String
+     * @return String translated book title if it matches otherwise the original book title
+     */
     private String translateTitle(String bookTitle)
     {
         if(bookTitle.equals("College Physics For AP® Courses"))
