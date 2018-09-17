@@ -30,6 +30,18 @@ public class Content implements Serializable, Comparable<Content>
     
     private String bookUrl;
 
+    private String pdfUrl;
+
+    public String getPdfUrl()
+    {
+        return pdfUrl;
+    }
+
+    public void setPdfUrl(String pdfUrl)
+    {
+        this.pdfUrl = pdfUrl;
+    }
+
     public String getBookUrl()
     {
         return bookUrl;
