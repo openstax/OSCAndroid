@@ -44,12 +44,8 @@ public class WebviewLogic
             {
                 newTitle = "Anatomy and Physiology";
             }
-            else if(newTitle.equals("Biology for AP® Courses"))
-            {
-                newTitle = "Biology For AP® Courses";
-            }
 
-            return translateTitle(newTitle);
+            return newTitle;
         }
         else
         {
@@ -82,6 +78,10 @@ public class WebviewLogic
                         pdfURL = books.getHighResolutionPdfUrl();
                     }
                 }
+            }
+            if(pdfURL == null)
+            {
+                pdfURL = "";
             }
         }
         return pdfURL;
