@@ -29,6 +29,7 @@ import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.beans.Content;
 import org.openstaxcollege.android.handlers.MenuHandler;
 import org.openstaxcollege.android.logic.WebviewLogic;
+import org.openstaxcollege.android.tasks.FetchPdfUrlTask;
 import org.openstaxcollege.android.utils.MenuUtil;
 import org.openstaxcollege.android.utils.OSCUtil;
 
@@ -52,7 +53,7 @@ import java.io.File;
  * @author Ed Woodward
  *
  */
-public class WebViewActivity extends AppCompatActivity
+public class WebViewActivity extends AppCompatActivity implements FetchPdfUrlTask.PdfTaskCallback
 {
     /** Web browser view for Activity */
     private WebView webView;
@@ -153,7 +154,7 @@ public class WebViewActivity extends AppCompatActivity
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.web_view);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         if (Build.VERSION.SDK_INT >= 24) {
@@ -193,6 +194,7 @@ public class WebViewActivity extends AppCompatActivity
             }
 
         }
+        new FetchPdfUrlTask(content.getBookTitle(), this).execute();
 
         if(OSCUtil.isConnected(this))
         {
@@ -201,9 +203,19 @@ public class WebViewActivity extends AppCompatActivity
         }
         else
         {
-            webView = (WebView)findViewById(R.id.web_view);
+            webView = findViewById(R.id.web_view);
             OSCUtil.makeNoDataToast(this);
         }
+    }
+
+    /**
+     * callback for PDF URL retrieval
+     * @param result
+     */
+    public void onResultReceived(String result)
+    {
+        //Log.d("PDF TASK RESULT", result);
+        content.setPdfUrl(result);
     }
     
     @Override
@@ -342,10 +354,6 @@ public class WebViewActivity extends AppCompatActivity
     {
         super.onResume();
         saveLocation = true;
-        //SharedPreferences sharedPref = getSharedPreferences(getString(R.string.osc_package),MODE_PRIVATE);
-        //String url = sharedPref.getString(content.getIcon(), "");
-        //Log.d("WebViewActivity.onResume()","URL retrieved: " + url);
-
 
     }
 
@@ -463,14 +471,14 @@ public class WebViewActivity extends AppCompatActivity
                     {
                         cnxDir.mkdir();
                     }
-                    DownloadManager dm = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-                    WebviewLogic wl = new WebviewLogic();
-                    //Log.d("WeviewLogic", "title: " + currentContent.getBookTitle());
-                    String pdfUrl = wl.getPDFUrl(currentContent.getBookTitle());
 
-                    if(pdfUrl == null || pdfUrl.equals(""))
+                    DownloadManager dm = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+                    //Log.d("WeviewLogic","title: "+currentContent.getBookTitle());
+                    String pdfUrl = content.getPdfUrl();
+
+                    if (pdfUrl == null || pdfUrl.equals(""))
                     {
-                        Toast.makeText(context, getString(R.string.pdf_url_missing),  Toast.LENGTH_LONG).show();
+                        makePDFToast();
                     }
                     else
                     {
@@ -485,19 +493,17 @@ public class WebViewActivity extends AppCompatActivity
                         {
                             dm.enqueue(request);
                         }
-                        catch(IllegalArgumentException iae)
+                        catch (IllegalArgumentException iae)
                         {
                             createDialog(context);
                         }
                     }
+
                 }
                 else
                 {
                     OSCUtil.makeNoDataToast(context);
                 }
-
-
-
 
             } });
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.cancel), new DialogInterface.OnClickListener()
@@ -544,6 +550,11 @@ public class WebViewActivity extends AppCompatActivity
                 .setCancelable(true)
                 .create()
                 .show();
+    }
+
+    private void makePDFToast()
+    {
+        Toast.makeText(this, getString(R.string.pdf_url_missing), Toast.LENGTH_LONG).show();
     }
 
 }

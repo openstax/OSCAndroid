@@ -7,11 +7,12 @@
 package org.openstaxcollege.android.beans
 
 /**
- * Data class for about.json file
+ * Data class for json from openstax CMS
  *
  * @author Ed Woodward
  */
-data class About(
-    val title:String? = null,
-    val blurb:String? = null
+data class Parent(
+    val meta: Meta? = null,
+    val id: Int? = null,
+    val title: String? = null
 )

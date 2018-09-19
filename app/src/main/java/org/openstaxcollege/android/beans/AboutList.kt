@@ -8,6 +8,11 @@ package org.openstaxcollege.android.beans
 
 import java.util.ArrayList
 
+/**
+ * Data class for about.json file
+ *
+ * @author Ed Woodward
+ */
 data class AboutList(
-        val aboutList: ArrayList<About>
+    val aboutList: ArrayList<About>
 )
