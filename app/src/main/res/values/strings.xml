@@ -58,6 +58,7 @@
     <string name="econ_2e_icon">econ_2e</string>
     <string name="fizyka_tom1">fizyka tom1</string>
     <string name="fizyka_tom2">fizyka tom2</string>
+    <string name="fizyka_tom3">fizyka tom3</string>
     <string name="ok">Ok</string>
     <string name="cancel">Cancel</string>
     <string name="folder_name">OpenStax</string>
@@ -91,5 +92,7 @@
     <string name="ap_micro_icon">ap-micro</string>
     <string name="menu_about">About OpenStax</string>
     <string name="about">About OpenStax</string>
+    <string name="intro_business_icon">intro-business</string>
+    <string name="business_ethics_icon">business-ethics</string>
 </resources>
  

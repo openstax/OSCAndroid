@@ -265,8 +265,8 @@
       "icon":"ap-micro-2e"
     },
     {
-      "bookTitle":"Biology For AP® Courses",
-      "title":"Biology For AP® Courses",
+      "bookTitle":"Biology for AP® Courses",
+      "title":"Biology for AP® Courses",
       "contentString":"",
       "url":"https://cnx.org/contents/bDIuMp-w:JWlEtS9z?minimal=true",
       "bookUrl":"https://cnx.org/contents/bDIuMp-w:JWlEtS9z?minimal=true",
@@ -287,6 +287,30 @@
       "url":"https://cnx.org/contents/FqtblkWY:pLGsuj0f?minimal=true",
       "bookUrl":"https://cnx.org/contents/FqtblkWY:pLGsuj0f?minimal=true",
       "icon":"fizyka tom2"
+    },
+    {
+      "bookTitle":"Fizyka dla szkół wyższych Tom 3",
+      "title":"Fizyka dla szkół wyższych Tom 3",
+      "contentString":"",
+      "url":"https://cnx.org/contents/u2KTPvIK:pLGsuj0f?minimal=true",
+      "bookUrl":"https://cnx.org/contents/u2KTPvIK:pLGsuj0f?minimal=true",
+      "icon":"fizyka tom3"
+    },
+    {
+      "bookTitle":"Introduction to Business",
+      "title":"Introduction to Business",
+      "contentString":"",
+      "url":"https://cnx.org/contents/Tgl3H6iq:HFQiJQgd?minimal=true",
+      "bookUrl":"https://cnx.org/contents/Tgl3H6iq:HFQiJQgd?minimal=true",
+      "icon":"intro-business"
+    },
+    {
+      "bookTitle":"Business Ethics",
+      "title":"Business Ethics",
+      "contentString":"",
+      "url":"https://cnx.org/contents/kUrGbuHs:KCyr9xii?minimal=true",
+      "bookUrl":"https://cnx.org/contents/kUrGbuHs:KCyr9xii?minimal=true",
+      "icon":"business-ethics"
     }
   ]
 }

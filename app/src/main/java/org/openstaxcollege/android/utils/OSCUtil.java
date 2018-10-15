@@ -195,6 +195,10 @@ public class OSCUtil
        {
            coverId = R.drawable.fizyka_tom2;
        }
+       else if(icon.equals(context.getString(R.string.fizyka_tom3)))
+       {
+           coverId = R.drawable.fizyka_tom3;
+       }
        else if(icon.equals(context.getString(R.string.macro_icon)))
        {
            coverId = R.drawable.macro_econ_lg;
@@ -210,6 +214,14 @@ public class OSCUtil
        else if(icon.equals(context.getString(R.string.ap_micro_icon)))
        {
            coverId = R.drawable.ap_micro;
+       }
+       else if(icon.equals(context.getString(R.string.intro_business_icon)))
+       {
+           coverId = R.drawable.intro_to_business;
+       }
+       else if(icon.equals(context.getString(R.string.business_ethics_icon)))
+       {
+           coverId = R.drawable.business_ethics;
        }
 
        return coverId;
