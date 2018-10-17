@@ -127,11 +127,18 @@ public class ShelfRecyclerViewAdapter extends RecyclerView.Adapter<ShelfRecycler
             {
                 content.setBookUrl(bookTitle.getBookUrl());
             }
-            Context context = v.getContext();
-            Intent wv = new Intent(v.getContext(), WebViewActivity.class);
-            wv.putExtra(v.getContext().getString(R.string.webcontent), content);
+            if(OSCUtil.isConnected(context))
+            {
+                Context context = v.getContext();
+                Intent wv = new Intent(v.getContext(), WebViewActivity.class);
+                wv.putExtra(v.getContext().getString(R.string.webcontent), content);
 
-            context.startActivity(wv);
+                context.startActivity(wv);
+            }
+            else
+            {
+                Toast.makeText(context, context.getString(R.string.no_connextion), Toast.LENGTH_SHORT).show();
+            }
         }
 
 

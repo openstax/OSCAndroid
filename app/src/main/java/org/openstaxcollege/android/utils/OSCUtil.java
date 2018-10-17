@@ -234,6 +234,19 @@ public class OSCUtil
 
     public static Content getTitle(String title, Context context)
     {
+        //Log.d("OSCUtil", "title: " + title);
+        if(title.equals("Fizyka dla szkół wyższych Tom 3"))
+        {
+             title = "Fizyka dla szkół wyższych. Tom 3";
+        }
+        else if(title.equals("Fizyka dla szkół wyższych Tom 2"))
+        {
+            title = "Fizyka dla szkół wyższych. Tom 2";
+        }
+        else if(title.equals("Fizyka dla szkół wyższych Tom 1"))
+        {
+            title = "Fizyka dla szkół wyższych. Tom 1";
+        }
         if(bookList == null)
         {
             JsonHelper helper = new JsonHelper();

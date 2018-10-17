@@ -94,5 +94,6 @@
     <string name="about">About OpenStax</string>
     <string name="intro_business_icon">intro-business</string>
     <string name="business_ethics_icon">business-ethics</string>
+    <string name="no_connextion">No data connection</string>
 </resources>
  

@@ -18,6 +18,19 @@ class FetchPdfUrlTask(val bookTitle: String?, val pdfListener:PdfTaskCallback): 
                 title = "Biology for AP® Courses"
             }
             pdfUrl = wl.getPDFUrl(title)
+
+            if(pdfUrl == "" && title == "Fizyka dla szkół wyższych. Tom 3")
+            {
+                pdfUrl = wl.getPDFUrl("Fizyka dla szkół wyższych Tom 3")
+            }
+            else if(pdfUrl == "" && title == "Fizyka dla szkół wyższych. Tom 2")
+            {
+                pdfUrl = wl.getPDFUrl("Fizyka dla szkół wyższych Tom 2")
+            }
+            else if(pdfUrl == "" && title == "Fizyka dla szkół wyższych. Tom 1")
+            {
+                pdfUrl = wl.getPDFUrl("Fizyka dla szkół wyższych Tom 1")
+            }
         }
 
         return pdfUrl
