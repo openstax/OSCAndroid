@@ -286,6 +286,7 @@ public class NoteEditorFragment extends Fragment
      */
     private void checkDBForNote()
     {
+        //Log.d("NoteFragment", "bookURL = " + content.getBookUrl());
         if(content != null)
         {
             cursor = activity.getContentResolver().query(Notes.CONTENT_URI, null, "notes_url='" + content.getBookUrl() + "'", null, null);

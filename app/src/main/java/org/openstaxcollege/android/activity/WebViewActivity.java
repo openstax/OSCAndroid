@@ -305,7 +305,7 @@ public class WebViewActivity extends AppCompatActivity implements FetchPdfUrlTas
                 content.setUrl(webView.getUrl());
                 Content bookUrlContent = OSCUtil.getTitle(content.getBookTitle(), this);
                 content.setBookUrl(bookUrlContent.getBookUrl());
-                //Log.d("webviewl", "book url: " + content.getBookUrl());
+                //Log.d("webview2", "book url: " + content.getBookUrl());
 
             }
             catch(Exception mue)
