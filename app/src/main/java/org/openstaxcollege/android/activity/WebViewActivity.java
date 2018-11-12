@@ -194,11 +194,12 @@ public class WebViewActivity extends AppCompatActivity implements FetchPdfUrlTas
             }
 
         }
-        new FetchPdfUrlTask(content.getBookTitle(), this).execute();
+
 
         if(OSCUtil.isConnected(this))
         {
             setUpViews();
+            new FetchPdfUrlTask(content.getBookTitle(), this).execute();
 
         }
         else
