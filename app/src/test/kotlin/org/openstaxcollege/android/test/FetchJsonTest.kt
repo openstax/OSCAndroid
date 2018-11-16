@@ -22,7 +22,12 @@ class FetchJsonTest
         for(item in books.orEmpty())
         {
             println(item?.title)
-            println(item?.lowResolutionPdfUrl)
+            var pdf = item?.lowResolutionPdfUrl
+            if(pdf == null)
+            {
+                pdf = item?.highResolutionPdfUrl
+            }
+            println(pdf)
         }
 
     }
