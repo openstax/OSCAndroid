@@ -32,6 +32,10 @@ class FetchPdfUrlTask(val bookTitle: String?, val pdfListener:PdfTaskCallback): 
                 pdfUrl = wl.getPDFUrl("Fizyka dla szkół wyższych Tom 1")
             }
         }
+        if(pdfUrl == null)
+        {
+            pdfUrl = ""
+        }
 
         return pdfUrl
     }

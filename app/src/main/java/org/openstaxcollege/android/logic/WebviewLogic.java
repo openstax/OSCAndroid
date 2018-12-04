@@ -64,7 +64,7 @@ public class WebviewLogic
         FetchBooks fetchBooks =  new FetchBooks();
 
         Response response = fetchBooks.getBooks();
-        String pdfURL = null;
+        String pdfURL = "";
         if(response != null && response.getBooks() != null)
         {
             for (Books books : response.getBooks())

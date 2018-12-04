@@ -30,7 +30,7 @@ public class Content implements Serializable, Comparable<Content>
     
     private String bookUrl;
 
-    private String pdfUrl;
+    private String pdfUrl = "";
 
     public String getPdfUrl()
     {
