@@ -8,9 +8,12 @@
 package org.openstaxcollege.android.fragment;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,6 +25,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.openstaxcollege.android.R;
+import org.openstaxcollege.android.activity.SelectBookActivity;
 import org.openstaxcollege.android.adapters.ShelfRecyclerViewAdapter;
 import org.openstaxcollege.android.beans.Content;
 import org.openstaxcollege.android.providers.ShelfBooks;
@@ -101,6 +105,17 @@ public class ShelfFragment extends Fragment implements OnStartDragListener
             itemTouchHelper.attachToRecyclerView(recyclerView);
 
         }
+        final Context context = getContext();
+        FloatingActionButton fab = (FloatingActionButton) getView().findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(context, SelectBookActivity.class);
+                context.startActivity(intent);
+            }
+        });
     }
 
     /**

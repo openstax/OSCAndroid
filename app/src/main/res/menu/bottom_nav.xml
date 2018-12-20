@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/bookshelf_nav"
+        android:icon="@drawable/outline_chrome_reader_mode_white_24"
+        android:title="@string/title_bookshelf"/>
+    <item
+        android:id="@+id/bookmarks_nav"
+        android:icon="@drawable/ic_bookmark_border_white_24dp"
+        android:title="@string/bookmarks_shortcut_short_label"/>
+</menu>

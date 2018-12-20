@@ -17,4 +17,6 @@
 	<color name="list_item_pressed_color_light">#FFFFFFFF</color>
 	<color name="list_item_pressed_color_dark">#0000FF</color>
 	<color name="list_item_color_disabled">#FFCCCCCC</color>
+	<color name="white">#FFFFFF</color>
+	<color name="white_trans">#99FFFFFF</color>
 </resources>
