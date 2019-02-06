@@ -79,7 +79,7 @@ public class ShelfFragment extends Fragment implements OnStartDragListener
     public void onActivityCreated(Bundle savedInstanceState)
     {
         super.onActivityCreated(savedInstanceState);
-        recyclerView = (RecyclerView)getView().findViewById(R.id.book_list);
+        recyclerView = getView().findViewById(R.id.book_list);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -106,7 +106,7 @@ public class ShelfFragment extends Fragment implements OnStartDragListener
 
         }
         final Context context = getContext();
-        FloatingActionButton fab = (FloatingActionButton) getView().findViewById(R.id.fab);
+        FloatingActionButton fab = getView().findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -143,6 +143,8 @@ public class ShelfFragment extends Fragment implements OnStartDragListener
                 readDB();
             }
         }
+        FloatingActionButton fab = getView().findViewById(R.id.fab);
+        fab.show();
     }
 
     protected void finishedLoadingList()

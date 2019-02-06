@@ -39,7 +39,7 @@ public class BookshelfActivity extends AppCompatActivity
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bookshelf);
+        setContentView(R.layout.activity_bookshelf2);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(Html.fromHtml(getString(R.string.app_name_html)));;
@@ -79,14 +79,14 @@ public class BookshelfActivity extends AppCompatActivity
 
                         }
                         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                        transaction.replace(R.id.container, selectedFragment);
+                        transaction.replace(R.id.sample_content_fragment, selectedFragment);
                         transaction.commit();
                         return true;
                     }
                 });
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.container, new ShelfFragment());
+        transaction.replace(R.id.sample_content_fragment, new ShelfFragment());
         transaction.commit();
 
     }

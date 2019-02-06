@@ -10,6 +10,7 @@ import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -97,6 +98,8 @@ public class BookmarkFragment extends Fragment implements OnStartDragListener
             itemTouchHelper.attachToRecyclerView(recyclerView);
 
         }
+        FloatingActionButton fab = getView().findViewById(R.id.fab);
+        fab.hide();
     }
 
     /**

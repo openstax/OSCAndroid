@@ -18,6 +18,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
+import android.os.StrictMode;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -66,6 +67,8 @@ public class WebViewActivity extends AppCompatActivity implements FetchPdfUrlTas
     private int REQUEST = 1336;
 
     private boolean saveLocation = true;
+
+    private boolean DEVELOPER_MODE = true;
     
 
     /** inner class for WebViewClient*/
@@ -151,7 +154,6 @@ public class WebViewActivity extends AppCompatActivity implements FetchPdfUrlTas
     @Override
     public void onCreate(Bundle savedInstanceState) 
     {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.web_view);
         Toolbar toolbar = findViewById(R.id.toolbar);
