@@ -21,22 +21,23 @@ class FetchBooks
 
     fun getBooks(): Response?
     {
+        var bis: BufferedInputStream? = null
+        var reader: BufferedReader? = null
 
         try
         {
-
             val URL = URL("https://openstax.org/api/v2/pages/30/?format=json")
             val connect = URL.openConnection() as HttpURLConnection
 
             connect.connect()
             val responseCode: Int = connect.responseCode
-//            Log.d(Tag, "ResponseCode" + ResponseCode)
+            //            Log.d(Tag, "ResponseCode" + ResponseCode)
             val gson = Gson()
 
             if (responseCode == 200)
             {
-                val bis = BufferedInputStream(connect.inputStream)
-                val reader = BufferedReader(InputStreamReader(bis))
+                bis = BufferedInputStream(connect.inputStream)
+                reader = BufferedReader(InputStreamReader(bis))
                 return gson.fromJson(reader, Response::class.java)
             }
         }
@@ -46,6 +47,17 @@ class FetchBooks
             println("exception: " + Ex.toString())
             println("msg: " + Ex.message)
             println("stacktrace: " + Ex.stackTrace.contentToString())
+        }
+        finally
+        {
+            if(bis != null)
+            {
+                bis.close()
+            }
+            if(reader != null)
+            {
+                reader.close()
+            }
         }
         return null
 
