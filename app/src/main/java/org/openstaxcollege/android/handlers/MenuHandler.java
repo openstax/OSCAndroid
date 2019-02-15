@@ -7,29 +7,18 @@
 package org.openstaxcollege.android.handlers;
 
 
-import android.Manifest;
 import android.app.AlertDialog;
-import android.app.DownloadManager;
-import android.content.DialogInterface;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.Environment;
-import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.webkit.WebView;
 import android.widget.Toast;
 import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.activity.AboutActivity;
 import org.openstaxcollege.android.activity.NoteEditorActivity;
+import org.openstaxcollege.android.activity.SelectBookActivity;
 import org.openstaxcollege.android.activity.ViewBookmarksActivity;
 import org.openstaxcollege.android.beans.Content;
-import org.openstaxcollege.android.logic.WebviewLogic;
 import org.openstaxcollege.android.providers.Bookmarks;
-import org.openstaxcollege.android.utils.MenuUtil;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -115,6 +104,10 @@ public class MenuHandler
                 {
                     Toast.makeText(context, context.getString(R.string.no_data_msg),  Toast.LENGTH_LONG).show();
                 }
+                return true;
+            case R.id.add_book:
+                Intent bookintent = new Intent(context, SelectBookActivity.class);
+                context.startActivity(bookintent);
                 return true;
             default:
                 return false;

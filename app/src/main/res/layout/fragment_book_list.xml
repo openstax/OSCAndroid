@@ -14,6 +14,8 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
+        android:paddingBottom="48dp"
+        android:clipToPadding="false"
         app:layoutManager="LinearLayoutManager"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
     <android.support.design.widget.FloatingActionButton

@@ -18,10 +18,12 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.text.util.Linkify;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.fragment.BookmarkFragment;
@@ -39,10 +41,22 @@ public class BookshelfActivity extends AppCompatActivity
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bookshelf2);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setContentView(R.layout.activity_bookshelf3);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(Html.fromHtml(getString(R.string.app_name_html)));;
+        getSupportActionBar().setTitle(Html.fromHtml(getString(R.string.app_name_html)));
+        TextView title = findViewById(R.id.bookshelf_help);
+        Linkify.addLinks(title, Linkify.ALL);
+        final Context context = this;
+        title.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(context, SelectBookActivity.class);
+                context.startActivity(intent);
+            }
+        });
 
 //        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 //        ShelfFragment fragment = new ShelfFragment();
