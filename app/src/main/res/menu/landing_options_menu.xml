@@ -5,10 +5,6 @@
           android:icon="@drawable/ic_add_white_24dp"
           android:title="@string/menu_add_books"
           app:showAsAction="always" />
-    <item android:id="@+id/go_to_favs"
-          android:icon="@drawable/ic_star_white_24dp"
-          android:title="@string/menu_go_to_favs"
-          app:showAsAction="never" />
     <item android:id="@+id/about"
           android:icon="@drawable/ic_star_white_24dp"
           android:title="@string/menu_about"

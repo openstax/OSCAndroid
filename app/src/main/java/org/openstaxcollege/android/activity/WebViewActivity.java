@@ -18,7 +18,6 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
-import android.os.StrictMode;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -491,6 +490,7 @@ public class WebViewActivity extends AppCompatActivity implements FetchPdfUrlTas
                         DownloadManager.Request request = new DownloadManager.Request(uri);
                         request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "/" + MenuUtil.getTitle(currentContent.getBookTitle()) + ".pdf");
                         request.setTitle(currentContent.getBookTitle() + ".pdf");
+                        request.setDescription("Downloading " + currentContent.getBookTitle() + ".pdf");
                         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
                         try
                         {

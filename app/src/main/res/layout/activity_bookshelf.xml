@@ -5,14 +5,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true">
+
     <android.support.design.widget.CoordinatorLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
+        android:layout_above="@id/navigation"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        tools:context=".activity.SelectBookActivity">
+        android:fitsSystemWindows="true">
 
         <android.support.design.widget.AppBarLayout
             android:id="@+id/app_bar"
@@ -49,18 +50,52 @@
 
             </android.support.design.widget.CollapsingToolbarLayout>
         </android.support.design.widget.AppBarLayout>
+        <android.support.v4.widget.NestedScrollView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:context=".activity.SelectBookActivity"
+            tools:showIn="@layout/activity_bookshelf"
+            android:background="@color/gray_background">
 
-        <include layout="@layout/content_landing"/>
+            <FrameLayout
+                android:id="@+id/sample_content_fragment"
+                android:layout_weight="2"
+                android:layout_width="match_parent"
+                android:background="@color/gray_background"
+                android:layout_height="0px">
+                <TextView
+                    android:id="@+id/bookshelf_help"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/OSTextAppearance.Title"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_horizontal"
+                    android:padding="10dp"
+                    android:textSize="24sp"
+                    android:text="@string/bookshelf_help"
+                    android:layout_marginStart="10dip"
+                    android:layout_marginEnd="10dip"
+                    android:layout_marginTop="30dip"/>
+            </FrameLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorPrimary"
+            app:itemIconTint="@color/bottom_nav_state"
+            app:itemTextColor="@color/bottom_nav_state"
+            android:layout_gravity="bottom|end"
+            app:layout_insetEdge="bottom"
+            app:menu="@menu/bottom_nav"
+            />
+
     </android.support.design.widget.CoordinatorLayout>
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/navigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimary"
-        app:itemIconTint="@color/bottom_nav_state"
-        app:itemTextColor="@color/bottom_nav_state"
-        android:layout_gravity="bottom|end"
-        app:layout_insetEdge="bottom"
-        app:menu="@menu/bottom_nav"/>
 </RelativeLayout>

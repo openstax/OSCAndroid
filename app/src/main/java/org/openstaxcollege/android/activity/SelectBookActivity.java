@@ -8,8 +8,6 @@ package org.openstaxcollege.android.activity;
 
 import java.util.ArrayList;
 
-import android.content.Context;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.support.v4.app.FragmentTransaction;
@@ -17,7 +15,6 @@ import android.view.*;
 import org.openstaxcollege.android.R;
 import org.openstaxcollege.android.beans.Content;
 import org.openstaxcollege.android.fragment.SelectBookFragment;
-import org.openstaxcollege.android.handlers.MenuHandler;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -55,42 +52,18 @@ public class SelectBookActivity extends AppCompatActivity
         transaction.replace(R.id.sample_content_fragment, fragment);
         transaction.commit();
 
-        final Context context = this;
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                Intent intent = new Intent(context, ViewBookmarksActivity.class);
-                context.startActivity(intent);
-            }
-        });
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.landing_options_menu, menu);
-        return true;
-        
-    }
-    
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) 
+    public boolean onOptionsItemSelected(MenuItem item)
     {
         if(item.getItemId() == android.R.id.home)
         {
             Intent mainIntent = new Intent(getApplicationContext(), BookshelfActivity.class);
             startActivity(mainIntent);
-            return true;
         }
-        else
-        {
-            MenuHandler mh = new MenuHandler();
-            return mh.handleContextMenu(item, this, null);
-        }
+        return true;
+
     }
     
     @Override
