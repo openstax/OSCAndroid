@@ -44,7 +44,7 @@ public class BookshelfActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(Html.fromHtml(getString(R.string.app_name_html)));
-        TextView title = findViewById(R.id.bookshelf_help);
+        final TextView title = findViewById(R.id.bookshelf_help);
         Linkify.addLinks(title, Linkify.ALL);
         final Context context = this;
         title.setOnClickListener(new View.OnClickListener()
@@ -57,23 +57,6 @@ public class BookshelfActivity extends AppCompatActivity
             }
         });
 
-//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//        ShelfFragment fragment = new ShelfFragment();
-//        transaction.add(R.id.sample_content_fragment, fragment);
-//        transaction.commit();
-//
-//        final Context context = this;
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener()
-//        {
-//            @Override
-//            public void onClick(View view)
-//            {
-//                Intent intent = new Intent(context, SelectBookActivity.class);
-//                context.startActivity(intent);
-//            }
-//        });
-
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
 
         bottomNavigationView.setOnNavigationItemSelectedListener
@@ -84,10 +67,12 @@ public class BookshelfActivity extends AppCompatActivity
                         switch (item.getItemId()) {
                             case R.id.bookshelf_nav:
                                 selectedFragment = new ShelfFragment();
+                                title.setVisibility(View.VISIBLE);
                                 break;
                             case R.id.bookmarks_nav:
                                 Log.d("Bookshelf","bookmark selected");
                                 selectedFragment = new BookmarkFragment();
+                                title.setVisibility(View.INVISIBLE);
                                 break;
 
                         }
