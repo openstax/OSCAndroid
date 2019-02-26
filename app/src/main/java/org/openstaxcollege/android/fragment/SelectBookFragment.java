@@ -15,7 +15,6 @@ import org.openstaxcollege.android.adapters.SelectBookRecyclerViewAdapter;
 import org.openstaxcollege.android.beans.BookList;
 import org.openstaxcollege.android.beans.Content;
 import org.openstaxcollege.android.handlers.JsonHelper;
-import org.openstaxcollege.android.utils.OSCUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -52,7 +51,7 @@ public class SelectBookFragment extends Fragment
     {
         super.onViewCreated(view, savedInstanceState);
         super.onActivityCreated(savedInstanceState);
-        recyclerView = (RecyclerView)getView().findViewById(R.id.book_list);
+        recyclerView = getView().findViewById(R.id.book_list);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
         recyclerView.setItemAnimator(new DefaultItemAnimator());

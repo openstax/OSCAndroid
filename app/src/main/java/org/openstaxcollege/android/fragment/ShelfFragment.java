@@ -75,7 +75,7 @@ public class ShelfFragment extends Fragment implements OnStartDragListener
     public void onActivityCreated(Bundle savedInstanceState)
     {
         super.onActivityCreated(savedInstanceState);
-        recyclerView = (RecyclerView)getView().findViewById(R.id.book_list);
+        recyclerView = getView().findViewById(R.id.book_list);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -101,6 +101,7 @@ public class ShelfFragment extends Fragment implements OnStartDragListener
             itemTouchHelper.attachToRecyclerView(recyclerView);
 
         }
+
     }
 
     /**

@@ -66,6 +66,8 @@ public class WebViewActivity extends AppCompatActivity implements FetchPdfUrlTas
     private int REQUEST = 1336;
 
     private boolean saveLocation = true;
+
+    private boolean DEVELOPER_MODE = true;
     
 
     /** inner class for WebViewClient*/
@@ -151,7 +153,6 @@ public class WebViewActivity extends AppCompatActivity implements FetchPdfUrlTas
     @Override
     public void onCreate(Bundle savedInstanceState) 
     {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.web_view);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -489,6 +490,7 @@ public class WebViewActivity extends AppCompatActivity implements FetchPdfUrlTas
                         DownloadManager.Request request = new DownloadManager.Request(uri);
                         request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "/" + MenuUtil.getTitle(currentContent.getBookTitle()) + ".pdf");
                         request.setTitle(currentContent.getBookTitle() + ".pdf");
+                        request.setDescription("Downloading " + currentContent.getBookTitle() + ".pdf");
                         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
                         try
                         {

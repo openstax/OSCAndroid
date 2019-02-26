@@ -84,7 +84,7 @@
     <string name="select_book">Select Book</string>
     <string name="added_to_bookshelf">\u0020added to Bookshelf</string>
     <string name="removed_from_bookshelf">\u0020removed from Bookshelf</string>
-    <string name="bookshelf_help">No books found. Click the + button to add books to your bookshelf</string>
+    <string name="bookshelf_help">To add books to your bookshelf, touch here</string>
     <string name="econ_icon">econ</string>
     <string name="macro_icon">macro</string>
     <string name="micro_icon">micro</string>
@@ -95,5 +95,6 @@
     <string name="intro_business_icon">intro-business</string>
     <string name="business_ethics_icon">business-ethics</string>
     <string name="no_connextion">No data connection</string>
+    <string name="menu_add_books">Add books to Bookshelf</string>
 </resources>
  
