@@ -75,13 +75,16 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
     @Override
     public void onItemDismiss(int position)
     {
-        Log.d("BRVA","position = " + position);
-        Log.d("BRVA","content list size = " + contentList.size());
-        Content currentContent = contentList.get(position);
-        context.getContentResolver().delete(Bookmarks.CONTENT_URI, "_id="+ currentContent.getId(), null);
-        contentList.remove(position);
-        notifyItemRemoved(position);
-        Toast.makeText(context, context.getString(R.string.bookmark_deleted) + currentContent.getTitle(), Toast.LENGTH_SHORT).show();
+        //Log.d("BRVA","position = " + position);
+        //Log.d("BRVA","content list size = " + contentList.size());
+        if(position <= contentList.size())
+        {
+            Content currentContent = contentList.get(position);
+            context.getContentResolver().delete(Bookmarks.CONTENT_URI, "_id=" + currentContent.getId(), null);
+            contentList.remove(position);
+            notifyItemRemoved(position);
+            Toast.makeText(context, context.getString(R.string.bookmark_deleted) + currentContent.getTitle(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
