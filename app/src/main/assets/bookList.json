@@ -311,6 +311,54 @@
       "url":"https://cnx.org/contents/kUrGbuHs:KCyr9xii?minimal=true",
       "bookUrl":"https://cnx.org/contents/kUrGbuHs:KCyr9xii?minimal=true",
       "icon":"business-ethics"
+    },
+    {
+      "bookTitle":"Chemistry 2e",
+      "title":"Chemistry 2e",
+      "contentString":"",
+      "url":"https://cnx.org/contents/f8zJz5tx:DY-noYmh?minimal=true",
+      "bookUrl":"https://cnx.org/contents/f8zJz5tx:DY-noYmh?minimal=true",
+      "icon":"chemistry-2e"
+    },
+    {
+      "bookTitle":"Chemistry: Atoms First 2e",
+      "title":"Chemistry: Atoms First",
+      "contentString":"",
+      "url":"https://cnx.org/contents/2bhe5sV_:DY-noYmh?minimal=true",
+      "bookUrl":"https://cnx.org/contents/2bhe5sV_:DY-noYmh?minimal=true",
+      "icon":"chem-atoms-2e"
+    },
+    {
+      "bookTitle":"American Government 2e",
+      "title":"American Government 2e",
+      "contentString":"",
+      "url":"https://cnx.org/contents/nY32AU8S:SjdU64Og?minimal=true",
+      "bookUrl":"https://cnx.org/contents/nY32AU8S:SjdU64Og?minimal=true",
+      "icon":"amer-gov-2e"
+    },
+    {
+      "bookTitle":"Principles of Accounting, Volume 1: Financial Accounting",
+      "title":"Principles of Accounting, Volume 1: Financial Accounting",
+      "contentString":"",
+      "url":"https://cnx.org/contents/mrS6bR5I:qv6kYQJ7?minimal=true",
+      "bookUrl":"https://cnx.org/contents/mrS6bR5I:qv6kYQJ7?minimal=true",
+      "icon":"accounting-vol-1"
+    },
+    {
+      "bookTitle":"Principles of Accounting, Volume 2: Managerial Accounting",
+      "title":"Principles of Accounting, Volume 2: Managerial Accounting",
+      "contentString":"",
+      "url":"https://cnx.org/contents/kg0cimBs:feO1bURf?minimal=true",
+      "bookUrl":"https://cnx.org/contents/kg0cimBs:feO1bURf?minimal=true",
+      "icon":"accounting-vol-2"
+    },
+    {
+      "bookTitle":"Principles of Management",
+      "title":"Principles of Management",
+      "contentString":"",
+      "url":"https://cnx.org/contents/w6yyq31c:Bgbu38Eg?minimal=true",
+      "bookUrl":"https://cnx.org/contents/w6yyq31c:Bgbu38Eg?minimal=true",
+      "icon":"mgmt"
     }
   ]
 }

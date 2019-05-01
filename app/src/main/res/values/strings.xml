@@ -96,5 +96,11 @@
     <string name="business_ethics_icon">business-ethics</string>
     <string name="no_connextion">No data connection</string>
     <string name="menu_add_books">Add books to Bookshelf</string>
+    <string name="chemistry_2e_icon">chemistry-2e</string>
+    <string name="chem_atoms_2e_icon">chem-atoms-2e</string>
+    <string name="amer_gov_2e_icon">amer-gov-2e</string>
+    <string name="accounting_vol_1_icon">accounting-vol-1</string>
+    <string name="accounting_vol_2_icon">accounting-vol-2</string>
+    <string name="management_icon">mgmt</string>
 </resources>
  

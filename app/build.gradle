@@ -12,8 +12,8 @@ android {
         applicationId "org.openstaxcollege.android"
         minSdkVersion 19
         targetSdkVersion 26
-        versionCode 38
-        versionName "5.11"
+        versionCode 39
+        versionName "5.12"
     }
     dependencies{
         implementation 'com.android.support:appcompat-v7:26.1.0'
