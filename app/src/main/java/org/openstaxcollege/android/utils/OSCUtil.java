@@ -223,6 +223,30 @@ public class OSCUtil
        {
            coverId = R.drawable.business_ethics;
        }
+       else if(icon.equals(context.getString(R.string.accounting_vol_1_icon)))
+       {
+           coverId = R.drawable.principles_of_acounting_volume_1;
+       }
+       else if(icon.equals(context.getString(R.string.accounting_vol_2_icon)))
+       {
+           coverId = R.drawable.principles_of_acounting_volume_2;
+       }
+       else if(icon.equals(context.getString(R.string.management_icon)))
+       {
+           coverId = R.drawable.principles_of_management;
+       }
+       else if(icon.equals(context.getString(R.string.chem_atoms_2e_icon)))
+       {
+           coverId = R.drawable.chemistry_atoms_first_2e;
+       }
+       else if(icon.equals(context.getString(R.string.chemistry_2e_icon)))
+       {
+           coverId = R.drawable.chemistry_2e;
+       }
+       else if(icon.equals(context.getString(R.string.amer_gov_2e_icon)))
+       {
+           coverId = R.drawable.american_government_2e;
+       }
 
        return coverId;
    }
