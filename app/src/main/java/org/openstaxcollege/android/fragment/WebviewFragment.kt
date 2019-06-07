@@ -25,6 +25,7 @@ import android.webkit.*
 import android.widget.Toast
 import org.openstaxcollege.android.R
 import org.openstaxcollege.android.activity.BookshelfActivity
+import org.openstaxcollege.android.activity.WebViewActivity
 import org.openstaxcollege.android.beans.Content
 import org.openstaxcollege.android.handlers.MenuHandler
 import org.openstaxcollege.android.logic.WebviewLogic
@@ -33,7 +34,7 @@ import org.openstaxcollege.android.utils.MenuUtil
 import org.openstaxcollege.android.utils.OSCUtil
 import java.io.File
 
-class WebviewFragment : Fragment, FetchPdfUrlTask.PdfTaskCallback
+class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
 {
     /** Web browser view for Activity  */
     private var webView: WebView? = null
@@ -139,7 +140,7 @@ class WebviewFragment : Fragment, FetchPdfUrlTask.PdfTaskCallback
         //    supportActionBar!!.title = Html.fromHtml(getString(R.string.app_name_html))
         //}
 
-        val intent = intent
+        val intent = getActivity().getIntent()
         content = intent.getSerializableExtra(getString(R.string.webcontent)) as Content
 
 
@@ -180,7 +181,7 @@ class WebviewFragment : Fragment, FetchPdfUrlTask.PdfTaskCallback
         }
         else
         {
-            webView = getView().findViewById(R.id.web_view)
+            webView = this.view?.findViewById(R.id.web_view)
             OSCUtil.makeNoDataToast(getActivity())
         }
         return inflater!!.inflate(R.layout.web_view, container, false)
@@ -192,19 +193,9 @@ class WebviewFragment : Fragment, FetchPdfUrlTask.PdfTaskCallback
 
     }
 
-    /**
-     * callback for PDF URL retrieval
-     * @param result
-     */
-    override fun onResultReceived(result: String)
+    fun onCreateOptionsMenu(menu: Menu): Boolean
     {
-        //Log.d("PDF TASK RESULT", result);
-        content!!.pdfUrl = result
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean
-    {
-        val inflater = menuInflater
+        val inflater = activity.menuInflater
         if(content == null)
         {
             return false
@@ -216,12 +207,12 @@ class WebviewFragment : Fragment, FetchPdfUrlTask.PdfTaskCallback
         return true
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu): Boolean
-    {
-        super.onPrepareOptionsMenu(menu)
-        //handle changing menu based on URL
-        return onCreateOptionsMenu(menu)
-    }
+//    override fun onPrepareOptionsMenu(menu: Menu): Unit
+//    {
+//        super.onPrepareOptionsMenu(menu)
+//        //handle changing menu based on URL
+//        return onCreateOptionsMenu(menu)
+//    }
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean
@@ -229,7 +220,7 @@ class WebviewFragment : Fragment, FetchPdfUrlTask.PdfTaskCallback
         val activity = this
         if(item.itemId == android.R.id.home)
         {
-            val mainIntent = Intent(getActivity().applicationContext, BookshelfActivity::class.java)
+            val mainIntent = Intent(activity.context, BookshelfActivity::class.java)
             mainIntent.flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
             startActivity(mainIntent)
             return true
@@ -243,17 +234,17 @@ class WebviewFragment : Fragment, FetchPdfUrlTask.PdfTaskCallback
             }
             else
             {
-                if(ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
+                if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
                 {
                     displayDownloadAlert(content)
                 }
-                else if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE))
+                else if(ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE))
                 {
-                    Snackbar.make(webView!!, getString(R.string.pdf_download_request), Snackbar.LENGTH_INDEFINITE).setAction(getString(R.string.ok_button)) { ActivityCompat.requestPermissions(activity, STORAGE_PERMS, REQUEST) }.show()
+                    Snackbar.make(webView!!, getString(R.string.pdf_download_request), Snackbar.LENGTH_INDEFINITE).setAction(getString(R.string.ok_button)) { ActivityCompat.requestPermissions(getActivity(), WebViewActivity.STORAGE_PERMS, REQUEST) }.show()
                 }
                 else
                 {
-                    ActivityCompat.requestPermissions(this, STORAGE_PERMS, REQUEST)
+                    ActivityCompat.requestPermissions(getActivity(), WebViewActivity.STORAGE_PERMS, REQUEST)
 
                 }
             }
@@ -266,7 +257,7 @@ class WebviewFragment : Fragment, FetchPdfUrlTask.PdfTaskCallback
             ed.remove(content!!.icon)
             ed.commit()
             saveLocation = false
-            Toast.makeText(this, "Saved location removed", Toast.LENGTH_LONG).show()
+            Toast.makeText(getActivity(), "Saved location removed", Toast.LENGTH_LONG).show()
         }
         else
         {
@@ -277,7 +268,7 @@ class WebviewFragment : Fragment, FetchPdfUrlTask.PdfTaskCallback
                 content!!.bookTitle = wl.getBookTitle(webView!!.title)
                 content!!.title = webView!!.title.replace(" - " + content!!.bookTitle + getString(R.string.cnx_title_snippet), "")
                 content!!.url = webView!!.url
-                val bookUrlContent = OSCUtil.getTitle(content!!.bookTitle, this)
+                val bookUrlContent = OSCUtil.getTitle(content!!.bookTitle, getActivity())
                 content!!.bookUrl = bookUrlContent.bookUrl
                 //Log.d("webview2", "book url: " + content.getBookUrl());
 
@@ -293,6 +284,19 @@ class WebviewFragment : Fragment, FetchPdfUrlTask.PdfTaskCallback
 
     }
 
+    /**
+     * callback for PDF URL retrieval
+     * @param result
+     */
+    override fun onResultReceived(result: String)
+    {
+        //Log.d("PDF TASK RESULT", result);
+        content!!.pdfUrl = result
+    }
+
+
+
+
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray)
     {
 
@@ -303,21 +307,21 @@ class WebviewFragment : Fragment, FetchPdfUrlTask.PdfTaskCallback
         }
     }
 
-    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean
-    {
-        if(webView != null && keyCode == KeyEvent.KEYCODE_BACK && webView!!.canGoBack())
-        {
-            webView!!.goBack()
-            return true
-
-        }
-        return super.onKeyDown(keyCode, event)
-    }
-
-    override fun onConfigurationChanged(newConfig: Configuration)
-    {
-        super.onConfigurationChanged(newConfig)
-    }
+//    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean
+//    {
+//        if(webView != null && keyCode == KeyEvent.KEYCODE_BACK && webView!!.canGoBack())
+//        {
+//            webView!!.goBack()
+//            return true
+//
+//        }
+//        return super.onKeyDown(keyCode, event)
+//    }
+//
+//    override fun onConfigurationChanged(newConfig: Configuration)
+//    {
+//        super.onConfigurationChanged(newConfig)
+//    }
 
 
     override fun onResume()
@@ -381,7 +385,7 @@ class WebviewFragment : Fragment, FetchPdfUrlTask.PdfTaskCallback
         }
 
         //Log.d("WebViewView.setupViews()", "Called");
-        webView = getView().findViewById<View>(R.id.web_view) as WebView
+        webView = this.view?.findViewById<View>(R.id.web_view) as WebView
         webView!!.settings.javaScriptEnabled = true
         webView!!.settings.defaultFontSize = 17
         webView!!.settings.setSupportZoom(true)
@@ -423,11 +427,11 @@ class WebviewFragment : Fragment, FetchPdfUrlTask.PdfTaskCallback
 
         val message = getString(R.string.pdf_download_message)
 
-        val alertDialog = AlertDialog.Builder(this).create()
+        val alertDialog = AlertDialog.Builder(getContext()).create()
         alertDialog.setTitle(getString(R.string.download))
         alertDialog.setMessage(message)
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.ok)) { dialog, which ->
-            if(OSCUtil.isConnected(context))
+            if(OSCUtil.isConnected(getContext()))
             {
 
                 val cnxDir = File(Environment.getExternalStorageDirectory(), "OpenStax/")
@@ -459,7 +463,7 @@ class WebviewFragment : Fragment, FetchPdfUrlTask.PdfTaskCallback
                         dm.enqueue(request)
                     } catch(iae: IllegalArgumentException)
                     {
-                        createDialog(context)
+                        createDialog(getContext())
                     }
 
                 }
@@ -467,7 +471,7 @@ class WebviewFragment : Fragment, FetchPdfUrlTask.PdfTaskCallback
             }
             else
             {
-                OSCUtil.makeNoDataToast(context)
+                OSCUtil.makeNoDataToast(getContext())
             }
         }
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.cancel)) { dialog, which ->
@@ -507,7 +511,7 @@ class WebviewFragment : Fragment, FetchPdfUrlTask.PdfTaskCallback
 
     private fun makePDFToast()
     {
-        Toast.makeText(this, getString(R.string.pdf_url_missing), Toast.LENGTH_LONG).show()
+        Toast.makeText(context, getString(R.string.pdf_url_missing), Toast.LENGTH_LONG).show()
     }
 
     companion object

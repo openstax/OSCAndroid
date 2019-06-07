@@ -43,6 +43,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.webkit.WebSettings.LayoutAlgorithm
 import android.widget.Toast
+import org.openstaxcollege.android.fragment.WebviewFragment
 
 import java.io.File
 
@@ -52,11 +53,8 @@ import java.io.File
  *
  * @author Ed Woodward
  */
-class WebViewActivity : AppCompatActivity(), FetchPdfUrlTask.PdfTaskCallback
+class WebViewActivity : AppCompatActivity()
 {
-    /** Web browser view for Activity  */
-    private var webView: WebView? = null
-    /** Variable for serialized Content object  */
     private var content: Content? = null
     private val REQUEST = 1336
 
@@ -65,82 +63,7 @@ class WebViewActivity : AppCompatActivity(), FetchPdfUrlTask.PdfTaskCallback
     private val DEVELOPER_MODE = true
 
 
-    /** inner class for WebViewClient */
-    private val webViewClient = object : WebViewClient()
-    {
-        override fun onLoadResource(view: WebView, url: String)
-        {
-            super.onLoadResource(view, url)
 
-            //Log.d("WebViewClient.onLoadResource()", "Called");
-        }
-
-        /** loads URL into view  */
-        override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean
-        {
-
-            //Log.d("WebviewCliet","url: " + url);
-            if(!url.contains("cnx.org"))
-            {
-                //open url in a  browser
-                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                startActivity(browserIntent)
-            }
-            else
-            {
-
-                view.loadUrl(url)
-
-                content!!.url = url
-            }
-
-            return true
-        }
-
-        @TargetApi(Build.VERSION_CODES.N)
-        override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean
-        {
-            val url = request.url.toString()
-
-            //Log.d("WebviewCliet2","url: " + url);
-            if(!url.contains("cnx.org"))
-            {
-                //open url in a  browser
-                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                startActivity(browserIntent)
-            }
-            else
-            {
-
-                view.loadUrl(url)
-
-                content!!.url = url
-            }
-
-            return true
-        }
-
-        override fun onPageFinished(view: WebView, url: String)
-        {
-            var url = url
-            //Log.d("WebViewClient.onPageFinished", "title: " + view.getTitle());
-            //Log.d("WebViewClient", "url: " + url);
-
-            content!!.title = view.title
-            if(url.contains("cnx.org"))
-            {
-                if(!url.contains(getString(R.string.minimal_url_snippet)))
-                {
-                    url = url + getString(R.string.minimal_url_snippet)
-                    view.loadUrl(url)
-                }
-
-                content!!.url = url
-            }
-
-        }
-
-    }
 
     public override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -158,152 +81,106 @@ class WebViewActivity : AppCompatActivity(), FetchPdfUrlTask.PdfTaskCallback
             supportActionBar!!.title = Html.fromHtml(getString(R.string.app_name_html))
         }
 
-        val intent = intent
-        content = intent.getSerializableExtra(getString(R.string.webcontent)) as Content
-
-
-        if(!content!!.url.contains(getString(R.string.bookmarks_url_snippet)))
+        if (savedInstanceState == null)
         {
-
-            val sharedPref = getSharedPreferences(getString(R.string.osc_package), Context.MODE_PRIVATE)
-            var url = sharedPref.getString(content!!.icon, "")
-
-            if(url != "")
-            {
-                url = convertURL(url!!)
-
-                content!!.url = url
-
-            }
-        }
-        else
-        {
-            //remove bookmark parameter
-            val newURL = content!!.url.replace(getString(R.string.bookmarks_url_snippet), "")
-            //Log.d("onCreate","url: " + newURL);
-            content!!.url = newURL
-            val bookTitle = OSCUtil.getTitle(content!!.bookTitle, this)
-            if(bookTitle != null)
-            {
-                content!!.bookUrl = bookTitle.bookUrl
-            }
-
-        }
-
-
-        if(OSCUtil.isConnected(this))
-        {
-            setUpViews()
-            FetchPdfUrlTask(content!!.bookTitle, this).execute()
-
-        }
-        else
-        {
-            webView = findViewById(R.id.web_view)
-            OSCUtil.makeNoDataToast(this)
+            val transaction = supportFragmentManager.beginTransaction()
+            val fragment = WebviewFragment()
+            transaction.replace(R.id.sample_content_fragment, fragment)
+            transaction.commit()
         }
     }
 
-    /**
-     * callback for PDF URL retrieval
-     * @param result
-     */
-    override fun onResultReceived(result: String)
-    {
-        //Log.d("PDF TASK RESULT", result);
-        content!!.pdfUrl = result
-    }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean
-    {
-        val inflater = menuInflater
-        if(content == null)
-        {
-            return false
-        }
-
-        menu.clear()
-        inflater.inflate(R.menu.web_options_menu, menu)
-
-        return true
-    }
-
-    override fun onPrepareOptionsMenu(menu: Menu): Boolean
-    {
-        super.onPrepareOptionsMenu(menu)
-        //handle changing menu based on URL
-        return onCreateOptionsMenu(menu)
-    }
-
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean
-    {
-        val activity = this
-        if(item.itemId == android.R.id.home)
-        {
-            val mainIntent = Intent(applicationContext, BookshelfActivity::class.java)
-            mainIntent.flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
-            startActivity(mainIntent)
-            return true
-        }
-        else if(item.itemId == R.id.download)
-        {
-            if(Build.VERSION.SDK_INT < 23)
-            {
-                displayDownloadAlert(content)
-
-            }
-            else
-            {
-                if(ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
-                {
-                    displayDownloadAlert(content)
-                }
-                else if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE))
-                {
-                    Snackbar.make(webView!!, getString(R.string.pdf_download_request), Snackbar.LENGTH_INDEFINITE).setAction(getString(R.string.ok_button)) { ActivityCompat.requestPermissions(activity, STORAGE_PERMS, REQUEST) }.show()
-                }
-                else
-                {
-                    ActivityCompat.requestPermissions(this, STORAGE_PERMS, REQUEST)
-
-                }
-            }
-        }
-        else if(item.itemId == R.id.remove_location)
-        {
-            //Log.d("menuItem", "removing location: " + content.getIcon());
-            val sharedPref = getSharedPreferences(getString(R.string.osc_package), Context.MODE_PRIVATE)
-            val ed = sharedPref.edit()
-            ed.remove(content!!.icon)
-            ed.commit()
-            saveLocation = false
-            Toast.makeText(this, "Saved location removed", Toast.LENGTH_LONG).show()
-        }
-        else
-        {
-            try
-            {
-
-                val wl = WebviewLogic()
-                content!!.bookTitle = wl.getBookTitle(webView!!.title)
-                content!!.title = webView!!.title.replace(" - " + content!!.bookTitle + getString(R.string.cnx_title_snippet), "")
-                content!!.url = webView!!.url
-                val bookUrlContent = OSCUtil.getTitle(content!!.bookTitle, this)
-                content!!.bookUrl = bookUrlContent.bookUrl
-                //Log.d("webview2", "book url: " + content.getBookUrl());
-
-            } catch(mue: Exception)
-            {
-                Log.d("WVMenu", "Error: $mue")
-            }
-
-            val mh = MenuHandler()
-            return mh.handleContextMenu(item, this, content)
-        }
-        return true
-
-    }
+//    override fun onCreateOptionsMenu(menu: Menu): Boolean
+//    {
+//        val inflater = menuInflater
+//        if(content == null)
+//        {
+//            return false
+//        }
+//
+//        menu.clear()
+//        inflater.inflate(R.menu.web_options_menu, menu)
+//
+//        return true
+//    }
+//
+//    override fun onPrepareOptionsMenu(menu: Menu): Boolean
+//    {
+//        super.onPrepareOptionsMenu(menu)
+//        //handle changing menu based on URL
+//        return onCreateOptionsMenu(menu)
+//    }
+//
+//
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean
+//    {
+//        val activity = this
+//        if(item.itemId == android.R.id.home)
+//        {
+//            val mainIntent = Intent(applicationContext, BookshelfActivity::class.java)
+//            mainIntent.flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
+//            startActivity(mainIntent)
+//            return true
+//        }
+//        else if(item.itemId == R.id.download)
+//        {
+//            if(Build.VERSION.SDK_INT < 23)
+//            {
+//                displayDownloadAlert(content)
+//
+//            }
+//            else
+//            {
+//                if(ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
+//                {
+//                    displayDownloadAlert(content)
+//                }
+//                else if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE))
+//                {
+//                    Snackbar.make(webView!!, getString(R.string.pdf_download_request), Snackbar.LENGTH_INDEFINITE).setAction(getString(R.string.ok_button)) { ActivityCompat.requestPermissions(activity, STORAGE_PERMS, REQUEST) }.show()
+//                }
+//                else
+//                {
+//                    ActivityCompat.requestPermissions(this, STORAGE_PERMS, REQUEST)
+//
+//                }
+//            }
+//        }
+//        else if(item.itemId == R.id.remove_location)
+//        {
+//            //Log.d("menuItem", "removing location: " + content.getIcon());
+//            val sharedPref = getSharedPreferences(getString(R.string.osc_package), Context.MODE_PRIVATE)
+//            val ed = sharedPref.edit()
+//            ed.remove(content!!.icon)
+//            ed.commit()
+//            saveLocation = false
+//            Toast.makeText(this, "Saved location removed", Toast.LENGTH_LONG).show()
+//        }
+//        else
+//        {
+//            try
+//            {
+//
+//                val wl = WebviewLogic()
+//                content!!.bookTitle = wl.getBookTitle(webView!!.title)
+//                content!!.title = webView!!.title.replace(" - " + content!!.bookTitle + getString(R.string.cnx_title_snippet), "")
+//                content!!.url = webView!!.url
+//                val bookUrlContent = OSCUtil.getTitle(content!!.bookTitle, this)
+//                content!!.bookUrl = bookUrlContent.bookUrl
+//                //Log.d("webview2", "book url: " + content.getBookUrl());
+//
+//            } catch(mue: Exception)
+//            {
+//                Log.d("WVMenu", "Error: $mue")
+//            }
+//
+//            val mh = MenuHandler()
+//            return mh.handleContextMenu(item, this, content)
+//        }
+//        return true
+//
+//    }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray)
     {
@@ -315,16 +192,16 @@ class WebViewActivity : AppCompatActivity(), FetchPdfUrlTask.PdfTaskCallback
         }
     }
 
-    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean
-    {
-        if(webView != null && keyCode == KeyEvent.KEYCODE_BACK && webView!!.canGoBack())
-        {
-            webView!!.goBack()
-            return true
-
-        }
-        return super.onKeyDown(keyCode, event)
-    }
+//    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean
+//    {
+//        if(webView != null && keyCode == KeyEvent.KEYCODE_BACK && webView!!.canGoBack())
+//        {
+//            webView!!.goBack()
+//            return true
+//
+//        }
+//        return super.onKeyDown(keyCode, event)
+//    }
 
     override fun onConfigurationChanged(newConfig: Configuration)
     {
@@ -339,89 +216,52 @@ class WebViewActivity : AppCompatActivity(), FetchPdfUrlTask.PdfTaskCallback
 
     }
 
-    override fun onPause()
-    {
-        //Log.d("onPause", "savedLocation: " + saveLocation);
-        super.onPause()
-        val sharedPref = getSharedPreferences(getString(R.string.osc_package), Context.MODE_PRIVATE)
-        val ed = sharedPref.edit()
-        //Log.d("WVA.onPause()","URL saved: " + content.getUrl().toString());
-        if(webView != null && content != null)
-        {
-            if(webView!!.url != null)
-            {
-                if(saveLocation && webView!!.url.contains("cnx.org"))
-                {
-                    //Log.d("onPause()", "saving data");
-                    val url = webView!!.url.replace(getString(R.string.bookmarks_url_snippet), "")
-                    ed.putString(content!!.icon, url)
-                    ed.apply()
-                }
+//    override fun onPause()
+//    {
+//        //Log.d("onPause", "savedLocation: " + saveLocation);
+//        super.onPause()
+//        val sharedPref = getSharedPreferences(getString(R.string.osc_package), Context.MODE_PRIVATE)
+//        val ed = sharedPref.edit()
+//        //Log.d("WVA.onPause()","URL saved: " + content.getUrl().toString());
+//        if(webView != null && content != null)
+//        {
+//            if(webView!!.url != null)
+//            {
+//                if(saveLocation && webView!!.url.contains("cnx.org"))
+//                {
+//                    //Log.d("onPause()", "saving data");
+//                    val url = webView!!.url.replace(getString(R.string.bookmarks_url_snippet), "")
+//                    ed.putString(content!!.icon, url)
+//                    ed.apply()
+//                }
+//
+//            }
+//        }
+//    }
 
-            }
-        }
-    }
+
+//    override fun onSaveInstanceState(outState: Bundle)
+//    {
+//        super.onSaveInstanceState(outState)
+//        //Log.d("ViewLenses.onSaveInstanceState()", "saving data");
+//        outState.putSerializable(getString(R.string.webcontent), content)
+//        val sharedPref = getSharedPreferences(getString(R.string.osc_package), Context.MODE_PRIVATE)
+//        val ed = sharedPref.edit()
+//        if(webView != null && content != null && webView!!.url != null)
+//        {
+//            if(webView!!.url.contains("cnx.org") && saveLocation)
+//            {
+//                //Log.d("onSaveInstanceState()", "saving data");
+//                val url = webView!!.url.replace(getString(R.string.bookmarks_url_snippet), "")
+//                ed.putString(content!!.icon, url)
+//                ed.apply()
+//            }
+//
+//        }
+//
+//    }
 
 
-    override fun onSaveInstanceState(outState: Bundle)
-    {
-        super.onSaveInstanceState(outState)
-        //Log.d("ViewLenses.onSaveInstanceState()", "saving data");
-        outState.putSerializable(getString(R.string.webcontent), content)
-        val sharedPref = getSharedPreferences(getString(R.string.osc_package), Context.MODE_PRIVATE)
-        val ed = sharedPref.edit()
-        if(webView != null && content != null && webView!!.url != null)
-        {
-            if(webView!!.url.contains("cnx.org") && saveLocation)
-            {
-                //Log.d("onSaveInstanceState()", "saving data");
-                val url = webView!!.url.replace(getString(R.string.bookmarks_url_snippet), "")
-                ed.putString(content!!.icon, url)
-                ed.apply()
-            }
-
-        }
-
-    }
-
-    /** sets properties on WebView and loads selected content into browser.  */
-    private fun setUpViews()
-    {
-        if(content == null || content!!.url == "")
-        {
-            return
-        }
-
-        //Log.d("WebViewView.setupViews()", "Called");
-        webView = findViewById<View>(R.id.web_view) as WebView
-        webView!!.settings.javaScriptEnabled = true
-        webView!!.settings.defaultFontSize = 17
-        webView!!.settings.setSupportZoom(true)
-        webView!!.settings.builtInZoomControls = true
-        webView!!.settings.layoutAlgorithm = LayoutAlgorithm.NARROW_COLUMNS
-        webView!!.webChromeClient = WebChromeClient()
-        webView!!.webViewClient = webViewClient
-        webView!!.loadUrl(content!!.url)
-    }
-
-    /**
-     * Converts Legacy style url to rewrite style
-     * Removes m. from the url since that no longer exists
-     * but could be book marked
-     * @param url - String - the url to convert
-     */
-    private fun convertURL(url: String): String
-    {
-
-        return if(url.contains("/content/"))
-        {
-            url.replace("//m.", "//")
-        }
-        else
-        {
-            url
-        }
-    }
 
     /**
      * Displays alert telling user where the downloaded files are located, the size of the files to download and confirms download.
@@ -525,7 +365,7 @@ class WebViewActivity : AppCompatActivity(), FetchPdfUrlTask.PdfTaskCallback
     companion object
     {
 
-        private val STORAGE_PERMS = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        val STORAGE_PERMS = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
     }
 
 }
