@@ -8,7 +8,6 @@ import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.content.res.Configuration
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -17,8 +16,6 @@ import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
-import android.support.v7.widget.Toolbar
-import android.text.Html
 import android.util.Log
 import android.view.*
 import android.webkit.*
@@ -123,10 +120,19 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
 
     }
 
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
         super.onCreate(savedInstanceState)
+        val view = inflater!!.inflate(R.layout.content_webview, container, false)
+        webView = view?.findViewById(R.id.web_view)
+
         //setContentView(R.layout.web_view)
         //val toolbar = findViewById<Toolbar>(R.id.toolbar)
         //setSupportActionBar(toolbar)
@@ -142,6 +148,14 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
 
         val intent = getActivity().getIntent()
         content = intent.getSerializableExtra(getString(R.string.webcontent)) as Content
+        if(content == null)
+        {
+            Log.d("WVFragment**", "content is null")
+        }
+        else
+        {
+            Log.d("WVFragment**", "content is not null: " + content!!.url)
+        }
 
 
         if(!content!!.url.contains(getString(R.string.bookmarks_url_snippet)))
@@ -181,10 +195,10 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
         }
         else
         {
-            webView = this.view?.findViewById(R.id.web_view)
+            webView = view?.findViewById(R.id.web_view)
             OSCUtil.makeNoDataToast(getActivity())
         }
-        return inflater!!.inflate(R.layout.web_view, container, false)
+        return view
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?)
@@ -379,13 +393,15 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
     /** sets properties on WebView and loads selected content into browser.  */
     private fun setUpViews()
     {
+        Log.d("WVFragment**","setupViews called")
         if(content == null || content!!.url == "")
         {
+            Log.d("WVFragment**","content is null")
             return
         }
 
         //Log.d("WebViewView.setupViews()", "Called");
-        webView = this.view?.findViewById<View>(R.id.web_view) as WebView
+        //webView = this.view?.findViewById<View>(R.id.web_view) as WebView
         webView!!.settings.javaScriptEnabled = true
         webView!!.settings.defaultFontSize = 17
         webView!!.settings.setSupportZoom(true)

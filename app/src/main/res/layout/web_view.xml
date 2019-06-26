@@ -22,6 +22,16 @@
 
 	</android.support.design.widget.AppBarLayout>
 
-	<include layout="@layout/content_webview"/>
+	<!--<include layout="@layout/content_webview"/>-->
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:orientation="vertical"
+			android:id="@+id/sample_content_fragment"/>
+	</ScrollView>
+
 
 </android.support.design.widget.CoordinatorLayout>

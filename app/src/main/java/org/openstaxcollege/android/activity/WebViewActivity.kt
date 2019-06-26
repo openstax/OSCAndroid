@@ -91,19 +91,19 @@ class WebViewActivity : AppCompatActivity()
     }
 
 
-//    override fun onCreateOptionsMenu(menu: Menu): Boolean
-//    {
-//        val inflater = menuInflater
+    override fun onCreateOptionsMenu(menu: Menu): Boolean
+    {
+        val inflater = menuInflater
 //        if(content == null)
 //        {
 //            return false
 //        }
-//
-//        menu.clear()
-//        inflater.inflate(R.menu.web_options_menu, menu)
-//
-//        return true
-//    }
+
+        menu.clear()
+        inflater.inflate(R.menu.web_options_menu, menu)
+
+        return true
+    }
 //
 //    override fun onPrepareOptionsMenu(menu: Menu): Boolean
 //    {
