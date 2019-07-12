@@ -132,6 +132,13 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
         super.onCreate(savedInstanceState)
         val view = inflater!!.inflate(R.layout.content_webview, container, false)
         webView = view?.findViewById(R.id.web_view)
+        val sharedPref = getActivity().getSharedPreferences(getString(R.string.osc_package), Context.MODE_PRIVATE)
+        var yVal = sharedPref.getString("webviewY", "")
+        if(yVal != null && yVal != "")
+        {
+
+            webView!!.scrollTo(0, yVal.toInt())
+        }
 
         //setContentView(R.layout.web_view)
         //val toolbar = findViewById<Toolbar>(R.id.toolbar)
@@ -146,19 +153,69 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
         //    supportActionBar!!.title = Html.fromHtml(getString(R.string.app_name_html))
         //}
 
+        //val intent = getActivity().getIntent()
+        //content = intent.getSerializableExtra(getString(R.string.webcontent)) as Content
+//        if(content == null)
+//        {
+//            Log.d("WVFragment**", "content is null")
+//        }
+//        else
+//        {
+//            Log.d("WVFragment**", "content is not null: " + content!!.url)
+//        }
+
+
+//        if(!content!!.url.contains(getString(R.string.bookmarks_url_snippet)))
+//        {
+//
+//            val sharedPref = getActivity().getSharedPreferences(getString(R.string.osc_package), Context.MODE_PRIVATE)
+//            var url = sharedPref.getString(content!!.icon, "")
+//
+//            if(url != "")
+//            {
+//                url = convertURL(url!!)
+//
+//                content!!.url = url
+//
+//            }
+//        }
+//        else
+//        {
+//            //remove bookmark parameter
+//            val newURL = content!!.url.replace(getString(R.string.bookmarks_url_snippet), "")
+//            //Log.d("onCreate","url: " + newURL);
+//            content!!.url = newURL
+//            val bookTitle = OSCUtil.getTitle(content!!.bookTitle, getActivity())
+//            if(bookTitle != null)
+//            {
+//                content!!.bookUrl = bookTitle.bookUrl
+//            }
+//
+//        }
+//
+//
+//        if(OSCUtil.isConnected(getActivity()))
+//        {
+//            setUpViews()
+//            FetchPdfUrlTask(content!!.bookTitle, this).execute()
+//
+//        }
+//        else
+//        {
+//            webView = view?.findViewById(R.id.web_view)
+//            OSCUtil.makeNoDataToast(getActivity())
+//        }
+        return view
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?)
+    {
+        super.onActivityCreated(savedInstanceState)
+        webView = getView()!!.findViewById(R.id.web_view)
         val intent = getActivity().getIntent()
         content = intent.getSerializableExtra(getString(R.string.webcontent)) as Content
-        if(content == null)
-        {
-            Log.d("WVFragment**", "content is null")
-        }
-        else
-        {
-            Log.d("WVFragment**", "content is not null: " + content!!.url)
-        }
 
-
-        if(!content!!.url.contains(getString(R.string.bookmarks_url_snippet)))
+        if(!content!!.url!!.contains(getString(R.string.bookmarks_url_snippet)))
         {
 
             val sharedPref = getActivity().getSharedPreferences(getString(R.string.osc_package), Context.MODE_PRIVATE)
@@ -175,7 +232,7 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
         else
         {
             //remove bookmark parameter
-            val newURL = content!!.url.replace(getString(R.string.bookmarks_url_snippet), "")
+            val newURL = content!!.url!!.replace(getString(R.string.bookmarks_url_snippet), "")
             //Log.d("onCreate","url: " + newURL);
             content!!.url = newURL
             val bookTitle = OSCUtil.getTitle(content!!.bookTitle, getActivity())
@@ -189,36 +246,33 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
 
         if(OSCUtil.isConnected(getActivity()))
         {
-            setUpViews()
+            if (savedInstanceState != null)
+            {
+                webView!!.restoreState(savedInstanceState)
+            }
+            else
+            {
+                setUpViews()
+            }
             FetchPdfUrlTask(content!!.bookTitle, this).execute()
 
         }
         else
         {
-            webView = view?.findViewById(R.id.web_view)
+            webView = view!!.findViewById(R.id.web_view)
             OSCUtil.makeNoDataToast(getActivity())
         }
-        return view
-    }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?)
-    {
-        super.onActivityCreated(savedInstanceState)
+
 
     }
 
-    fun onCreateOptionsMenu(menu: Menu): Boolean
+    override fun onCreateOptionsMenu(menu:Menu, inflater:MenuInflater)
     {
-        val inflater = activity.menuInflater
-        if(content == null)
-        {
-            return false
-        }
 
         menu.clear()
         inflater.inflate(R.menu.web_options_menu, menu)
 
-        return true
     }
 
 //    override fun onPrepareOptionsMenu(menu: Menu): Unit
@@ -342,6 +396,13 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
     {
         super.onResume()
         saveLocation = true
+        val sharedPref = getActivity().getSharedPreferences(getString(R.string.osc_package), Context.MODE_PRIVATE)
+        var yVal = sharedPref.getString("webviewY", "")
+        if(yVal != null && yVal != "")
+        {
+
+            webView!!.scrollTo(0, yVal.toInt())
+        }
 
     }
 
@@ -361,6 +422,7 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
                     //Log.d("onPause()", "saving data");
                     val url = webView!!.url.replace(getString(R.string.bookmarks_url_snippet), "")
                     ed.putString(content!!.icon, url)
+                    ed.putString("webviewY", webView!!.scrollY.toString())
                     ed.apply()
                 }
 
@@ -383,10 +445,12 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
                 //Log.d("onSaveInstanceState()", "saving data");
                 val url = webView!!.url.replace(getString(R.string.bookmarks_url_snippet), "")
                 ed.putString(content!!.icon, url)
+                ed.putString("webviewY", webView!!.scrollY.toString())
                 ed.apply()
             }
 
         }
+
 
     }
 

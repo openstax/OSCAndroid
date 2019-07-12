@@ -6,6 +6,8 @@
  */
 package org.openstaxcollege.android.logic;
 
+import android.util.Log;
+
 import org.openstaxcollege.android.beans.Books;
 import org.openstaxcollege.android.beans.Response;
 import org.openstaxcollege.android.utils.FetchBooks;
@@ -60,6 +62,7 @@ public class WebviewLogic
      */
     public String getPDFUrl(String bookTitle)
     {
+        //Log.d("**WVLogic", "called");
         String jsonTitle = translateTitle(bookTitle);
         FetchBooks fetchBooks =  new FetchBooks();
 

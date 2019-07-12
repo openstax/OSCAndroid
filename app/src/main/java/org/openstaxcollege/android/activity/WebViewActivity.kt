@@ -36,6 +36,8 @@ import org.openstaxcollege.android.utils.OSCUtil
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
+import android.support.design.widget.BottomNavigationView
+import android.support.v4.app.Fragment
 import android.util.Log
 import android.webkit.WebChromeClient
 import android.webkit.WebResourceRequest
@@ -43,6 +45,9 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.webkit.WebSettings.LayoutAlgorithm
 import android.widget.Toast
+import org.openstaxcollege.android.fragment.BookmarkFragment
+import org.openstaxcollege.android.fragment.NoteEditorFragment
+import org.openstaxcollege.android.fragment.ShelfFragment
 import org.openstaxcollege.android.fragment.WebviewFragment
 
 import java.io.File
@@ -80,30 +85,73 @@ class WebViewActivity : AppCompatActivity()
         {
             supportActionBar!!.title = Html.fromHtml(getString(R.string.app_name_html))
         }
+        content = intent.getSerializableExtra(getString(R.string.webcontent)) as Content
 
-        if (savedInstanceState == null)
-        {
-            val transaction = supportFragmentManager.beginTransaction()
-            val fragment = WebviewFragment()
-            transaction.replace(R.id.sample_content_fragment, fragment)
-            transaction.commit()
-        }
-    }
-
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean
-    {
-        val inflater = menuInflater
-//        if(content == null)
+//        if (savedInstanceState == null)
 //        {
-//            return false
+//            val transaction = supportFragmentManager.beginTransaction()
+//            val fragment = WebviewFragment()
+//            transaction.replace(R.id.sample_content_fragment, fragment)
+//            transaction.commit()
 //        }
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.webview_navigation)
 
-        menu.clear()
-        inflater.inflate(R.menu.web_options_menu, menu)
+        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
+            //var selectedFragment: Fragment? = null
+            var webview: Fragment? = null
+            var notes: Fragment? = null
+            val transaction = supportFragmentManager.beginTransaction()
+            when(item.itemId)
+            {
+                R.id.webview_nav ->
+                {
+                    webview = supportFragmentManager.findFragmentByTag("webviewFrag")
+                    if(webview == null)
+                    {
+                        webview = WebviewFragment()
+                    }
+                    transaction.replace(R.id.sample_content_fragment, webview, "webviewFrag")
 
-        return true
+                }
+                R.id.notes_nav ->
+                {
+                    //Log.d("Webview", "**notes selected")
+                    notes = supportFragmentManager.findFragmentByTag("notesFrag")
+                    if(notes == null)
+                    {
+                        notes = NoteEditorFragment.newInstance(content)
+                    }
+                    transaction.replace(R.id.sample_content_fragment, notes, "notesFrag")
+
+                }
+            }
+            //val transaction = supportFragmentManager.beginTransaction()
+            //transaction.replace(R.id.sample_content_fragment, selectedFragment)
+            //transaction.hide(previousFragment)
+            //transaction.show(selectedFragment)
+            transaction.commit()
+            true
+        }
+
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.sample_content_fragment, WebviewFragment(), "webviewFrag")
+        transaction.commit()
     }
+
+
+//    override fun onCreateOptionsMenu(menu: Menu): Boolean
+//    {
+//        val inflater = menuInflater
+////        if(content == null)
+////        {
+////            return false
+////        }
+//
+//        menu.clear()
+//        inflater.inflate(R.menu.web_options_menu, menu)
+//
+//        return true
+//    }
 //
 //    override fun onPrepareOptionsMenu(menu: Menu): Boolean
 //    {

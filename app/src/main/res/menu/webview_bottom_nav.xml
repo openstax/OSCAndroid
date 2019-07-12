@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/webview_nav"
+        android:icon="@drawable/outline_web_white_24"
+        android:title="@string/title_webview"/>
+    <item
+        android:id="@+id/notes_nav"
+        android:icon="@drawable/outline_note_white_24"
+        android:title="@string/title_notes"/>
+</menu>

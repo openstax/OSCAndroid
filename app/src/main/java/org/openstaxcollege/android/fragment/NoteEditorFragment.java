@@ -26,6 +26,8 @@ import android.text.util.Linkify;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -105,6 +107,7 @@ public class NoteEditorFragment extends Fragment
 
     public static NoteEditorFragment newInstance(Content c)
     {
+        Log.d("NoteEditor","**instance called");
         NoteEditorFragment nef = new NoteEditorFragment();
         Bundle args = new Bundle();
         args.putSerializable("content", c);
@@ -117,6 +120,7 @@ public class NoteEditorFragment extends Fragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        Log.d("NoteEditor","**on create called");
         setHasOptionsMenu(true);
     }
 
@@ -126,6 +130,14 @@ public class NoteEditorFragment extends Fragment
         activity = (AppCompatActivity)getActivity();
         content = (Content)getArguments().get("content");
         View v = inflater.inflate(R.layout.note_editor, container, false);
+        if(content == null)
+        {
+            Log.d("NEFragment**", "content is null");
+        }
+        else
+        {
+            Log.d("NEFragment**", "content is not null: " + content.getBookTitle());
+        }
 
         state = STATE_EDIT;
 
@@ -137,6 +149,14 @@ public class NoteEditorFragment extends Fragment
             originalContent = savedInstanceState.getString(ORIGINAL_CONTENT);
         }
         return v;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
+    {
+        menu.clear();
+        inflater.inflate(R.menu.noteeditor_menu, menu);
+
     }
 
     @Override

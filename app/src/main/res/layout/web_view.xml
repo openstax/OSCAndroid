@@ -1,37 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:tools="http://schemas.android.com/tools"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:fitsSystemWindows="true"
-	tools:context="org.openstaxcollege.android.activity.WebViewActivity">
-
-	<android.support.design.widget.AppBarLayout
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				xmlns:app="http://schemas.android.com/apk/res-auto"
+				xmlns:tools="http://schemas.android.com/tools"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:fitsSystemWindows="true">
+	<android.support.design.widget.CoordinatorLayout
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:theme="@style/AppTheme.AppBarOverlay">
+		android:layout_height="match_parent"
+		android:fitsSystemWindows="true"
+		tools:context="org.openstaxcollege.android.activity.WebViewActivity">
 
-		<android.support.v7.widget.Toolbar
-			android:id="@+id/toolbar"
+		<android.support.design.widget.AppBarLayout
 			android:layout_width="match_parent"
-			android:layout_height="?attr/actionBarSize"
-			android:background="?attr/colorPrimary"
-			app:popupTheme="@style/AppTheme.PopupOverlay"/>
+			android:layout_height="wrap_content"
+			android:theme="@style/AppTheme.AppBarOverlay">
 
-	</android.support.design.widget.AppBarLayout>
+			<android.support.v7.widget.Toolbar
+				android:id="@+id/toolbar"
+				android:layout_width="match_parent"
+				android:layout_height="?attr/actionBarSize"
+				android:background="?attr/colorPrimary"
+				app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
-	<!--<include layout="@layout/content_webview"/>-->
-	<ScrollView
-		android:layout_width="match_parent"
-		android:layout_height="match_parent">
-		<LinearLayout
+		</android.support.design.widget.AppBarLayout>
+
+		<!--<include layout="@layout/content_webview"/>-->
+		<!--<ScrollView
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
+			<FrameLayout
+				android:id="@+id/sample_content_fragment"
+				android:layout_width="match_parent"
+				android:layout_height="0px"
+				android:background="@color/colorPrimary"/>
+			-<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:orientation="vertical"
+				android:id="@+id/sample_content_fragment"/>
+		</ScrollView>-->
+		<FrameLayout
+			android:id="@+id/sample_content_fragment"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
-			android:orientation="vertical"
-			android:id="@+id/sample_content_fragment"/>
-	</ScrollView>
+			app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+		<android.support.design.widget.BottomNavigationView
+			android:id="@+id/webview_navigation"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_alignParentBottom="true"
+			android:background="@color/colorPrimary"
+			app:itemIconTint="@color/bottom_nav_state"
+			app:itemTextColor="@color/bottom_nav_state"
+			android:layout_gravity="bottom|end"
+			app:layout_insetEdge="bottom"
+			app:menu="@menu/webview_bottom_nav"
+			/>
 
 
-</android.support.design.widget.CoordinatorLayout>
+	</android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>

@@ -26,7 +26,7 @@ class FetchBooks
 
         try
         {
-            val URL = URL("https://openstax.org/api/v2/pages/30/?format=json")
+            val URL = URL("https://openstax.org/apps/cms/api/v2/pages/30/?format=json")
             val connect = URL.openConnection() as HttpURLConnection
 
             connect.connect()
