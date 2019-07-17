@@ -105,23 +105,32 @@ class WebViewActivity : AppCompatActivity()
             {
                 R.id.webview_nav ->
                 {
+                    Log.d("Webview", "**webview  selected")
                     webview = supportFragmentManager.findFragmentByTag("webviewFrag")
                     if(webview == null)
                     {
                         webview = WebviewFragment()
                     }
-                    transaction.replace(R.id.sample_content_fragment, webview, "webviewFrag")
+                    transaction.replace(R.id.sample_content_fragment, notes, "notesFrag")
+                    //transaction.show(webview)
+                    //transaction.hide(notes)
 
                 }
                 R.id.notes_nav ->
                 {
-                    //Log.d("Webview", "**notes selected")
+                    Log.d("Webview", "**notes selected")
                     notes = supportFragmentManager.findFragmentByTag("notesFrag")
                     if(notes == null)
                     {
                         notes = NoteEditorFragment.newInstance(content)
+                        transaction.replace(R.id.sample_content_fragment, notes, "notesFrag")
                     }
-                    transaction.replace(R.id.sample_content_fragment, notes, "notesFrag")
+//                    else
+//                    {
+//                        transaction.replace(R.id.sample_content_fragment, notes, "notesFrag")
+//                        //transaction.show(notes)
+//                        //transaction.hide(webview)
+//                    }
 
                 }
             }

@@ -13,22 +13,22 @@ class Content : Serializable, Comparable<Content>
 {
 
     /** URL  to retrieve content  */
-    var url: String? = null
+    var url: String? = ""
     /** Title of content  */
-    var title: String? = null
+    var title: String? = ""
     /** icon of content.  Only used for Lenses  */
-    var icon: String? = null
-    var bookTitle: String? = null
+    var icon: String? = ""
+    var bookTitle: String = ""
     /**
      * String to hold lens description and keywords
      */
-    var contentString: String? = null
+    var contentString: String? = ""
     /**
      * database id
      */
     var id: Int = 0
 
-    var bookUrl: String? = null
+    var bookUrl: String? = ""
 
     var pdfUrl = ""
 

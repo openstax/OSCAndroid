@@ -43,6 +43,8 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
 
     private val DEVELOPER_MODE = true
 
+    private var savedState: Bundle? = null
+
     /** inner class for WebViewClient */
     private val webViewClient = object : WebViewClient()
     {
@@ -123,6 +125,7 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
+        Log.d("WVF","**onCreate called")
         setHasOptionsMenu(true)
     }
 
@@ -130,6 +133,7 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
         super.onCreate(savedInstanceState)
+        Log.d("WVF","**onCreateView called")
         val view = inflater!!.inflate(R.layout.content_webview, container, false)
         webView = view?.findViewById(R.id.web_view)
         val sharedPref = getActivity().getSharedPreferences(getString(R.string.osc_package), Context.MODE_PRIVATE)
@@ -211,6 +215,7 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
     override fun onActivityCreated(savedInstanceState: Bundle?)
     {
         super.onActivityCreated(savedInstanceState)
+        Log.d("WVF","**onActivityCreated called")
         webView = getView()!!.findViewById(R.id.web_view)
         val intent = getActivity().getIntent()
         content = intent.getSerializableExtra(getString(R.string.webcontent)) as Content
@@ -246,12 +251,14 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
 
         if(OSCUtil.isConnected(getActivity()))
         {
-            if (savedInstanceState != null)
+            if (savedState != null)
             {
-                webView!!.restoreState(savedInstanceState)
+                Log.d("WVF","**restoring webview state")
+                webView!!.restoreState(savedState)
             }
             else
             {
+                Log.d("WVF","**setUpViews called")
                 setUpViews()
             }
             FetchPdfUrlTask(content!!.bookTitle, this).execute()
@@ -337,7 +344,7 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
                 content!!.title = webView!!.title.replace(" - " + content!!.bookTitle + getString(R.string.cnx_title_snippet), "")
                 content!!.url = webView!!.url
                 val bookUrlContent = OSCUtil.getTitle(content!!.bookTitle, getActivity())
-                content!!.bookUrl = bookUrlContent.bookUrl
+                content!!.bookUrl = bookUrlContent?.bookUrl
                 //Log.d("webview2", "book url: " + content.getBookUrl());
 
             } catch(mue: Exception)
@@ -394,7 +401,12 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
 
     override fun onResume()
     {
+        Log.d("WVF","**onResume called")
         super.onResume()
+        if(savedState != null)
+        {
+            webView!!.restoreState(savedState)
+        }
         saveLocation = true
         val sharedPref = getActivity().getSharedPreferences(getString(R.string.osc_package), Context.MODE_PRIVATE)
         var yVal = sharedPref.getString("webviewY", "")
@@ -408,8 +420,14 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
 
     override fun onPause()
     {
+        Log.d("WVF","**onPause called")
         //Log.d("onPause", "savedLocation: " + saveLocation);
         super.onPause()
+        if(savedState != null)
+        {
+            savedState = Bundle()
+        }
+        webView!!.saveState(savedState)
         val sharedPref = getActivity().getSharedPreferences(getString(R.string.osc_package), Context.MODE_PRIVATE)
         val ed = sharedPref.edit()
         //Log.d("WVA.onPause()","URL saved: " + content.getUrl().toString());
@@ -433,6 +451,7 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
 
     override fun onSaveInstanceState(outState: Bundle)
     {
+        Log.d("WVF","**onSaveInstanceState called")
         super.onSaveInstanceState(outState)
         //Log.d("ViewLenses.onSaveInstanceState()", "saving data");
         outState.putSerializable(getString(R.string.webcontent), content)
@@ -457,10 +476,10 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
     /** sets properties on WebView and loads selected content into browser.  */
     private fun setUpViews()
     {
-        Log.d("WVFragment**","setupViews called")
+        //Log.d("WVFragment**","setupViews called")
         if(content == null || content!!.url == "")
         {
-            Log.d("WVFragment**","content is null")
+            //Log.d("WVFragment**","content is null")
             return
         }
 

@@ -9,7 +9,7 @@ class FetchPdfUrlTask(val bookTitle: String?, val pdfListener:PdfTaskCallback): 
     override fun doInBackground(vararg p0: String?): String
     {
         val wl = WebviewLogic()
-        var pdfUrl = ""
+        var pdfUrl:String? = ""
         var title:String? = bookTitle
         if(title != null)
         {

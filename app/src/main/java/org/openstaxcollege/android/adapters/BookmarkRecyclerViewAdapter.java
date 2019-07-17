@@ -60,7 +60,7 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
         viewHolder.other.setText(content.getContentString());
         if (viewHolder.logo != null && content.getIcon() != null)
         {
-            viewHolder.logo.setImageResource(OSCUtil.getCoverId(content.getIcon(), context));
+            viewHolder.logo.setImageResource(OSCUtil.INSTANCE.getCoverId(content.getIcon(), context));
 
         }
 
@@ -119,7 +119,7 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
         {
             Content content = contentList.get(getAdapterPosition());
             //Log.d("BRVA", "title: " + content.getBookTitle());
-            Content bookTitle = OSCUtil.getTitle(content.getBookTitle(), v.getContext());
+            Content bookTitle = OSCUtil.INSTANCE.getTitle(content.getBookTitle(), v.getContext());
             if(bookTitle != null)
             {
                 content.setBookUrl(bookTitle.getBookUrl());

@@ -55,7 +55,7 @@ public class SelectBookRecyclerViewAdapter extends RecyclerView.Adapter<SelectBo
         holder.bookTitle.setText(book.getBookTitle());
         if (holder.logo != null && book.getIcon() != null)
         {
-            holder.logo.setImageResource(OSCUtil.getCoverId(book.getIcon(), context));
+            holder.logo.setImageResource(OSCUtil.INSTANCE.getCoverId(book.getIcon(), context));
 
         }
     }
