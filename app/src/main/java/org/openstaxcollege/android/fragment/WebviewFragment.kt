@@ -353,7 +353,7 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
             }
 
             val mh = MenuHandler()
-            return mh.handleContextMenu(item, getActivity(), content)
+            return mh.handleContextMenu(item, getActivity(), content!!)
         }
         return true
 
