@@ -95,7 +95,7 @@ class BookmarkFragment : Fragment(), OnStartDragListener
         else
         {
             //reuse existing feed data
-            adapter = BookmarkRecyclerViewAdapter(content, R.layout.bookmark, activity)
+            adapter = BookmarkRecyclerViewAdapter(content, R.layout.bookmark, activity!!)
             recyclerView!!.adapter = adapter
             val callback = SimpleItemTouchHelperCallback(adapter)
             itemTouchHelper = ItemTouchHelper(callback)
@@ -164,6 +164,6 @@ class BookmarkFragment : Fragment(), OnStartDragListener
     private fun fillData(contentList: ArrayList<Content>?)
     {
         //Log.d("LensViewer", "fillData() called");
-        adapter = BookmarkRecyclerViewAdapter(contentList, R.layout.bookmark, activity)
+        adapter = BookmarkRecyclerViewAdapter(contentList, R.layout.bookmark, activity!!)
     }
 }

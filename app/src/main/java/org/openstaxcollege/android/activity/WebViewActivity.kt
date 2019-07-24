@@ -122,7 +122,7 @@ class WebViewActivity : AppCompatActivity()
                     notes = supportFragmentManager.findFragmentByTag("notesFrag")
                     if(notes == null)
                     {
-                        notes = NoteEditorFragment.newInstance(content)
+                        notes = NoteEditorFragment.newInstance(content!!)
                         transaction.replace(R.id.sample_content_fragment, notes, "notesFrag")
                     }
 //                    else
