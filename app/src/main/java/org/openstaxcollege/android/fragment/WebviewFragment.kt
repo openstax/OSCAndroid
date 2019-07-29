@@ -144,71 +144,6 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
             webView!!.scrollTo(0, yVal.toInt())
         }
 
-        //setContentView(R.layout.web_view)
-        //val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        //setSupportActionBar(toolbar)
-        //supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        //if(Build.VERSION.SDK_INT >= 24)
-        //{
-        //    supportActionBar!!.title = Html.fromHtml(getString(R.string.app_name_html), Html.FROM_HTML_MODE_LEGACY)
-        //}
-        //else
-        //{
-        //    supportActionBar!!.title = Html.fromHtml(getString(R.string.app_name_html))
-        //}
-
-        //val intent = getActivity().getIntent()
-        //content = intent.getSerializableExtra(getString(R.string.webcontent)) as Content
-//        if(content == null)
-//        {
-//            Log.d("WVFragment**", "content is null")
-//        }
-//        else
-//        {
-//            Log.d("WVFragment**", "content is not null: " + content!!.url)
-//        }
-
-
-//        if(!content!!.url.contains(getString(R.string.bookmarks_url_snippet)))
-//        {
-//
-//            val sharedPref = getActivity().getSharedPreferences(getString(R.string.osc_package), Context.MODE_PRIVATE)
-//            var url = sharedPref.getString(content!!.icon, "")
-//
-//            if(url != "")
-//            {
-//                url = convertURL(url!!)
-//
-//                content!!.url = url
-//
-//            }
-//        }
-//        else
-//        {
-//            //remove bookmark parameter
-//            val newURL = content!!.url.replace(getString(R.string.bookmarks_url_snippet), "")
-//            //Log.d("onCreate","url: " + newURL);
-//            content!!.url = newURL
-//            val bookTitle = OSCUtil.getTitle(content!!.bookTitle, getActivity())
-//            if(bookTitle != null)
-//            {
-//                content!!.bookUrl = bookTitle.bookUrl
-//            }
-//
-//        }
-//
-//
-//        if(OSCUtil.isConnected(getActivity()))
-//        {
-//            setUpViews()
-//            FetchPdfUrlTask(content!!.bookTitle, this).execute()
-//
-//        }
-//        else
-//        {
-//            webView = view?.findViewById(R.id.web_view)
-//            OSCUtil.makeNoDataToast(getActivity())
-//        }
         return view
     }
 
@@ -253,12 +188,12 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
         {
             if (savedState != null)
             {
-                Log.d("WVF","**restoring webview state")
+                //Log.d("WVF","**restoring webview state")
                 webView!!.restoreState(savedState)
             }
             else
             {
-                Log.d("WVF","**setUpViews called")
+                //Log.d("WVF","**setUpViews called")
                 setUpViews()
             }
             FetchPdfUrlTask(content!!.bookTitle, this).execute()
@@ -281,14 +216,6 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
         inflater.inflate(R.menu.web_options_menu, menu)
 
     }
-
-//    override fun onPrepareOptionsMenu(menu: Menu): Unit
-//    {
-//        super.onPrepareOptionsMenu(menu)
-//        //handle changing menu based on URL
-//        return onCreateOptionsMenu(menu)
-//    }
-
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean
     {
@@ -382,26 +309,9 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
         }
     }
 
-//    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean
-//    {
-//        if(webView != null && keyCode == KeyEvent.KEYCODE_BACK && webView!!.canGoBack())
-//        {
-//            webView!!.goBack()
-//            return true
-//
-//        }
-//        return super.onKeyDown(keyCode, event)
-//    }
-//
-//    override fun onConfigurationChanged(newConfig: Configuration)
-//    {
-//        super.onConfigurationChanged(newConfig)
-//    }
-
-
     override fun onResume()
     {
-        Log.d("WVF","**onResume called")
+        //Log.d("WVF","**onResume called")
         super.onResume()
         if(savedState != null)
         {
@@ -420,7 +330,7 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
 
     override fun onPause()
     {
-        Log.d("WVF","**onPause called")
+        //Log.d("WVF","**onPause called")
         //Log.d("onPause", "savedLocation: " + saveLocation);
         super.onPause()
         if(savedState != null)
@@ -451,7 +361,7 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
 
     override fun onSaveInstanceState(outState: Bundle)
     {
-        Log.d("WVF","**onSaveInstanceState called")
+        //Log.d("WVF","**onSaveInstanceState called")
         super.onSaveInstanceState(outState)
         //Log.d("ViewLenses.onSaveInstanceState()", "saving data");
         outState.putSerializable(getString(R.string.webcontent), content)

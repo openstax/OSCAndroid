@@ -8,8 +8,6 @@ package org.openstaxcollege.android.logic
 
 import android.util.Log
 
-import org.openstaxcollege.android.beans.Books
-import org.openstaxcollege.android.beans.Response
 import org.openstaxcollege.android.utils.FetchBooks
 
 /**

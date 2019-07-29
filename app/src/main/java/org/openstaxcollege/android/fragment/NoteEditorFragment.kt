@@ -36,7 +36,6 @@ import android.widget.Toast
 
 import org.openstaxcollege.android.R
 import org.openstaxcollege.android.activity.SelectBookActivity
-import org.openstaxcollege.android.activity.NoteEditorActivity
 import org.openstaxcollege.android.beans.Content
 import org.openstaxcollege.android.handlers.MenuHandler
 import org.openstaxcollege.android.providers.Notes
@@ -108,14 +107,6 @@ class NoteEditorFragment : Fragment()
         activity = getActivity() as AppCompatActivity
         content = arguments.get("content") as Content
         val v = inflater!!.inflate(R.layout.note_editor, container, false)
-        //        if(content == null)
-        //        {
-        //            Log.d("NEFragment**", "content is null");
-        //        }
-        //        else
-        //        {
-        //            Log.d("NEFragment**", "content is not null: " + content.getBookTitle());
-        //        }
 
         state = STATE_EDIT
 

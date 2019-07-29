@@ -7,7 +7,6 @@
 package org.openstaxcollege.android.fragment
 
 import android.app.Activity
-import android.database.Cursor
 import android.os.Bundle
 import android.os.Handler
 import android.support.v4.app.Fragment

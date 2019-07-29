@@ -24,8 +24,6 @@ import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 
-import java.io.File
-
 /**
  * Handler for context and other menus
  *
