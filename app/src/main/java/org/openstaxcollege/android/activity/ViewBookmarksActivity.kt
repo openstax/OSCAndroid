@@ -6,7 +6,6 @@
  */
 package org.openstaxcollege.android.activity
 
-import android.support.v4.app.FragmentTransaction
 import android.support.design.widget.CollapsingToolbarLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
@@ -48,11 +47,7 @@ class ViewBookmarksActivity : AppCompatActivity()
 
     }
 
-
-    /* (non-Javadoc)
-     * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
-     * Handles selected options menu item
-     */
+    
     override fun onOptionsItemSelected(item: MenuItem): Boolean
     {
         if(item.itemId == android.R.id.home)

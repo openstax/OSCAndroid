@@ -10,7 +10,6 @@ import java.util.ArrayList
 
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
-import android.support.v4.app.FragmentTransaction
 import android.view.*
 import org.openstaxcollege.android.R
 import org.openstaxcollege.android.beans.Content
