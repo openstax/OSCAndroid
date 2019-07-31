@@ -62,7 +62,7 @@ class BookmarkRecyclerViewAdapter(
     override fun onItemDismiss(position: Int)
     {
         //Log.d("BRVA","position = " + position);
-        //Log.d("BRVA","content list size = " + contentList.size());
+        //Log.d("BRVA","content list size = " + contentList!!.size);
         if(position < contentList!!.size)
         {
             val currentContent = contentList[position]
