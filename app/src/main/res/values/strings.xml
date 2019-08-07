@@ -102,5 +102,7 @@
     <string name="accounting_vol_1_icon">accounting-vol-1</string>
     <string name="accounting_vol_2_icon">accounting-vol-2</string>
     <string name="management_icon">mgmt</string>
+    <string name="title_webview">Book</string>
+    <string name="title_notes">Notes</string>
 </resources>
  
