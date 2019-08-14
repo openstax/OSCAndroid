@@ -23,7 +23,7 @@ class WebviewLogicTest
         //val url:String = webLogic.getPDFUrl("College Physics")
         //val url:String = webLogic.getPDFUrl("Precalculus")
         //val url:String = webLogic.getPDFUrl("Chemistry: Atoms First 2e")
-        val url:String = webLogic.getPDFUrl("Chemistry 2e")
+        val url:String? = webLogic.getPDFUrl("Chemistry 2e")
         //val url:String = webLogic.getPDFUrl("Biology for AP® Courses")
         //val url: String? = webLogic.getPDFUrl("Bad Title")
         println(url)

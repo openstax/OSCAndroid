@@ -245,6 +245,10 @@ object OSCUtil
         {
             coverId = R.drawable.american_government_2e
         }
+        else if(icon == context.getString(R.string.organizational_behavior_icon))
+        {
+            coverId = R.drawable.organizational_behavior
+        }
 
         return coverId
     }

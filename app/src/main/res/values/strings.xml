@@ -104,5 +104,6 @@
     <string name="management_icon">mgmt</string>
     <string name="title_webview">Book</string>
     <string name="title_notes">Notes</string>
+    <string name="organizational_behavior_icon">organizational_behavior</string>
 </resources>
  
