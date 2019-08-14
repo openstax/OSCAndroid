@@ -42,7 +42,7 @@ class ShelfRecyclerViewAdapter(private val contentList: ArrayList<Content>?, pri
         return ViewHolder(v, contentList!!)
     }
 
-    override fun onBindViewHolder(viewHolder: ShelfRecyclerViewAdapter.ViewHolder, i: Int)
+    override fun onBindViewHolder(viewHolder: ViewHolder, i: Int)
     {
         //Log.d("SRVA","BVH: Content size = " + contentList.size());
         val content = contentList!![i]

@@ -66,12 +66,12 @@ class BookmarkFragment : Fragment(), OnStartDragListener
 
         }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View?
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
         activity = getActivity()
 
 
-        return inflater!!.inflate(R.layout.fragment_book_list, container, false)
+        return inflater.inflate(R.layout.fragment_book_list, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?)
