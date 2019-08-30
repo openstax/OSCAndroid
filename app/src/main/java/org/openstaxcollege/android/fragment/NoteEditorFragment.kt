@@ -102,11 +102,11 @@ class NoteEditorFragment : Fragment()
         setHasOptionsMenu(true)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View?
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
         activity = getActivity() as AppCompatActivity
-        content = arguments.get("content") as Content
-        val v = inflater!!.inflate(R.layout.note_editor, container, false)
+        content = arguments!!.get("content") as Content
+        val v = inflater.inflate(R.layout.note_editor, container, false)
 
         state = STATE_EDIT
 
@@ -139,7 +139,7 @@ class NoteEditorFragment : Fragment()
         else if(item.itemId == R.id.delete_note)
         {
             deleteNote()
-            getActivity().finish()
+            getActivity()?.finish()
             return true
 
         }
@@ -159,7 +159,7 @@ class NoteEditorFragment : Fragment()
         {
 
             val mh = MenuHandler()
-            return mh.handleContextMenu(item, context, content)
+            return mh.handleContextMenu(item, requireContext(), content)
         }
 
     }
@@ -175,9 +175,9 @@ class NoteEditorFragment : Fragment()
 
     }
 
-    override fun onSaveInstanceState(outState: Bundle?)
+    override fun onSaveInstanceState(outState: Bundle)
     {
-        outState!!.putString(ORIGINAL_CONTENT, originalContent)
+        outState.putString(ORIGINAL_CONTENT, originalContent)
     }
 
     override fun onPause()

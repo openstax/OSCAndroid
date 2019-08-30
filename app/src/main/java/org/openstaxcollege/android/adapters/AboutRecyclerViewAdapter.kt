@@ -6,8 +6,8 @@
  */
 package org.openstaxcollege.android.adapters
 
+import android.support.v4.text.HtmlCompat
 import android.support.v7.widget.RecyclerView
-import android.text.Html
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -30,13 +30,13 @@ class AboutRecyclerViewAdapter(private val contentList: ArrayList<About>, privat
         val (title, blurb) = contentList!![i]
         //Log.d("rv","title: " + about.getTitle() + " details: "+ about.getBlurb());
         viewHolder.title.text = title
-        viewHolder.blurb.text = Html.fromHtml(blurb)
+        viewHolder.blurb.text = HtmlCompat.fromHtml(blurb!!, HtmlCompat.FROM_HTML_MODE_LEGACY)
 
 
     }
 
     override fun getItemCount(): Int {
-        return contentList?.size ?: 0
+        return contentList.size ?: 0
     }
 
 

@@ -49,14 +49,14 @@ class SelectBookFragment : Fragment()
             }
         }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View?
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
         activity = getActivity()
 
-        return inflater!!.inflate(R.layout.fragment_book_list, container, false)
+        return inflater.inflate(R.layout.fragment_book_list, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?)
     {
         super.onViewCreated(view, savedInstanceState)
         super.onActivityCreated(savedInstanceState)

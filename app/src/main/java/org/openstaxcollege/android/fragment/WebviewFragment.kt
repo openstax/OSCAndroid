@@ -130,13 +130,13 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
     }
 
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View?
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
         super.onCreate(savedInstanceState)
         Log.d("WVF","**onCreateView called")
         val view = inflater!!.inflate(R.layout.content_webview, container, false)
         webView = view?.findViewById(R.id.web_view)
-        val sharedPref = getActivity().getSharedPreferences(getString(R.string.osc_package), Context.MODE_PRIVATE)
+        val sharedPref = getActivity()!!.getSharedPreferences(getString(R.string.osc_package), Context.MODE_PRIVATE)
         var yVal = sharedPref.getString("webviewY", "")
         if(yVal != null && yVal != "")
         {
@@ -151,14 +151,14 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
     {
         super.onActivityCreated(savedInstanceState)
         Log.d("WVF","**onActivityCreated called")
-        webView = getView()!!.findViewById(R.id.web_view)
-        val intent = getActivity().getIntent()
+        webView = view!!.findViewById(R.id.web_view)
+        val intent = activity!!.getIntent()
         content = intent.getSerializableExtra(getString(R.string.webcontent)) as Content
 
         if(!content!!.url!!.contains(getString(R.string.bookmarks_url_snippet)))
         {
 
-            val sharedPref = getActivity().getSharedPreferences(getString(R.string.osc_package), Context.MODE_PRIVATE)
+            val sharedPref = activity!!.getSharedPreferences(getString(R.string.osc_package), Context.MODE_PRIVATE)
             var url = sharedPref.getString(content!!.icon, "")
 
             if(url != "")
@@ -175,7 +175,7 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
             val newURL = content!!.url!!.replace(getString(R.string.bookmarks_url_snippet), "")
             //Log.d("onCreate","url: " + newURL);
             content!!.url = newURL
-            val bookTitle = OSCUtil.getTitle(content!!.bookTitle, getActivity())
+            val bookTitle = OSCUtil.getTitle(content!!.bookTitle, requireContext())
             if(bookTitle != null)
             {
                 content!!.bookUrl = bookTitle.bookUrl
@@ -184,7 +184,7 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
         }
 
 
-        if(OSCUtil.isConnected(getActivity()))
+        if(OSCUtil.isConnected(requireContext()))
         {
             if (savedState != null)
             {
@@ -202,7 +202,7 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
         else
         {
             webView = view!!.findViewById(R.id.web_view)
-            OSCUtil.makeNoDataToast(getActivity())
+            OSCUtil.makeNoDataToast(requireContext())
         }
 
 
@@ -219,10 +219,10 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean
     {
-        val activity = this
+        //val activity = this
         if(item.itemId == android.R.id.home)
         {
-            val mainIntent = Intent(activity.context, BookshelfActivity::class.java)
+            val mainIntent = Intent(requireContext(), BookshelfActivity::class.java)
             mainIntent.flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
             startActivity(mainIntent)
             return true
@@ -236,17 +236,17 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
             }
             else
             {
-                if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
+                if(ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
                 {
                     displayDownloadAlert(content)
                 }
-                else if(ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE))
+                else if(ActivityCompat.shouldShowRequestPermissionRationale(activity!!, Manifest.permission.WRITE_EXTERNAL_STORAGE))
                 {
-                    Snackbar.make(webView!!, getString(R.string.pdf_download_request), Snackbar.LENGTH_INDEFINITE).setAction(getString(R.string.ok_button)) { ActivityCompat.requestPermissions(getActivity(), WebViewActivity.STORAGE_PERMS, REQUEST) }.show()
+                    Snackbar.make(webView!!, getString(R.string.pdf_download_request), Snackbar.LENGTH_INDEFINITE).setAction(getString(R.string.ok_button)) { ActivityCompat.requestPermissions(activity!!, WebViewActivity.STORAGE_PERMS, REQUEST) }.show()
                 }
                 else
                 {
-                    ActivityCompat.requestPermissions(getActivity(), WebViewActivity.STORAGE_PERMS, REQUEST)
+                    ActivityCompat.requestPermissions(activity!!, WebViewActivity.STORAGE_PERMS, REQUEST)
 
                 }
             }
@@ -254,7 +254,7 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
         else if(item.itemId == R.id.remove_location)
         {
             //Log.d("menuItem", "removing location: " + content.getIcon());
-            val sharedPref = getActivity().getSharedPreferences(getString(R.string.osc_package), Context.MODE_PRIVATE)
+            val sharedPref = activity!!.getSharedPreferences(getString(R.string.osc_package), Context.MODE_PRIVATE)
             val ed = sharedPref.edit()
             ed.remove(content!!.icon)
             ed.commit()
@@ -270,7 +270,7 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
                 content!!.bookTitle = wl.getBookTitle(webView!!.title)
                 content!!.title = webView!!.title.replace(" - " + content!!.bookTitle + getString(R.string.cnx_title_snippet), "")
                 content!!.url = webView!!.url
-                val bookUrlContent = OSCUtil.getTitle(content!!.bookTitle, getActivity())
+                val bookUrlContent = OSCUtil.getTitle(content!!.bookTitle, requireContext())
                 content!!.bookUrl = bookUrlContent?.bookUrl
                 //Log.d("webview2", "book url: " + content.getBookUrl());
 
@@ -280,7 +280,7 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
             }
 
             val mh = MenuHandler()
-            return mh.handleContextMenu(item, getActivity(), content!!)
+            return mh.handleContextMenu(item, requireContext(), content!!)
         }
         return true
 
@@ -302,7 +302,7 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray)
     {
 
-        if(grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+        if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)
         {
 
             displayDownloadAlert(content)
@@ -318,7 +318,7 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
             webView!!.restoreState(savedState)
         }
         saveLocation = true
-        val sharedPref = getActivity().getSharedPreferences(getString(R.string.osc_package), Context.MODE_PRIVATE)
+        val sharedPref = activity!!.getSharedPreferences(getString(R.string.osc_package), Context.MODE_PRIVATE)
         var yVal = sharedPref.getString("webviewY", "")
         if(yVal != null && yVal != "")
         {
@@ -338,7 +338,7 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
             savedState = Bundle()
         }
         webView!!.saveState(savedState)
-        val sharedPref = getActivity().getSharedPreferences(getString(R.string.osc_package), Context.MODE_PRIVATE)
+        val sharedPref = activity!!.getSharedPreferences(getString(R.string.osc_package), Context.MODE_PRIVATE)
         val ed = sharedPref.edit()
         //Log.d("WVA.onPause()","URL saved: " + content.getUrl().toString());
         if(webView != null && content != null)
@@ -365,7 +365,7 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
         super.onSaveInstanceState(outState)
         //Log.d("ViewLenses.onSaveInstanceState()", "saving data");
         outState.putSerializable(getString(R.string.webcontent), content)
-        val sharedPref =getActivity(). getSharedPreferences(getString(R.string.osc_package), Context.MODE_PRIVATE)
+        val sharedPref = activity!!.getSharedPreferences(getString(R.string.osc_package), Context.MODE_PRIVATE)
         val ed = sharedPref.edit()
         if(webView != null && content != null && webView!!.url != null)
         {
@@ -440,7 +440,7 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
         alertDialog.setTitle(getString(R.string.download))
         alertDialog.setMessage(message)
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.ok)) { dialog, which ->
-            if(OSCUtil.isConnected(getContext()))
+            if(OSCUtil.isConnected(requireContext()))
             {
 
                 val cnxDir = File(Environment.getExternalStorageDirectory(), "OpenStax/")
@@ -449,7 +449,7 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
                     cnxDir.mkdir()
                 }
 
-                val dm = getActivity().getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+                val dm = activity!!.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
                 //Log.d("WeviewLogic","title: "+currentContent.getBookTitle());
                 val pdfUrl = content!!.pdfUrl
 
@@ -472,7 +472,7 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
                         dm.enqueue(request)
                     } catch(iae: IllegalArgumentException)
                     {
-                        createDialog(getContext())
+                        createDialog(requireContext())
                     }
 
                 }
@@ -480,7 +480,7 @@ class WebviewFragment : Fragment(), FetchPdfUrlTask.PdfTaskCallback
             }
             else
             {
-                OSCUtil.makeNoDataToast(getContext())
+                OSCUtil.makeNoDataToast(requireContext())
             }
         }
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.cancel)) { dialog, which ->

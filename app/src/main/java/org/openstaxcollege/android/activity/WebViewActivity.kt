@@ -24,8 +24,8 @@ import org.openstaxcollege.android.utils.MenuUtil
 import org.openstaxcollege.android.utils.OSCUtil
 
 import android.content.Intent
-import android.content.res.Configuration
 import android.os.Bundle
+import android.support.v4.text.HtmlCompat
 import android.widget.Toast
 import org.openstaxcollege.android.fragment.WebviewFragment
 
@@ -40,11 +40,11 @@ import java.io.File
 class WebViewActivity : AppCompatActivity()
 {
     private var content: Content? = null
-    private val REQUEST = 1336
+    //private val REQUEST = 1336
 
     private var saveLocation = true
 
-    private val DEVELOPER_MODE = true
+    //private val DEVELOPER_MODE = true
 
 
 
@@ -62,7 +62,7 @@ class WebViewActivity : AppCompatActivity()
         }
         else
         {
-            supportActionBar!!.title = Html.fromHtml(getString(R.string.app_name_html))
+            supportActionBar!!.title = HtmlCompat.fromHtml(getString(R.string.app_name_html),HtmlCompat.FROM_HTML_MODE_LEGACY)
         }
         content = intent.getSerializableExtra(getString(R.string.webcontent)) as Content
 
@@ -86,10 +86,10 @@ class WebViewActivity : AppCompatActivity()
         }
     }
 
-    override fun onConfigurationChanged(newConfig: Configuration)
-    {
-        super.onConfigurationChanged(newConfig)
-    }
+//    override fun onConfigurationChanged(newConfig: Configuration)
+//    {
+//        super.onConfigurationChanged(newConfig)
+//    }
 
 
     override fun onResume()

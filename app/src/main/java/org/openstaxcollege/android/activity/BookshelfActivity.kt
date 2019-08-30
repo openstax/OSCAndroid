@@ -11,9 +11,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
+import android.support.v4.text.HtmlCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
-import android.text.Html
 import android.text.util.Linkify
 import android.util.Log
 import android.view.Menu
@@ -39,7 +39,7 @@ class BookshelfActivity : AppCompatActivity()
         setContentView(R.layout.activity_bookshelf)
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
-        supportActionBar!!.title = Html.fromHtml(getString(R.string.app_name_html))
+        supportActionBar!!.title = HtmlCompat.fromHtml(getString(R.string.app_name_html), HtmlCompat.FROM_HTML_MODE_LEGACY)
         val title = findViewById<TextView>(R.id.bookshelf_help)
         Linkify.addLinks(title, Linkify.ALL)
         val context = this
@@ -67,7 +67,7 @@ class BookshelfActivity : AppCompatActivity()
                 }
             }
             val transaction = supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.sample_content_fragment, selectedFragment)
+            transaction.replace(R.id.sample_content_fragment, selectedFragment!!)
             transaction.commit()
             true
         }
