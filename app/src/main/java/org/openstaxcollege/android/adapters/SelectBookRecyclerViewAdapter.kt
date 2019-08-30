@@ -66,6 +66,7 @@ class SelectBookRecyclerViewAdapter(private val contentList: ArrayList<Content>?
 
         override fun onClick(v: View)
         {
+            //TODO: move database code to testable function
             val content = contentList[adapterPosition]
             val cv = ContentValues()
 

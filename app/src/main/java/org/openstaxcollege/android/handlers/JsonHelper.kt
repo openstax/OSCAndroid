@@ -17,6 +17,7 @@ import java.io.InputStreamReader
 
 class JsonHelper
 {
+    //TODO: write tests
 
     fun getAboutData(context: Context, clazz:Class<*>, jsonFile:String): AboutList?
     {
